@@ -5,11 +5,13 @@ class GalleryItemData {
     required this.id,
     required this.name,
     required this.seedColor,
+    required this.iconData,
   });
 
   final String id;
   final String name;
   final Color seedColor;
+  final Icon iconData;
 }
 
 class MyFlutterGalleryData {

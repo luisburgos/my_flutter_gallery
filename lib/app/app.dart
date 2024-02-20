@@ -3,11 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_flutter_gallery/app/app_cubit.dart';
 import 'package:my_flutter_gallery/app/app_data.dart';
 import 'package:my_flutter_gallery/app/app_launchpad.dart';
-import 'package:my_flutter_gallery/clones/instagram_page.dart';
-import 'package:my_flutter_gallery/clones/perplexity_page.dart';
-import 'package:my_flutter_gallery/clones/supernotes_page.dart';
+import 'package:my_flutter_gallery/app/globals.dart';
+import 'package:my_flutter_gallery/clones/clones.dart';
 import 'package:my_flutter_gallery/l10n/l10n.dart';
-import 'package:my_flutter_gallery/shared/colors_extended.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -17,11 +15,12 @@ class App extends StatelessWidget {
     return BlocProvider(
       create: (_) => MyFlutterGalleryCubit(
         MyFlutterGalleryData(
-          selectedItem: _instagramApp,
+          selectedItem: InstagramAppData(),
           items: [
-            _instagramApp,
-            _perplexityApp,
-            _supernotesApp,
+            InstagramAppData(),
+            PerplexityAppData(),
+            SupernotesAppData(),
+            BrancherAiAppData(),
           ],
         ),
       ),
@@ -74,37 +73,19 @@ class AppHomeBuilderSelector extends StatelessWidget {
     final state = context.watch<MyFlutterGalleryCubit>().state;
     final selectedApp = state.selectedItem;
 
-    if (selectedApp?.id == _instagramAppId) {
+    if (selectedApp?.id == InstagramAppData().id) {
       return const InstagramPage();
     }
-    if (selectedApp?.id == _perplexityAppId) {
+    if (selectedApp?.id == PerplexityAppData().id) {
       return const PerplexityPage();
     }
-    if (selectedApp?.id == _supernotesAppId) {
+    if (selectedApp?.id == SupernotesAppData().id) {
       return const SuperNotesPage();
+    }
+    if (selectedApp?.id == BrancherAiAppData().id) {
+      return const BrancherAiAppPage();
     }
     // TODO(unassigned): change for UnimplementedAppHome();
     return const Placeholder();
   }
 }
-
-const _instagramAppId = 'INST-00';
-const _perplexityAppId = 'PERP-00';
-const _supernotesAppId = 'SUPN-00';
-
-// Example: Color(0xFF00ff00)
-final _instagramApp = GalleryItemData(
-  id: _instagramAppId,
-  name: 'Instagram',
-  seedColor: ColorsExtended.instaOrange,
-);
-const _perplexityApp = GalleryItemData(
-  id: _perplexityAppId,
-  name: 'Perplexity',
-  seedColor: Colors.cyan,
-);
-const _supernotesApp = GalleryItemData(
-  id: _supernotesAppId,
-  name: 'Supernotes',
-  seedColor: Colors.pinkAccent,
-);

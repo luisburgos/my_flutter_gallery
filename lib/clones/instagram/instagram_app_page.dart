@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_flutter_gallery/app/globals.dart';
 import 'package:my_flutter_gallery/shared/colors_extended.dart';
 import 'package:my_flutter_gallery/shared/dashboard_page_view.dart';
 import 'package:my_flutter_gallery/shared/open_command_bar_shortcut.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class InstagramPage extends StatelessWidget {
   const InstagramPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final pageData = InstagramAppData();
+
     return Scaffold(
       body: OpenCommandBarShortcut(
         child: DashboardPageView(
           /// App Specific
-          appTitle: 'Instagram',
-          appLogoIcon: const Icon(
-            FontAwesomeIcons.instagram,
-            size: 16,
-          ),
+          appTitle: pageData.name,
+          appLogoIcon: pageData.iconData,
+          accentColor: pageData.seedColor,
           primaryColor: ColorsExtended.charcoal,
-          accentColor: ColorsExtended.instaOrange,
 
           /// Responsive Breakpoints
           smallWidthBreakpoint: 600,
