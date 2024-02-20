@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_flutter_gallery/app/app_cubit.dart';
+import 'package:my_flutter_gallery/app/app_data.dart';
+import 'package:my_flutter_gallery/shared/simple_grid.dart';
 
 class LaunchpadPage extends StatelessWidget {
   const LaunchpadPage({super.key});
@@ -18,9 +20,9 @@ class LaunchpadView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final apps = context.watch<MyFlutterGalleryCubit>().state.apps;
+    final apps = context.watch<MyFlutterGalleryCubit>().state.items;
 
-    return SimpleGrid<AppData>(
+    return SimpleGrid<GalleryItemData>(
       items: apps,
       itemBuilder: (item) {
         return Card(
@@ -44,10 +46,7 @@ class LaunchpadView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(12),
                   child: ElevatedButton(
-                    onPressed: () {
-                      context.read<MyFlutterGalleryCubit>().setAppById(item.id);
-                      Navigator.of(context).pushNamed('/');
-                    },
+                    onPressed: () => _onLaunchTap(context, item),
                     child: const Text('LAUNCH'),
                   ),
                 ),
@@ -58,33 +57,9 @@ class LaunchpadView extends StatelessWidget {
       },
     );
   }
-}
 
-class SimpleGrid<T> extends StatelessWidget {
-  const SimpleGrid({
-    required this.items,
-    required this.itemBuilder,
-    super.key,
-  });
-
-  final List<T> items;
-  final Widget Function(T) itemBuilder;
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: items.isEmpty ? 1 : items.length,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-        childAspectRatio: items.length * 1.2 / items.length,
-      ),
-      padding: const EdgeInsets.all(8),
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        final item = items[index];
-        return itemBuilder(item);
-      },
-    );
+  void _onLaunchTap(BuildContext context, GalleryItemData item) {
+    context.read<MyFlutterGalleryCubit>().setSelectedAppById(item.id);
+    Navigator.of(context).pushNamed('/');
   }
 }
