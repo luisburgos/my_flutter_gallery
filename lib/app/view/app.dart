@@ -6,6 +6,7 @@ import 'package:my_flutter_gallery/clones/perplexity_page.dart';
 import 'package:my_flutter_gallery/clones/supernotes_page.dart';
 import 'package:my_flutter_gallery/l10n/l10n.dart';
 import 'package:my_flutter_gallery/launchpad/launchpad_page.dart';
+import 'package:my_flutter_gallery/shared/colors_extended.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -14,7 +15,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => MyFlutterGalleryCubit(
-        const MyFlutterGalleryData(
+        MyFlutterGalleryData(
           selectedApp: _instagramApp,
           apps: [
             _instagramApp,
@@ -90,18 +91,19 @@ const _instagramAppId = 'INST-00';
 const _perplexityAppId = 'PERP-00';
 const _supernotesAppId = 'SUPN-00';
 
-const _instagramApp = AppData(
+// Example: Color(0xFF00ff00)
+final _instagramApp = AppData(
   id: _instagramAppId,
   name: 'Instagram',
-  seedColor: Color(0xFF00ff00),
+  seedColor: ColorsExtended.instaOrange,
 );
 const _perplexityApp = AppData(
   id: _perplexityAppId,
   name: 'Perplexity',
-  seedColor: Color(0xFF00ff00),
+  seedColor: Colors.cyan,
 );
 const _supernotesApp = AppData(
   id: _supernotesAppId,
   name: 'Supernotes',
-  seedColor: Color(0xFF00ff00),
+  seedColor: Colors.pinkAccent,
 );

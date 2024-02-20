@@ -18,25 +18,10 @@ class LaunchpadView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SimpleGrid<LaunchpadAppData>(
-      items: const [
-        // TODO(unassigned): change appId to reference global constants
-        LaunchpadAppData(
-          appId: 'INST-00',
-          name: 'Instagram',
-          rootRoute: '/',
-        ),
-        LaunchpadAppData(
-          appId: 'PERP-00',
-          name: 'Perplexity',
-          rootRoute: '/',
-        ),
-        LaunchpadAppData(
-          appId: 'SUPN-00',
-          name: 'Supernotes',
-          rootRoute: '/',
-        ),
-      ],
+    final apps = context.watch<MyFlutterGalleryCubit>().state.apps;
+
+    return SimpleGrid<AppData>(
+      items: apps,
       itemBuilder: (item) {
         return Card(
           color: Colors.white,
@@ -45,7 +30,6 @@ class LaunchpadView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // TODO(unassigned): use title large text style
                 Padding(
                   padding: const EdgeInsets.all(12),
                   child: Text(
@@ -61,14 +45,10 @@ class LaunchpadView extends StatelessWidget {
                   padding: const EdgeInsets.all(12),
                   child: ElevatedButton(
                     onPressed: () {
-                      context
-                          .read<MyFlutterGalleryCubit>()
-                          .setAppById(item.appId);
-                      Navigator.of(context).pushNamed(item.rootRoute);
+                      context.read<MyFlutterGalleryCubit>().setAppById(item.id);
+                      Navigator.of(context).pushNamed('/');
                     },
-                    child: const Text(
-                      'LAUNCH',
-                    ),
+                    child: const Text('LAUNCH'),
                   ),
                 ),
               ],
@@ -78,18 +58,6 @@ class LaunchpadView extends StatelessWidget {
       },
     );
   }
-}
-
-class LaunchpadAppData {
-  const LaunchpadAppData({
-    required this.appId,
-    required this.name,
-    required this.rootRoute,
-  });
-
-  final String appId;
-  final String name;
-  final String rootRoute;
 }
 
 class SimpleGrid<T> extends StatelessWidget {
