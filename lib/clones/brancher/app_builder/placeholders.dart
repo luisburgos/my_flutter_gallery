@@ -163,7 +163,7 @@ class BodyPlaceholder extends StatelessWidget {
           ),
           Expanded(
             child: PreviewPlaceholder(),
-          )
+          ),
         ],
       ),
     );
