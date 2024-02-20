@@ -47,7 +47,7 @@ class BrancherAiAppData extends GalleryItemData {
       : super(
           id: 'BRCR-00',
           name: 'brancher.ai',
-          seedColor: const Color(0xFF00ff00),
+          seedColor: Colors.green,
           iconData: const Icon(
             FontAwesomeIcons.wind,
             size: 16,

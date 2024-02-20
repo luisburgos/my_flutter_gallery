@@ -22,26 +22,26 @@ class BrancherAiAppPage extends StatelessWidget {
           primaryColor: ColorsExtended.charcoal,
 
           /// Responsive Breakpoints
+          sideBarExpandedWidth: 220,
           smallWidthBreakpoint: 600,
           mediumWidthBreakpoint: 800,
 
           /// Navigation Items
-          initialSelectedItemId: _homeId,
+          initialSelectedItemId: _appsId,
           topBarItems: [
             _profileItemData,
           ],
           bottomBarItems: [
-            _homeItemData,
-            _searchItemData,
-            _pinnedItemData,
-            _notificationsItemData,
+            _appsItemData,
+            _templateLibraryItemData,
+            _subscriptionsItemData,
           ],
           sideBarBodyItems: [
-            _homeItemData,
-            _searchItemData,
+            _appsItemData,
+            _templateLibraryItemData,
+            _subscriptionsItemData,
           ],
           sideBarFooterItems: [
-            _notificationsItemData,
             _profileItemData,
           ],
         ),
@@ -50,33 +50,32 @@ class BrancherAiAppPage extends StatelessWidget {
   }
 }
 
-const _homeId = 'home';
-const _searchId = 'search';
-const _notificationsId = 'notifications';
+const _appsId = 'apps';
+const _templateLibraryId = 'template_library';
+const _subscriptionsId = 'subscriptions';
 const _profileId = 'profile';
-const _pinnedId = 'pinned';
 
-final _homeItemData = NavigationItemData(
-  id: _homeId,
-  label: 'Home',
+final _appsItemData = NavigationItemData(
+  id: _appsId,
+  label: 'Apps',
   iconBuilder: (_) => const Icon(
-    FontAwesomeIcons.house,
+    FontAwesomeIcons.rocket,
     size: 16,
   ),
 );
-final _searchItemData = NavigationItemData(
-  id: _searchId,
-  label: 'Search',
+final _templateLibraryItemData = NavigationItemData(
+  id: _templateLibraryId,
+  label: 'Template Library',
   iconBuilder: (_) => const Icon(
-    FontAwesomeIcons.magnifyingGlass,
+    FontAwesomeIcons.rectangleList,
     size: 16,
   ),
 );
-final _notificationsItemData = NavigationItemData(
-  id: _notificationsId,
-  label: 'Notifications',
+final _subscriptionsItemData = NavigationItemData(
+  id: _subscriptionsId,
+  label: 'Subscriptions',
   iconBuilder: (_) => const Icon(
-    FontAwesomeIcons.heart,
+    FontAwesomeIcons.bolt,
     size: 16,
   ),
 );
@@ -85,14 +84,6 @@ final _profileItemData = NavigationItemData(
   label: 'Profile',
   iconBuilder: (_) => const Icon(
     FontAwesomeIcons.solidUser,
-    size: 16,
-  ),
-);
-final _pinnedItemData = NavigationItemData(
-  id: _pinnedId,
-  label: 'Pinned',
-  iconBuilder: (_) => const Icon(
-    FontAwesomeIcons.thumbtack,
     size: 16,
   ),
 );

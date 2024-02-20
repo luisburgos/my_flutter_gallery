@@ -16,11 +16,13 @@ class DashboardPageView extends StatefulWidget {
     this.topBarItems = const [],
     this.smallWidthBreakpoint,
     this.mediumWidthBreakpoint,
+    this.sideBarExpandedWidth = 180,
     super.key,
   });
 
   final String appTitle;
   final String initialSelectedItemId;
+  final double sideBarExpandedWidth;
   final double? smallWidthBreakpoint;
   final double? mediumWidthBreakpoint;
   final Color primaryColor;
@@ -134,7 +136,7 @@ class _DashboardPageViewState extends State<DashboardPageView> {
             SideBar(
               isCollapsed: actualCollapseState,
               backgroundColor: backgroundColor,
-              expandedWidth: 180,
+              expandedWidth: widget.sideBarExpandedWidth,
               headerBuilder: () {
                 if (actualCollapseState) {
                   return SideBarHeaderCollapsed(
