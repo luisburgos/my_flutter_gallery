@@ -28,7 +28,7 @@ class OpenCommandBarShortcut extends StatelessWidget {
               duration: const Duration(milliseconds: 900),
             ),
           );
-          Navigator.of(context).pushNamed('/');
+          Navigator.of(context).pushNamed('/launchpad');
         },
       },
       child: Focus(

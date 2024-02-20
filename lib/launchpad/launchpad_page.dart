@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_flutter_gallery/app/app_cubit.dart';
 
 class LaunchpadPage extends StatelessWidget {
   const LaunchpadPage({super.key});
@@ -18,17 +20,21 @@ class LaunchpadView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SimpleGrid<LaunchpadAppData>(
       items: const [
+        // TODO(unassigned): change appId to reference global constants
         LaunchpadAppData(
+          appId: 'INST-00',
           name: 'Instagram',
-          rootRoute: '/insta-clone',
+          rootRoute: '/',
         ),
         LaunchpadAppData(
+          appId: 'PERP-00',
           name: 'Perplexity',
-          rootRoute: '/plexity-clone',
+          rootRoute: '/',
         ),
         LaunchpadAppData(
+          appId: 'SUPN-00',
           name: 'Supernotes',
-          rootRoute: '/supernotes-clone',
+          rootRoute: '/',
         ),
       ],
       itemBuilder: (item) {
@@ -55,6 +61,9 @@ class LaunchpadView extends StatelessWidget {
                   padding: const EdgeInsets.all(12),
                   child: ElevatedButton(
                     onPressed: () {
+                      context
+                          .read<MyFlutterGalleryCubit>()
+                          .setAppById(item.appId);
                       Navigator.of(context).pushNamed(item.rootRoute);
                     },
                     child: const Text(
@@ -73,10 +82,12 @@ class LaunchpadView extends StatelessWidget {
 
 class LaunchpadAppData {
   const LaunchpadAppData({
+    required this.appId,
     required this.name,
     required this.rootRoute,
   });
 
+  final String appId;
   final String name;
   final String rootRoute;
 }
