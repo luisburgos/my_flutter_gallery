@@ -17,6 +17,7 @@ class DashboardPageView extends StatefulWidget {
     this.smallWidthBreakpoint,
     this.mediumWidthBreakpoint,
     this.sideBarExpandedWidth = 180,
+    this.pageBody,
     super.key,
   });
 
@@ -32,6 +33,7 @@ class DashboardPageView extends StatefulWidget {
   final List<NavigationItemData> bottomBarItems;
   final List<NavigationItemData> sideBarBodyItems;
   final List<NavigationItemData> sideBarFooterItems;
+  final Widget? pageBody;
 
   @override
   State<DashboardPageView> createState() => _DashboardPageViewState();
@@ -104,9 +106,10 @@ class _DashboardPageViewState extends State<DashboardPageView> {
                 },
               ),
               Expanded(
-                child: PageBody(
-                  selectedItemId: selectedItemId,
-                ),
+                child: widget.pageBody ??
+                    DefaultPageBodyPlaceholder(
+                      selectedItemId: selectedItemId,
+                    ),
               ),
               Divider(
                 thickness: 1,
@@ -176,9 +179,10 @@ class _DashboardPageViewState extends State<DashboardPageView> {
               color: Colors.grey.shade300,
             ),
             Expanded(
-              child: PageBody(
-                selectedItemId: selectedItemId,
-              ),
+              child: widget.pageBody ??
+                  DefaultPageBodyPlaceholder(
+                    selectedItemId: selectedItemId,
+                  ),
             ),
           ],
         );
@@ -397,8 +401,8 @@ class NavigationItemView extends StatelessWidget {
 }
 
 // TODO(unassigned): change to a pageBodyBuilder(itemId) callback
-class PageBody extends StatelessWidget {
-  const PageBody({required this.selectedItemId, super.key});
+class DefaultPageBodyPlaceholder extends StatelessWidget {
+  const DefaultPageBodyPlaceholder({required this.selectedItemId, super.key});
 
   final String selectedItemId;
 

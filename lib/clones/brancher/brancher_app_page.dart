@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_flutter_gallery/app/globals.dart';
+import 'package:my_flutter_gallery/clones/brancher/app_builder/app_builder.dart';
 import 'package:my_flutter_gallery/shared/colors_extended.dart';
 import 'package:my_flutter_gallery/shared/dashboard_page_view.dart';
 import 'package:my_flutter_gallery/shared/open_command_bar_shortcut.dart';
@@ -44,8 +46,21 @@ class BrancherAiAppPage extends StatelessWidget {
           sideBarFooterItems: [
             _profileItemData,
           ],
+          pageBody: const Body(),
         ),
       ),
+    );
+  }
+}
+
+class Body extends StatelessWidget {
+  const Body({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => AppBuilderCubit(),
+      child: const AppBuilderView(),
     );
   }
 }
