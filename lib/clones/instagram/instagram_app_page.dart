@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_flutter_gallery/app/globals.dart';
 import 'package:my_flutter_gallery/shared/colors_extended.dart';
 import 'package:my_flutter_gallery/shared/dashboard_page_view.dart';
-import 'package:my_flutter_gallery/shared/open_command_bar_shortcut.dart';
+import 'package:my_flutter_gallery/shared/open_launchpad_shortcut.dart';
 
 class InstagramPage extends StatelessWidget {
   const InstagramPage({super.key});
@@ -13,7 +13,7 @@ class InstagramPage extends StatelessWidget {
     final pageData = InstagramAppData();
 
     return Scaffold(
-      body: OpenCommandBarShortcut(
+      body: OpenLaunchpadShortcut(
         child: DashboardPageView(
           /// App Specific
           appTitle: pageData.name,

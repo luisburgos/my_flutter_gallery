@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class OpenCommandBarShortcut extends StatelessWidget {
-  const OpenCommandBarShortcut({
+class OpenLaunchpadShortcut extends StatelessWidget {
+  const OpenLaunchpadShortcut({
     required this.child,
     super.key,
   });
@@ -11,19 +11,21 @@ class OpenCommandBarShortcut extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const firstKey = LogicalKeyboardKey.meta;
+    const secondKey = LogicalKeyboardKey.keyK;
+
     return CallbackShortcuts(
       bindings: <ShortcutActivator, VoidCallback>{
         LogicalKeySet(
-          // TODO(unassigned): change to CMD key
-          LogicalKeyboardKey.control,
-          LogicalKeyboardKey.keyK,
+          firstKey,
+          secondKey,
         ): () {
           // TODO(unassigned): change to command bar dialog
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                'SHORTCUT: ${LogicalKeyboardKey.control.debugName} + '
-                '${LogicalKeyboardKey.keyK.debugName}',
+                'SHORTCUT: ${firstKey.debugName} + '
+                '${secondKey.debugName}',
               ),
               duration: const Duration(milliseconds: 900),
             ),
