@@ -21,6 +21,7 @@ class DashboardPageView extends StatefulWidget {
     this.pageBodyBuilder,
     this.sideBarHeaderBuilder,
     this.sideBarBodyBuilder,
+    this.onSelectedItemId,
     super.key,
   });
 
@@ -40,6 +41,7 @@ class DashboardPageView extends StatefulWidget {
   final Widget Function()? pageBodyBuilder;
   final Widget Function(bool)? sideBarHeaderBuilder;
   final Widget Function()? sideBarBodyBuilder;
+  final void Function(String)? onSelectedItemId;
 
   @override
   State<DashboardPageView> createState() => _DashboardPageViewState();
@@ -220,6 +222,7 @@ class _DashboardPageViewState extends State<DashboardPageView> {
   void _onItemTap(String _) {
     setState(() {
       selectedItemId = _;
+      widget.onSelectedItemId?.call(_);
     });
   }
 }

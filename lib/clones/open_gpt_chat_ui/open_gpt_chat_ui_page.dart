@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_flutter_gallery/app/globals.dart';
+import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/dialogs/dialogs.dart';
 import 'package:my_flutter_gallery/shared/colors_extended.dart';
 import 'package:my_flutter_gallery/shared/dashboard_page_view.dart';
 import 'package:my_flutter_gallery/shared/open_launchpad_shortcut.dart';
@@ -69,6 +70,15 @@ class OpenGptChatUiPage extends StatelessWidget {
             _renewPlusItemData,
             _profileItemData,
           ],
+          onSelectedItemId: (_) {
+            if (_ == _renewPlusId) {
+              openDialog(
+                context,
+                child: const UpgradeYourPlanDialog(),
+              );
+              return;
+            }
+          },
         ),
       ),
     );
@@ -77,7 +87,7 @@ class OpenGptChatUiPage extends StatelessWidget {
 
 const _newChatId = 'new_chat';
 const _profileId = 'profile';
-const _renewPlusIid = 'renew';
+const _renewPlusId = 'renew';
 
 final _newChatItemData = NavigationItemData(
   id: _newChatId,
@@ -88,7 +98,7 @@ final _newChatItemData = NavigationItemData(
   ),
 );
 final _renewPlusItemData = NavigationItemData(
-  id: _renewPlusIid,
+  id: _renewPlusId,
   label: 'Renew Plus',
   iconBuilder: (_) => const Icon(
     FontAwesomeIcons.wandSparkles,
