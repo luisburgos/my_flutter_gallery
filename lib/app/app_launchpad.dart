@@ -20,14 +20,28 @@ class LaunchpadView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final apps = context.watch<MyFlutterGalleryCubit>().state.items;
+    final state = context.watch<MyFlutterGalleryCubit>().state;
+    final apps = state.items;
+    final selectedItem = state.selectedItem;
 
     return SimpleGrid<GalleryItemData>(
       items: apps,
       itemBuilder: (item) {
+        final isSelected = item.id == selectedItem?.id;
+        final theme = Theme.of(context).colorScheme;
+
         return Card(
           color: Colors.white,
           surfaceTintColor: Colors.white,
+          shape: isSelected
+              ? RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(
+                    width: 2,
+                    color: theme.primary,
+                  ),
+                )
+              : null,
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
