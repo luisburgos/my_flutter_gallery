@@ -9,10 +9,11 @@ class DashboardPageView extends StatefulWidget {
     required this.initialSelectedItemId,
     required this.primaryColor,
     required this.accentColor,
-    required this.bottomBarItems,
     required this.sideBarBodyItems,
     required this.sideBarFooterItems,
     required this.appLogoIcon,
+    this.displayAppTitle = true,
+    this.bottomBarItems = const [],
     this.topBarItems = const [],
     this.smallWidthBreakpoint,
     this.mediumWidthBreakpoint,
@@ -26,6 +27,7 @@ class DashboardPageView extends StatefulWidget {
   final double sideBarExpandedWidth;
   final double? smallWidthBreakpoint;
   final double? mediumWidthBreakpoint;
+  final bool displayAppTitle;
   final Color primaryColor;
   final Color accentColor;
   final Widget appLogoIcon;
@@ -91,10 +93,11 @@ class _DashboardPageViewState extends State<DashboardPageView> {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SideBarHeaderExpanded(
-                        appTitle: widget.appTitle,
-                        onLogoTap: _onLogoTap,
-                      ),
+                      if (widget.displayAppTitle)
+                        SideBarHeaderExpanded(
+                          appTitle: widget.appTitle,
+                          onLogoTap: _onLogoTap,
+                        ),
                       ...NavigationItemsGenerator.generate(
                         data: widget.topBarItems,
                         config: bottomBarItemsConfig,
@@ -116,20 +119,21 @@ class _DashboardPageViewState extends State<DashboardPageView> {
                 height: 1,
                 color: Colors.grey.shade300,
               ),
-              BottomBar(
-                backgroundColor: backgroundColor,
-                bodyBuilder: () {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: NavigationItemsGenerator.generate(
-                      data: widget.bottomBarItems,
-                      config: bottomBarItemsConfig,
-                      onPressed: _onItemTap,
-                      selectedItemId: selectedItemId,
-                    ),
-                  );
-                },
-              ),
+              if (widget.bottomBarItems.isNotEmpty)
+                BottomBar(
+                  backgroundColor: backgroundColor,
+                  bodyBuilder: () {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: NavigationItemsGenerator.generate(
+                        data: widget.bottomBarItems,
+                        config: bottomBarItemsConfig,
+                        onPressed: _onItemTap,
+                        selectedItemId: selectedItemId,
+                      ),
+                    );
+                  },
+                ),
             ],
           );
         }
@@ -147,10 +151,14 @@ class _DashboardPageViewState extends State<DashboardPageView> {
                     appLogoIcon: widget.appLogoIcon,
                   );
                 }
-                return SideBarHeaderExpanded(
-                  appTitle: widget.appTitle,
-                  onLogoTap: _onLogoTap,
-                );
+
+                if (widget.displayAppTitle) {
+                  return SideBarHeaderExpanded(
+                    appTitle: widget.appTitle,
+                    onLogoTap: _onLogoTap,
+                  );
+                }
+                return const SizedBox(height: 16);
               },
               bodyBuilder: () {
                 return SideBarBody(
