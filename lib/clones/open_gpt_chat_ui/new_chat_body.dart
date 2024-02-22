@@ -22,7 +22,39 @@ class ChatViewTemplate extends StatelessWidget {
           width: double.infinity,
           child: Row(
             children: [
-              const Text('TODO: ModelSelector'),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    iconColor: primary,
+                    alignment: Alignment.centerLeft,
+                  ),
+                  onPressed: () {},
+                  child: Row(
+                    children: [
+                      Text(
+                        'GPT 3.5',
+                        style: TextStyle(
+                          color: primary,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1.05,
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        child: Icon(
+                          FontAwesomeIcons.chevronDown,
+                          size: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               const Spacer(),
               ...trailing,
             ],
@@ -30,11 +62,8 @@ class ChatViewTemplate extends StatelessWidget {
         ),
         Expanded(
           child: SizedBox.expand(
-            child: ColoredBox(
-              color: primary.withOpacity(0.05),
-              child: Center(
-                child: content,
-              ),
+            child: Center(
+              child: content,
             ),
           ),
         ),
@@ -90,6 +119,8 @@ class NewChatBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).primaryColor;
+
     return ChatViewTemplate(
       content: ConstrainedBox(
         constraints: const BoxConstraints(
@@ -117,7 +148,7 @@ class NewChatBody extends StatelessWidget {
                   return Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      color: Colors.green.shade100,
+                      color: primaryColor.withOpacity(0.1),
                     ),
                     padding: const EdgeInsets.all(16),
                     child: Column(
@@ -156,6 +187,9 @@ class ChatBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChatViewTemplate(
+      content: const Text(
+        'Existing Chat Content',
+      ),
       trailing: [
         IconButton(
           onPressed: () {},
@@ -165,9 +199,6 @@ class ChatBody extends StatelessWidget {
           ),
         ),
       ],
-      content: const Text(
-        'Existing Chat Content',
-      ),
     );
   }
 }
