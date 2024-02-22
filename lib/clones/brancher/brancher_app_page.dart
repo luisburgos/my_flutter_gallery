@@ -46,7 +46,7 @@ class BrancherAiAppPage extends StatelessWidget {
           sideBarFooterItems: [
             _profileItemData,
           ],
-          pageBodyBuilder: () => const Body(),
+          pageBodyBuilder: (_) => const Body(),
         ),
       ),
     );

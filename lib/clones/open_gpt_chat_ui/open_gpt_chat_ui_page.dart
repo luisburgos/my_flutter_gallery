@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_flutter_gallery/app/globals.dart';
+import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/chat_history_view.dart';
 import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/dialogs/dialogs.dart';
+import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/new_chat_body.dart';
 import 'package:my_flutter_gallery/shared/colors_extended.dart';
 import 'package:my_flutter_gallery/shared/dashboard_page_view.dart';
 import 'package:my_flutter_gallery/shared/open_launchpad_shortcut.dart';
@@ -58,13 +60,7 @@ class OpenGptChatUiPage extends StatelessWidget {
             );
           },
           sideBarBodyBuilder: () {
-            // TODO(unassigned): create ChatHistory component with static data
-            return ColoredBox(
-              color: Colors.grey.shade300,
-              child: const Center(
-                child: Text('ChatHistory'),
-              ),
-            );
+            return const ChatHistoryView();
           },
           sideBarFooterItems: [
             _renewPlusItemData,
@@ -78,6 +74,10 @@ class OpenGptChatUiPage extends StatelessWidget {
               );
               return;
             }
+          },
+          pageBodyBuilder: (_) {
+            return const NewChatBody();
+            //return const ChatBody();
           },
         ),
       ),

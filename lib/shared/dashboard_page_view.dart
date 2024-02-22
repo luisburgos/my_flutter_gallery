@@ -38,7 +38,7 @@ class DashboardPageView extends StatefulWidget {
   final List<NavigationItemData> bottomBarItems;
   final List<NavigationItemData> sideBarBodyItems;
   final List<NavigationItemData> sideBarFooterItems;
-  final Widget Function()? pageBodyBuilder;
+  final Widget Function(String)? pageBodyBuilder;
   final Widget Function(bool)? sideBarHeaderBuilder;
   final Widget Function()? sideBarBodyBuilder;
   final void Function(String)? onSelectedItemId;
@@ -115,7 +115,7 @@ class _DashboardPageViewState extends State<DashboardPageView> {
                 },
               ),
               Expanded(
-                child: widget.pageBodyBuilder?.call() ??
+                child: widget.pageBodyBuilder?.call(selectedItemId) ??
                     DefaultPageBodyPlaceholder(
                       selectedItemId: selectedItemId,
                     ),
@@ -181,7 +181,7 @@ class _DashboardPageViewState extends State<DashboardPageView> {
               color: Colors.grey.shade300,
             ),
             Expanded(
-              child: widget.pageBodyBuilder?.call() ??
+              child: widget.pageBodyBuilder?.call(selectedItemId) ??
                   DefaultPageBodyPlaceholder(
                     selectedItemId: selectedItemId,
                   ),
