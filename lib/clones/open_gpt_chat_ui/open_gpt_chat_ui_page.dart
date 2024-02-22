@@ -40,23 +40,28 @@ class OpenGptChatUiPage extends StatelessWidget {
             _newChatItemData,
           ],
           sideBarHeaderBuilder: (isCollapsed) {
-            return Column(
-              children: [
-                NavigationItemView(
-                  data: _newChatItemData,
-                  margin: const EdgeInsets.symmetric(vertical: 8),
-                  // TODO(unassigned): avoid duplication, evaluate design
-                  config: NavigationItemsConfig(
-                    isCollapsed: isCollapsed,
-                    fillWidth: true,
-                    iconDefaultColor: pageData.seedColor,
-                    iconDefaultAccentColor: ColorsExtended.charcoal,
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+              ),
+              child: Column(
+                children: [
+                  NavigationItemView(
+                    data: _newChatItemData,
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    // TODO(unassigned): avoid duplication, evaluate design
+                    config: NavigationItemsConfig(
+                      isCollapsed: isCollapsed,
+                      fillWidth: true,
+                      iconDefaultColor: pageData.seedColor,
+                      iconDefaultAccentColor: ColorsExtended.charcoal,
+                    ),
+                    onPressed: () {},
+                    // TODO(unassigned): remove, make it optional or refactor
+                    selectedItemId: '',
                   ),
-                  onPressed: () {},
-                  // TODO(unassigned): remove, make it optional or refactor
-                  selectedItemId: '',
-                ),
-              ],
+                ],
+              ),
             );
           },
           sideBarBodyBuilder: () {
