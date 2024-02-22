@@ -54,3 +54,16 @@ class BrancherAiAppData extends GalleryItemData {
           ),
         );
 }
+
+class OpenGptChatUiAppData extends GalleryItemData {
+  OpenGptChatUiAppData()
+      : super(
+          id: 'OGTC-00',
+          name: 'OpenGPTChatUI',
+          seedColor: Colors.green,
+          iconData: const Icon(
+            FontAwesomeIcons.message,
+            size: 16,
+          ),
+        );
+}

@@ -18,7 +18,9 @@ class DashboardPageView extends StatefulWidget {
     this.smallWidthBreakpoint,
     this.mediumWidthBreakpoint,
     this.sideBarExpandedWidth = 180,
-    this.pageBody,
+    this.pageBodyBuilder,
+    this.sideBarHeaderBuilder,
+    this.sideBarBodyBuilder,
     super.key,
   });
 
@@ -35,7 +37,9 @@ class DashboardPageView extends StatefulWidget {
   final List<NavigationItemData> bottomBarItems;
   final List<NavigationItemData> sideBarBodyItems;
   final List<NavigationItemData> sideBarFooterItems;
-  final Widget? pageBody;
+  final Widget Function()? pageBodyBuilder;
+  final Widget Function(bool)? sideBarHeaderBuilder;
+  final Widget Function()? sideBarBodyBuilder;
 
   @override
   State<DashboardPageView> createState() => _DashboardPageViewState();
@@ -109,7 +113,7 @@ class _DashboardPageViewState extends State<DashboardPageView> {
                 },
               ),
               Expanded(
-                child: widget.pageBody ??
+                child: widget.pageBodyBuilder?.call() ??
                     DefaultPageBodyPlaceholder(
                       selectedItemId: selectedItemId,
                     ),
@@ -144,31 +148,19 @@ class _DashboardPageViewState extends State<DashboardPageView> {
               isCollapsed: actualCollapseState,
               backgroundColor: backgroundColor,
               expandedWidth: widget.sideBarExpandedWidth,
-              headerBuilder: () {
-                if (actualCollapseState) {
-                  return SideBarHeaderCollapsed(
-                    onLogoTap: _onLogoTap,
-                    appLogoIcon: widget.appLogoIcon,
-                  );
-                }
-
-                if (widget.displayAppTitle) {
-                  return SideBarHeaderExpanded(
-                    appTitle: widget.appTitle,
-                    onLogoTap: _onLogoTap,
-                  );
-                }
-                return const SizedBox(height: 16);
-              },
+              headerBuilder: () => _buildSideBarHeader(
+                actualCollapseState,
+              ),
               bodyBuilder: () {
-                return SideBarBody(
-                  children: NavigationItemsGenerator.generate(
-                    data: widget.sideBarBodyItems,
-                    config: sideBarItemsConfig,
-                    onPressed: _onItemTap,
-                    selectedItemId: selectedItemId,
-                  ),
-                );
+                return widget.sideBarBodyBuilder?.call() ??
+                    SideBarBody(
+                      children: NavigationItemsGenerator.generate(
+                        data: widget.sideBarBodyItems,
+                        config: sideBarItemsConfig,
+                        onPressed: _onItemTap,
+                        selectedItemId: selectedItemId,
+                      ),
+                    );
               },
               footerBuilder: () {
                 return SideBarFooter(
@@ -187,7 +179,7 @@ class _DashboardPageViewState extends State<DashboardPageView> {
               color: Colors.grey.shade300,
             ),
             Expanded(
-              child: widget.pageBody ??
+              child: widget.pageBodyBuilder?.call() ??
                   DefaultPageBodyPlaceholder(
                     selectedItemId: selectedItemId,
                   ),
@@ -196,6 +188,27 @@ class _DashboardPageViewState extends State<DashboardPageView> {
         );
       },
     );
+  }
+
+  Widget _buildSideBarHeader(bool isCollapsed) {
+    if (widget.sideBarHeaderBuilder != null) {
+      return widget.sideBarHeaderBuilder!.call(isCollapsed);
+    }
+
+    if (isCollapsed) {
+      return SideBarHeaderCollapsed(
+        onLogoTap: _onLogoTap,
+        appLogoIcon: widget.appLogoIcon,
+      );
+    }
+
+    if (widget.displayAppTitle) {
+      return SideBarHeaderExpanded(
+        appTitle: widget.appTitle,
+        onLogoTap: _onLogoTap,
+      );
+    }
+    return const SizedBox(height: 16);
   }
 
   void _onLogoTap() {
@@ -364,6 +377,7 @@ class NavigationItemView extends StatelessWidget {
     required this.config,
     required this.onPressed,
     required this.selectedItemId,
+    this.margin,
     super.key,
   });
 
@@ -371,6 +385,7 @@ class NavigationItemView extends StatelessWidget {
   final NavigationItemsConfig config;
   final VoidCallback onPressed;
   final String selectedItemId;
+  final EdgeInsetsGeometry? margin;
 
   @override
   Widget build(BuildContext context) {
@@ -381,7 +396,7 @@ class NavigationItemView extends StatelessWidget {
 
     return Container(
       width: config.fillWidth ? double.infinity : null,
-      margin: const EdgeInsets.only(bottom: 8),
+      margin: margin ?? const EdgeInsets.only(bottom: 8),
       child: config.isCollapsed
           ? IconButton(
               onPressed: onPressed,
