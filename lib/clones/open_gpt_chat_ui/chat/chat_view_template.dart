@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/dialogs/dialogs.dart';
-import 'package:my_flutter_gallery/shared/trailing_icon_text_button.dart';
+import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/shared/selected_model_button.dart';
 
 class ChatViewTemplate extends StatelessWidget {
   const ChatViewTemplate({
@@ -58,8 +58,6 @@ class ChatViewTemplateHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primary = Theme.of(context).colorScheme.primary;
-
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 12,
@@ -69,13 +67,8 @@ class ChatViewTemplateHeader extends StatelessWidget {
       width: double.infinity,
       child: Row(
         children: [
-          TrailingIconTextButton(
-            label: selectedModelName,
-            icon: const Icon(
-              FontAwesomeIcons.chevronDown,
-              size: 12,
-            ),
-            color: primary,
+          SelectedModelButton(
+            selectedModelName: selectedModelName,
             onPressed: () {},
           ),
           const Spacer(),

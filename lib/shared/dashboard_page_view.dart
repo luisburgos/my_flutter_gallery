@@ -9,7 +9,7 @@ class DashboardPageView extends StatefulWidget {
     required this.initialSelectedItemId,
     required this.primaryColor,
     required this.accentColor,
-    required this.sideBarBodyItems,
+    this.sideBarBodyItems = const [],
     required this.sideBarFooterItems,
     required this.appLogoIcon,
     this.displayAppTitle = true,

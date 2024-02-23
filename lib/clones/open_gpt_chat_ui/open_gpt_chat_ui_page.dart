@@ -39,9 +39,6 @@ class OpenGptChatUiPage extends StatelessWidget {
               topBarItems: [
                 _newChatItemData,
               ],
-              sideBarBodyItems: [
-                _newChatItemData,
-              ],
               sideBarHeaderBuilder: (isCollapsed) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(
