@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_flutter_gallery/shared/trailing_icon_text_button.dart';
 
 class ChatViewTemplate extends StatelessWidget {
   const ChatViewTemplate({
@@ -27,32 +28,14 @@ class ChatViewTemplate extends StatelessWidget {
                   horizontal: 12,
                   vertical: 4,
                 ),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    iconColor: primary,
-                    alignment: Alignment.centerLeft,
+                child: TrailingIconTextButton(
+                  label: 'GPT 3.5',
+                  icon: const Icon(
+                    FontAwesomeIcons.chevronDown,
+                    size: 12,
                   ),
+                  color: primary,
                   onPressed: () {},
-                  child: Row(
-                    children: [
-                      Text(
-                        'GPT 3.5',
-                        style: TextStyle(
-                          color: primary,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 1.05,
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8),
-                        child: Icon(
-                          FontAwesomeIcons.chevronDown,
-                          size: 12,
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               ),
               const Spacer(),
@@ -182,14 +165,17 @@ class NewChatBody extends StatelessWidget {
 }
 
 class ChatBody extends StatelessWidget {
-  const ChatBody({super.key});
+  const ChatBody({
+    required this.content,
+    super.key,
+  });
+
+  final String content;
 
   @override
   Widget build(BuildContext context) {
     return ChatViewTemplate(
-      content: const Text(
-        'Existing Chat Content',
-      ),
+      content: Text(content),
       trailing: [
         IconButton(
           onPressed: () {},

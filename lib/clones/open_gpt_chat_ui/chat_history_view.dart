@@ -1,30 +1,46 @@
 import 'package:flutter/material.dart';
 
+typedef OnChatHistoryItemTap = void Function(String);
+
 class ChatHistoryView extends StatelessWidget {
-  const ChatHistoryView({super.key});
+  const ChatHistoryView({
+    required this.onItemTap,
+    super.key,
+  });
+
+  final OnChatHistoryItemTap onItemTap;
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      child: Column(
-        children: [
-          ChatHistorySectionView(
-            name: 'Today',
-            items: ['A'],
-          ),
-          ChatHistorySectionView(
-            name: 'Yesterday',
-            items: ['B', 'C'],
-          ),
-          ChatHistorySectionView(
-            name: 'Previous 7 Days',
-            items: ['D', 'E', 'F', 'G'],
-          ),
-          ChatHistorySectionView(
-            name: 'Previous 30 Days',
-            items: ['H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'],
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.only(
+        bottom: 20,
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            ChatHistorySectionView(
+              name: 'Today',
+              items: ['A'],
+              onItemTap: onItemTap,
+            ),
+            ChatHistorySectionView(
+              name: 'Yesterday',
+              items: ['B', 'C'],
+              onItemTap: onItemTap,
+            ),
+            ChatHistorySectionView(
+              name: 'Previous 7 Days',
+              items: ['D', 'E', 'F', 'G'],
+              onItemTap: onItemTap,
+            ),
+            ChatHistorySectionView(
+              name: 'Previous 30 Days',
+              items: ['H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'],
+              onItemTap: onItemTap,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -34,11 +50,13 @@ class ChatHistorySectionView extends StatelessWidget {
   const ChatHistorySectionView({
     required this.name,
     required this.items,
+    required this.onItemTap,
     super.key,
   });
 
   final String name;
   final List<String> items;
+  final OnChatHistoryItemTap onItemTap;
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +78,7 @@ class ChatHistorySectionView extends StatelessWidget {
           ),
         ),
         ...items.map(
-          (e) => ChatHistoryItem(
-            name: e,
-          ),
+          (e) => ChatHistoryItem(name: e, onItemTap: onItemTap),
         ),
       ],
     );
@@ -72,10 +88,12 @@ class ChatHistorySectionView extends StatelessWidget {
 class ChatHistoryItem extends StatelessWidget {
   const ChatHistoryItem({
     required this.name,
+    required this.onItemTap,
     super.key,
   });
 
   final String name;
+  final OnChatHistoryItemTap onItemTap;
 
   @override
   Widget build(BuildContext context) {
@@ -86,9 +104,7 @@ class ChatHistoryItem extends StatelessWidget {
         horizontal: 16,
       ),
       child: TextButton(
-        onPressed: () {
-          // TODO(unassigned): handle callback
-        },
+        onPressed: () => onItemTap(name),
         child: Text(
           '$name: Lorem ipsum dolor sit amet, consectetur...',
           overflow: TextOverflow.ellipsis,
