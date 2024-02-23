@@ -26,39 +26,42 @@ class NewChatView extends StatelessWidget {
             ),
             const Spacer(),
             Flexible(
-              child: GridView.count(
-                crossAxisCount: 2,
-                childAspectRatio: 4.5,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                children: List.generate(4, (index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: primaryColor.withOpacity(0.1),
-                    ),
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Name $index',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+              child: Container(
+                color: Colors.pink,
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  childAspectRatio: 4.5,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  children: List.generate(4, (index) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: primaryColor.withOpacity(0.1),
+                      ),
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Name $index',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        Text(
-                          'Description $index',
-                          style: const TextStyle(
-                            fontSize: 12,
+                          Text(
+                            'Description $index',
+                            style: const TextStyle(
+                              fontSize: 12,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                }),
+                        ],
+                      ),
+                    );
+                  }),
+                ),
               ),
             ),
           ],
