@@ -32,8 +32,7 @@ class OpenGptChatUiPage extends StatelessWidget {
 
               /// Responsive Breakpoints
               sideBarExpandedWidth: 280,
-              mediumWidthBreakpoint: 900,
-              smallWidthBreakpoint: 550,
+              smallWidthBreakpoint: 700,
 
               /// Navigation Items
               initialSelectedItemId: _newChatId,
