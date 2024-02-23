@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_flutter_gallery/app/app_data.dart';
+import 'package:my_flutter_gallery/clones/brancher/brancher_app_page.dart';
+import 'package:my_flutter_gallery/clones/instagram/instagram_app_page.dart';
+import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/open_gpt_chat_ui_page.dart';
+import 'package:my_flutter_gallery/clones/perplexity/perplexity_app_page.dart';
+import 'package:my_flutter_gallery/clones/popcorn_flavor_picker/popcorn_flavor_picker_page.dart';
+import 'package:my_flutter_gallery/clones/supernotes/supernotes_app_page.dart';
 import 'package:my_flutter_gallery/shared/colors_extended.dart';
 
 class InstagramAppData extends GalleryItemData {
@@ -13,6 +19,7 @@ class InstagramAppData extends GalleryItemData {
             FontAwesomeIcons.instagram,
             size: 16,
           ),
+          pageBuilder: (_) => const InstagramPage(),
         );
 }
 
@@ -26,6 +33,7 @@ class PerplexityAppData extends GalleryItemData {
             FontAwesomeIcons.microchip,
             size: 16,
           ),
+          pageBuilder: (_) => const PerplexityPage(),
         );
 }
 
@@ -39,6 +47,7 @@ class SupernotesAppData extends GalleryItemData {
             FontAwesomeIcons.noteSticky,
             size: 16,
           ),
+          pageBuilder: (_) => const SuperNotesPage(),
         );
 }
 
@@ -52,6 +61,7 @@ class BrancherAiAppData extends GalleryItemData {
             FontAwesomeIcons.wind,
             size: 16,
           ),
+          pageBuilder: (_) => const BrancherAiAppPage(),
         );
 }
 
@@ -65,5 +75,20 @@ class OpenGptChatUiAppData extends GalleryItemData {
             FontAwesomeIcons.message,
             size: 16,
           ),
+          pageBuilder: (_) => const OpenGptChatUiPage(),
+        );
+}
+
+class PopcornFlavorPickerData extends GalleryItemData {
+  PopcornFlavorPickerData()
+      : super(
+          id: 'POPP-00',
+          name: 'PopcornFlavorPicker',
+          seedColor: Colors.blueAccent,
+          iconData: const Icon(
+            FontAwesomeIcons.film,
+            size: 16,
+          ),
+          pageBuilder: (_) => const PopcornFlavorPickerPage(),
         );
 }

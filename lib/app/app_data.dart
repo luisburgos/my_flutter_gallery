@@ -6,12 +6,14 @@ class GalleryItemData {
     required this.name,
     required this.seedColor,
     required this.iconData,
+    required this.pageBuilder,
   });
 
   final String id;
   final String name;
   final Color seedColor;
   final Icon iconData;
+  final Widget Function(BuildContext context) pageBuilder;
 }
 
 class MyFlutterGalleryData {

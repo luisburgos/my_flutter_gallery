@@ -4,8 +4,6 @@ import 'package:my_flutter_gallery/app/app_cubit.dart';
 import 'package:my_flutter_gallery/app/app_data.dart';
 import 'package:my_flutter_gallery/app/app_launchpad.dart';
 import 'package:my_flutter_gallery/app/globals.dart';
-import 'package:my_flutter_gallery/clones/clones.dart';
-import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/open_gpt_chat_ui_page.dart';
 import 'package:my_flutter_gallery/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -23,6 +21,7 @@ class App extends StatelessWidget {
             SupernotesAppData(),
             BrancherAiAppData(),
             OpenGptChatUiAppData(),
+            PopcornFlavorPickerData(),
           ],
         ),
       ),
@@ -73,24 +72,10 @@ class AppHomeBuilderSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<MyFlutterGalleryCubit>().state;
-    final selectedApp = state.selectedItem;
-
-    if (selectedApp?.id == InstagramAppData().id) {
-      return const InstagramPage();
+    final selectedItem = state.selectedItem;
+    if (selectedItem != null) {
+      return selectedItem.pageBuilder(context);
     }
-    if (selectedApp?.id == PerplexityAppData().id) {
-      return const PerplexityPage();
-    }
-    if (selectedApp?.id == SupernotesAppData().id) {
-      return const SuperNotesPage();
-    }
-    if (selectedApp?.id == BrancherAiAppData().id) {
-      return const BrancherAiAppPage();
-    }
-    if (selectedApp?.id == OpenGptChatUiAppData().id) {
-      return const OpenGptChatUiPage();
-    }
-    // TODO(unassigned): change for UnimplementedAppHome();
-    return const Placeholder();
+    return const UnimplementedGalleryItemPage();
   }
 }
