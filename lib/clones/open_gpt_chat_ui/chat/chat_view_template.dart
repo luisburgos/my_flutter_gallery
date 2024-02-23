@@ -24,10 +24,8 @@ class ChatViewTemplate extends StatelessWidget {
           trailing: trailing,
         ),
         Expanded(
-          child: SizedBox.expand(
-            child: Center(
-              child: content,
-            ),
+          child: Center(
+            child: content,
           ),
         ),
         ChatViewTemplateFooter(
