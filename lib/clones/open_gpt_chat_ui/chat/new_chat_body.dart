@@ -6,17 +6,15 @@ class NewChatView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
-
     return ChatViewTemplate(
       content: ConstrainedBox(
         constraints: const BoxConstraints(
-          maxWidth: 800,
+          maxWidth: 700,
         ),
-        child: Column(
+        child: const Column(
           children: [
-            const Spacer(),
-            const Center(
+            Spacer(),
+            Center(
               child: Text(
                 'How can I help you today?',
                 style: TextStyle(
@@ -24,48 +22,103 @@ class NewChatView extends StatelessWidget {
                 ),
               ),
             ),
-            const Spacer(),
-            Flexible(
-              child: Container(
-                color: Colors.pink,
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  childAspectRatio: 4.5,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  children: List.generate(4, (index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: primaryColor.withOpacity(0.1),
-                      ),
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Name $index',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            'Description $index',
-                            style: const TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-                ),
-              ),
-            ),
+            Spacer(),
+            SuggestionsBox(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class SuggestionsBox extends StatelessWidget {
+  const SuggestionsBox({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: SuggestedStarterMessageItem(
+                  title: 'Suggestion A',
+                  description: 'Description A',
+                ),
+              ),
+              SizedBox(width: 8),
+              Expanded(
+                child: SuggestedStarterMessageItem(
+                  title: 'Suggestion B',
+                  description: 'Description B',
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
+                child: SuggestedStarterMessageItem(
+                  title: 'Suggestion C',
+                  description: 'Description C',
+                ),
+              ),
+              SizedBox(width: 8),
+              Expanded(
+                child: SuggestedStarterMessageItem(
+                  title: 'Suggestion D',
+                  description: 'Description D',
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SuggestedStarterMessageItem extends StatelessWidget {
+  const SuggestedStarterMessageItem({
+    required this.title,
+    required this.description,
+    super.key,
+  });
+
+  final String title;
+  final String description;
+
+  @override
+  Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).primaryColor;
+
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: primaryColor.withOpacity(0.1),
+      ),
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            description,
+            style: const TextStyle(
+              fontSize: 12,
+            ),
+          ),
+        ],
       ),
     );
   }

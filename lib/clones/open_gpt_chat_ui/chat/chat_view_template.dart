@@ -24,12 +24,9 @@ class ChatViewTemplate extends StatelessWidget {
           trailing: trailing,
         ),
         Expanded(
-          child: Container(
-            color: Colors.blue,
-            child: SizedBox.expand(
-              child: Center(
-                child: content,
-              ),
+          child: SizedBox.expand(
+            child: Center(
+              child: content,
             ),
           ),
         ),
@@ -111,7 +108,7 @@ class ChatViewTemplateFooter extends StatelessWidget {
             horizontal: 80,
           ),
           constraints: const BoxConstraints(
-            maxWidth: 800,
+            maxWidth: 860,
           ),
           child: TextFormField(
             autocorrect: false,
