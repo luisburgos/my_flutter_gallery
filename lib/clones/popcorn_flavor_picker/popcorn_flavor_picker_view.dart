@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_flutter_gallery/clones/popcorn_flavor_picker/popcorn_flavor_model.dart';
@@ -26,6 +27,10 @@ class _PopcornFlavorPickerViewState extends State<PopcornFlavorPickerView> {
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: PickerDataSourceSelector(),
+          ),
           PickerTitle(
             selectionLimit: cubit.state.selectionLimit,
           ),
@@ -46,6 +51,32 @@ class _PopcornFlavorPickerViewState extends State<PopcornFlavorPickerView> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class PickerDataSourceSelector extends StatelessWidget {
+  const PickerDataSourceSelector({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final state = context.watch<PopcornFlavorPickerCubit>().state;
+
+    final segmentedCinemaOptions = {
+      for (final option in state.cinemaOptions)
+        option: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Text('Cinema $option'),
+        ),
+    };
+
+    return CupertinoSegmentedControl(
+      padding: const EdgeInsets.all(8),
+      groupValue: state.selectedCinema,
+      children: segmentedCinemaOptions,
+      onValueChanged: (_) {
+        context.read<PopcornFlavorPickerCubit>().setSelectedCinema(_);
+      },
     );
   }
 }
@@ -94,6 +125,18 @@ class PickerPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (items.isEmpty) {
+      return Container(
+        margin: const EdgeInsets.symmetric(
+          vertical: 4,
+          horizontal: 8,
+        ),
+        color: Colors.grey.shade300,
+        width: double.infinity,
+        height: 20,
+      );
+    }
+
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: items.isEmpty ? 1 : items.length,

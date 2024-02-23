@@ -17,10 +17,17 @@ abstract class PopcornFlavorPickerOptionsService {
   Future<PopcornFlavorPickerConfig> getConfigForCinemaId(String cinemaId);
 
   Future<List<PopcornFlavor>> getPopcornFlavorOptions(String cinemaId);
+
+  Future<List<String>> getDefaultCinemas();
 }
 
 class DefaultPopcornFlavorPickerOptionsService
     extends PopcornFlavorPickerOptionsService {
+  @override
+  Future<List<String>> getDefaultCinemas() {
+    return Future.value(['A', 'B']);
+  }
+
   @override
   Future<String> getDefaultCinemaId() {
     return Future.value('B');

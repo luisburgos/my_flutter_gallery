@@ -6,10 +6,8 @@ import 'package:my_flutter_gallery/clones/popcorn_flavor_picker/popcorn_flavor_p
 class PopcornFlavorPickerCubit extends Cubit<PopcornFlavorPickerModel> {
   PopcornFlavorPickerCubit({
     required this.optionsService,
-    this.selectionLimit = 2,
   }) : super(const PopcornFlavorPickerModel());
 
-  final int selectionLimit;
   final PopcornFlavorPickerOptionsService optionsService;
 
   void toggleSelected(PopcornFlavor item) {
@@ -30,14 +28,32 @@ class PopcornFlavorPickerCubit extends Cubit<PopcornFlavorPickerModel> {
     );
   }
 
+  Future<void> setSelectedCinema(String cinema) async {
+    final config = await optionsService.getConfigForCinemaId(cinema);
+    final options = await optionsService.getPopcornFlavorOptions(cinema);
+    emit(
+      state.copyWith(
+        options: options,
+        selectionLimit: config.selectionLimit,
+        selectedCinema: cinema,
+        selected: [],
+      ),
+    );
+  }
+
   Future<void> loadOptions() async {
     final defaultCinema = await optionsService.getDefaultCinemaId();
+    final cinemaOptions = await optionsService.getDefaultCinemas();
     final config = await optionsService.getConfigForCinemaId(defaultCinema);
     final options = await optionsService.getPopcornFlavorOptions(defaultCinema);
     emit(
       state.copyWith(
         options: options,
         selectionLimit: config.selectionLimit,
+        cinemaOptions: cinemaOptions,
+        selectedCinema: cinemaOptions.firstWhere(
+          (_) => _ == defaultCinema,
+        ),
       ),
     );
   }
