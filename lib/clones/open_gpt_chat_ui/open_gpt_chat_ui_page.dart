@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_flutter_gallery/app/globals.dart';
-import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/chat_history_view.dart';
+import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/chat/chat_details.dart';
+import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/chat/chat_history_view.dart';
+import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/chat/new_chat_body.dart';
 import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/dialogs/dialogs.dart';
-import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/new_chat_body.dart';
 import 'package:my_flutter_gallery/shared/colors_extended.dart';
 import 'package:my_flutter_gallery/shared/dashboard_page_view.dart';
 import 'package:my_flutter_gallery/shared/open_launchpad_shortcut.dart';
@@ -81,9 +82,9 @@ class OpenGptChatUiPage extends StatelessWidget {
               },
               pageBodyBuilder: (_) {
                 if (selectedChat != null) {
-                  return ChatBody(content: selectedChat);
+                  return ChatDetailsView(content: selectedChat);
                 }
-                return const NewChatBody();
+                return const NewChatView();
               },
             );
           },
