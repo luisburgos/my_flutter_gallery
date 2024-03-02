@@ -22,22 +22,22 @@ class ChatHistoryView extends StatelessWidget {
           children: [
             ChatHistorySectionView(
               name: 'Today',
-              items: ['A'],
+              items: const ['A'],
               onItemTap: onItemTap,
             ),
             ChatHistorySectionView(
               name: 'Yesterday',
-              items: ['B', 'C'],
+              items: const ['B', 'C'],
               onItemTap: onItemTap,
             ),
             ChatHistorySectionView(
               name: 'Previous 7 Days',
-              items: ['D', 'E', 'F', 'G'],
+              items: const ['D', 'E', 'F', 'G'],
               onItemTap: onItemTap,
             ),
             ChatHistorySectionView(
               name: 'Previous 30 Days',
-              items: ['H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'],
+              items: const ['H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'],
               onItemTap: onItemTap,
             ),
           ],

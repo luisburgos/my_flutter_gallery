@@ -27,7 +27,7 @@ class OpenGptChatUiPage extends StatelessWidget {
               appLogoIcon: pageData.iconData,
               accentColor: pageData.seedColor,
               primaryColor: ColorsExtended.charcoal,
-              // TODO(unassigned): fix hiding title breaks [topBarItems] alignment
+              // TODO(unassigned): fix hiding title breaks topBarItems alignment
               displayAppTitle: false,
 
               /// Responsive Breakpoints
@@ -39,7 +39,7 @@ class OpenGptChatUiPage extends StatelessWidget {
               topBarItems: [
                 _newChatItemData,
               ],
-              sideBarHeaderBuilder: (isCollapsed) {
+              sideBarHeaderBuilder: ({required bool isCollapsed}) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 12,

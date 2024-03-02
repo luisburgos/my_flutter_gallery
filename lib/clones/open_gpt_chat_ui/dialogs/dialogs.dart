@@ -85,7 +85,7 @@ class KeyboardShortcutsDialog extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -133,10 +133,8 @@ class KeysCombinationText extends StatelessWidget {
   Widget build(BuildContext context) {
     final children = <Widget>[];
     for (final key in keys) {
-      print(key);
       final itemWidget = _buildItem(key);
       children.add(itemWidget);
-      print(children);
 
       final keyIndex = keys.indexOf(key);
       if (keyIndex != keys.length - 1) {

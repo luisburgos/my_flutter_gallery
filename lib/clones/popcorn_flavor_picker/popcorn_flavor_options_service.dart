@@ -83,7 +83,7 @@ class DefaultPopcornFlavorPickerOptionsService
         const PopcornFlavor(
           name: 'Takis® Blue',
           iconName: 'blue_stick',
-        )
+        ),
       ];
     }
 

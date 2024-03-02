@@ -9,9 +9,9 @@ class DashboardPageView extends StatefulWidget {
     required this.initialSelectedItemId,
     required this.primaryColor,
     required this.accentColor,
-    this.sideBarBodyItems = const [],
     required this.sideBarFooterItems,
     required this.appLogoIcon,
+    this.sideBarBodyItems = const [],
     this.displayAppTitle = true,
     this.bottomBarItems = const [],
     this.topBarItems = const [],
@@ -39,7 +39,7 @@ class DashboardPageView extends StatefulWidget {
   final List<NavigationItemData> sideBarBodyItems;
   final List<NavigationItemData> sideBarFooterItems;
   final Widget Function(String)? pageBodyBuilder;
-  final Widget Function(bool)? sideBarHeaderBuilder;
+  final Widget Function({required bool isCollapsed})? sideBarHeaderBuilder;
   final Widget Function()? sideBarBodyBuilder;
   final void Function(String)? onSelectedItemId;
 
@@ -194,7 +194,7 @@ class _DashboardPageViewState extends State<DashboardPageView> {
 
   Widget _buildSideBarHeader(bool isCollapsed) {
     if (widget.sideBarHeaderBuilder != null) {
-      return widget.sideBarHeaderBuilder!.call(isCollapsed);
+      return widget.sideBarHeaderBuilder!.call(isCollapsed: isCollapsed);
     }
 
     if (isCollapsed) {
