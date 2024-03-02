@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_flutter_gallery/clones/popcorn_flavor_picker/popcorn_flavor_model.dart';
 import 'package:my_flutter_gallery/clones/popcorn_flavor_picker/popcorn_flavor_picker_cubit.dart';
+import 'package:my_flutter_gallery/shared/color_utils.dart';
 
 class PopcornFlavorPickerView extends StatefulWidget {
   const PopcornFlavorPickerView({super.key});
@@ -22,17 +23,25 @@ class _PopcornFlavorPickerViewState extends State<PopcornFlavorPickerView> {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<PopcornFlavorPickerCubit>();
+    final theme = Theme.of(context);
+    var brandColor = theme.colorScheme.primary;
+    if (cubit.state.brandHexColor != null) {
+      brandColor = hexToColor(cubit.state.brandHexColor!);
+    }
 
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          const Align(
+          Align(
             alignment: Alignment.centerLeft,
-            child: PickerDataSourceSelector(),
+            child: PickerDataSourceSelector(
+              color: brandColor,
+            ),
           ),
           PickerTitle(
             selectionLimit: cubit.state.selectionLimit,
+            color: brandColor,
           ),
           SizedBox(
             height: 100,
@@ -47,6 +56,7 @@ class _PopcornFlavorPickerViewState extends State<PopcornFlavorPickerView> {
               items: cubit.state.options,
               selectedItems: cubit.state.selected,
               onOptionTap: cubit.toggleSelected,
+              selectedColor: brandColor,
             ),
           ),
         ],
@@ -56,7 +66,12 @@ class _PopcornFlavorPickerViewState extends State<PopcornFlavorPickerView> {
 }
 
 class PickerDataSourceSelector extends StatelessWidget {
-  const PickerDataSourceSelector({super.key});
+  const PickerDataSourceSelector({
+    required this.color,
+    super.key,
+  });
+
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +88,8 @@ class PickerDataSourceSelector extends StatelessWidget {
     return CupertinoSegmentedControl(
       padding: const EdgeInsets.all(8),
       groupValue: state.selectedCinema,
+      selectedColor: color,
+      borderColor: color,
       children: segmentedCinemaOptions,
       onValueChanged: (_) {
         context.read<PopcornFlavorPickerCubit>().setSelectedCinema(_);
@@ -83,16 +100,16 @@ class PickerDataSourceSelector extends StatelessWidget {
 
 class PickerTitle extends StatelessWidget {
   const PickerTitle({
+    required this.color,
     required this.selectionLimit,
     super.key,
   });
 
+  final Color color;
   final int selectionLimit;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 20,
@@ -103,7 +120,7 @@ class PickerTitle extends StatelessWidget {
         child: Text(
           'Elige hasta $selectionLimit sabores para tus palomitas',
           style: TextStyle(
-            color: theme.colorScheme.primary,
+            color: color,
             fontSize: 20,
             fontWeight: FontWeight.w500,
           ),
@@ -207,12 +224,14 @@ class PickerOptions extends StatelessWidget {
     required this.items,
     required this.selectedItems,
     required this.onOptionTap,
+    required this.selectedColor,
     super.key,
   });
 
   final List<PopcornFlavor> items;
   final List<PopcornFlavor> selectedItems;
   final void Function(PopcornFlavor) onOptionTap;
+  final Color selectedColor;
 
   @override
   Widget build(BuildContext context) {
@@ -231,6 +250,7 @@ class PickerOptions extends StatelessWidget {
           item: item,
           onOptionTap: onOptionTap,
           isSelected: selectedItems.contains(item),
+          selectedColor: selectedColor,
         );
       },
     );
@@ -242,24 +262,24 @@ class PickerOptionItem extends StatelessWidget {
     required this.item,
     required this.onOptionTap,
     required this.isSelected,
+    required this.selectedColor,
     super.key,
   });
 
   final PopcornFlavor item;
   final bool isSelected;
   final void Function(PopcornFlavor) onOptionTap;
+  final Color selectedColor;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return GestureDetector(
       onTap: () => onOptionTap(item),
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
             width: 2,
-            color: isSelected ? theme.colorScheme.primary : Colors.grey,
+            color: isSelected ? selectedColor : Colors.grey,
           ),
         ),
         width: 20,

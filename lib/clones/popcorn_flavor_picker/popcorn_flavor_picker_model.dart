@@ -7,6 +7,7 @@ class PopcornFlavorPickerModel {
     this.selectionLimit = -1,
     this.selectedCinema,
     this.cinemaOptions = const [],
+    this.brandHexColor,
   });
 
   final List<PopcornFlavor> selected;
@@ -14,6 +15,7 @@ class PopcornFlavorPickerModel {
   final int selectionLimit;
   final String? selectedCinema;
   final List<String> cinemaOptions;
+  final String? brandHexColor;
 
   PopcornFlavorPickerModel copyWith({
     List<PopcornFlavor>? selected,
@@ -21,6 +23,7 @@ class PopcornFlavorPickerModel {
     int? selectionLimit,
     String? selectedCinema,
     List<String>? cinemaOptions,
+    String? brandHexColor,
   }) {
     return PopcornFlavorPickerModel(
       selected: selected ?? this.selected,
@@ -28,6 +31,7 @@ class PopcornFlavorPickerModel {
       selectionLimit: selectionLimit ?? this.selectionLimit,
       selectedCinema: selectedCinema ?? this.selectedCinema,
       cinemaOptions: cinemaOptions ?? this.cinemaOptions,
+      brandHexColor: brandHexColor ?? this.brandHexColor,
     );
   }
 }

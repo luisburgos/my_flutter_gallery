@@ -37,6 +37,7 @@ class PopcornFlavorPickerCubit extends Cubit<PopcornFlavorPickerModel> {
         selectionLimit: config.selectionLimit,
         selectedCinema: cinema,
         selected: [],
+        brandHexColor: config.brandHexColor,
       ),
     );
   }
@@ -54,6 +55,7 @@ class PopcornFlavorPickerCubit extends Cubit<PopcornFlavorPickerModel> {
         selectedCinema: cinemaOptions.firstWhere(
           (_) => _ == defaultCinema,
         ),
+        brandHexColor: config.brandHexColor,
       ),
     );
   }

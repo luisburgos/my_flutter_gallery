@@ -5,10 +5,12 @@ class PopcornFlavorPickerConfig {
   PopcornFlavorPickerConfig({
     required this.cinemaId,
     required this.selectionLimit,
+    required this.brandHexColor,
   });
 
   final String cinemaId;
   final int selectionLimit;
+  final String brandHexColor;
 }
 
 abstract class PopcornFlavorPickerOptionsService {
@@ -40,6 +42,7 @@ class DefaultPopcornFlavorPickerOptionsService
         PopcornFlavorPickerConfig(
           cinemaId: 'A',
           selectionLimit: 2,
+          brandHexColor: '003366',
         ),
       );
     }
@@ -48,6 +51,7 @@ class DefaultPopcornFlavorPickerOptionsService
       PopcornFlavorPickerConfig(
         cinemaId: 'B',
         selectionLimit: 3,
+        brandHexColor: 'E30B17',
       ),
     );
   }
