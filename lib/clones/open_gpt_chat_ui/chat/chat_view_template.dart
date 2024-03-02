@@ -42,6 +42,7 @@ class ChatViewTemplate extends StatelessWidget {
     openDialog(
       context,
       child: const KeyboardShortcutsDialog(),
+      height: 300,
     );
   }
 }
