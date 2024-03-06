@@ -22,6 +22,7 @@ class App extends StatelessWidget {
             BrancherAiAppData(),
             OpenGptChatUiAppData(),
             PopcornFlavorPickerData(),
+            HabitsData(),
           ],
         ),
       ),

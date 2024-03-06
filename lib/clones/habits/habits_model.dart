@@ -1,0 +1,3 @@
+class HabitsModel {
+  const HabitsModel();
+}

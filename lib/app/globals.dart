@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_flutter_gallery/app/app_data.dart';
 import 'package:my_flutter_gallery/clones/brancher/brancher_app_page.dart';
+import 'package:my_flutter_gallery/clones/habits/habits.dart';
 import 'package:my_flutter_gallery/clones/instagram/instagram_app_page.dart';
 import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/open_gpt_chat_ui_page.dart';
 import 'package:my_flutter_gallery/clones/perplexity/perplexity_app_page.dart';
@@ -90,5 +91,19 @@ class PopcornFlavorPickerData extends GalleryItemData {
             size: 16,
           ),
           pageBuilder: (_) => const PopcornFlavorPickerPage(),
+        );
+}
+
+class HabitsData extends GalleryItemData {
+  HabitsData()
+      : super(
+          id: 'HABI-00',
+          name: 'Habits',
+          seedColor: Colors.lightGreenAccent,
+          iconData: const Icon(
+            FontAwesomeIcons.calendarWeek,
+            size: 16,
+          ),
+          pageBuilder: (_) => const HabitsPage(),
         );
 }
