@@ -56,60 +56,63 @@ class LinearAvailabilityIndicatorBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      final width = constraints.maxWidth;
-      values.setWidth(width);
-      return Column(
-        children: [
-          Row(
-            children: [
-              _AvailabilityIndicatorPart(
-                value: 1,
-                color: options.soldColor,
-                width: values.soldWidth,
-                height: options.height,
-                margin: options.margin,
-                radius: options.radius,
-                withLeadingRoundedCorners: true,
-              ),
-              _AvailabilityIndicatorPart(
-                value: 1,
-                color: options.reservedColor,
-                height: options.height,
-                margin: options.margin,
-                radius: options.radius,
-                width: values.reservedWidth,
-              ),
-              _AvailabilityIndicatorPart(
-                value: 1,
-                color: options.availableColor,
-                width: values.availableWidth,
-                height: options.height,
-                margin: options.margin,
-                radius: options.radius,
-                withTrailingRoundedCorners: true,
-              )
-            ],
-          ),
-        ],
-      );
-    });
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        values.setWidth(width);
+        return Column(
+          children: [
+            Row(
+              children: [
+                _AvailabilityIndicatorPart(
+                  value: 1,
+                  color: options.soldColor,
+                  width: values.soldWidth,
+                  height: options.height,
+                  margin: options.margin,
+                  radius: options.radius,
+                  withLeadingRoundedCorners: true,
+                ),
+                _AvailabilityIndicatorPart(
+                  value: 1,
+                  color: options.reservedColor,
+                  height: options.height,
+                  margin: options.margin,
+                  radius: options.radius,
+                  width: values.reservedWidth,
+                ),
+                _AvailabilityIndicatorPart(
+                  value: 1,
+                  color: options.availableColor,
+                  width: values.availableWidth,
+                  height: options.height,
+                  margin: options.margin,
+                  radius: options.radius,
+                  withTrailingRoundedCorners: true,
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
   }
 }
 
 class _AvailabilityIndicatorPart extends StatelessWidget {
   const _AvailabilityIndicatorPart({
-    super.key,
     required this.value,
     required this.width,
     required this.height,
     required this.color,
+    required this.radius,
+    required this.margin,
     // ignore: unused_element
     this.backgroundColor,
     this.withLeadingRoundedCorners = false,
     this.withTrailingRoundedCorners = false,
-    required this.radius,
-    required this.margin,
+    // ignore: unused_element
+    super.key,
   });
 
   final double value;
