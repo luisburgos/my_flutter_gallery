@@ -14,7 +14,7 @@ class App extends StatelessWidget {
     return BlocProvider(
       create: (_) => MyFlutterGalleryCubit(
         MyFlutterGalleryData(
-          selectedItem: OpenGptChatUiAppData(),
+          selectedItem: HabitsData(),
           items: [
             InstagramAppData(),
             PerplexityAppData(),
