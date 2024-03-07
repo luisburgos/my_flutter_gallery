@@ -1,9 +1,20 @@
 class HabitsModel {
   const HabitsModel({
-    this.entries = const [],
+    this.selectedWeek,
+    this.weeks = const [],
   });
 
-  final List<Habit> entries;
+  final Week? selectedWeek;
+  final List<Week> weeks;
+
+  int get selectedWeekIndex {
+    if (selectedWeek != null) {
+      return weeks.indexOf(selectedWeek!);
+    }
+    return 0;
+  }
+
+  List<Habit> get selectedWeekHabits => weeks[selectedWeekIndex].habits;
 
   double get completionPercentage {
     return (completionRate * 100).floorToDouble();
@@ -11,24 +22,46 @@ class HabitsModel {
 
   double get completionRate {
     var completionRateSum = 0.0;
-    if (entries.isEmpty) return completionRateSum;
+    if (selectedWeekHabits.isEmpty) return completionRateSum;
 
-    for (final element in entries) {
+    for (final element in selectedWeekHabits) {
       completionRateSum += element.completionRate;
     }
-    return completionRateSum / entries.length;
+    return completionRateSum / selectedWeekHabits.length;
   }
 
   HabitsModel copyWith({
-    List<Habit>? entries,
+    Week? selectedWeek,
+    List<Week>? weeks,
   }) {
     return HabitsModel(
-      entries: entries ?? this.entries,
+      selectedWeek: selectedWeek ?? this.selectedWeek,
+      weeks: weeks ?? this.weeks,
     );
   }
 }
 
 typedef HabitEntryDaysStatuses = Map<Days, HabitEntryStatus>;
+
+class Week {
+  const Week({
+    required this.id,
+    this.habits = const [],
+  });
+
+  final String id;
+  final List<Habit> habits;
+
+  Week copyWith({
+    String? id,
+    List<Habit>? habits,
+  }) {
+    return Week(
+      id: id ?? this.id,
+      habits: habits ?? this.habits,
+    );
+  }
+}
 
 class Habit {
   const Habit({

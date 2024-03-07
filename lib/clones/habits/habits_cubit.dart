@@ -9,36 +9,71 @@ class HabitsCubit extends Cubit<HabitsModel> {
 
   final HabitsService habitsService;
 
-  void nextWeek() {}
+  void nextWeek() {
+    final currentWeekIndex = state.selectedWeekIndex;
+    final newWeekIndex = currentWeekIndex + 1;
+    if (newWeekIndex > state.weeks.length - 1) return;
 
-  void previousWeek() {}
+    final newSelectedWeek = state.weeks[newWeekIndex];
+    emit(
+      state.copyWith(
+        selectedWeek: newSelectedWeek,
+      ),
+    );
+  }
 
-  void nextStatus(Habit entry, Days day) {
-    final currentEntries = state.entries;
-    final currentIndex = currentEntries.indexOf(entry);
-    final currentDayStatuses = Map<Days, HabitEntryStatus>.from(
-      currentEntries[currentIndex].statuses,
+  void previousWeek() {
+    final currentWeekIndex = state.selectedWeekIndex;
+    final newWeekIndex = currentWeekIndex - 1;
+    if (newWeekIndex < 0) return;
+
+    final newSelectedWeek = state.weeks[newWeekIndex];
+    emit(
+      state.copyWith(
+        selectedWeek: newSelectedWeek,
+      ),
+    );
+  }
+
+  // TODO(unassigned): improve logic and model design
+  void changeDayStatus(Habit habit, Days day) {
+    final habitIndex = state.selectedWeekHabits.indexOf(habit);
+    final habitStatuses = Map<Days, HabitEntryStatus>.from(
+      state.selectedWeekHabits[habitIndex].statuses,
     );
 
-    final currentStatusForDay =
-        currentDayStatuses[day] ?? HabitEntryStatus.initial;
-    final nextStatusForEntry = _getNextStatus(currentStatusForDay);
+    final habitStatusForDay = habitStatuses[day] ?? HabitEntryStatus.initial;
+    final nextStatusForEntry = _getNextStatus(habitStatusForDay);
 
-    currentDayStatuses[day] = nextStatusForEntry;
-    currentEntries[currentIndex] = entry.copyWith(
-      statuses: currentDayStatuses,
+    habitStatuses[day] = nextStatusForEntry;
+
+    final asd = List<Habit>.from(state.selectedWeekHabits);
+    final asdCurrent = asd[habitIndex];
+    asd[habitIndex] = asdCurrent.copyWith(statuses: habitStatuses);
+
+    final nextWeekState = state.selectedWeek?.copyWith(
+      habits: asd,
     );
+
+    final newWeeksState = List<Week>.from(state.weeks);
+    newWeeksState[state.selectedWeekIndex] = nextWeekState!;
+
+    // TODO(unassigned): uncomment and fix
     final nextState = state.copyWith(
-      entries: currentEntries,
+      selectedWeek: nextWeekState,
+      weeks: newWeeksState,
     );
     emit(nextState);
   }
 
   Future<void> load() async {
     final entries = await habitsService.getHabitEntries();
-    emit(state.copyWith(
-      entries: entries,
-    ));
+    emit(
+      state.copyWith(
+        selectedWeek: entries.first,
+        weeks: entries,
+      ),
+    );
   }
 
   HabitEntryStatus _getNextStatus(HabitEntryStatus current) {

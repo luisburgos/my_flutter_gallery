@@ -31,8 +31,9 @@ class _HabitsViewState extends State<HabitsView> {
       ),
       child: Column(
         children: [
+          // TODO(unassigned): fix dynamic header and selected week (restart!)
           WeekHeader(
-            weekNumber: 7,
+            weekNumber: state.selectedWeekIndex,
             onNextTap: cubit.nextWeek,
             onPreviousTap: cubit.previousWeek,
           ),
@@ -50,20 +51,20 @@ class _HabitsViewState extends State<HabitsView> {
             ),
           ),
           const CustomDivider(),
-          if (state.entries.isEmpty)
+          if (state.selectedWeekHabits.isEmpty)
             const Text('No entries')
           else
             Padding(
               padding: const EdgeInsets.all(8),
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: state.entries.length,
+                itemCount: state.selectedWeekHabits.length,
                 itemBuilder: (context, index) {
-                  final item = state.entries[index];
+                  final item = state.selectedWeekHabits[index];
                   return HabitEntryListTile(
                     data: item,
                     onDayTap: (_) {
-                      cubit.nextStatus(item, _);
+                      cubit.changeDayStatus(item, _);
                     },
                   );
                 },
