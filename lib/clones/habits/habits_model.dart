@@ -181,5 +181,24 @@ enum Days {
   thursday,
   friday,
   saturday,
-  sunday,
+  sunday;
+
+  String get letter {
+    switch (this) {
+      case Days.monday:
+        return 'M';
+      case Days.tuesday:
+        return 'T';
+      case Days.wednesday:
+        return 'W';
+      case Days.thursday:
+        return 'T';
+      case Days.friday:
+        return 'F';
+      case Days.saturday:
+        return 'S';
+      case Days.sunday:
+        return 'S';
+    }
+  }
 }
