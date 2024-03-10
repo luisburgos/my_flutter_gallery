@@ -2,7 +2,13 @@
 import 'data_model.dart';
 
 class ResonanceRemoteConfig {
-  const ResonanceRemoteConfig();
+  const ResonanceRemoteConfig({
+    required this.withAddPhraseButton,
+    required this.withIncreasingFontSize,
+  });
+
+  final bool withAddPhraseButton;
+  final bool withIncreasingFontSize;
 }
 
 abstract class ResonanceService {
@@ -14,19 +20,31 @@ abstract class ResonanceService {
 class DefaultResonanceService extends ResonanceService {
   @override
   Future<ResonanceRemoteConfig> getRemoteConfig() {
-    return Future.value(const ResonanceRemoteConfig());
+    return Future.value(
+      const ResonanceRemoteConfig(
+        withAddPhraseButton: false,
+        withIncreasingFontSize: true,
+      ),
+    );
   }
 
   @override
   Future<List<ResonanceDataModel>> getAll() {
-    final items = [
-      const ResonanceDataModel(
-        name: 'Data Model Item #1 Name',
-      ),
-      const ResonanceDataModel(
-        name: 'Data Model Item #2 Name',
-      ),
+    final phrases = [
+      'Every day count',
+      'Replace Judgement with Curiosity',
+      'Listen to your Body',
+      'Automate, Eliminate, Delegate',
+      'Boring & Feel Good Productivity',
+      'Day Starts the Night Before',
     ];
-    return Future.value(items);
+
+    return Future.value(
+      phrases
+          .map(
+            (p) => ResonanceDataModel(name: p),
+          )
+          .toList(),
+    );
   }
 }

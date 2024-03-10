@@ -5,20 +5,20 @@ import 'service.dart';
 
 class ResonanceCubitModel {
   const ResonanceCubitModel({
-    this.items = const [],
     this.config,
+    this.itemsVotes = const {},
   });
 
-  final List<ResonanceDataModel> items;
   final ResonanceRemoteConfig? config;
+  final Map<ResonanceDataModel, int> itemsVotes;
 
   ResonanceCubitModel copyWith({
-    List<ResonanceDataModel>? items,
     ResonanceRemoteConfig? config,
+    Map<ResonanceDataModel, int>? itemsVotes,
   }) {
     return ResonanceCubitModel(
-      items: items ?? this.items,
       config: config ?? this.config,
+      itemsVotes: itemsVotes ?? this.itemsVotes,
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:my_flutter_gallery/app/app_cubit.dart';
 import 'package:my_flutter_gallery/app/app_data.dart';
 import 'package:my_flutter_gallery/app/app_launchpad.dart';
 import 'package:my_flutter_gallery/app/globals.dart';
+import 'package:my_flutter_gallery/clones/resonance/metadata.dart';
 import 'package:my_flutter_gallery/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -14,7 +15,7 @@ class App extends StatelessWidget {
     return BlocProvider(
       create: (_) => MyFlutterGalleryCubit(
         MyFlutterGalleryData(
-          selectedItem: HabitsData(),
+          selectedItem: ResonanceAppData(),
           items: [
             InstagramAppData(),
             PerplexityAppData(),
@@ -23,6 +24,7 @@ class App extends StatelessWidget {
             OpenGptChatUiAppData(),
             PopcornFlavorPickerData(),
             HabitsData(),
+            ResonanceAppData(),
           ],
         ),
       ),
