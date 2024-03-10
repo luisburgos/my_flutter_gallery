@@ -37,6 +37,15 @@ class DefaultResonanceService extends ResonanceService {
       'Automate, Eliminate, Delegate',
       'Boring & Feel Good Productivity',
       'Day Starts the Night Before',
+      'Smile more',
+      'Think First, Then Fun',
+      'Watch your Posture',
+      'Rules lead to Goals',
+      "Don't fool yourself",
+      'Let the mind wonder and free',
+      'Test on yourself',
+      'Everything is a micro-mission',
+      'Cloning Apps is always FUN',
     ];
 
     return Future.value(
