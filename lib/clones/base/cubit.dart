@@ -5,14 +5,14 @@ import 'package:bloc/bloc.dart';
 import 'cubit_model.dart';
 import 'service.dart';
 
-class BaseCubit extends Cubit<BaseCubitModel> {
-  BaseCubit({
+class MyCubit extends Cubit<MyCubitModel> {
+  MyCubit({
     required this.optionsService,
-  }) : super(const BaseCubitModel());
+  }) : super(const MyCubitModel());
 
-  final BaseService optionsService;
+  final MyService optionsService;
 
-  Future<void> loadOptions() async {
+  Future<void> load() async {
     final remoteConfig = await optionsService.getRemoteConfig();
     final remoteData = await optionsService.getAll();
     emit(

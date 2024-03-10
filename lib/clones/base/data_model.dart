@@ -1,5 +1,5 @@
-class DataModel {
-  const DataModel({
+class MyDataModel {
+  const MyDataModel({
     required this.name,
   });
 

@@ -3,20 +3,20 @@
 import 'data_model.dart';
 import 'service.dart';
 
-class BaseCubitModel {
-  const BaseCubitModel({
+class MyCubitModel {
+  const MyCubitModel({
     this.items = const [],
     this.config,
   });
 
-  final List<DataModel> items;
-  final RemoteConfig? config;
+  final List<MyDataModel> items;
+  final MyRemoteConfig? config;
 
-  BaseCubitModel copyWith({
-    List<DataModel>? items,
-    RemoteConfig? config,
+  MyCubitModel copyWith({
+    List<MyDataModel>? items,
+    MyRemoteConfig? config,
   }) {
-    return BaseCubitModel(
+    return MyCubitModel(
       items: items ?? this.items,
       config: config ?? this.config,
     );

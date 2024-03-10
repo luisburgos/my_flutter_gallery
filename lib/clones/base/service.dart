@@ -1,29 +1,29 @@
 // ignore_for_file: always_use_package_imports
 import 'data_model.dart';
 
-class RemoteConfig {
-  const RemoteConfig();
+class MyRemoteConfig {
+  const MyRemoteConfig();
 }
 
-abstract class BaseService {
-  Future<RemoteConfig> getRemoteConfig();
+abstract class MyService {
+  Future<MyRemoteConfig> getRemoteConfig();
 
-  Future<List<DataModel>> getAll();
+  Future<List<MyDataModel>> getAll();
 }
 
-class DefaultBaseService extends BaseService {
+class DefaultMyService extends MyService {
   @override
-  Future<RemoteConfig> getRemoteConfig() {
-    return Future.value(const RemoteConfig());
+  Future<MyRemoteConfig> getRemoteConfig() {
+    return Future.value(const MyRemoteConfig());
   }
 
   @override
-  Future<List<DataModel>> getAll() {
+  Future<List<MyDataModel>> getAll() {
     final items = [
-      const DataModel(
+      const MyDataModel(
         name: 'Data Model Item #1 Name',
       ),
-      const DataModel(
+      const MyDataModel(
         name: 'Data Model Item #2 Name',
       ),
     ];

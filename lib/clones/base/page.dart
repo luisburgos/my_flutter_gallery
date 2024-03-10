@@ -6,18 +6,18 @@ import 'cubit.dart';
 import 'service.dart';
 import 'view.dart';
 
-class BasePage extends StatelessWidget {
-  const BasePage({super.key});
+class MyPage extends StatelessWidget {
+  const MyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: BlocProvider(
-          create: (_) => BaseCubit(
-            optionsService: DefaultBaseService(),
+          create: (_) => MyCubit(
+            optionsService: DefaultMyService(),
           ),
-          child: const BaseView(),
+          child: const MyView(),
         ),
       ),
     );

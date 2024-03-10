@@ -6,8 +6,8 @@ import 'package:my_flutter_gallery/shared/colors_extended.dart';
 
 import 'page.dart';
 
-class BaseAppData extends GalleryItemData {
-  BaseAppData()
+class MyAppData extends GalleryItemData {
+  MyAppData()
       : super(
           id: 'XXXX-00',
           name: 'Base',
@@ -16,6 +16,6 @@ class BaseAppData extends GalleryItemData {
             FontAwesomeIcons.clone,
             size: 16,
           ),
-          pageBuilder: (_) => const BasePage(),
+          pageBuilder: (_) => const MyPage(),
         );
 }
