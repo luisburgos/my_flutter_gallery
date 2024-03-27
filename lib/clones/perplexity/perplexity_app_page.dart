@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_flutter_gallery/app/globals.dart';
 import 'package:my_flutter_gallery/shared/colors_extended.dart';
 import 'package:my_flutter_gallery/shared/dashboard_page_view.dart';
-import 'package:my_flutter_gallery/shared/open_launchpad_shortcut.dart';
 
 class PerplexityPage extends StatelessWidget {
   const PerplexityPage({super.key});
@@ -13,37 +12,35 @@ class PerplexityPage extends StatelessWidget {
     final pageData = PerplexityAppData();
 
     return Scaffold(
-      body: OpenLaunchpadShortcut(
-        child: DashboardPageView(
-          /// App Specific
-          appTitle: pageData.name,
-          appLogoIcon: pageData.iconData,
-          accentColor: pageData.seedColor,
-          primaryColor: ColorsExtended.charcoal,
+      body: DashboardPageView(
+        /// App Specific
+        appTitle: pageData.name,
+        appLogoIcon: pageData.iconData,
+        accentColor: pageData.seedColor,
+        primaryColor: ColorsExtended.charcoal,
 
-          /// Responsive Breakpoints
-          mediumWidthBreakpoint: 900,
-          smallWidthBreakpoint: 550,
+        /// Responsive Breakpoints
+        mediumWidthBreakpoint: 900,
+        smallWidthBreakpoint: 550,
 
-          /// Navigation Items
-          initialSelectedItemId: _homeId,
-          topBarItems: [
-            _profileItemData,
-          ],
-          bottomBarItems: [
-            _homeItemData,
-            _searchItemData,
-            _libraryItemData,
-          ],
-          sideBarBodyItems: [
-            _homeItemData,
-            _searchItemData,
-            _libraryItemData,
-          ],
-          sideBarFooterItems: [
-            _profileItemData,
-          ],
-        ),
+        /// Navigation Items
+        initialSelectedItemId: _homeId,
+        topBarItems: [
+          _profileItemData,
+        ],
+        bottomBarItems: [
+          _homeItemData,
+          _searchItemData,
+          _libraryItemData,
+        ],
+        sideBarBodyItems: [
+          _homeItemData,
+          _searchItemData,
+          _libraryItemData,
+        ],
+        sideBarFooterItems: [
+          _profileItemData,
+        ],
       ),
     );
   }

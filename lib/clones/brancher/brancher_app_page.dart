@@ -5,7 +5,6 @@ import 'package:my_flutter_gallery/app/globals.dart';
 import 'package:my_flutter_gallery/clones/brancher/app_builder/app_builder.dart';
 import 'package:my_flutter_gallery/shared/colors_extended.dart';
 import 'package:my_flutter_gallery/shared/dashboard_page_view.dart';
-import 'package:my_flutter_gallery/shared/open_launchpad_shortcut.dart';
 
 class BrancherAiAppPage extends StatelessWidget {
   const BrancherAiAppPage({super.key});
@@ -15,39 +14,37 @@ class BrancherAiAppPage extends StatelessWidget {
     final pageData = BrancherAiAppData();
 
     return Scaffold(
-      body: OpenLaunchpadShortcut(
-        child: DashboardPageView(
-          /// App Specific
-          appTitle: pageData.name,
-          appLogoIcon: pageData.iconData,
-          accentColor: pageData.seedColor,
-          primaryColor: ColorsExtended.charcoal,
+      body: DashboardPageView(
+        /// App Specific
+        appTitle: pageData.name,
+        appLogoIcon: pageData.iconData,
+        accentColor: pageData.seedColor,
+        primaryColor: ColorsExtended.charcoal,
 
-          /// Responsive Breakpoints
-          sideBarExpandedWidth: 220,
-          smallWidthBreakpoint: 600,
-          mediumWidthBreakpoint: 800,
+        /// Responsive Breakpoints
+        sideBarExpandedWidth: 220,
+        smallWidthBreakpoint: 600,
+        mediumWidthBreakpoint: 800,
 
-          /// Navigation Items
-          initialSelectedItemId: _appsId,
-          topBarItems: [
-            _profileItemData,
-          ],
-          bottomBarItems: [
-            _appsItemData,
-            _templateLibraryItemData,
-            _subscriptionsItemData,
-          ],
-          sideBarBodyItems: [
-            _appsItemData,
-            _templateLibraryItemData,
-            _subscriptionsItemData,
-          ],
-          sideBarFooterItems: [
-            _profileItemData,
-          ],
-          pageBodyBuilder: (_) => const Body(),
-        ),
+        /// Navigation Items
+        initialSelectedItemId: _appsId,
+        topBarItems: [
+          _profileItemData,
+        ],
+        bottomBarItems: [
+          _appsItemData,
+          _templateLibraryItemData,
+          _subscriptionsItemData,
+        ],
+        sideBarBodyItems: [
+          _appsItemData,
+          _templateLibraryItemData,
+          _subscriptionsItemData,
+        ],
+        sideBarFooterItems: [
+          _profileItemData,
+        ],
+        pageBodyBuilder: (_) => const Body(),
       ),
     );
   }

@@ -4,31 +4,38 @@ import 'package:my_flutter_gallery/app/app_cubit.dart';
 import 'package:my_flutter_gallery/app/app_data.dart';
 import 'package:my_flutter_gallery/app/app_launchpad.dart';
 import 'package:my_flutter_gallery/app/globals.dart';
+import 'package:my_flutter_gallery/clones/llm_model_selector/metadata.dart';
 import 'package:my_flutter_gallery/clones/resonance/metadata.dart';
 import 'package:my_flutter_gallery/l10n/l10n.dart';
+import 'package:my_flutter_gallery/shared/global_shortcuts_handler.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => MyFlutterGalleryCubit(
-        MyFlutterGalleryData(
-          selectedItem: ResonanceAppData(),
-          items: [
-            InstagramAppData(),
-            PerplexityAppData(),
-            SupernotesAppData(),
-            BrancherAiAppData(),
-            OpenGptChatUiAppData(),
-            PopcornFlavorPickerData(),
-            HabitsData(),
-            ResonanceAppData(),
-          ],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => MyFlutterGalleryCubit(
+            MyFlutterGalleryData(
+              selectedItem: LLMSelectorAppData(),
+              items: [
+                InstagramAppData(),
+                PerplexityAppData(),
+                SupernotesAppData(),
+                BrancherAiAppData(),
+                OpenGptChatUiAppData(),
+                PopcornFlavorPickerData(),
+                HabitsData(),
+                ResonanceAppData(),
+                LLMSelectorAppData(),
+              ],
+            ),
+          ),
         ),
-      ),
-      child: const MyFlutterGalleryApp(),
+      ],
+      child: MyFlutterGalleryApp(),
     );
   }
 }
@@ -62,8 +69,12 @@ class MyFlutterGalleryApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       initialRoute: '/',
       routes: {
-        '/launchpad': (_) => const LaunchpadPage(),
-        '/': (_) => const AppHomeBuilderSelector(),
+        '/launchpad': (_) => const GlobalShortcutsHandler(
+              child: LaunchpadPage(),
+            ),
+        '/': (_) => const GlobalShortcutsHandler(
+              child: AppHomeBuilderSelector(),
+            ),
       },
     );
   }

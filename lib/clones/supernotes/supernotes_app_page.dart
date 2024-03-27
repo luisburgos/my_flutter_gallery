@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_flutter_gallery/app/globals.dart';
 import 'package:my_flutter_gallery/shared/colors_extended.dart';
 import 'package:my_flutter_gallery/shared/dashboard_page_view.dart';
-import 'package:my_flutter_gallery/shared/open_launchpad_shortcut.dart';
 
 class SuperNotesPage extends StatelessWidget {
   const SuperNotesPage({super.key});
@@ -13,38 +12,36 @@ class SuperNotesPage extends StatelessWidget {
     final pageData = SupernotesAppData();
 
     return Scaffold(
-      body: OpenLaunchpadShortcut(
-        child: DashboardPageView(
-          /// App Specific
-          appTitle: pageData.name,
-          appLogoIcon: pageData.iconData,
-          accentColor: pageData.seedColor,
-          primaryColor: ColorsExtended.charcoal,
+      body: DashboardPageView(
+        /// App Specific
+        appTitle: pageData.name,
+        appLogoIcon: pageData.iconData,
+        accentColor: pageData.seedColor,
+        primaryColor: ColorsExtended.charcoal,
 
-          /// Responsive Breakpoints
-          smallWidthBreakpoint: 600,
-          mediumWidthBreakpoint: 800,
+        /// Responsive Breakpoints
+        smallWidthBreakpoint: 600,
+        mediumWidthBreakpoint: 800,
 
-          /// Navigation Items
-          initialSelectedItemId: _homeId,
-          topBarItems: [
-            _profileItemData,
-          ],
-          bottomBarItems: [
-            _homeItemData,
-            _searchItemData,
-            _pinnedItemData,
-            _notificationsItemData,
-          ],
-          sideBarBodyItems: [
-            _homeItemData,
-            _searchItemData,
-          ],
-          sideBarFooterItems: [
-            _notificationsItemData,
-            _profileItemData,
-          ],
-        ),
+        /// Navigation Items
+        initialSelectedItemId: _homeId,
+        topBarItems: [
+          _profileItemData,
+        ],
+        bottomBarItems: [
+          _homeItemData,
+          _searchItemData,
+          _pinnedItemData,
+          _notificationsItemData,
+        ],
+        sideBarBodyItems: [
+          _homeItemData,
+          _searchItemData,
+        ],
+        sideBarFooterItems: [
+          _notificationsItemData,
+          _profileItemData,
+        ],
       ),
     );
   }

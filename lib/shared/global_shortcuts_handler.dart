@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class OpenLaunchpadShortcut extends StatelessWidget {
-  const OpenLaunchpadShortcut({
+class GlobalShortcutsHandler extends StatelessWidget {
+  const GlobalShortcutsHandler({
     required this.child,
     super.key,
   });

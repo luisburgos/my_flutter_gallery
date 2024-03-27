@@ -4,32 +4,35 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'cubit.dart';
 
-class MyView extends StatefulWidget {
-  const MyView({super.key});
+class LLMSelectorView extends StatefulWidget {
+  const LLMSelectorView({super.key});
 
   @override
-  State<MyView> createState() => _MyViewState();
+  State<LLMSelectorView> createState() => _LLMSelectorViewState();
 }
 
-class _MyViewState extends State<MyView> {
+class _LLMSelectorViewState extends State<LLMSelectorView> {
   @override
   void initState() {
-    context.read<MyCubit>().load();
+    context.read<LLMOptionCubit>().load();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final myCubit = context.watch<MyCubit>();
-    final items = myCubit.state.items;
+    final optionCubit = context.watch<LLMOptionCubit>();
+    final items = optionCubit.state.items;
 
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          Text('Items count: ${items.length}'),
+          Text(
+            'Items count: ${items.length}',
+          ),
           const SizedBox(height: 20),
           ListView.builder(
+            shrinkWrap: true,
             itemCount: items.length,
             itemBuilder: (context, index) {
               final item = items[index];
