@@ -1,6 +1,7 @@
 // ignore_for_file: always_use_package_imports
 
 import 'package:bloc/bloc.dart';
+import 'package:my_flutter_gallery/clones/llm_model_selector/data_model.dart';
 
 import 'cubit_model.dart';
 import 'service.dart';
@@ -23,5 +24,13 @@ class LLMOptionCubit extends Cubit<LLMOptionCubitModel> {
     );
   }
 
-  // TODO(unassigned): add more methods
+  void setSelected(LLMDataModel item) {
+    emit(
+      state.copyWith(selectedItem: item),
+    );
+  }
+
+  bool needsPlanUpgrade(LLMDataModel item) {
+    return item.version == '4.0';
+  }
 }
