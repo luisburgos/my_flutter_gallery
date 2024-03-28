@@ -5,19 +5,8 @@ import 'package:my_flutter_gallery/shared/custom_dropwdown.dart';
 
 import 'cubit.dart';
 
-class LLMSelectorView extends StatefulWidget {
+class LLMSelectorView extends StatelessWidget {
   const LLMSelectorView({super.key});
-
-  @override
-  State<LLMSelectorView> createState() => _LLMSelectorViewState();
-}
-
-class _LLMSelectorViewState extends State<LLMSelectorView> {
-  @override
-  void initState() {
-    context.read<LLMOptionCubit>().load();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +32,10 @@ class _LLMSelectorViewState extends State<LLMSelectorView> {
                       itemCount: items.length,
                       itemBuilder: (context, index) {
                         final item = items[index];
-                        return ListTile(
-                          title: Text('${item.name} - ${item.version}'),
-                          subtitle: optionCubit.needsPlanUpgrade(item)
-                              ? const UpgradePlanButton()
-                              : null,
+                        return CustomDropdownOptionsListItem(
+                          title: '${item.name} - ${item.version}',
+                          displayUpgradeButton:
+                              optionCubit.needsPlanUpgrade(item),
                           onTap: () {
                             optionCubit.setSelected(item);
                           },
@@ -61,6 +49,28 @@ class _LLMSelectorViewState extends State<LLMSelectorView> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class CustomDropdownOptionsListItem extends StatelessWidget {
+  const CustomDropdownOptionsListItem({
+    required this.title,
+    required this.onTap,
+    this.displayUpgradeButton = false,
+    super.key,
+  });
+
+  final String title;
+  final bool displayUpgradeButton;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(title),
+      subtitle: displayUpgradeButton ? const UpgradePlanButton() : null,
+      onTap: onTap,
     );
   }
 }

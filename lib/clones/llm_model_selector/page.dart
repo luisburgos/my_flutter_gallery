@@ -16,7 +16,7 @@ class LLMSelectorPage extends StatelessWidget {
         child: BlocProvider(
           create: (_) => LLMOptionCubit(
             optionsService: DefaultLLMService(),
-          ),
+          )..load(),
           child: const LLMSelectorView(),
         ),
       ),

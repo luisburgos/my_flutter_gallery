@@ -12,4 +12,8 @@ extension PumpApp on WidgetTester {
       ),
     );
   }
+
+  Future<void> rebuild() async {
+    await pump();
+  }
 }

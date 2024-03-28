@@ -1,220 +1,211 @@
+// ignore_for_file: unused_result
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:meta/meta.dart' show isTest;
+import 'package:mocktail/mocktail.dart' hide When;
 import 'package:my_flutter_gallery/clones/llm_model_selector/cubit.dart';
 import 'package:my_flutter_gallery/clones/llm_model_selector/service.dart';
 import 'package:my_flutter_gallery/clones/llm_model_selector/view.dart';
 import 'package:my_flutter_gallery/shared/custom_dropwdown.dart';
 
-import '../helpers/pump_app.dart';
+import '../helpers/helpers.dart';
 
 void main() {
-  late LLMOptionCubit cubit;
-  late LLMService service;
-
-  setUp(() {
-    service = DefaultLLMService();
-    cubit = LLMOptionCubit(optionsService: service);
-  });
+  testScenario(
+    'Component initialization no selection',
+    Given(
+      'the LLM default options',
+      (_) async {
+        await _.pumpLLMSelectorView(forceLoad: false);
+      },
+    ),
+    When(
+      'finishes initialization',
+      (_) async {
+        // TODO(unassigned): evaluate remove or refactor
+        //await _.rebuild();
+      },
+    ),
+    Then(
+      'hint text is shown',
+      (_) async {
+        _.hasCustomDropdownButtonWithText('Select one');
+      },
+    ),
+  );
 
   testScenario(
-    'GIVEN the LLM default options \n'
-    'WHEN finishes initialization \n'
-    'THEN hint text is shown',
-    given: (_) async {
-      await pumpLLMSelectorView(_, cubit);
-    },
-    when: (_) async {
+    'Display options list',
+    Given(
+      'the LLM default options'
+      '\n AND LLMSelectorView is initialized',
+      (_) async {
+        await _.pumpLLMSelectorView(forceLoad: true);
+      },
+    ),
+    When(
+      'the dropdown button is tap',
+      (_) async {
+        await _.tapOnDropdownButton();
+      },
+    ),
+    Then(
+      'the options list is displayed',
+      (_) async {
+        _
+          ..hasCustomDropdownOptionsListItemWithText('ChatGPT - 3.5')
+          ..hasCustomDropdownOptionsListItemWithText('ChatGPT - 4.0')
+          ..hasCustomDropdownOptionsListItemWithText('Gemini - 1.0 Pro')
+          ..hasCustomDropdownOptionsListItemWithText('Gemini - 1.5 Pro');
+      },
+    ),
+  );
+
+  testScenario(
+    'First selection',
+    Given(
+      'the LLM default options'
+      '\n AND LLMSelectorView is initialized',
+      (_) async {
+        await _.pumpLLMSelectorView(forceLoad: true);
+        await _.tapOnDropdownButton();
+      },
+    ),
+    When(
+      'ChatGPT 3.5 is selected',
+      (_) async {
+        await _.tapOnDropdownOptionsListItemNamed('ChatGPT - 3.5');
+      },
+    ),
+    Then(
+      'ChatGPT 3.5 is shown',
+      (_) async {
+        _.hasCustomDropdownOptionsListItemWithText('ChatGPT - 3.5');
+      },
+    ),
+  );
+
+  testScenario(
+    'Change current selection',
+    Given(
+      'the LLM default options'
+      '\n AND LLMSelectorView is initialized',
+      (_) async {
+        await _.pumpLLMSelectorView(forceLoad: true);
+        await _.tapOnDropdownButton();
+      },
+    ),
+    When(
+      'Gemini - 1.0 Pro is selected',
+      (_) async {
+        await _.tapOnDropdownOptionsListItemNamed('ChatGPT - 4.0');
+      },
+    ),
+    Then(
+      'Gemini - 1.0 Pro is shown',
+      (_) async {
+        _.hasCustomDropdownButtonWithText('ChatGPT - 4.0');
+      },
+    ),
+  );
+
+  testScenario(
+    'Select option not included on current subscription plan',
+    Given(
+      'the LLM default options'
+      '\n AND Gemini - 1.0 Pro is selected'
+      '\n AND options list is displayed',
+      (_) async {
+        await _.pumpLLMSelectorView(forceLoad: true);
+        await _.tapOnDropdownButton();
+        await _.tapOnDropdownOptionsListItemNamed('Gemini - 1.0 Pro');
+      },
+    ),
+    When(
+      'select ChatGPT - 4.0',
+      (_) async {
+        await _.tapOnDropdownOptionsListItemNamed('ChatGPT - 4.0');
+      },
+    ),
+    Then(
+      'ChatGPT - 4.0 is shown WHERE?',
+      (_) async {
+        _.hasCustomDropdownButtonWithText('ChatGPT - 4.0');
+      },
+    ),
+  );
+}
+
+extension _CustomDropdownRobot on WidgetTester {
+  Future<void> pumpLLMSelectorView({
+    required bool forceLoad,
+  }) async {
+    final mockService = MockLLMService();
+    final cubit = LLMOptionCubit(
+      optionsService: mockService,
+    );
+    when(
+      mockService.getAll,
+    ).thenAnswer(
+      (_) async => [
+        chatGpt3dot5,
+        chatGpt4dot0,
+        gemini1dot0Pro,
+        gemini1dot5Pro,
+      ],
+    );
+
+    when(
+      mockService.getRemoteConfig,
+    ).thenAnswer(
+      (_) async => const LLMRemoteConfig(),
+    );
+
+    if (forceLoad) {
       await cubit.load();
-      await rebuild(_);
-    },
-    then: (_) async {
-      expect(find.text('Select one'), findsOneWidget);
-    },
-  );
-
-  testScenario(
-    'GIVEN the LLM default options'
-    ' AND LLMSelectorView is initialized \n'
-    'WHEN the dropdown is tap \n'
-    'THEN the options list is displayed',
-    given: (_) async {
-      await pumpLLMSelectorView(_, cubit);
-    },
-    when: (_) async {
-      final buttonWidgetFinder = find.text('Select one');
-      await _.tap(buttonWidgetFinder);
-      await rebuild(_);
-    },
-    then: (_) async {
-      expect(find.text('ChatGPT - 3.5'), findsOneWidget);
-      expect(find.text('ChatGPT - 4.0'), findsOneWidget);
-      expect(find.text('Gemini - 1.0 Pro'), findsOneWidget);
-      expect(find.text('Gemini - 1.5 Pro'), findsOneWidget);
-    },
-  );
-
-  testScenario(
-    'GIVEN the LLM default options'
-    ' AND LLMSelectorView is initialized \n'
-    'WHEN ChatGPT 3.5 is selected \n'
-    'THEN ChatGPT 3.5 is shown',
-    given: (_) async {
-      await pumpLLMSelectorView(_, cubit);
-    },
-    when: (_) async {
-      cubit.setSelected(chatGpt3dot5);
-      await rebuild(_);
-    },
-    then: (_) async {
-      expect(find.text('ChatGPT - 3.5'), findsOneWidget);
-    },
-  );
-
-  testScenario(
-    'GIVEN the LLM default options'
-    ' AND LLMSelectorView is initialized \n'
-    'WHEN Gemini - 1.0 Pro is selected \n'
-    'THEN Gemini - 1.0 Pro is shown',
-    given: (_) async {
-      await pumpLLMSelectorView(_, cubit);
-      final buttonWidgetFinder = find.byType(ButtonWidget);
-      await _.tap(buttonWidgetFinder);
-      await rebuild(_);
-    },
-    when: (_) async {
-      // Find item list element with label or selected actually
-      final widgetFinder = find.text('ChatGPT - 4.0');
-      await _.tap(widgetFinder);
-      await rebuild(_);
-    },
-    then: (_) async {
-      isA<ButtonWidget>().having(
-        (t) => t.child! as Text,
-        'data',
-        'ChatGPT - 4.0',
-      );
-    },
-  );
-
-  // TODO(unassigned): change descriptions
-  testScenario2(
-    given: _Given(
-      'GIVEN the LLM default options'
-      ' AND LLMSelectorView is initialized',
-      (_) async {
-        await pumpLLMSelectorView(_, cubit);
-        cubit.setSelected(gemini1dot0Pro);
-        await rebuild(_);
-      },
-    ),
-    when: _When(
-      'WHEN Gemini - 1.0 Pro is selected',
-      (_) async {
-        final widgetFinder = find.text('Gemini - 1.0 Pro');
-        await _.tap(widgetFinder);
-        await rebuild(_);
-      },
-    ),
-    then: _Then(
-      'THEN Gemini - 1.0 Pro is shown',
-      (_) async {
-        isA<ButtonWidget>().having(
-          (t) => t.child! as Text,
-          'data',
-          'Gemini - 1.0 Pro',
-        );
-      },
-    ),
-  );
-}
-
-Future<void> rebuild(WidgetTester tester) async {
-  await tester.pump();
-}
-
-Future<void> pumpLLMSelectorView(
-  WidgetTester tester,
-  LLMOptionCubit cubit,
-) async {
-  await tester.pumpApp(
-    Scaffold(
-      body: BlocProvider(
-        create: (_) => cubit,
-        child: const LLMSelectorView(),
+    }
+    await pumpApp(
+      Scaffold(
+        body: BlocProvider(
+          create: (_) => cubit,
+          child: const LLMSelectorView(),
+        ),
       ),
-    ),
-  );
+    );
+  }
+
+  Future<void> tapOnDropdownButton() async {
+    final finder = find.byType(CustomDropdownButton);
+    await tap(finder);
+    await rebuild();
+  }
+
+  Future<void> tapOnDropdownOptionsListItemNamed(
+    String optionName,
+  ) async {
+    final finder = find.widgetWithText(
+      CustomDropdownOptionsListItem,
+      optionName,
+    );
+    await tap(finder);
+    await rebuild();
+  }
+
+  void hasCustomDropdownOptionsListItemWithText(String text) {
+    isA<CustomDropdownOptionsListItem>().having(
+      (_) => _.title as Text,
+      'data',
+      text,
+    );
+  }
+
+  void hasCustomDropdownButtonWithText(String text) {
+    isA<CustomDropdownButton>().having(
+      (_) => _.child! as Text,
+      'data',
+      text,
+    );
+  }
 }
 
-@isTest
-Future<void> testScenario(
-  String description, {
-  required WidgetTesterCallback given,
-  required WidgetTesterCallback when,
-  required WidgetTesterCallback then,
-}) async {
-  testWidgets(
-    description,
-    (tester) async {
-      await given.call(tester);
-      await when.call(tester);
-      await then.call(tester);
-    },
-  );
-}
-
-@isTest
-Future<void> testScenario2({
-  // ignore: library_private_types_in_public_api
-  required _Given given,
-  // ignore: library_private_types_in_public_api
-  required _When when,
-  // ignore: library_private_types_in_public_api
-  required _Then then,
-}) async {
-  testWidgets(
-    '${given.description} \n'
-    '${when.description} \n'
-    '${then.description}',
-    (tester) async {
-      debugPrint(given.description);
-      await given.callback.call(tester);
-      debugPrint(when.description);
-      await when.callback.call(tester);
-      debugPrint(then.description);
-      await then.callback.call(tester);
-    },
-  );
-}
-
-class _Given {
-  _Given(
-    this.description,
-    this.callback,
-  );
-
-  final String description;
-  final WidgetTesterCallback callback;
-}
-
-class _When {
-  _When(
-    this.description,
-    this.callback,
-  );
-
-  final String description;
-  final WidgetTesterCallback callback;
-}
-
-class _Then {
-  _Then(
-    this.description,
-    this.callback,
-  );
-
-  final String description;
-  final WidgetTesterCallback callback;
-}
+class MockLLMService extends Mock implements LLMService {}

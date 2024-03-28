@@ -38,7 +38,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
             ),
           );
         },
-        child: ButtonWidget(
+        child: CustomDropdownButton(
           onTap: onTap,
           child: Text(widget.label),
         ),
@@ -52,8 +52,8 @@ class _CustomDropDownState extends State<CustomDropDown> {
   }
 }
 
-class ButtonWidget extends StatelessWidget {
-  const ButtonWidget({
+class CustomDropdownButton extends StatelessWidget {
+  const CustomDropdownButton({
     super.key,
     this.height = 48,
     this.width,
