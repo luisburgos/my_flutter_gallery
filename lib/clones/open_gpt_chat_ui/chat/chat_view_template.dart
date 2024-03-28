@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_flutter_gallery/clones/llm_model_selector/cubit.dart';
+import 'package:my_flutter_gallery/clones/llm_model_selector/service.dart';
 import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/dialogs/dialogs.dart';
-import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/shared/selected_model_button.dart';
+
+import '../../llm_model_selector/view.dart';
 
 class ChatViewTemplate extends StatelessWidget {
   const ChatViewTemplate({
@@ -68,9 +72,14 @@ class ChatViewTemplateHeader extends StatelessWidget {
       width: double.infinity,
       child: Row(
         children: [
-          SelectedModelButton(
-            selectedModelName: selectedModelName,
-            onPressed: () {},
+          // TODO(unassigned): fix 32 pixels overflow
+          Center(
+            child: BlocProvider(
+              create: (_) => LLMOptionCubit(
+                optionsService: DefaultLLMService(),
+              )..load(),
+              child: const LLMSelectorView(),
+            ),
           ),
           const Spacer(),
           ...trailing,

@@ -30,7 +30,7 @@ class LLMOptionCubit extends Cubit<LLMOptionCubitModel> {
     );
   }
 
-  bool needsPlanUpgrade(LLMDataModel item) {
-    return item.version == '4.0';
+  bool isIncludedInCurrentSubscriptionPlan(LLMDataModel item) {
+    return item.version != '4.0';
   }
 }

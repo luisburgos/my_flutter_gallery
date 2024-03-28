@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/dialogs/dialogs.dart';
 
 class CustomDropDown extends StatefulWidget {
   const CustomDropDown({
@@ -8,7 +9,10 @@ class CustomDropDown extends StatefulWidget {
   });
 
   final String label;
-  final Widget Function({double? width}) builder;
+  final Widget Function(
+    OverlayPortalController controller,
+    double? width,
+  ) builder;
 
   @override
   State<CustomDropDown> createState() => _CustomDropDownState();
@@ -34,7 +38,12 @@ class _CustomDropDownState extends State<CustomDropDown> {
             targetAnchor: Alignment.bottomLeft,
             child: Align(
               alignment: AlignmentDirectional.topStart,
-              child: widget.builder(width: _buttonWidth),
+              child: CustomDropdownBodyContainer(
+                child: widget.builder(
+                  _tooltipController,
+                  _buttonWidth,
+                ),
+              ),
             ),
           );
         },
@@ -99,13 +108,50 @@ class CustomDropdownButton extends StatelessWidget {
   }
 }
 
+class CustomDropdownBodyContainer extends StatelessWidget {
+  const CustomDropdownBodyContainer({
+    required this.child,
+    this.width,
+    this.margin = const EdgeInsets.only(top: 8),
+    super.key,
+  });
+
+  final double? width;
+  final Widget child;
+  final EdgeInsetsGeometry margin;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: margin,
+      width: width ?? 200,
+      height: 270,
+      decoration: ShapeDecoration(
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(
+            width: 1.5,
+            color: Colors.black12,
+          ),
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+      child: child,
+    );
+  }
+}
+
 class UpgradePlanButton extends StatelessWidget {
   const UpgradePlanButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        openDialog(
+          context,
+          child: const UpgradeYourPlanDialog(),
+        );
+      },
       child: const Text('Upgrade to Plus'),
     );
   }
