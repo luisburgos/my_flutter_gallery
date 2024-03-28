@@ -4,9 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart' hide When;
 import 'package:my_flutter_gallery/clones/llm_model_selector/cubit.dart';
+import 'package:my_flutter_gallery/clones/llm_model_selector/data_model.dart';
 import 'package:my_flutter_gallery/clones/llm_model_selector/service.dart';
 import 'package:my_flutter_gallery/clones/llm_model_selector/view.dart';
-import 'package:my_flutter_gallery/shared/custom_dropwdown.dart';
+import 'package:my_flutter_gallery/components/custom_dropwdown.dart';
 
 import '../helpers/helpers.dart';
 
@@ -53,10 +54,10 @@ void main() {
       'the options list is displayed',
       (_) async {
         _
-          ..hasCustomDropdownOptionsListItemWithText('ChatGPT - 3.5')
-          ..hasCustomDropdownOptionsListItemWithText('ChatGPT - 4.0')
-          ..hasCustomDropdownOptionsListItemWithText('Gemini - 1.0 Pro')
-          ..hasCustomDropdownOptionsListItemWithText('Gemini - 1.5 Pro');
+          ..hasCustomDropdownOptionsListItemWithText('Model A 3.5')
+          ..hasCustomDropdownOptionsListItemWithText('Model A 4.0')
+          ..hasCustomDropdownOptionsListItemWithText('Model B 1.0 Pro')
+          ..hasCustomDropdownOptionsListItemWithText('Model B 1.5 Pro');
       },
     ),
   );
@@ -72,15 +73,15 @@ void main() {
       },
     ),
     When(
-      'ChatGPT 3.5 is selected',
+      'Model A 3.5 is selected',
       (_) async {
-        await _.tapOnDropdownOptionsListItemNamed('ChatGPT - 3.5');
+        await _.tapOnDropdownOptionsListItemWithText('Model A 3.5');
       },
     ),
     Then(
-      'ChatGPT 3.5 is shown',
+      'Model A 3.5 is shown',
       (_) async {
-        _.hasCustomDropdownOptionsListItemWithText('ChatGPT - 3.5');
+        _.hasCustomDropdownOptionsListItemWithText('Model A 3.5');
       },
     ),
   );
@@ -96,15 +97,15 @@ void main() {
       },
     ),
     When(
-      'Gemini - 1.0 Pro is selected',
+      'Model B 1.0 Pro is selected',
       (_) async {
-        await _.tapOnDropdownOptionsListItemNamed('ChatGPT - 4.0');
+        await _.tapOnDropdownOptionsListItemWithText('Model A 4.0');
       },
     ),
     Then(
-      'Gemini - 1.0 Pro is shown',
+      'Model B 1.0 Pro is shown',
       (_) async {
-        _.hasCustomDropdownButtonWithText('ChatGPT - 4.0');
+        _.hasCustomDropdownButtonWithText('Model A 4.0');
       },
     ),
   );
@@ -113,24 +114,24 @@ void main() {
     'Select option not included on current subscription plan',
     Given(
       'the LLM default options'
-      '\n AND Gemini - 1.0 Pro is selected'
+      '\n AND Model B 1.0 Pro is selected'
       '\n AND options list is displayed',
       (_) async {
         await _.pumpLLMSelectorView(forceLoad: true);
         await _.tapOnDropdownButton();
-        await _.tapOnDropdownOptionsListItemNamed('Gemini - 1.0 Pro');
+        await _.tapOnDropdownOptionsListItemWithText('Model B 1.0 Pro');
       },
     ),
     When(
-      'select ChatGPT - 4.0',
+      'select Model A 4.0',
       (_) async {
-        await _.tapOnDropdownOptionsListItemNamed('ChatGPT - 4.0');
+        await _.tapOnDropdownOptionsListItemWithText('Model A 4.0');
       },
     ),
     Then(
-      'ChatGPT - 4.0 is shown WHERE?',
+      'Model A 4.0 is shown WHERE?',
       (_) async {
-        _.hasCustomDropdownButtonWithText('ChatGPT - 4.0');
+        _.hasCustomDropdownButtonWithText('Model A 4.0');
       },
     ),
   );
@@ -141,17 +142,35 @@ extension _CustomDropdownRobot on WidgetTester {
     required bool forceLoad,
   }) async {
     final mockService = MockLLMService();
-    final cubit = LLMOptionCubit(
-      optionsService: mockService,
-    );
+    final cubit = LLMOptionCubit(optionsService: mockService);
     when(
       mockService.getAll,
     ).thenAnswer(
       (_) async => [
-        chatGpt3dot5,
-        chatGpt4dot0,
-        gemini1dot0Pro,
-        gemini1dot5Pro,
+        const LLMDataModel(
+          name: 'Model A',
+          description: '',
+          version: '3.5',
+          type: '',
+        ),
+        const LLMDataModel(
+          name: 'Model A',
+          description: '',
+          version: '4.0',
+          type: '',
+        ),
+        const LLMDataModel(
+          name: 'Model B',
+          description: '',
+          version: '1.0 Pro',
+          type: '',
+        ),
+        const LLMDataModel(
+          name: 'Model B',
+          description: '',
+          version: '1.5 Pro',
+          type: '',
+        ),
       ],
     );
 
@@ -180,7 +199,7 @@ extension _CustomDropdownRobot on WidgetTester {
     await rebuild();
   }
 
-  Future<void> tapOnDropdownOptionsListItemNamed(
+  Future<void> tapOnDropdownOptionsListItemWithText(
     String optionName,
   ) async {
     final finder = find.widgetWithText(

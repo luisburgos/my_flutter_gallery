@@ -10,4 +10,6 @@ class LLMDataModel {
   final String description;
   final String version;
   final String type;
+
+  String get nameWithVersion => '$name $version';
 }

@@ -1,7 +1,7 @@
 // ignore_for_file: always_use_package_imports
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_flutter_gallery/shared/custom_dropwdown.dart';
+import 'package:my_flutter_gallery/components/custom_dropwdown.dart';
 
 import 'cubit.dart';
 
@@ -24,7 +24,7 @@ class LLMSelectorView extends StatelessWidget {
               CustomDropDown(
                 label: selectedItem == null
                     ? 'Select one'
-                    : '${selectedItem.name} - ${selectedItem.version}',
+                    : selectedItem.nameWithVersion,
                 builder: ({double? width}) {
                   return MenuWidget(
                     child: ListView.builder(
@@ -33,7 +33,7 @@ class LLMSelectorView extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final item = items[index];
                         return CustomDropdownOptionsListItem(
-                          title: '${item.name} - ${item.version}',
+                          title: item.nameWithVersion,
                           displayUpgradeButton:
                               optionCubit.needsPlanUpgrade(item),
                           onTap: () {
