@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomDropDown extends StatefulWidget {
-  const CustomDropDown({
+class CustomDropdown extends StatefulWidget {
+  const CustomDropdown({
     required this.label,
     required this.builder,
     super.key,
@@ -11,10 +11,10 @@ class CustomDropDown extends StatefulWidget {
   final Widget Function({double? width}) builder;
 
   @override
-  State<CustomDropDown> createState() => _CustomDropDownState();
+  State<CustomDropdown> createState() => _CustomDropdownState();
 }
 
-class _CustomDropDownState extends State<CustomDropDown> {
+class _CustomDropdownState extends State<CustomDropdown> {
   final OverlayPortalController _tooltipController = OverlayPortalController();
 
   final _link = LayerLink();
@@ -86,27 +86,14 @@ class ButtonWidget extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             child: Row(
               children: [
-                Expanded(
-                  child: child ?? const SizedBox(),
-                ),
+                child ?? const SizedBox(),
+                const Spacer(),
                 const Icon(Icons.arrow_drop_down_outlined),
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class UpgradePlanButton extends StatelessWidget {
-  const UpgradePlanButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {},
-      child: Text('Upgrade to Plus'),
     );
   }
 }

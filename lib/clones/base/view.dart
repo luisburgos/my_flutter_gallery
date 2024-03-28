@@ -34,7 +34,9 @@ class _MyViewState extends State<MyView> {
             itemBuilder: (context, index) {
               final item = items[index];
               return ListTile(
-                title: Text(item.name),
+                title: Text(
+                  item.name,
+                ),
               );
             },
           ),
