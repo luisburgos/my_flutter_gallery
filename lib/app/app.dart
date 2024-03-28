@@ -35,7 +35,7 @@ class App extends StatelessWidget {
           ),
         ),
       ],
-      child: MyFlutterGalleryApp(),
+      child: const MyFlutterGalleryApp(),
     );
   }
 }

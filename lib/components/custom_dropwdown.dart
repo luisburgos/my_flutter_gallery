@@ -106,7 +106,7 @@ class UpgradePlanButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {},
-      child: Text('Upgrade to Plus'),
+      child: const Text('Upgrade to Plus'),
     );
   }
 }
