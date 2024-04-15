@@ -30,6 +30,7 @@ class _MyViewState extends State<MyView> {
           Text('Items count: ${items.length}'),
           const SizedBox(height: 20),
           ListView.builder(
+            shrinkWrap: true,
             itemCount: items.length,
             itemBuilder: (context, index) {
               final item = items[index];

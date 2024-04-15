@@ -5,6 +5,7 @@ import 'package:my_flutter_gallery/app/app_data.dart';
 import 'package:my_flutter_gallery/app/app_launchpad.dart';
 import 'package:my_flutter_gallery/app/globals.dart';
 import 'package:my_flutter_gallery/clones/llm_model_selector/metadata.dart';
+import 'package:my_flutter_gallery/clones/open_ai_ui/metadata.dart';
 import 'package:my_flutter_gallery/clones/resonance/metadata.dart';
 import 'package:my_flutter_gallery/l10n/l10n.dart';
 import 'package:my_flutter_gallery/shared/global_shortcuts_handler.dart';
@@ -19,7 +20,7 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (_) => MyFlutterGalleryCubit(
             MyFlutterGalleryData(
-              selectedItem: LLMSelectorAppData(),
+              selectedItem: OpenAiUiData(),
               items: [
                 InstagramAppData(),
                 PerplexityAppData(),
@@ -30,6 +31,7 @@ class App extends StatelessWidget {
                 HabitsData(),
                 ResonanceAppData(),
                 LLMSelectorAppData(),
+                OpenAiUiData(),
               ],
             ),
           ),
