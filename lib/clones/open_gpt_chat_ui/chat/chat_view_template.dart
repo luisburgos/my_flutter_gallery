@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_flutter_gallery/clones/llm_model_selector/cubit.dart';
 import 'package:my_flutter_gallery/clones/llm_model_selector/service.dart';
+import 'package:my_flutter_gallery/clones/llm_model_selector/view.dart';
 import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/dialogs/dialogs.dart';
-
-import '../../llm_model_selector/view.dart';
 
 class ChatViewTemplate extends StatelessWidget {
   const ChatViewTemplate({

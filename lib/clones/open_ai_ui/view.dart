@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_flutter_gallery/clones/open_ai_ui/metadata.dart';
 import 'package:my_flutter_gallery/shared/app_shell_one.dart';
+import 'package:my_flutter_gallery/shared/app_version.dart';
 import 'package:my_flutter_gallery/shared/colors_extended.dart';
 
 import 'cubit.dart';
@@ -28,7 +29,7 @@ class _MyViewState extends State<MyView> {
 
   @override
   Widget build(BuildContext context) {
-    final myCubit = context.watch<MyCubit>();
+    //final myCubit = context.watch<MyCubit>();
     //final items = myCubit.state.items;
 
     final pageData = OpenAiUiData();
@@ -71,10 +72,7 @@ class _MyViewState extends State<MyView> {
 }
 
 class _Label extends StatelessWidget {
-  const _Label(
-    this.text, {
-    super.key,
-  });
+  const _Label(this.text);
 
   final String text;
 
@@ -116,6 +114,7 @@ class _LeadingWrapper extends StatelessWidget {
             onPressed: onCollapseTap,
             icon: const Icon(
               FontAwesomeIcons.squareCaretRight,
+              size: 18,
             ),
           ),
           const Spacer(),
@@ -155,6 +154,7 @@ class _TrailingWrapper extends StatelessWidget {
             onPressed: onCollapseTap,
             icon: const Icon(
               FontAwesomeIcons.squareCaretLeft,
+              size: 18,
             ),
           ),
         ],
@@ -163,15 +163,18 @@ class _TrailingWrapper extends StatelessWidget {
   }
 }
 
+final borderColor = Colors.grey.shade300;
+const borderWidth = 1.0;
+
 class _CustomDivider extends StatelessWidget {
   const _CustomDivider();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 1,
+      width: borderWidth,
       height: topBarHeight,
-      color: Colors.grey,
+      color: borderColor,
     );
   }
 }
@@ -193,6 +196,7 @@ class ChatsMainView extends StatelessWidget {
                   onPressed: () {},
                   icon: const Icon(
                     FontAwesomeIcons.squarePlus,
+                    size: 18,
                   ),
                 ),
               ),
@@ -363,7 +367,10 @@ class _MainViewBodyTemplateState extends State<MainViewBodyTemplate> {
         Expanded(
           child: widget.body.call(controller),
         ),
-        if (widget.footer != null) widget.footer!.call(controller),
+        if (widget.footer != null)
+          widget.footer!.call(controller)
+        else
+          const FooterStatusBar(),
       ],
     );
   }
@@ -374,7 +381,6 @@ class _TopBar extends StatelessWidget {
     required this.body,
     this.leading,
     this.trailing,
-    super.key,
   });
 
   final Widget? leading;
@@ -386,6 +392,11 @@ class _TopBar extends StatelessWidget {
     return Container(
       constraints: const BoxConstraints(
         minHeight: topBarHeight,
+      ),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: borderColor),
+        ),
       ),
       child: Row(
         children: [
@@ -415,30 +426,35 @@ class _BodyPaneBuilder extends StatelessWidget {
       children: [
         if (displayLeftPane)
           Container(
-            color: Colors.orange.shade50,
             constraints: const BoxConstraints(
               maxWidth: leftPaneWidth,
             ),
-            child: Placeholder(
-              color: Colors.red.shade200,
+            decoration: BoxDecoration(
+              border: Border(
+                right: BorderSide(color: borderColor),
+              ),
+            ),
+            child: const Center(
+              child: Text('Left Pane'),
             ),
           ),
-        Expanded(
-          child: ColoredBox(
-            color: Colors.red.shade50,
-            child: Placeholder(
-              color: Colors.red.shade200,
-            ),
+        const Expanded(
+          child: Center(
+            child: Text('Body'),
           ),
         ),
         if (displayRightPane)
           Container(
-            color: Colors.cyan.shade50,
             constraints: const BoxConstraints(
               maxWidth: rightPaneWidth,
             ),
-            child: Placeholder(
-              color: Colors.cyan.shade200,
+            decoration: BoxDecoration(
+              border: Border(
+                left: BorderSide(color: borderColor),
+              ),
+            ),
+            child: const Center(
+              child: Text('Right Pane'),
             ),
           ),
       ],
@@ -452,12 +468,42 @@ class FooterStatusBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green.shade50,
       constraints: const BoxConstraints(
-        maxHeight: 60,
+        minHeight: topBarHeight,
       ),
-      child: Placeholder(
-        color: Colors.green.shade200,
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(color: borderColor),
+        ),
+      ),
+      child: Row(
+        children: [
+          const Spacer(),
+          CurrentAppVersion(
+            withBuildNumber: false,
+            builder: (_) {
+              return Text(
+                'v$_',
+                style: TextStyle(color: Colors.grey.shade600),
+              );
+            },
+          ),
+          const SizedBox(width: 8),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              FontAwesomeIcons.discord,
+              size: 16,
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              FontAwesomeIcons.github,
+              size: 16,
+            ),
+          ),
+        ],
       ),
     );
   }
