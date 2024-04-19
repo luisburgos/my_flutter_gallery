@@ -96,10 +96,12 @@ class _Label extends StatelessWidget {
 class _LeadingWrapper extends StatelessWidget {
   const _LeadingWrapper({
     required this.extra,
+    required this.isCollapsed,
     required this.onCollapseTap,
   });
 
   final Widget extra;
+  final bool isCollapsed;
   final VoidCallback onCollapseTap;
 
   @override
@@ -112,8 +114,10 @@ class _LeadingWrapper extends StatelessWidget {
         children: [
           IconButton(
             onPressed: onCollapseTap,
-            icon: const Icon(
-              FontAwesomeIcons.squareCaretRight,
+            icon: Icon(
+              isCollapsed
+                  ? FontAwesomeIcons.squareCaretRight
+                  : FontAwesomeIcons.squareCaretLeft,
               size: 18,
             ),
           ),
@@ -152,8 +156,10 @@ class _TrailingWrapper extends StatelessWidget {
           const Spacer(),
           IconButton(
             onPressed: onCollapseTap,
-            icon: const Icon(
-              FontAwesomeIcons.squareCaretLeft,
+            icon: Icon(
+              isCollapsed
+                  ? FontAwesomeIcons.squareCaretLeft
+                  : FontAwesomeIcons.squareCaretRight,
               size: 18,
             ),
           ),
@@ -191,6 +197,7 @@ class ChatsMainView extends StatelessWidget {
           builder: (context, state, widget) {
             return _TopBar(
               leading: _LeadingWrapper(
+                isCollapsed: !state.isLeftSidebarOpen,
                 onCollapseTap: _.toggleLeft,
                 extra: IconButton(
                   onPressed: () {},
@@ -237,8 +244,36 @@ class HubMainView extends StatelessWidget {
         );
       },
       body: (_) {
-        return const Placeholder();
+        return const _BodyPaneBuilder(
+          body: _HubBody(),
+        );
       },
+    );
+  }
+}
+
+class _HubBody extends StatelessWidget {
+  const _HubBody();
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const _RowItemPlaceholder(
+            height: 250,
+          ),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 800),
+            child: Column(
+              children: List.generate(
+                10,
+                (index) => const _RowItemPlaceholder(height: 80),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -269,7 +304,7 @@ class LocalApiServerMainView extends StatelessWidget {
           valueListenable: _,
           builder: (context, state, widget) {
             return _BodyPaneBuilder(
-              displayLeftPane: state.isLeftSidebarOpen,
+              displayLeftPane: true,
               displayRightPane: state.isRightSidebarOpen,
             );
           },
@@ -291,8 +326,51 @@ class SettingsMainView extends StatelessWidget {
         );
       },
       body: (_) {
-        return const Placeholder();
+        return const _BodyPaneBuilder(
+          displayLeftPane: true,
+          leftPane: _SettingsLeftPane(),
+        );
       },
+    );
+  }
+}
+
+class _SettingsLeftPane extends StatelessWidget {
+  const _SettingsLeftPane();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: List.generate(
+        4,
+        (index) => const _RowItemPlaceholder(),
+      ),
+    );
+  }
+}
+
+class _RowItemPlaceholder extends StatelessWidget {
+  const _RowItemPlaceholder({
+    this.height = 30,
+  });
+
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      margin: const EdgeInsets.only(
+        top: 8,
+        right: 8,
+        bottom: 4,
+        left: 8,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade200,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      width: double.infinity,
     );
   }
 }
@@ -354,8 +432,8 @@ class MainViewBodyTemplate extends StatefulWidget {
 class _MainViewBodyTemplateState extends State<MainViewBodyTemplate> {
   final controller = MainViewBodyController(
     const MainViewBodyState(
-      isLeftSidebarOpen: false,
-      isRightSidebarOpen: false,
+      isLeftSidebarOpen: true,
+      isRightSidebarOpen: true,
     ),
   );
 
@@ -415,10 +493,15 @@ class _BodyPaneBuilder extends StatelessWidget {
   const _BodyPaneBuilder({
     this.displayLeftPane = false,
     this.displayRightPane = false,
+    this.leftPane,
+    this.body,
   });
 
   final bool displayLeftPane;
   final bool displayRightPane;
+
+  final Widget? leftPane;
+  final Widget? body;
 
   @override
   Widget build(BuildContext context) {
@@ -434,14 +517,16 @@ class _BodyPaneBuilder extends StatelessWidget {
                 right: BorderSide(color: borderColor),
               ),
             ),
-            child: const Center(
-              child: Text('Left Pane'),
-            ),
+            child: leftPane ??
+                const Center(
+                  child: Text('Left Pane'),
+                ),
           ),
-        const Expanded(
-          child: Center(
-            child: Text('Body'),
-          ),
+        Expanded(
+          child: body ??
+              const Center(
+                child: Text('Body'),
+              ),
         ),
         if (displayRightPane)
           Container(
