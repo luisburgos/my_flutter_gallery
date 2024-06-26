@@ -204,54 +204,56 @@ class SettingsDialog extends StatelessWidget {
 
 class DialogBase extends StatelessWidget {
   const DialogBase({
-    required this.title,
     required this.body,
+    this.title,
     super.key,
   });
 
-  final String title;
+  final String? title;
   final Widget body;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 16,
-            horizontal: 20,
-          ),
-          child: Row(
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+        if (title != null) ...[
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 16,
+              horizontal: 20,
+            ),
+            child: Row(
+              children: [
+                Text(
+                  title!,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
-              ),
-              const Spacer(),
-              IconButton(
-                padding: EdgeInsets.zero,
-                onPressed: () {
-                  final navigator = Navigator.of(context);
-                  if (navigator.canPop()) {
-                    navigator.pop();
-                  }
-                },
-                icon: const Icon(
-                  FontAwesomeIcons.xmark,
-                  size: 20,
+                const Spacer(),
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () {
+                    final navigator = Navigator.of(context);
+                    if (navigator.canPop()) {
+                      navigator.pop();
+                    }
+                  },
+                  icon: const Icon(
+                    FontAwesomeIcons.xmark,
+                    size: 20,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        const Divider(
-          color: Colors.grey,
-          thickness: 0.2,
-          height: 1,
-        ),
+          const Divider(
+            color: Colors.grey,
+            thickness: 0.2,
+            height: 1,
+          ),
+        ],
         Expanded(child: body),
       ],
     );
