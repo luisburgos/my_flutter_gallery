@@ -19,6 +19,7 @@ dependencies:
   meta: ^1.11.0
   neubrutalism_ui: ^2.0.2
   package_info_plus: ^7.0.0
+  shadcn_ui: ^0.8.1
 
 dev_dependencies:
   bloc_test: ^9.1.4

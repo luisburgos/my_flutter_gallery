@@ -27,7 +27,7 @@ class MyFlutterGalleryData {
   const MyFlutterGalleryData({
     this.selectedItem,
     this.items = const [],
-    this.displayMode = DisplayMode.list,
+    this.displayMode = DisplayMode.grid,
   });
 
   final GalleryItemData? selectedItem;

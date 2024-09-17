@@ -21,7 +21,7 @@ class GlobalShortcutsHandler extends StatelessWidget {
           secondKey,
         ): () {
           // TODO(unassigned): change to command bar dialog
-          ScaffoldMessenger.of(context).showSnackBar(
+          /*ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
                 'SHORTCUT: ${firstKey.debugName} + '
@@ -29,7 +29,7 @@ class GlobalShortcutsHandler extends StatelessWidget {
               ),
               duration: const Duration(milliseconds: 900),
             ),
-          );
+          );*/
           Navigator.of(context).pushNamed('/launchpad');
         },
       },
