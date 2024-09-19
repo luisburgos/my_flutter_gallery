@@ -34,10 +34,14 @@ class BetaGalleryItem extends StatelessWidget {
   const BetaGalleryItem({
     required this.item,
     required this.onItemTap,
+    this.displayCover = false,
     this.scheme = defaultScheme,
+    this.margin = const EdgeInsets.all(8),
     super.key,
   });
 
+  final EdgeInsetsGeometry margin;
+  final bool displayCover;
   final AppUiScheme scheme;
   final GalleryItemData item;
   final void Function(GalleryItemData) onItemTap;
@@ -46,7 +50,7 @@ class BetaGalleryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     if (scheme == AppUiScheme.shadcn) {
       return Container(
-        margin: const EdgeInsets.all(8),
+        margin: margin,
         child: ShadCard(
           width: 350,
           title: WrapperText(
@@ -56,7 +60,7 @@ class BetaGalleryItem extends StatelessWidget {
           footer: WrapperPlayIconButton(
             onPressed: () => onItemTap(item),
           ),
-          child: const ItemCover(),
+          child: displayCover ? const ItemCover() : const SizedBox.shrink(),
         ),
       );
     }
@@ -72,7 +76,7 @@ class BetaGalleryItem extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const ItemCover(),
+                if (displayCover) const ItemCover(),
                 Padding(
                   padding: const EdgeInsets.all(12),
                   child: WrapperText(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:my_flutter_gallery/app/app.dart';
 import 'package:my_flutter_gallery/app/app_cubit.dart';
 import 'package:my_flutter_gallery/app/app_data.dart';
 import 'package:my_flutter_gallery/app/ui_wrappers.dart';
@@ -7,13 +9,26 @@ import 'package:my_flutter_gallery/shared/simple_grid.dart';
 
 const betaGallery = true;
 
-class LaunchpadPage extends StatelessWidget {
-  const LaunchpadPage({super.key});
+class GalleryPage extends StatelessWidget {
+  const GalleryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: LaunchpadView(),
+    return Scaffold(
+      body: Column(
+        children: [
+          SiteTopBar(
+            selectedIndex: 1,
+            onGalleryTap: () {},
+            onHomeTap: () {
+              context.go(AppRoutes.root);
+            },
+          ),
+          const Expanded(
+            child: LaunchpadView(),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -128,7 +143,9 @@ class LaunchpadView extends StatelessWidget {
 
   void _onLaunchTap(BuildContext context, GalleryItemData item) {
     context.read<MyFlutterGalleryCubit>().setSelectedAppById(item.id);
-    Navigator.of(context).pushNamed('/');
+    context.go(
+      AppRoutes.galleryItem.replaceAll(':id', item.id),
+    );
   }
 }
 
@@ -212,30 +229,3 @@ class BetaGallery extends StatelessWidget {
     );
   }
 }
-
-const items = [
-  {
-    'name': 'Popcorn Flavor Picker',
-    'type': 'sample',
-  },
-  {
-    'name': 'Weekly Habit Tracker',
-    'type': 'sample',
-  },
-  {
-    'name': 'AI Apps Builder',
-    'type': 'sample',
-  },
-  {
-    'name': 'App Shell One',
-    'type': 'sample',
-  },
-  {
-    'name': 'Countdown Timer Button',
-    'type': 'sample',
-  },
-  {
-    'name': 'Expense Splitter',
-    'type': 'sample',
-  },
-];
