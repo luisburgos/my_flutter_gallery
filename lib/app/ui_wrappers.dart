@@ -5,38 +5,19 @@ import 'package:my_flutter_gallery/shared/colors_extended.dart';
 import 'package:neubrutalism_ui/neubrutalism_ui.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-class Header extends StatelessWidget {
-  const Header({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const WrapperText(
-          'My ',
-          fontSize: 22,
-        ),
-        WrapperText(
-          'Flutter',
-          color: ColorsExtended.neoTertiary,
-          fontSize: 22,
-        ),
-        const WrapperText(
-          ' Gallery',
-          fontSize: 22,
-        ),
-      ],
-    );
-  }
+enum BetaGalleryItemMode {
+  preview,
+  full;
 }
 
 class BetaGalleryItem extends StatelessWidget {
   const BetaGalleryItem({
     required this.item,
     required this.onItemTap,
-    this.displayCover = false,
+    this.displayCover = true,
     this.scheme = defaultScheme,
     this.margin = const EdgeInsets.all(8),
+    this.mode = BetaGalleryItemMode.full,
     super.key,
   });
 
@@ -45,22 +26,71 @@ class BetaGalleryItem extends StatelessWidget {
   final AppUiScheme scheme;
   final GalleryItemData item;
   final void Function(GalleryItemData) onItemTap;
+  final BetaGalleryItemMode mode;
 
   @override
   Widget build(BuildContext context) {
+    final subtitleColor = ShadTheme.of(context).colorScheme.mutedForeground;
+
     if (scheme == AppUiScheme.shadcn) {
+      if (mode == BetaGalleryItemMode.preview) {
+        return Container(
+          margin: margin,
+          child: ShadCard(
+            width: double.infinity,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (displayCover)
+                  const ItemCover(
+                    mode: ItemCoverMode.square,
+                  )
+                else
+                  const SizedBox.shrink(),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        WrapperText(
+                          item.name,
+                          fontSize: 16,
+                        ),
+                        WrapperText(
+                          'Lorem description this is a lorem description '
+                          'with truncate enabled for longer descriptions as'
+                          'this one in the example',
+                          fontSize: 12,
+                          maxLines: 2,
+                          color: subtitleColor,
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      }
+
       return Container(
         margin: margin,
         child: ShadCard(
           width: 350,
-          title: WrapperText(
-            item.name,
-            fontSize: 16,
-          ),
           footer: WrapperPlayIconButton(
             onPressed: () => onItemTap(item),
           ),
-          child: displayCover ? const ItemCover() : const SizedBox.shrink(),
+          title: displayCover
+              ? const ItemCover(
+                  mode: ItemCoverMode.square,
+                )
+              : const SizedBox.shrink(),
+          child: WrapperText(
+            item.name,
+            fontSize: 16,
+          ),
         ),
       );
     }
@@ -106,21 +136,39 @@ class BetaGalleryItem extends StatelessWidget {
   }
 }
 
+enum ItemCoverMode {
+  square,
+  rectangle;
+}
+
 class ItemCover extends StatelessWidget {
   const ItemCover({
+    this.mode = ItemCoverMode.rectangle,
     super.key,
   });
 
+  final ItemCoverMode mode;
+
   @override
   Widget build(BuildContext context) {
+    final color = ShadTheme.of(context).colorScheme.secondary;
+    final iconColor = ShadTheme.of(context).colorScheme.primary;
+
+    final isSquareMode = mode == ItemCoverMode.square;
+    final height = isSquareMode ? 100.0 : 200.0;
+    final width = isSquareMode ? 100.0 : double.infinity;
+
     return Container(
-      color: ColorsExtended.neoPrimary,
-      height: 128,
-      width: 270,
-      child: const Center(
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      height: height,
+      width: width,
+      child: Center(
         child: Icon(
           Icons.terminal,
-          color: Colors.white,
+          color: iconColor,
           size: 24,
         ),
       ),
@@ -167,44 +215,6 @@ class WrapperPlayIconButton extends StatelessWidget {
   }
 }
 
-class WrapperSupportButton extends StatelessWidget {
-  const WrapperSupportButton({
-    this.scheme = defaultScheme,
-    super.key,
-  });
-
-  final AppUiScheme scheme;
-
-  @override
-  Widget build(BuildContext context) {
-    if (scheme == AppUiScheme.shadcn) {
-      return ShadButton(
-        child: const WrapperText(
-          'Support me',
-          color: Colors.white,
-          fontSize: 16,
-        ),
-        onPressed: () {},
-      );
-    }
-
-    return NeuTextButton(
-      buttonColor: ColorsExtended.neoPrimary,
-      buttonHeight: 40,
-      buttonWidth: 200,
-      borderWidth: 2,
-      //shadowColor: Colors.transparent,
-      //offset: Offset(1, 1),
-      enableAnimation: true,
-      text: const WrapperText(
-        'Support me',
-        color: Colors.white,
-        fontSize: 16,
-      ),
-    );
-  }
-}
-
 enum AppUiScheme {
   neobrutalism,
   shadcn,
@@ -220,6 +230,7 @@ class WrapperText extends Text {
     this.fontWeight,
     this.color,
     this.scheme = defaultScheme,
+    this.maxLines,
   }) : super('');
 
   final String text;
@@ -227,16 +238,20 @@ class WrapperText extends Text {
   final FontWeight? fontWeight;
   final Color? color;
   final AppUiScheme scheme;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
     if (scheme == AppUiScheme.shadcn) {
       return Text(
         text,
+        maxLines: maxLines,
+        softWrap: false,
         style: TextStyle(
           fontSize: fontSize ?? 16,
           fontWeight: fontWeight ?? FontWeight.w600,
           color: color,
+          overflow: TextOverflow.ellipsis,
         ),
       );
     }

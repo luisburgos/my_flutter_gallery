@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_flutter_gallery/app/app_cubit.dart';
 import 'package:my_flutter_gallery/app/app_data.dart';
@@ -75,11 +76,26 @@ class MyFlutterGalleryApp extends StatelessWidget {
     //final state = context.watch<MyFlutterGalleryCubit>().state;
     //final selectedApp = state.selectedItem;
 
+    const colorSchemeName = 'stone';
     return ShadApp.router(
       routerConfig: _router,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      themeMode: ThemeMode.light,
+      darkTheme: ShadThemeData(
+        brightness: Brightness.dark,
+        colorScheme: ShadColorScheme.fromName(
+          colorSchemeName,
+          brightness: Brightness.dark,
+        ),
+      ),
+      theme: ShadThemeData(
+        brightness: Brightness.light,
+        colorScheme: ShadColorScheme.fromName(
+          colorSchemeName,
+        ),
+      ),
     );
   }
 }
@@ -99,19 +115,66 @@ class HomePage extends StatelessWidget {
             onHomeTap: () {},
           ),
           const Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: AboutView(),
-                ),
-                Expanded(
-                  child: LatestGalleryItemsView(),
-                ),
-              ],
-            ),
+            child: SiteBody(),
           ),
         ],
       ),
+    );
+  }
+}
+
+class SiteBody extends StatelessWidget {
+  const SiteBody({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final children = [
+      Expanded(
+        child: Center(
+          child: Container(
+            //color: Colors.blue,
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: const AboutView(),
+          ),
+        ),
+      ),
+      Expanded(
+        child: Center(
+          child: Container(
+            //color: Colors.red,
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: const LatestGalleryItemsView(),
+          ),
+        ),
+      ),
+    ];
+
+    if (isMobile(context)) {
+      return SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(40),
+              child: AboutView(),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 40,
+                vertical: 12,
+              ),
+              child: LatestGalleryItemsView(),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: children,
     );
   }
 }
@@ -121,38 +184,39 @@ class AboutView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "Hi, I'm Luis 👋",
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w700,
-            ),
+    final titleColor = ShadTheme.of(context).colorScheme.primary;
+    final subtitleColor = ShadTheme.of(context).colorScheme.mutedForeground;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "Hi, I'm Luis 👋",
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w700,
+            color: titleColor,
           ),
-          SizedBox(height: 8),
-          Text(
-            'Software Engineer based in México 🇲🇽',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w100,
-              color: Colors.white60,
-            ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Software Engineer based in México 🇲🇽',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w100,
+            color: subtitleColor,
           ),
-          Text(
-            'Lorem ipsum lorem ipsum lorem 🎯',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w100,
-              color: Colors.white60,
-            ),
+        ),
+        Text(
+          'Lorem ipsum lorem ipsum lorem 🎯',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w100,
+            color: subtitleColor,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -165,35 +229,42 @@ class LatestGalleryItemsView extends StatelessWidget {
     final state = context.watch<MyFlutterGalleryCubit>().state;
     final apps = state.items;
 
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text('LATEST BITS'),
-          const SizedBox(height: 12),
-          BetaGalleryItem(
-            margin: EdgeInsets.zero,
-            item: apps[0],
-            onItemTap: (_) {},
-          ),
-          const SizedBox(height: 14),
-          BetaGalleryItem(
-            margin: EdgeInsets.zero,
-            item: apps[1],
-            onItemTap: (_) {},
-          ),
-          const SizedBox(height: 12),
-          Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'LATEST BITS',
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            const Spacer(),
+            ShadButton.link(
               onPressed: () {},
               child: const Text('View all'),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        BetaGalleryItem(
+          margin: EdgeInsets.zero,
+          item: apps[0],
+          onItemTap: (_) {},
+          mode: BetaGalleryItemMode.preview,
+        ),
+        const SizedBox(height: 14),
+        BetaGalleryItem(
+          margin: EdgeInsets.zero,
+          item: apps[1],
+          onItemTap: (_) {},
+          mode: BetaGalleryItemMode.preview,
+        ),
+        const SizedBox(height: 12),
+      ],
     );
   }
 }
@@ -212,9 +283,6 @@ class SiteTopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).colorScheme.primary;
-    final secondaryColor = Theme.of(context).colorScheme.secondary;
-
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(
@@ -223,22 +291,14 @@ class SiteTopBar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          IconButton(
+          HomeTabButton(
             onPressed: onHomeTap,
-            icon: Icon(
-              Icons.home_filled,
-              size: 18,
-              color: selectedIndex == 0 ? primaryColor : secondaryColor,
-            ),
+            isSelected: selectedIndex == 0,
           ),
           const SizedBox(width: 8),
-          IconButton(
+          GalleryTabButton(
             onPressed: onGalleryTap,
-            icon: Icon(
-              Icons.terminal,
-              size: 18,
-              color: selectedIndex == 1 ? primaryColor : secondaryColor,
-            ),
+            isSelected: selectedIndex == 1,
           ),
         ],
       ),
@@ -258,4 +318,114 @@ class GalleryItemHomePage extends StatelessWidget {
     }
     return const UnimplementedGalleryItemPage();
   }
+}
+
+class HomeTabButton extends StatelessWidget {
+  const HomeTabButton({
+    required this.onPressed,
+    required this.isSelected,
+    super.key,
+  });
+
+  final bool isSelected;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    if (isMobile(context)) {
+      return MobileIconButtonWrapper(
+        isSelected: isSelected,
+        onPressed: onPressed,
+        iconData: FontAwesomeIcons.house,
+      );
+    }
+
+    const text = Text('HOME');
+    if (isSelected) {
+      return ShadButton(
+        size: ShadButtonSize.sm,
+        onPressed: onPressed,
+        child: text,
+      );
+    }
+
+    return ShadButton.ghost(
+      size: ShadButtonSize.sm,
+      onPressed: onPressed,
+      child: text,
+    );
+  }
+}
+
+class GalleryTabButton extends StatelessWidget {
+  const GalleryTabButton({
+    required this.onPressed,
+    required this.isSelected,
+    super.key,
+  });
+
+  final bool isSelected;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    if (isMobile(context)) {
+      return MobileIconButtonWrapper(
+        isSelected: isSelected,
+        onPressed: onPressed,
+        iconData: FontAwesomeIcons.solidFolderOpen,
+      );
+    }
+
+    const text = Text('FLUTTER GALLERY');
+    if (isSelected) {
+      return ShadButton(
+        size: ShadButtonSize.sm,
+        onPressed: onPressed,
+        child: text,
+      );
+    }
+
+    return ShadButton.ghost(
+      size: ShadButtonSize.sm,
+      onPressed: onPressed,
+      child: text,
+    );
+  }
+}
+
+class MobileIconButtonWrapper extends StatelessWidget {
+  const MobileIconButtonWrapper({
+    required this.onPressed,
+    required this.iconData,
+    this.isSelected = false,
+    super.key,
+  });
+
+  final bool isSelected;
+  final VoidCallback onPressed;
+  final IconData iconData;
+
+  @override
+  Widget build(BuildContext context) {
+    final selectedColor = ShadTheme.of(context).colorScheme.primary;
+    final baseColor = ShadTheme.of(context).colorScheme.mutedForeground;
+
+    return ShadButton.outline(
+      decoration: const ShadDecoration(
+        border: ShadBorder.none,
+      ),
+      foregroundColor: isSelected ? selectedColor : baseColor,
+      onPressed: onPressed,
+      icon: Icon(
+        iconData,
+        size: 18,
+      ),
+    );
+  }
+}
+
+bool isMobile(BuildContext context) {
+  final width = MediaQuery.of(context).size.width;
+  return width <= 640;
 }

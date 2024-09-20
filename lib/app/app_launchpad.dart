@@ -178,16 +178,6 @@ class BetaGallery extends StatelessWidget {
       //backgroundColor: ColorsExtended.neoBackground,
       body: Column(
         children: [
-          const Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(20),
-                child: Header(),
-              ),
-              Spacer(),
-            ],
-          ),
-          const WrapperDivider(),
           Expanded(
             child: Center(
               child: Padding(
@@ -213,16 +203,6 @@ class BetaGallery extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          const WrapperDivider(),
-          const Row(
-            children: [
-              Spacer(),
-              Padding(
-                padding: EdgeInsets.all(20),
-                child: WrapperSupportButton(),
-              ),
-            ],
           ),
         ],
       ),
