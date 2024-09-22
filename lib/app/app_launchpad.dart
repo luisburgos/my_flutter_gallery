@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:my_flutter_gallery/app/app.dart';
 import 'package:my_flutter_gallery/app/app_cubit.dart';
 import 'package:my_flutter_gallery/app/app_data.dart';
+import 'package:my_flutter_gallery/app/app_routes.dart';
 import 'package:my_flutter_gallery/app/ui_wrappers.dart';
 import 'package:my_flutter_gallery/home/site_top_bar.dart';
 import 'package:my_flutter_gallery/shared/simple_grid.dart';
@@ -144,9 +144,7 @@ class LaunchpadView extends StatelessWidget {
 
   void _onLaunchTap(BuildContext context, GalleryItemData item) {
     context.read<MyFlutterGalleryCubit>().setSelectedAppById(item.id);
-    context.go(
-      AppRoutes.galleryItem.replaceAll(':id', item.id),
-    );
+    context.navigateToGalleryItem(item.id);
   }
 }
 

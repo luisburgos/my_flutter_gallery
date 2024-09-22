@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_flutter_gallery/app/app.dart';
 
 class GlobalShortcutsHandler extends StatelessWidget {
   const GlobalShortcutsHandler({
@@ -31,7 +30,7 @@ class GlobalShortcutsHandler extends StatelessWidget {
               duration: const Duration(milliseconds: 900),
             ),
           );*/
-          Navigator.of(context).pushNamed(AppRoutes.gallery);
+          //Navigator.of(context).pushNamed(AppRoutes.gallery);
         },
       },
       child: Focus(
