@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_flutter_gallery/app/app_cubit.dart';
 import 'package:my_flutter_gallery/app/app_data.dart';
@@ -10,7 +9,9 @@ import 'package:my_flutter_gallery/app/ui_wrappers.dart';
 import 'package:my_flutter_gallery/clones/llm_model_selector/metadata.dart';
 import 'package:my_flutter_gallery/clones/open_ai_ui/metadata.dart';
 import 'package:my_flutter_gallery/clones/resonance/metadata.dart';
+import 'package:my_flutter_gallery/home/site_top_bar.dart';
 import 'package:my_flutter_gallery/l10n/l10n.dart';
+import 'package:my_flutter_gallery/utils/is_mobile.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class AppRoutes {
@@ -269,43 +270,6 @@ class LatestGalleryItemsView extends StatelessWidget {
   }
 }
 
-class SiteTopBar extends StatelessWidget {
-  const SiteTopBar({
-    required this.onHomeTap,
-    required this.onGalleryTap,
-    this.selectedIndex = 0,
-    super.key,
-  });
-
-  final int selectedIndex;
-  final VoidCallback onHomeTap;
-  final VoidCallback onGalleryTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(
-        vertical: 12,
-        horizontal: 12,
-      ),
-      child: Row(
-        children: [
-          HomeTabButton(
-            onPressed: onHomeTap,
-            isSelected: selectedIndex == 0,
-          ),
-          const SizedBox(width: 8),
-          GalleryTabButton(
-            onPressed: onGalleryTap,
-            isSelected: selectedIndex == 1,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class GalleryItemHomePage extends StatelessWidget {
   const GalleryItemHomePage({super.key});
 
@@ -318,114 +282,4 @@ class GalleryItemHomePage extends StatelessWidget {
     }
     return const UnimplementedGalleryItemPage();
   }
-}
-
-class HomeTabButton extends StatelessWidget {
-  const HomeTabButton({
-    required this.onPressed,
-    required this.isSelected,
-    super.key,
-  });
-
-  final bool isSelected;
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    if (isMobile(context)) {
-      return MobileIconButtonWrapper(
-        isSelected: isSelected,
-        onPressed: onPressed,
-        iconData: FontAwesomeIcons.house,
-      );
-    }
-
-    const text = Text('HOME');
-    if (isSelected) {
-      return ShadButton(
-        size: ShadButtonSize.sm,
-        onPressed: onPressed,
-        child: text,
-      );
-    }
-
-    return ShadButton.ghost(
-      size: ShadButtonSize.sm,
-      onPressed: onPressed,
-      child: text,
-    );
-  }
-}
-
-class GalleryTabButton extends StatelessWidget {
-  const GalleryTabButton({
-    required this.onPressed,
-    required this.isSelected,
-    super.key,
-  });
-
-  final bool isSelected;
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    if (isMobile(context)) {
-      return MobileIconButtonWrapper(
-        isSelected: isSelected,
-        onPressed: onPressed,
-        iconData: FontAwesomeIcons.solidFolderOpen,
-      );
-    }
-
-    const text = Text('FLUTTER GALLERY');
-    if (isSelected) {
-      return ShadButton(
-        size: ShadButtonSize.sm,
-        onPressed: onPressed,
-        child: text,
-      );
-    }
-
-    return ShadButton.ghost(
-      size: ShadButtonSize.sm,
-      onPressed: onPressed,
-      child: text,
-    );
-  }
-}
-
-class MobileIconButtonWrapper extends StatelessWidget {
-  const MobileIconButtonWrapper({
-    required this.onPressed,
-    required this.iconData,
-    this.isSelected = false,
-    super.key,
-  });
-
-  final bool isSelected;
-  final VoidCallback onPressed;
-  final IconData iconData;
-
-  @override
-  Widget build(BuildContext context) {
-    final selectedColor = ShadTheme.of(context).colorScheme.primary;
-    final baseColor = ShadTheme.of(context).colorScheme.mutedForeground;
-
-    return ShadButton.outline(
-      decoration: const ShadDecoration(
-        border: ShadBorder.none,
-      ),
-      foregroundColor: isSelected ? selectedColor : baseColor,
-      onPressed: onPressed,
-      icon: Icon(
-        iconData,
-        size: 18,
-      ),
-    );
-  }
-}
-
-bool isMobile(BuildContext context) {
-  final width = MediaQuery.of(context).size.width;
-  return width <= 640;
 }

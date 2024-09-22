@@ -5,6 +5,7 @@ import 'package:my_flutter_gallery/app/app.dart';
 import 'package:my_flutter_gallery/app/app_cubit.dart';
 import 'package:my_flutter_gallery/app/app_data.dart';
 import 'package:my_flutter_gallery/app/ui_wrappers.dart';
+import 'package:my_flutter_gallery/home/site_top_bar.dart';
 import 'package:my_flutter_gallery/shared/simple_grid.dart';
 
 const betaGallery = true;
