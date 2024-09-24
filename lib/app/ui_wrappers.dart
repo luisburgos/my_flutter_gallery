@@ -88,11 +88,14 @@ class _BetaGalleryItemState extends State<BetaGalleryItem> {
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
-      child: Container(
-        margin: widget.margin,
-        child: Card(
-          elevation: _isHovered ? 7 : 0,
-          child: child,
+      child: GestureDetector(
+        onTap: () => widget.onItemTap(widget.item),
+        child: Container(
+          margin: widget.margin,
+          child: Card(
+            elevation: _isHovered ? 7 : 0,
+            child: child,
+          ),
         ),
       ),
     );

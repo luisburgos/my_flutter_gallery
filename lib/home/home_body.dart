@@ -136,14 +136,14 @@ class LatestGalleryItemsView extends StatelessWidget {
         BetaGalleryItem(
           margin: EdgeInsets.zero,
           item: apps[0],
-          onItemTap: (_) {},
+          onItemTap: (_) => context.navigateToGalleryItem(_.id),
           mode: BetaGalleryItemMode.preview,
         ),
         const SizedBox(height: 14),
         BetaGalleryItem(
           margin: EdgeInsets.zero,
           item: apps[1],
-          onItemTap: (_) {},
+          onItemTap: (_) => context.navigateToGalleryItem(_.id),
           mode: BetaGalleryItemMode.preview,
         ),
         const SizedBox(height: 12),

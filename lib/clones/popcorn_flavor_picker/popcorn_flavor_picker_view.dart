@@ -77,6 +77,8 @@ class PickerDataSourceSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = context.watch<PopcornFlavorPickerCubit>().state;
 
+    if (state.cinemaOptions.isEmpty) return const CircularProgressIndicator();
+
     final segmentedCinemaOptions = {
       for (final option in state.cinemaOptions)
         option: Padding(
