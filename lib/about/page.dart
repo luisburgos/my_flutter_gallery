@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter_gallery/home/site_top_bar.dart';
+import 'package:my_flutter_gallery/components/site_top_bar/site_top_bar.dart';
 import 'package:timelines/timelines.dart';
 
 class AboutPage extends StatelessWidget {
@@ -14,7 +14,7 @@ class AboutPage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            const SiteTopBarView(),
+            const DefaultSiteTopBar(),
             Expanded(
               child: Center(
                 child: ConstrainedBox(

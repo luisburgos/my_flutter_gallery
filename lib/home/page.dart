@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_flutter_gallery/components/site_top_bar/site_top_bar.dart';
 import 'package:my_flutter_gallery/home/home_body.dart';
-import 'package:my_flutter_gallery/home/site_top_bar.dart';
 import 'package:my_flutter_gallery/utils/constrained_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
     return const ConstrainedPage(
       child: Column(
         children: [
-          SiteTopBarView(),
+          DefaultSiteTopBar(),
           Expanded(
             child: HomeBody(),
           ),

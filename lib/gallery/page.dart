@@ -4,7 +4,7 @@ import 'package:my_flutter_gallery/app/app_cubit.dart';
 import 'package:my_flutter_gallery/app/app_data.dart';
 import 'package:my_flutter_gallery/app/app_routes.dart';
 import 'package:my_flutter_gallery/app/ui_wrappers.dart';
-import 'package:my_flutter_gallery/home/site_top_bar.dart';
+import 'package:my_flutter_gallery/components/site_top_bar/site_top_bar.dart';
 import 'package:my_flutter_gallery/shared/simple_grid.dart';
 import 'package:my_flutter_gallery/utils/constrained_page.dart';
 
@@ -18,7 +18,7 @@ class GalleryPage extends StatelessWidget {
     return const ConstrainedPage(
       child: Column(
         children: [
-          SiteTopBarView(),
+          DefaultSiteTopBar(),
           Expanded(
             child: LaunchpadView(),
           ),
