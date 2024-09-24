@@ -12,7 +12,7 @@ enum BetaGalleryItemMode {
 
 const itemCardWidth = 350.0;
 
-class BetaGalleryItem extends StatelessWidget {
+class BetaGalleryItem extends StatefulWidget {
   const BetaGalleryItem({
     required this.item,
     required this.onItemTap,
@@ -31,126 +31,68 @@ class BetaGalleryItem extends StatelessWidget {
   final BetaGalleryItemMode mode;
 
   @override
+  State<BetaGalleryItem> createState() => _BetaGalleryItemState();
+}
+
+class _BetaGalleryItemState extends State<BetaGalleryItem> {
+  bool _isHovered = false;
+
+  @override
   Widget build(BuildContext context) {
-    final subtitleColor = ShadTheme.of(context).colorScheme.mutedForeground;
-
-    if (scheme == AppUiScheme.shadcn) {
-      if (mode == BetaGalleryItemMode.preview) {
-        return Container(
-          margin: margin,
-          child: ShadCard(
-            width: double.infinity,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (displayCover)
-                  ItemCover(
-                    icon: item.iconData,
-                    mode: ItemCoverMode.square,
-                  )
-                else
-                  const SizedBox.shrink(),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        WrapperText(
-                          item.name,
-                          fontSize: 16,
-                        ),
-                        WrapperText(
-                          'Lorem description this is a lorem description '
-                          'with truncate enabled for longer descriptions as '
-                          'this one in the example',
-                          fontSize: 12,
-                          maxLines: 2,
-                          color: subtitleColor,
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
+    Widget child;
+    if (widget.mode == BetaGalleryItemMode.preview) {
+      child = ShadCard(
+        padding: const EdgeInsets.all(12),
+        width: double.infinity,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (widget.displayCover)
+              ItemCover(
+                icon: widget.item.iconData,
+                mode: ItemCoverMode.square,
+              )
+            else
+              const SizedBox.shrink(),
+            Expanded(
+              child: ItemTexts(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                name: widget.item.name,
+                description: widget.item.description,
+              ),
             ),
-          ),
-        );
-      }
-
-      return Container(
-        margin: margin,
-        child: ShadCard(
-          padding: EdgeInsets.zero,
-          width: itemCardWidth,
-          /*footer: WrapperPlayIconButton(
-            onPressed: () => onItemTap(item),
-          ),*/
-          title: displayCover
-              ? ItemCover(
-                  icon: item.iconData,
-                )
-              : const SizedBox.shrink(),
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                WrapperText(
-                  item.name,
-                  fontSize: 16,
-                ),
-                WrapperText(
-                  item.description,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w300,
-                  color: subtitleColor,
-                ),
-              ],
+          ],
+        ),
+      );
+    } else {
+      child = ShadCard(
+        padding: EdgeInsets.zero,
+        width: itemCardWidth,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (widget.displayCover)
+              ItemCover(
+                icon: widget.item.iconData,
+              ),
+            ItemTexts(
+              name: widget.item.name,
+              description: widget.item.description,
             ),
-          ),
+          ],
         ),
       );
     }
 
-    return Container(
-      margin: const EdgeInsets.all(8),
-      child: NeuContainer(
-        borderWidth: 2,
-        color: Colors.white,
-        offset: const Offset(3, 3),
-        child: Stack(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (displayCover)
-                  ItemCover(
-                    icon: item.iconData,
-                  ),
-                Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: WrapperText(
-                    item.name,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-            Positioned(
-              right: -2,
-              bottom: 0,
-              //top: 0,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: WrapperPlayIconButton(
-                    onPressed: () => onItemTap(item),
-                  ),
-                ),
-              ),
-            ),
-          ],
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: Container(
+        margin: widget.margin,
+        child: Card(
+          elevation: _isHovered ? 7 : 0,
+          child: child,
         ),
       ),
     );
@@ -160,6 +102,44 @@ class BetaGalleryItem extends StatelessWidget {
 enum ItemCoverMode {
   square,
   rectangle;
+}
+
+class ItemTexts extends StatelessWidget {
+  const ItemTexts({
+    required this.name,
+    required this.description,
+    this.padding,
+    super.key,
+  });
+
+  final String name;
+  final String description;
+  final EdgeInsetsGeometry? padding;
+
+  @override
+  Widget build(BuildContext context) {
+    final subtitleColor = ShadTheme.of(context).colorScheme.mutedForeground;
+
+    return Padding(
+      padding: padding ?? const EdgeInsets.all(12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          WrapperText(
+            name,
+            fontSize: 16,
+          ),
+          WrapperText(
+            description,
+            fontSize: 12,
+            fontWeight: FontWeight.w300,
+            color: subtitleColor,
+            maxLines: 3,
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class ItemCover extends StatelessWidget {
@@ -210,9 +190,11 @@ class WrapperPlayIconButton extends StatelessWidget {
   const WrapperPlayIconButton({
     required this.onPressed,
     this.scheme = defaultScheme,
+    this.textModeOn = true,
     super.key,
   });
 
+  final bool textModeOn;
   final AppUiScheme scheme;
   final VoidCallback onPressed;
 
@@ -225,6 +207,15 @@ class WrapperPlayIconButton extends StatelessWidget {
     );
 
     if (scheme == AppUiScheme.shadcn) {
+      if (textModeOn) {
+        return ShadButton(
+          size: ShadButtonSize.sm,
+          icon: icon,
+          onPressed: onPressed,
+          child: const Text('LAUNCH'),
+        );
+      }
+
       return ShadButton.outline(
         icon: icon,
         onPressed: onPressed,

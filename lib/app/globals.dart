@@ -10,6 +10,10 @@ import 'package:my_flutter_gallery/clones/popcorn_flavor_picker/popcorn_flavor_p
 import 'package:my_flutter_gallery/clones/supernotes/supernotes_app_page.dart';
 import 'package:my_flutter_gallery/shared/colors_extended.dart';
 
+const gLoremDescription = 'TODO: Add description lorem ipsum description '
+    'lorem ipsum description '
+    'lorem ipsum description';
+
 class InstagramAppData extends GalleryItemData {
   InstagramAppData()
       : super(
@@ -20,7 +24,7 @@ class InstagramAppData extends GalleryItemData {
             FontAwesomeIcons.instagram,
             size: 16,
           ),
-          description: 'TODO: Add description',
+          description: gLoremDescription,
           pageBuilder: (_) => const InstagramPage(),
         );
 }
@@ -35,7 +39,7 @@ class PerplexityAppData extends GalleryItemData {
             FontAwesomeIcons.microchip,
             size: 16,
           ),
-          description: 'TODO: Add description',
+          description: gLoremDescription,
           pageBuilder: (_) => const PerplexityPage(),
         );
 }
@@ -50,7 +54,7 @@ class SupernotesAppData extends GalleryItemData {
             FontAwesomeIcons.noteSticky,
             size: 16,
           ),
-          description: 'TODO: Add description',
+          description: gLoremDescription,
           pageBuilder: (_) => const SuperNotesPage(),
         );
 }
@@ -65,7 +69,7 @@ class BrancherAiAppData extends GalleryItemData {
             FontAwesomeIcons.wind,
             size: 16,
           ),
-          description: 'TODO: Add description',
+          description: gLoremDescription,
           pageBuilder: (_) => const BrancherAiAppPage(),
         );
 }
@@ -80,7 +84,7 @@ class OpenGptChatUiAppData extends GalleryItemData {
             FontAwesomeIcons.message,
             size: 16,
           ),
-          description: 'TODO: Add description',
+          description: gLoremDescription,
           pageBuilder: (_) => const OpenGptChatUiPage(),
         );
 }
@@ -95,7 +99,7 @@ class PopcornFlavorPickerData extends GalleryItemData {
             FontAwesomeIcons.film,
             size: 16,
           ),
-          description: 'TODO: Add description',
+          description: gLoremDescription,
           pageBuilder: (_) => const PopcornFlavorPickerPage(),
         );
 }
@@ -110,7 +114,7 @@ class HabitsData extends GalleryItemData {
             FontAwesomeIcons.calendarWeek,
             size: 16,
           ),
-          description: 'TODO: Add description',
+          description: gLoremDescription,
           pageBuilder: (_) => const HabitsPage(),
         );
 }
