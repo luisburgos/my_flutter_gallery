@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:my_flutter_gallery/app/app_cubit.dart';
 import 'package:my_flutter_gallery/app/app_data.dart';
 import 'package:my_flutter_gallery/app/app_routes.dart';
@@ -15,17 +14,11 @@ class GalleryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Column(
         children: [
-          SiteTopBar(
-            selectedIndex: 1,
-            onGalleryTap: () {},
-            onHomeTap: () {
-              context.go(AppRoutes.root);
-            },
-          ),
-          const Expanded(
+          SiteTopBarView(),
+          Expanded(
             child: LaunchpadView(),
           ),
         ],

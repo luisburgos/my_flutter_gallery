@@ -3,10 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:my_flutter_gallery/app/app.dart';
 import 'package:my_flutter_gallery/gallery/page.dart';
 import 'package:my_flutter_gallery/home/page.dart';
+import 'package:my_flutter_gallery/home/site_top_bar.dart';
 
 class AppRoutes {
   static const root = '/';
   static const gallery = '/gallery';
+  static const about = '/about';
   static const galleryItem = '/gallery/:id';
 }
 
@@ -24,6 +26,21 @@ final defaultAppRouter = GoRouter(
       path: AppRoutes.galleryItem,
       builder: (_, __) => const GalleryItemHomePage(),
     ),
+    GoRoute(
+      path: AppRoutes.about,
+      builder: (_, __) => const Scaffold(
+        body: Column(
+          children: [
+            SiteTopBarView(),
+            Expanded(
+              child: Center(
+                child: Text('About WIP'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
   ],
 );
 
@@ -34,6 +51,10 @@ extension BuildContextNavigationMethods<T> on BuildContext {
 
   void navigateToHome() {
     go(AppRoutes.root);
+  }
+
+  void navigateToAbout() {
+    go(AppRoutes.about);
   }
 
   void navigateToGalleryItem(String itemId) {
