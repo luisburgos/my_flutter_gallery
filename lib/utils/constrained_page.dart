@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
+import 'package:my_flutter_gallery/utils/is_mobile.dart';
 
-class ShadResponsivePage extends StatelessWidget {
-  const ShadResponsivePage({
+class ResponsiveView extends StatelessWidget {
+  const ResponsiveView({
     required this.child,
     required this.smChild,
     super.key,
@@ -13,8 +13,7 @@ class ShadResponsivePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sm = context.breakpoint >= ShadTheme.of(context).breakpoints.sm;
-    if (sm) return smChild;
+    if (isSmallWidth(context)) return smChild;
     return child;
   }
 }

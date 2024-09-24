@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_flutter_gallery/app/app_commands.dart';
 import 'package:my_flutter_gallery/app/app_routes.dart';
 import 'package:my_flutter_gallery/components/site_top_bar/state.dart';
 import 'package:my_flutter_gallery/components/site_top_bar/widgets.dart';
@@ -30,10 +31,7 @@ class DefaultSiteTopBar extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           SiteTopBarTabButton(
-            onPressed: () => siteTopBarState.setIndex(
-              1,
-              context.navigateToGallery,
-            ),
+            onPressed: () => selectGalleryPage(context),
             isSelected: siteTopBarState.selectedIndex == 1,
             iconData: FontAwesomeIcons.folderOpen,
             text: 'FLUTTER GALLERY',
