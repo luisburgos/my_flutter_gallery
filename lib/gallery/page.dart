@@ -6,6 +6,7 @@ import 'package:my_flutter_gallery/app/app_routes.dart';
 import 'package:my_flutter_gallery/app/ui_wrappers.dart';
 import 'package:my_flutter_gallery/home/site_top_bar.dart';
 import 'package:my_flutter_gallery/shared/simple_grid.dart';
+import 'package:my_flutter_gallery/utils/constrained_page.dart';
 
 const betaGallery = true;
 
@@ -14,21 +15,14 @@ class GalleryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: 800,
+    return const ConstrainedPage(
+      child: Column(
+        children: [
+          SiteTopBarView(),
+          Expanded(
+            child: LaunchpadView(),
           ),
-          child: const Column(
-            children: [
-              SiteTopBarView(),
-              Expanded(
-                child: LaunchpadView(),
-              ),
-            ],
-          ),
-        ),
+        ],
       ),
     );
   }

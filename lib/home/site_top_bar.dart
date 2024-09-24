@@ -73,7 +73,7 @@ class SiteTopBarView extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(
         vertical: 12,
-        horizontal: 12,
+        horizontal: 4,
       ),
       child: Row(
         children: [
@@ -93,7 +93,7 @@ class SiteTopBarView extends StatelessWidget {
               context.navigateToGallery,
             ),
             isSelected: siteTopBarState.selectedIndex == 1,
-            iconData: FontAwesomeIcons.solidFolderOpen,
+            iconData: FontAwesomeIcons.folderOpen,
             text: 'FLUTTER GALLERY',
           ),
           /*const SizedBox(width: 8),
@@ -133,7 +133,7 @@ class SiteTopBarTabButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isMobile(context)) {
+    if (isSmallWidth(context)) {
       final selectedColor = ShadTheme.of(context).colorScheme.primary;
       final baseColor = ShadTheme.of(context).colorScheme.mutedForeground;
 

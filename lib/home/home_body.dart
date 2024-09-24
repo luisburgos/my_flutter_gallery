@@ -14,39 +14,41 @@ class HomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final children = [
-      Expanded(
+      Flexible(
         child: Center(
           child: Container(
-            //color: Colors.blue,
-            constraints: const BoxConstraints(maxWidth: 400),
+            constraints: const BoxConstraints(minWidth: 380),
             child: const AboutView(),
           ),
         ),
       ),
-      Expanded(
+      const SizedBox(width: 20),
+      Flexible(
         child: Center(
           child: Container(
-            color: Colors.red,
-            constraints: const BoxConstraints(maxWidth: 400),
+            constraints: const BoxConstraints(minWidth: 380),
             child: const LatestGalleryItemsView(),
           ),
         ),
       ),
     ];
 
-    if (isMobile(context)) {
+    if (isSmallWidth(context)) {
       return SingleChildScrollView(
         child: Column(
           children: [
             Container(
               width: double.infinity,
-              padding: EdgeInsets.all(40),
-              child: AboutView(),
+              padding: const EdgeInsets.symmetric(
+                vertical: 12,
+                horizontal: 20,
+              ),
+              child: const AboutView(),
             ),
             const Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: 40,
                 vertical: 12,
+                horizontal: 20,
               ),
               child: LatestGalleryItemsView(),
             ),
@@ -55,9 +57,15 @@ class HomeBody extends StatelessWidget {
       );
     }
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: children,
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 8,
+        horizontal: 8,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: children,
+      ),
     );
   }
 }
@@ -87,14 +95,14 @@ class AboutView extends StatelessWidget {
           'Software Engineer based in México 🇲🇽',
           style: TextStyle(
             fontSize: 18,
-            fontWeight: FontWeight.w100,
-            color: subtitleColor,
+            fontWeight: FontWeight.w300,
+            color: titleColor,
           ),
         ),
         Text(
-          'Lorem ipsum lorem ipsum lorem 🎯',
+          'Lorem ipsum lorem ipsum lorem Lorem ipsum lorem ipsum lorem 🎯',
           style: TextStyle(
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: FontWeight.w100,
             color: subtitleColor,
           ),
@@ -119,13 +127,10 @@ class LatestGalleryItemsView extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 4),
-              child: Text(
-                'LATEST BITS',
-                style: TextStyle(
-                  fontWeight: FontWeight.w800,
-                ),
+            const Text(
+              'LATEST BITS',
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
               ),
             ),
             const Spacer(),

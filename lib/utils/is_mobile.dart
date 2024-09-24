@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
-bool isMobile(BuildContext context) {
-  final width = MediaQuery.of(context).size.width;
-  return width <= 640;
+bool isSmallWidth(BuildContext context) {
+  return context.breakpoint <= ShadTheme.of(context).breakpoints.sm;
 }
