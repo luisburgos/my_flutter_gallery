@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:my_flutter_gallery/about/page.dart';
 import 'package:my_flutter_gallery/app/app.dart';
 import 'package:my_flutter_gallery/gallery/page.dart';
 import 'package:my_flutter_gallery/home/page.dart';
-import 'package:my_flutter_gallery/home/site_top_bar.dart';
 
 class AppRoutes {
   static const root = '/';
@@ -28,18 +28,7 @@ final defaultAppRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.about,
-      builder: (_, __) => const Scaffold(
-        body: Column(
-          children: [
-            SiteTopBarView(),
-            Expanded(
-              child: Center(
-                child: Text('About WIP'),
-              ),
-            ),
-          ],
-        ),
-      ),
+      builder: (_, __) => const AboutPage(),
     ),
   ],
 );
