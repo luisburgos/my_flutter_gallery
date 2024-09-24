@@ -7,7 +7,6 @@ import 'package:my_flutter_gallery/app/globals.dart';
 import 'package:my_flutter_gallery/clones/llm_model_selector/metadata.dart';
 import 'package:my_flutter_gallery/clones/open_ai_ui/metadata.dart';
 import 'package:my_flutter_gallery/clones/resonance/metadata.dart';
-import 'package:my_flutter_gallery/gallery/page.dart';
 import 'package:my_flutter_gallery/home/site_top_bar.dart';
 import 'package:my_flutter_gallery/l10n/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -75,19 +74,5 @@ class MyFlutterGalleryApp extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class GalleryItemHomePage extends StatelessWidget {
-  const GalleryItemHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final state = context.watch<MyFlutterGalleryCubit>().state;
-    final selectedItem = state.selectedItem;
-    if (selectedItem != null) {
-      return selectedItem.pageBuilder(context);
-    }
-    return const UnimplementedGalleryItemPage();
   }
 }

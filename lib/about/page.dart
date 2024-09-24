@@ -8,22 +8,27 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const SiteTopBarView(),
-          Expanded(
-            child: Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: 500,
-                ),
-                child: const _DeliveryProcesses(
-                  processes: ['1', '2', '2', '2'],
+      body: ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxWidth: 1000,
+        ),
+        child: Column(
+          children: [
+            const SiteTopBarView(),
+            Expanded(
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 500,
+                  ),
+                  child: const _DeliveryProcesses(
+                    processes: ['1', '2', '2', '2'],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

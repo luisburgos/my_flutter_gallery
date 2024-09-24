@@ -161,7 +161,7 @@ class ItemCover extends StatelessWidget {
     final iconColor = ShadTheme.of(context).colorScheme.primary;
 
     final isSquareMode = mode == ItemCoverMode.square;
-    final height = isSquareMode ? 150.0 : 140.0;
+    final height = isSquareMode ? 100.0 : 140.0;
     final width = isSquareMode ? 100.0 : itemCardWidth;
 
     final borderRadius = isSquareMode

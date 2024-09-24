@@ -14,14 +14,21 @@ class GalleryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Column(
-        children: [
-          SiteTopBarView(),
-          Expanded(
-            child: LaunchpadView(),
+    return Scaffold(
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: 800,
           ),
-        ],
+          child: const Column(
+            children: [
+              SiteTopBarView(),
+              Expanded(
+                child: LaunchpadView(),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -139,19 +146,6 @@ class LaunchpadView extends StatelessWidget {
   void _onLaunchTap(BuildContext context, GalleryItemData item) {
     context.read<MyFlutterGalleryCubit>().setSelectedAppById(item.id);
     context.navigateToGalleryItem(item.id);
-  }
-}
-
-class UnimplementedGalleryItemPage extends StatelessWidget {
-  const UnimplementedGalleryItemPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Unimplemented item'),
-      ),
-    );
   }
 }
 

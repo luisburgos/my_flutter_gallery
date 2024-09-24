@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_flutter_gallery/app/app_routes.dart';
 import 'package:my_flutter_gallery/utils/is_mobile.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SiteTopBarState extends InheritedWidget {
   const SiteTopBarState({
@@ -95,7 +96,7 @@ class SiteTopBarView extends StatelessWidget {
             iconData: FontAwesomeIcons.solidFolderOpen,
             text: 'FLUTTER GALLERY',
           ),
-          const SizedBox(width: 8),
+          /*const SizedBox(width: 8),
           SiteTopBarTabButton(
             onPressed: () => siteTopBarState.setIndex(
               2,
@@ -104,10 +105,12 @@ class SiteTopBarView extends StatelessWidget {
             isSelected: siteTopBarState.selectedIndex == 2,
             iconData: FontAwesomeIcons.user,
             text: 'ABOUT',
-          ),
+          ),*/
           const Spacer(),
-          const XTwitterButton(),
-          const GithubButton(),
+          //const XTwitterButton(),
+          const GithubButton(
+            url: 'https://github.com/luisburgos',
+          ),
         ],
       ),
     );
@@ -181,7 +184,12 @@ class XTwitterButton extends StatelessWidget {
 }
 
 class GithubButton extends StatelessWidget {
-  const GithubButton({super.key});
+  const GithubButton({
+    required this.url,
+    super.key,
+  });
+
+  final String url;
 
   @override
   Widget build(BuildContext context) {
@@ -191,8 +199,8 @@ class GithubButton extends StatelessWidget {
     );
   }
 
-  void _onPressed() {
-    // TODO(luisburgos): open github profile.
+  Future<void> _onPressed() async {
+    await launchUrl(Uri.parse(url));
   }
 }
 

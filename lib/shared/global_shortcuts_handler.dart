@@ -1,8 +1,34 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_flutter_gallery/app/app_routes.dart';
 
-class GlobalShortcutsHandler extends StatelessWidget {
-  const GlobalShortcutsHandler({
+class GlobalShortcutsState extends InheritedWidget {
+  const GlobalShortcutsState({
+    required this.shortcutsFocusNode,
+    required super.child,
+    super.key,
+  });
+
+  final FocusNode shortcutsFocusNode;
+
+  static GlobalShortcutsState of(BuildContext context) {
+    final state =
+        context.dependOnInheritedWidgetOfExactType<GlobalShortcutsState>();
+    if (state == null) {
+      throw Exception('GlobalShortcuts not found in the widget tree');
+    }
+    return state;
+  }
+
+  @override
+  bool updateShouldNotify(GlobalShortcutsState oldWidget) {
+    return oldWidget.shortcutsFocusNode.hasFocus != shortcutsFocusNode.hasFocus;
+  }
+}
+
+class GlobalShortcuts extends StatefulWidget {
+  const GlobalShortcuts({
     required this.child,
     super.key,
   });
@@ -10,32 +36,58 @@ class GlobalShortcutsHandler extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context) {
-    const firstKey = LogicalKeyboardKey.meta;
-    const secondKey = LogicalKeyboardKey.keyK;
+  State<GlobalShortcuts> createState() => _GlobalShortcutsState();
+}
 
-    return CallbackShortcuts(
-      bindings: <ShortcutActivator, VoidCallback>{
-        LogicalKeySet(
-          firstKey,
-          secondKey,
-        ): () {
-          // TODO(unassigned): change to command bar dialog
-          /*ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                'SHORTCUT: ${firstKey.debugName} + '
-                '${secondKey.debugName}',
-              ),
-              duration: const Duration(milliseconds: 900),
-            ),
-          );*/
-          //Navigator.of(context).pushNamed(AppRoutes.gallery);
-        },
+class _GlobalShortcutsState extends State<GlobalShortcuts> {
+  final _shortcutsFocusNode = FocusNode();
+
+  @override
+  Widget build(BuildContext context) {
+    final isMac = defaultTargetPlatform == TargetPlatform.macOS;
+    final isShortcutsSupported = isMac ||
+        defaultTargetPlatform == TargetPlatform.linux ||
+        defaultTargetPlatform == TargetPlatform.windows;
+
+    return Shortcuts(
+      shortcuts: {
+        SingleActivator(
+          LogicalKeyboardKey.keyG,
+          meta: isMac,
+          control: !isMac,
+        ): VoidCallbackIntent(
+          () async {
+            context.navigateToGallery();
+          },
+        ),
       },
-      child: Focus(
-        autofocus: true,
-        child: child,
+      child: Actions(
+        actions: {
+          VoidCallbackIntent: CallbackAction<VoidCallbackIntent>(
+            onInvoke: (intent) => intent.callback(),
+          ),
+        },
+        child: GlobalShortcutsState(
+          shortcutsFocusNode: _shortcutsFocusNode,
+          child: Builder(
+            builder: (_) {
+              final shortcutsFocusNode =
+                  GlobalShortcutsState.of(_).shortcutsFocusNode;
+
+              return Focus(
+                autofocus: isShortcutsSupported,
+                focusNode: shortcutsFocusNode,
+                child: GestureDetector(
+                  onTap: () => isShortcutsSupported &&
+                          shortcutsFocusNode.canRequestFocus
+                      ? FocusScope.of(context).requestFocus(shortcutsFocusNode)
+                      : FocusScope.of(context).unfocus(),
+                  child: widget.child,
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }
