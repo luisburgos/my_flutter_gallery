@@ -15,6 +15,7 @@ class OpenAiUiData extends GalleryItemData {
             FontAwesomeIcons.hand,
             size: 16,
           ),
+          description: 'TODO: Add description',
           pageBuilder: (_) => const OpenAiUiPage(),
         );
 }

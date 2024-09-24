@@ -20,6 +20,7 @@ class InstagramAppData extends GalleryItemData {
             FontAwesomeIcons.instagram,
             size: 16,
           ),
+          description: 'TODO: Add description',
           pageBuilder: (_) => const InstagramPage(),
         );
 }
@@ -34,6 +35,7 @@ class PerplexityAppData extends GalleryItemData {
             FontAwesomeIcons.microchip,
             size: 16,
           ),
+          description: 'TODO: Add description',
           pageBuilder: (_) => const PerplexityPage(),
         );
 }
@@ -48,6 +50,7 @@ class SupernotesAppData extends GalleryItemData {
             FontAwesomeIcons.noteSticky,
             size: 16,
           ),
+          description: 'TODO: Add description',
           pageBuilder: (_) => const SuperNotesPage(),
         );
 }
@@ -62,6 +65,7 @@ class BrancherAiAppData extends GalleryItemData {
             FontAwesomeIcons.wind,
             size: 16,
           ),
+          description: 'TODO: Add description',
           pageBuilder: (_) => const BrancherAiAppPage(),
         );
 }
@@ -76,6 +80,7 @@ class OpenGptChatUiAppData extends GalleryItemData {
             FontAwesomeIcons.message,
             size: 16,
           ),
+          description: 'TODO: Add description',
           pageBuilder: (_) => const OpenGptChatUiPage(),
         );
 }
@@ -90,6 +95,7 @@ class PopcornFlavorPickerData extends GalleryItemData {
             FontAwesomeIcons.film,
             size: 16,
           ),
+          description: 'TODO: Add description',
           pageBuilder: (_) => const PopcornFlavorPickerPage(),
         );
 }
@@ -104,6 +110,7 @@ class HabitsData extends GalleryItemData {
             FontAwesomeIcons.calendarWeek,
             size: 16,
           ),
+          description: 'TODO: Add description',
           pageBuilder: (_) => const HabitsPage(),
         );
 }

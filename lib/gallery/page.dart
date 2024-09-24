@@ -86,10 +86,11 @@ class LaunchpadView extends StatelessWidget {
     if (displayMode.isGrid) {
       if (betaGallery) {
         body = BetaGallery(
-            items: apps,
-            onItemTap: (item) {
-              _onLaunchTap(context, item);
-            });
+          items: apps,
+          onItemTap: (item) {
+            _onLaunchTap(context, item);
+          },
+        );
       } else {
         body = SimpleGrid<GalleryItemData>(
           items: apps,
@@ -189,6 +190,7 @@ class BetaGallery extends StatelessWidget {
                       maxCrossAxisExtent: 300,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
+                      //childAspectRatio: items.length * 1.2 / items.length,
                     ),
                     itemCount: items.length,
                     itemBuilder: (context, index) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_flutter_gallery/app/app_cubit.dart';
+import 'package:my_flutter_gallery/app/app_routes.dart';
 import 'package:my_flutter_gallery/app/ui_wrappers.dart';
 import 'package:my_flutter_gallery/utils/is_mobile.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -126,7 +127,7 @@ class LatestGalleryItemsView extends StatelessWidget {
             ),
             const Spacer(),
             ShadButton.link(
-              onPressed: () {},
+              onPressed: context.navigateToGallery,
               child: const Text('View all'),
             ),
           ],

@@ -16,6 +16,7 @@ class LLMSelectorAppData extends GalleryItemData {
             FontAwesomeIcons.clipboardList,
             size: 16,
           ),
+          description: 'TODO: Add description',
           pageBuilder: (_) => const LLMSelectorPage(),
         );
 }

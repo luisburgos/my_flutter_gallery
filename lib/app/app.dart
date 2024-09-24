@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_flutter_gallery/app/app_cubit.dart';
 import 'package:my_flutter_gallery/app/app_data.dart';
-import 'package:my_flutter_gallery/app/app_launchpad.dart';
 import 'package:my_flutter_gallery/app/app_routes.dart';
 import 'package:my_flutter_gallery/app/globals.dart';
 import 'package:my_flutter_gallery/clones/llm_model_selector/metadata.dart';
 import 'package:my_flutter_gallery/clones/open_ai_ui/metadata.dart';
 import 'package:my_flutter_gallery/clones/resonance/metadata.dart';
+import 'package:my_flutter_gallery/gallery/page.dart';
 import 'package:my_flutter_gallery/l10n/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 

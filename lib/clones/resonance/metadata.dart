@@ -16,6 +16,7 @@ class ResonanceAppData extends GalleryItemData {
             FontAwesomeIcons.arrowsSpin,
             size: 16,
           ),
+          description: 'TODO: Add description',
           pageBuilder: (_) => const ResonancePage(),
         );
 }

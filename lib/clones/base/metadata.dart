@@ -16,6 +16,7 @@ class MyAppData extends GalleryItemData {
             FontAwesomeIcons.clone,
             size: 16,
           ),
+          description: 'TODO: Add description',
           pageBuilder: (_) => const MyPage(),
         );
 }

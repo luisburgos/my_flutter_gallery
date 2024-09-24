@@ -10,6 +10,8 @@ enum BetaGalleryItemMode {
   full;
 }
 
+const itemCardWidth = 350.0;
+
 class BetaGalleryItem extends StatelessWidget {
   const BetaGalleryItem({
     required this.item,
@@ -42,7 +44,8 @@ class BetaGalleryItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (displayCover)
-                  const ItemCover(
+                  ItemCover(
+                    icon: item.iconData,
                     mode: ItemCoverMode.square,
                   )
                 else
@@ -59,7 +62,7 @@ class BetaGalleryItem extends StatelessWidget {
                         ),
                         WrapperText(
                           'Lorem description this is a lorem description '
-                          'with truncate enabled for longer descriptions as'
+                          'with truncate enabled for longer descriptions as '
                           'this one in the example',
                           fontSize: 12,
                           maxLines: 2,
@@ -78,18 +81,33 @@ class BetaGalleryItem extends StatelessWidget {
       return Container(
         margin: margin,
         child: ShadCard(
-          width: 350,
-          footer: WrapperPlayIconButton(
+          padding: EdgeInsets.zero,
+          width: itemCardWidth,
+          /*footer: WrapperPlayIconButton(
             onPressed: () => onItemTap(item),
-          ),
+          ),*/
           title: displayCover
-              ? const ItemCover(
-                  mode: ItemCoverMode.square,
+              ? ItemCover(
+                  icon: item.iconData,
                 )
               : const SizedBox.shrink(),
-          child: WrapperText(
-            item.name,
-            fontSize: 16,
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                WrapperText(
+                  item.name,
+                  fontSize: 16,
+                ),
+                WrapperText(
+                  item.description,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w300,
+                  color: subtitleColor,
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -106,7 +124,10 @@ class BetaGalleryItem extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (displayCover) const ItemCover(),
+                if (displayCover)
+                  ItemCover(
+                    icon: item.iconData,
+                  ),
                 Padding(
                   padding: const EdgeInsets.all(12),
                   child: WrapperText(
@@ -143,11 +164,13 @@ enum ItemCoverMode {
 
 class ItemCover extends StatelessWidget {
   const ItemCover({
+    required this.icon,
     this.mode = ItemCoverMode.rectangle,
     super.key,
   });
 
   final ItemCoverMode mode;
+  final Icon icon;
 
   @override
   Widget build(BuildContext context) {
@@ -155,19 +178,26 @@ class ItemCover extends StatelessWidget {
     final iconColor = ShadTheme.of(context).colorScheme.primary;
 
     final isSquareMode = mode == ItemCoverMode.square;
-    final height = isSquareMode ? 100.0 : 200.0;
-    final width = isSquareMode ? 100.0 : double.infinity;
+    final height = isSquareMode ? 100.0 : 120.0;
+    final width = isSquareMode ? 100.0 : itemCardWidth;
+
+    final borderRadius = isSquareMode
+        ? BorderRadius.circular(8)
+        : const BorderRadius.only(
+            topLeft: Radius.circular(8),
+            topRight: Radius.circular(8),
+          );
 
     return Container(
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: borderRadius,
       ),
       height: height,
       width: width,
       child: Center(
         child: Icon(
-          Icons.terminal,
+          icon.icon,
           color: iconColor,
           size: 24,
         ),

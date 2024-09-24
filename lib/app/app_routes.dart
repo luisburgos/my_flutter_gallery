@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_flutter_gallery/app/app.dart';
-import 'package:my_flutter_gallery/app/app_launchpad.dart';
-import 'package:my_flutter_gallery/home/home_page.dart';
+import 'package:my_flutter_gallery/gallery/page.dart';
+import 'package:my_flutter_gallery/home/page.dart';
 
 class AppRoutes {
   static const root = '/';
