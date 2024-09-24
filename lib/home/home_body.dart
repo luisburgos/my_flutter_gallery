@@ -26,7 +26,7 @@ class HomeBody extends StatelessWidget {
       Expanded(
         child: Center(
           child: Container(
-            //color: Colors.red,
+            color: Colors.red,
             constraints: const BoxConstraints(maxWidth: 400),
             child: const LatestGalleryItemsView(),
           ),
@@ -119,14 +119,18 @@ class LatestGalleryItemsView extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              'LATEST BITS',
-              style: TextStyle(
-                fontWeight: FontWeight.w800,
+            const Padding(
+              padding: EdgeInsets.only(left: 4),
+              child: Text(
+                'LATEST BITS',
+                style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                ),
               ),
             ),
             const Spacer(),
             ShadButton.link(
+              padding: EdgeInsets.zero,
               onPressed: context.navigateToGallery,
               child: const Text('View all'),
             ),
