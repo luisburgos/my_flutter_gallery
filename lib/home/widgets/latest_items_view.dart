@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_flutter_gallery/app/app_commands.dart';
 import 'package:my_flutter_gallery/app/app_cubit.dart';
 import 'package:my_flutter_gallery/app/app_routes.dart';
-import 'package:my_flutter_gallery/app/ui_wrappers.dart';
+import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_card.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class LatestItemsView extends StatelessWidget {
@@ -43,18 +43,18 @@ class LatestItemsView extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 4),
-        BetaGalleryItem(
+        GalleryItemCard(
           margin: EdgeInsets.zero,
           item: apps[0],
           onItemTap: (_) => context.navigateToGalleryItem(_.id),
-          mode: BetaGalleryItemMode.preview,
+          mode: GalleryItemCardMode.square,
         ),
         const SizedBox(height: 14),
-        BetaGalleryItem(
+        GalleryItemCard(
           margin: EdgeInsets.zero,
           item: apps[1],
           onItemTap: (_) => context.navigateToGalleryItem(_.id),
-          mode: BetaGalleryItemMode.preview,
+          mode: GalleryItemCardMode.square,
         ),
         const SizedBox(height: 40),
       ],
