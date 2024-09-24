@@ -14,6 +14,8 @@ class LatestItemsView extends StatelessWidget {
     final state = context.watch<MyFlutterGalleryCubit>().state;
     final apps = state.items;
 
+    final subtitleColor = ShadTheme.of(context).colorScheme.mutedForeground;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -24,18 +26,23 @@ class LatestItemsView extends StatelessWidget {
             const Text(
               'LATEST BITS',
               style: TextStyle(
-                fontWeight: FontWeight.w800,
+                fontWeight: FontWeight.bold,
               ),
             ),
             const Spacer(),
             ShadButton.link(
               padding: EdgeInsets.zero,
               onPressed: () => selectGalleryPage(context),
-              child: const Text('View all'),
+              child: Text(
+                'VIEW ALL',
+                style: TextStyle(
+                  color: subtitleColor.withOpacity(0.6),
+                ),
+              ),
             ),
           ],
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 4),
         BetaGalleryItem(
           margin: EdgeInsets.zero,
           item: apps[0],
@@ -49,7 +56,7 @@ class LatestItemsView extends StatelessWidget {
           onItemTap: (_) => context.navigateToGalleryItem(_.id),
           mode: BetaGalleryItemMode.preview,
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 40),
       ],
     );
   }

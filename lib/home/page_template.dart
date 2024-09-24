@@ -37,27 +37,20 @@ class HomePageTemplate extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 8,
+          horizontal: 10,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Flexible(
               child: Center(
-                child: Container(
-                  constraints: const BoxConstraints(minWidth: 380),
-                  child: summary,
-                ),
+                child: summary,
               ),
             ),
             const SizedBox(width: 20),
             Flexible(
               child: Center(
-                child: Container(
-                  constraints: const BoxConstraints(minWidth: 380),
-                  child: latestItems,
-                ),
+                child: latestItems,
               ),
             ),
           ],
