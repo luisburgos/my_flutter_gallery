@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_flutter_gallery/app/app_cubit.dart';
-import 'package:my_flutter_gallery/shared/global_shortcuts_handler.dart';
 
 class GalleryItemHomePage extends StatelessWidget {
   const GalleryItemHomePage({super.key});
@@ -11,9 +10,7 @@ class GalleryItemHomePage extends StatelessWidget {
     final state = context.watch<MyFlutterGalleryCubit>().state;
     final selectedItem = state.selectedItem;
     if (selectedItem != null) {
-      return GlobalShortcuts(
-        child: selectedItem.pageBuilder(context),
-      );
+      return selectedItem.pageBuilder(context);
     }
     return const UnimplementedGalleryItemPage();
   }

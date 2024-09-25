@@ -4,9 +4,7 @@ import 'package:my_flutter_gallery/app/app_cubit.dart';
 import 'package:my_flutter_gallery/app/app_data.dart';
 import 'package:my_flutter_gallery/app/app_routes.dart';
 import 'package:my_flutter_gallery/app/globals.dart';
-import 'package:my_flutter_gallery/clones/llm_model_selector/metadata.dart';
 import 'package:my_flutter_gallery/clones/open_ai_ui/metadata.dart';
-import 'package:my_flutter_gallery/clones/resonance/metadata.dart';
 import 'package:my_flutter_gallery/components/site_top_bar/site_top_bar.dart';
 import 'package:my_flutter_gallery/l10n/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -24,15 +22,16 @@ class App extends StatelessWidget {
               MyFlutterGalleryData(
                 selectedItem: OpenAiUiData(),
                 items: [
-                  InstagramAppData(),
-                  PerplexityAppData(),
-                  SupernotesAppData(),
+                  //InstagramAppData(),
+                  //PerplexityAppData(),
+                  //SupernotesAppData(),
                   BrancherAiAppData(),
-                  OpenGptChatUiAppData(),
+                  //OpenGptChatUiAppData(),
                   PopcornFlavorPickerData(),
                   HabitsData(),
-                  ResonanceAppData(),
-                  LLMSelectorAppData(),
+                  ReadwiseDailyReview(),
+                  //ResonanceAppData(),
+                  //LLMSelectorAppData(),
                   OpenAiUiData(),
                 ],
               ),

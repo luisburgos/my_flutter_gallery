@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_flutter_gallery/app/app_routes.dart';
+import 'package:my_flutter_gallery/app/app_commands.dart';
 
 class GlobalShortcutsState extends InheritedWidget {
   const GlobalShortcutsState({
@@ -52,13 +52,11 @@ class _GlobalShortcutsState extends State<GlobalShortcuts> {
     return Shortcuts(
       shortcuts: {
         SingleActivator(
-          LogicalKeyboardKey.keyG,
+          LogicalKeyboardKey.keyK,
           meta: isMac,
           control: !isMac,
         ): VoidCallbackIntent(
-          () async {
-            context.navigateToGallery();
-          },
+          () => selectGalleryPage(context),
         ),
       },
       child: Actions(

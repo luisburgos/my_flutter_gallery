@@ -9,6 +9,7 @@ import 'package:my_flutter_gallery/clones/perplexity/perplexity_app_page.dart';
 import 'package:my_flutter_gallery/clones/popcorn_flavor_picker/popcorn_flavor_picker_page.dart';
 import 'package:my_flutter_gallery/clones/supernotes/supernotes_app_page.dart';
 import 'package:my_flutter_gallery/shared/colors_extended.dart';
+import 'package:readwise_daily_review/readwise_daily_review.dart';
 
 const gLoremDescription = 'TODO: Add description lorem ipsum description '
     'lorem ipsum description '
@@ -116,5 +117,20 @@ class HabitsData extends GalleryItemData {
           ),
           description: gLoremDescription,
           pageBuilder: (_) => const HabitsPage(),
+        );
+}
+
+class ReadwiseDailyReview extends GalleryItemData {
+  ReadwiseDailyReview()
+      : super(
+          id: 'READ-00',
+          name: 'Readwise Daily Review',
+          seedColor: Colors.blueGrey,
+          iconData: const Icon(
+            FontAwesomeIcons.readme,
+            size: 16,
+          ),
+          description: gLoremDescription,
+          pageBuilder: (_) => const ReadwiseDailyReviewPage(),
         );
 }

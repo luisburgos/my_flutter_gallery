@@ -4,6 +4,7 @@ import 'package:my_flutter_gallery/about/page.dart';
 import 'package:my_flutter_gallery/gallery/item/page.dart';
 import 'package:my_flutter_gallery/gallery/page.dart';
 import 'package:my_flutter_gallery/home/page.dart';
+import 'package:my_flutter_gallery/shared/global_shortcuts_handler.dart';
 
 class AppRoutes {
   static const root = '/';
@@ -16,7 +17,9 @@ final defaultAppRouter = GoRouter(
   routes: [
     GoRoute(
       path: AppRoutes.root,
-      builder: (_, __) => const HomePage(),
+      builder: (_, __) => const GlobalShortcuts(
+        child: HomePage(),
+      ),
     ),
     GoRoute(
       path: AppRoutes.gallery,
@@ -24,7 +27,9 @@ final defaultAppRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.galleryItem,
-      builder: (_, __) => const GalleryItemHomePage(),
+      builder: (_, __) => const GlobalShortcuts(
+        child: GalleryItemHomePage(),
+      ),
     ),
     GoRoute(
       path: AppRoutes.about,

@@ -533,6 +533,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.2"
+  readwise_daily_review:
+    dependency: "direct main"
+    description:
+      path: "packages/readwise_daily_review"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   shadcn_ui:
     dependency: "direct main"
     description:
