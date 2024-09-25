@@ -89,7 +89,7 @@ class _DashboardPageViewState extends State<DashboardPageView> {
         );
 
         final theme = Theme.of(context);
-        final backgroundColor = theme.colorScheme.background;
+        final backgroundColor = theme.colorScheme.surface;
         if (forceMobileDisplay) {
           return Column(
             children: [

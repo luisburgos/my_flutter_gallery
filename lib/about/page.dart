@@ -48,7 +48,7 @@ class _DeliveryProcesses extends StatelessWidget {
         fontSize: 12.5,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20),
         child: FixedTimeline.tileBuilder(
           theme: TimelineThemeData(
             nodePosition: 0,
@@ -66,7 +66,7 @@ class _DeliveryProcesses extends StatelessWidget {
             itemCount: processes.length,
             contentsBuilder: (_, index) {
               return Padding(
-                padding: const EdgeInsets.only(left: 8.0),
+                padding: const EdgeInsets.only(left: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,

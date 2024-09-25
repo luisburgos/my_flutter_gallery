@@ -33,7 +33,7 @@ class GalleryItemsGrid extends StatelessWidget {
               mode: crossAxisCount == 1
                   ? GalleryItemCardMode.square
                   : GalleryItemCardMode.rectangle,
-            )
+            ),
         ],
       ),
     );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'dialogs.dart';
+import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/dialogs/dialogs.dart';
 
 class ExcalidrawCommandsPalette extends StatelessWidget {
   const ExcalidrawCommandsPalette({super.key});
@@ -18,7 +17,7 @@ class ExcalidrawCommandsPalette extends StatelessWidget {
             const _SearchBar(),
             const _QuickActions(),
             Expanded(
-              /// TODO(luisburgos): add onTap command callback handler
+              // TODO(luisburgos): add onTap command callback handler
               child: _CommandsList(
                 items: [
                   _CommandGroupModel(
@@ -92,7 +91,7 @@ class ExcalidrawCommandsPalette extends StatelessWidget {
 }
 
 class _SearchBar extends StatefulWidget {
-  const _SearchBar({super.key});
+  const _SearchBar();
 
   @override
   State<_SearchBar> createState() => _SearchBarState();
@@ -104,7 +103,7 @@ class _SearchBarState extends State<_SearchBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16),
       child: TextField(
         controller: _controller,
         decoration: const InputDecoration(
@@ -135,7 +134,7 @@ class _SearchBarState extends State<_SearchBar> {
   }
 }
 
-/// TODO(luisburgos): make actions work and improve design
+// TODO(luisburgos): make actions work and improve design
 class _QuickActions extends StatelessWidget {
   const _QuickActions();
 
@@ -238,7 +237,7 @@ class _CommandListTileModel {
   final List<String> keys;
 }
 
-/// TODO(luisburgos): add onTap callback
+// TODO(luisburgos): add onTap callback
 class _CommandListTile extends StatelessWidget {
   const _CommandListTile({required this.data});
 

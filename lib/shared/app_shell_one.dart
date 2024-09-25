@@ -89,7 +89,7 @@ class _AppShell1State extends State<AppShell1> {
         );
 
         final theme = Theme.of(context);
-        final backgroundColor = theme.colorScheme.background;
+        final backgroundColor = theme.colorScheme.surface;
         if (forceMobileDisplay) {
           return Column(
             children: [
