@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter_gallery/clones/open_gpt_chat_ui/dialogs/dialogs.dart';
+import 'package:my_flutter_gallery/legacy/clones/open_gpt_chat_ui/dialogs/dialogs.dart';
 
 class CustomDropDown extends StatefulWidget {
   const CustomDropDown({

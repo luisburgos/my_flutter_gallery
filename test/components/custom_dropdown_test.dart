@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart' hide When;
-import 'package:my_flutter_gallery/clones/llm_model_selector/cubit.dart';
-import 'package:my_flutter_gallery/clones/llm_model_selector/data_model.dart';
-import 'package:my_flutter_gallery/clones/llm_model_selector/service.dart';
-import 'package:my_flutter_gallery/clones/llm_model_selector/view.dart';
 import 'package:my_flutter_gallery/components/custom_dropwdown.dart';
+import 'package:my_flutter_gallery/legacy/clones/llm_model_selector/cubit.dart';
+import 'package:my_flutter_gallery/legacy/clones/llm_model_selector/data_model.dart';
+import 'package:my_flutter_gallery/legacy/clones/llm_model_selector/service.dart';
+import 'package:my_flutter_gallery/legacy/clones/llm_model_selector/view.dart';
 
 import '../helpers/helpers.dart';
 

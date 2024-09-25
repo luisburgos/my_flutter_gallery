@@ -72,8 +72,8 @@ class _UserReviews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final children = <Widget>[];
-    for (final _ in highlights) {
-      final index = highlights.indexOf(_);
+    for (final h in highlights) {
+      final index = highlights.indexOf(h);
       final review = userReviews[index];
       final reviewResult = review != null
           ? review == true
@@ -94,7 +94,7 @@ class _UserReviews extends StatelessWidget {
       child: Column(
         children: [
           const Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8),
             child: Text('Your choices to keep or discard highligts'),
           ),
           Card(
