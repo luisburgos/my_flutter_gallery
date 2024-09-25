@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// @no-doc
 class SplitOptionIconButton extends StatelessWidget {
+  /// @no-doc
   const SplitOptionIconButton({
     required this.strategyId,
     required this.strategyCoverColor,
@@ -9,9 +11,16 @@ class SplitOptionIconButton extends StatelessWidget {
     super.key,
   });
 
+  /// @no-doc
   final String strategyId;
+
+  /// @no-doc
   final Color strategyCoverColor;
+
+  /// @no-doc
   final bool isActive;
+
+  /// @no-doc
   final void Function() onTabPressed;
 
   @override

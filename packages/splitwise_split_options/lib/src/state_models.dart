@@ -57,7 +57,7 @@ class SplitByPercentagesResolver
   const SplitByPercentagesResolver();
 
   @override
-  resolve(double amount) {
+  Map<String, double> resolve(double amount) {
     throw UnimplementedError();
   }
 }
