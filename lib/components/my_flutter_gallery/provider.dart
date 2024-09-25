@@ -25,6 +25,7 @@ class _MyFlutterGalleryState extends State<MyFlutterGallery> {
     PopcornFlavorPickerData(),
     HabitsData(),
     ReadwiseDailyReview(),
+    SplitwiseSplitOptions(),
     //ResonanceAppData(),
     //LLMSelectorAppData(),
     //OpenAiUiData(),

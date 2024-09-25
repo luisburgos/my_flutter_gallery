@@ -10,6 +10,7 @@ import 'package:my_flutter_gallery/legacy/clones/popcorn_flavor_picker/popcorn_f
 import 'package:my_flutter_gallery/legacy/clones/supernotes/supernotes_app_page.dart';
 import 'package:my_flutter_gallery/shared/colors_extended.dart';
 import 'package:readwise_daily_review/readwise_daily_review.dart';
+import 'package:splitwise_split_options/splitwise_split_options.dart';
 
 const gLoremDescription = 'TODO: Add description lorem ipsum description '
     'lorem ipsum description '
@@ -132,5 +133,20 @@ class ReadwiseDailyReview extends GalleryItemData {
           ),
           description: gLoremDescription,
           pageBuilder: (_) => const ReadwiseDailyReviewPage(),
+        );
+}
+
+class SplitwiseSplitOptions extends GalleryItemData {
+  SplitwiseSplitOptions()
+      : super(
+          id: 'SWSP-00',
+          name: 'Splitwise Split Options',
+          seedColor: Colors.greenAccent,
+          iconData: const Icon(
+            FontAwesomeIcons.arrowsSplitUpAndLeft,
+            size: 16,
+          ),
+          description: gLoremDescription,
+          pageBuilder: (_) => const SplitOptionsPage(),
         );
 }
