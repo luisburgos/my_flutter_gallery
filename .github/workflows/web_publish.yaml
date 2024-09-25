@@ -26,3 +26,4 @@ jobs:
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
           baseHref: /luisburgos/
+          customArgs: '--target lib/main_production.dart'
