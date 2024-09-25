@@ -14,19 +14,34 @@ class SiteTopBar extends StatefulWidget {
 }
 
 class _SiteTopBarState extends State<SiteTopBar> {
-  int selectedIndex = 0;
+  int _selectedIndex = 0;
 
   void _setIndex(int index, VoidCallback onChanged) {
     setState(() {
-      selectedIndex = index;
+      _selectedIndex = index;
       onChanged.call();
     });
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final currentRoute = ModalRoute.of(context)?.settings.name ?? '';
+
+    switch (currentRoute) {
+      case '/':
+        _selectedIndex = 0;
+      case '/gallery':
+        _selectedIndex = 1;
+      case '/about':
+        _selectedIndex = 2;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SiteTopBarState(
-      selectedIndex: selectedIndex,
+      selectedIndex: _selectedIndex,
       setIndex: _setIndex,
       child: widget.child,
     );
