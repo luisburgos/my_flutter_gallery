@@ -123,7 +123,7 @@ class HabitsData extends GalleryItemData {
 class ReadwiseDailyReview extends GalleryItemData {
   ReadwiseDailyReview()
       : super(
-          id: 'READ-00',
+          id: 'RWDR-00',
           name: 'Readwise Daily Review',
           seedColor: Colors.blueGrey,
           iconData: const Icon(

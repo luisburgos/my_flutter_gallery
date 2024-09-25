@@ -27,9 +27,15 @@ final defaultAppRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.galleryItem,
-      builder: (_, __) => const GlobalShortcuts(
-        child: GalleryItemHomePage(),
-      ),
+      builder: (_, __) {
+        final itemId = __.pathParameters['id'];
+
+        return GlobalShortcuts(
+          child: GalleryItemHomePage(
+            itemId: itemId,
+          ),
+        );
+      },
     ),
     GoRoute(
       path: AppRoutes.about,

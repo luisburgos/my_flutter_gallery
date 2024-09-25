@@ -22,7 +22,7 @@ class GalleryView extends StatelessWidget {
   }
 
   void _onLaunchTap(BuildContext context, GalleryItemData item) {
-    context.read<MyFlutterGalleryCubit>().setSelectedAppById(item.id);
+    //context.read<MyFlutterGalleryCubit>().setSelectedAppById(item.id);
     context.navigateToGalleryItem(item.id);
   }
 }

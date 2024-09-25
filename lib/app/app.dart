@@ -20,7 +20,7 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (_) => MyFlutterGalleryCubit(
               MyFlutterGalleryData(
-                selectedItem: OpenAiUiData(),
+                //selectedItem: OpenAiUiData(),
                 items: [
                   //InstagramAppData(),
                   //PerplexityAppData(),
