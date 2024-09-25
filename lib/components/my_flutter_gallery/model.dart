@@ -17,19 +17,3 @@ class GalleryItemData {
   final Icon iconData;
   final Widget Function(BuildContext context) pageBuilder;
 }
-
-class MyFlutterGalleryData {
-  const MyFlutterGalleryData({
-    this.items = const [],
-  });
-
-  final List<GalleryItemData> items;
-
-  MyFlutterGalleryData copyWith({
-    List<GalleryItemData>? items,
-  }) {
-    return MyFlutterGalleryData(
-      items: items ?? this.items,
-    );
-  }
-}

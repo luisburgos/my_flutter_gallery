@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_flutter_gallery/app/app_cubit.dart';
+import 'package:my_flutter_gallery/components/my_flutter_gallery/state.dart';
 
 class GalleryItemHomePage extends StatelessWidget {
   const GalleryItemHomePage({
@@ -12,7 +11,7 @@ class GalleryItemHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<MyFlutterGalleryCubit>().state;
+    final state = MyFlutterGalleryState.of(context);
     final find = state.items.where((app) => app.id == itemId).firstOrNull;
     if (find != null) {
       return find.pageBuilder(context);

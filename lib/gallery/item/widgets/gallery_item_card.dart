@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter_gallery/app/app_data.dart';
+import 'package:my_flutter_gallery/components/my_flutter_gallery/model.dart';
 import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_brief.dart';
 import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_cover.dart';
 import 'package:my_flutter_gallery/utils/ui_wrappers.dart';
