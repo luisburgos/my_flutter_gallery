@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -44,7 +45,11 @@ class GalleryItemRunnerPage extends StatelessWidget {
     final state = GalleryItemsState.of(context);
     final find = state.items.where((app) => app.id == itemId).firstOrNull;
     if (find != null) {
-      return find.pageBuilder(context);
+      return DevicePreview(
+        builder: (_) => SafeArea(
+          child: find.pageBuilder(_),
+        ),
+      );
     }
     return const UnimplementedGalleryItemPage();
   }

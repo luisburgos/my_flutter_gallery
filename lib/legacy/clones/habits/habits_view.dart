@@ -23,6 +23,10 @@ class _HabitsViewState extends State<HabitsView> {
     final cubit = context.watch<HabitsCubit>();
     final state = cubit.state;
 
+    if (state.weeks.isEmpty) {
+      return const CircularProgressIndicator();
+    }
+
     return Row(
       children: [
         const Expanded(
