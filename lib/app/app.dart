@@ -27,6 +27,7 @@ class MyFlutterGalleryApp extends StatelessWidget {
     //final selectedApp = state.selectedItem;
 
     const colorSchemeName = 'stone';
+
     return ShadApp.router(
       routerConfig: defaultAppRouter,
       debugShowCheckedModeBanner: false,
@@ -34,6 +35,7 @@ class MyFlutterGalleryApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       themeMode: ThemeMode.light,
       darkTheme: ShadThemeData(
+        breakpoints: _getBreakpoints(),
         brightness: Brightness.dark,
         colorScheme: ShadColorScheme.fromName(
           colorSchemeName,
@@ -41,11 +43,19 @@ class MyFlutterGalleryApp extends StatelessWidget {
         ),
       ),
       theme: ShadThemeData(
+        breakpoints: _getBreakpoints(),
         brightness: Brightness.light,
         colorScheme: ShadColorScheme.fromName(
           colorSchemeName,
         ),
       ),
+    );
+  }
+
+  ShadBreakpoints _getBreakpoints() {
+    return ShadBreakpoints(
+      sm: 480,
+      md: 640,
     );
   }
 }
