@@ -98,6 +98,7 @@ class GalleryItemDetailPage extends StatelessWidget {
                         icon: app.iconData,
                         mode: GalleryItemCoverMode.square,
                         sizeMultiplier: 3,
+                        iconColor: app.seedColor,
                       ),
                       const SizedBox(width: 12),
                       Expanded(

@@ -14,17 +14,19 @@ class GalleryItemCover extends StatelessWidget {
     required this.icon,
     this.mode = GalleryItemCoverMode.rectangle,
     this.sizeMultiplier = 1,
+    this.iconColor,
     super.key,
   });
 
   final GalleryItemCoverMode mode;
   final Icon icon;
   final double sizeMultiplier;
+  final Color? iconColor;
 
   @override
   Widget build(BuildContext context) {
-    final color = ShadTheme.of(context).colorScheme.secondary;
-    final iconColor = ShadTheme.of(context).colorScheme.primary;
+    final color = ShadTheme.of(context).colorScheme.secondary.withOpacity(0.5);
+    final defaultIconColor = ShadTheme.of(context).colorScheme.primary;
 
     final isSquareMode = mode.isSquare;
     final height =
@@ -50,7 +52,7 @@ class GalleryItemCover extends StatelessWidget {
       child: Center(
         child: Icon(
           icon.icon,
-          color: iconColor,
+          color: iconColor?.withOpacity(0.9) ?? defaultIconColor,
           size: 24,
         ),
       ),

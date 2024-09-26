@@ -74,6 +74,7 @@ class GalleryItemCardSquareMode extends StatelessWidget {
           GalleryItemCover(
             icon: item.iconData,
             mode: GalleryItemCoverMode.square,
+            iconColor: item.seedColor,
           ),
           Expanded(
             child: GalleryItemBrief(
@@ -106,6 +107,7 @@ class GalleryItemCardRectangleMode extends StatelessWidget {
         children: [
           GalleryItemCover(
             icon: item.iconData,
+            iconColor: item.seedColor,
           ),
           GalleryItemBrief(
             name: item.name,
