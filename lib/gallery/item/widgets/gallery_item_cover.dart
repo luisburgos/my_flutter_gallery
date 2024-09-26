@@ -52,7 +52,7 @@ class GalleryItemCover extends StatelessWidget {
       child: Center(
         child: Icon(
           icon.icon,
-          color: iconColor?.withOpacity(0.9) ?? defaultIconColor,
+          color: iconColor ?? defaultIconColor,
           size: 24,
         ),
       ),

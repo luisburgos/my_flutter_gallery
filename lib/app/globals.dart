@@ -111,7 +111,7 @@ class HabitsData extends GalleryItemData {
       : super(
           id: 'HABI-00',
           name: 'Habits',
-          seedColor: Colors.lightGreenAccent,
+          seedColor: Colors.orange,
           iconData: const Icon(
             FontAwesomeIcons.calendarWeek,
             size: 16,
