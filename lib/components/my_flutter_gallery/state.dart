@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_gallery/components/my_flutter_gallery/model.dart';
 
-class MyFlutterGalleryState extends InheritedWidget {
-  const MyFlutterGalleryState({
+class GalleryItemsState extends InheritedWidget {
+  const GalleryItemsState({
     required this.items,
     required super.child,
     super.key,
@@ -10,9 +10,9 @@ class MyFlutterGalleryState extends InheritedWidget {
 
   final List<GalleryItemData> items;
 
-  static MyFlutterGalleryState of(BuildContext context) {
+  static GalleryItemsState of(BuildContext context) {
     final state =
-        context.dependOnInheritedWidgetOfExactType<MyFlutterGalleryState>();
+        context.dependOnInheritedWidgetOfExactType<GalleryItemsState>();
     if (state == null) {
       throw Exception('MyFlutterGallery not found in the widget tree');
     }
@@ -20,7 +20,7 @@ class MyFlutterGalleryState extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(MyFlutterGalleryState oldWidget) {
+  bool updateShouldNotify(GalleryItemsState oldWidget) {
     return oldWidget.items != items;
   }
 }

@@ -10,7 +10,7 @@ class LatestItemsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = MyFlutterGalleryState.of(context);
+    final state = GalleryItemsState.of(context);
     final apps = state.items;
 
     final subtitleColor = ShadTheme.of(context).colorScheme.mutedForeground;

@@ -8,7 +8,7 @@ class GalleryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = MyFlutterGalleryState.of(context);
+    final state = GalleryItemsState.of(context);
     final apps = state.items;
 
     return GalleryItemsGrid(

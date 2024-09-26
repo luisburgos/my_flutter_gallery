@@ -11,7 +11,7 @@ class GalleryItemHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = MyFlutterGalleryState.of(context);
+    final state = GalleryItemsState.of(context);
     final find = state.items.where((app) => app.id == itemId).firstOrNull;
     if (find != null) {
       return find.pageBuilder(context);

@@ -33,7 +33,7 @@ class _MyFlutterGalleryState extends State<MyFlutterGallery> {
 
   @override
   Widget build(BuildContext context) {
-    return MyFlutterGalleryState(
+    return GalleryItemsState(
       items: _items,
       child: widget.child,
     );
