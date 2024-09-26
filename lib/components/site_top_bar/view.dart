@@ -12,6 +12,67 @@ class DefaultSiteTopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final siteTopBarState = SiteTopBarState.of(context);
 
+    return SiteTopBarContainer(
+      children: [
+        SiteTopBarTabButton(
+          onPressed: () => siteTopBarState.setIndex(
+            0,
+            context.navigateToHome,
+          ),
+          isSelected: siteTopBarState.selectedIndex == 0,
+          iconData: FontAwesomeIcons.house,
+          text: 'HOME',
+        ),
+        const SizedBox(width: 8),
+        SiteTopBarTabButton(
+          onPressed: () => selectGalleryPage(context),
+          isSelected: siteTopBarState.selectedIndex == 1,
+          iconData: FontAwesomeIcons.folderOpen,
+          text: 'FLUTTER GALLERY',
+        ),
+        /*const SizedBox(width: 8),
+        SiteTopBarTabButton(
+          onPressed: () => siteTopBarState.setIndex(
+            2,
+            context.navigateToAbout,
+          ),
+          isSelected: siteTopBarState.selectedIndex == 2,
+          iconData: FontAwesomeIcons.user,
+          text: 'ABOUT',
+        ),*/
+        const Spacer(),
+        const SocialButtons(),
+      ],
+    );
+  }
+}
+
+class SocialButtons extends StatelessWidget {
+  const SocialButtons({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      children: [
+        //const XTwitterButton(),
+        GithubButton(
+          url: 'https://github.com/luisburgos',
+        ),
+      ],
+    );
+  }
+}
+
+class SiteTopBarContainer extends StatelessWidget {
+  const SiteTopBarContainer({
+    required this.children,
+    super.key,
+  });
+
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(
@@ -19,39 +80,7 @@ class DefaultSiteTopBar extends StatelessWidget {
         horizontal: 4,
       ),
       child: Row(
-        children: [
-          SiteTopBarTabButton(
-            onPressed: () => siteTopBarState.setIndex(
-              0,
-              context.navigateToHome,
-            ),
-            isSelected: siteTopBarState.selectedIndex == 0,
-            iconData: FontAwesomeIcons.house,
-            text: 'HOME',
-          ),
-          const SizedBox(width: 8),
-          SiteTopBarTabButton(
-            onPressed: () => selectGalleryPage(context),
-            isSelected: siteTopBarState.selectedIndex == 1,
-            iconData: FontAwesomeIcons.folderOpen,
-            text: 'FLUTTER GALLERY',
-          ),
-          /*const SizedBox(width: 8),
-          SiteTopBarTabButton(
-            onPressed: () => siteTopBarState.setIndex(
-              2,
-              context.navigateToAbout,
-            ),
-            isSelected: siteTopBarState.selectedIndex == 2,
-            iconData: FontAwesomeIcons.user,
-            text: 'ABOUT',
-          ),*/
-          const Spacer(),
-          //const XTwitterButton(),
-          const GithubButton(
-            url: 'https://github.com/luisburgos',
-          ),
-        ],
+        children: children,
       ),
     );
   }

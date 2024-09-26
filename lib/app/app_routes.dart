@@ -10,6 +10,7 @@ class AppRoutes {
   static const root = '/';
   static const gallery = '/gallery';
   static const about = '/about';
+  static const run = '/run/:id';
   static const galleryItem = '/gallery/:id';
 }
 
@@ -41,6 +42,18 @@ final defaultAppRouter = GoRouter(
       path: AppRoutes.about,
       builder: (_, __) => const AboutPage(),
     ),
+    GoRoute(
+      path: AppRoutes.run,
+      builder: (_, __) {
+        final itemId = __.pathParameters['id'];
+
+        return GlobalShortcuts(
+          child: GalleryItemRunnerPage(
+            itemId: itemId,
+          ),
+        );
+      },
+    ),
   ],
 );
 
@@ -60,6 +73,12 @@ extension BuildContextNavigationMethods<T> on BuildContext {
   void navigateToGalleryItem(String itemId) {
     go(
       AppRoutes.galleryItem.replaceAll(':id', itemId),
+    );
+  }
+
+  void navigateToItemRunMode(String itemId) {
+    go(
+      AppRoutes.run.replaceAll(':id', itemId),
     );
   }
 }

@@ -13,11 +13,13 @@ class GalleryItemCover extends StatelessWidget {
   const GalleryItemCover({
     required this.icon,
     this.mode = GalleryItemCoverMode.rectangle,
+    this.sizeMultiplier = 1,
     super.key,
   });
 
   final GalleryItemCoverMode mode;
   final Icon icon;
+  final double sizeMultiplier;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +27,11 @@ class GalleryItemCover extends StatelessWidget {
     final iconColor = ShadTheme.of(context).colorScheme.primary;
 
     final isSquareMode = mode.isSquare;
-    final height = isSquareMode ? 100.0 : 140.0;
-    final width = isSquareMode ? 100.0 : itemCardWidth;
+    final height =
+        isSquareMode ? (sizeMultiplier * 100.0) : (sizeMultiplier * 140.0);
+    final width = isSquareMode
+        ? (sizeMultiplier * 100.0)
+        : (sizeMultiplier * itemCardWidth);
 
     final borderRadius = isSquareMode
         ? BorderRadius.circular(8)
