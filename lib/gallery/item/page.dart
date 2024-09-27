@@ -90,53 +90,125 @@ class GalleryItemDetailPage extends StatelessWidget {
               const SocialButtons(),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: ShadCard(
-              child: SizedBox(
-                height: 300,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GalleryItemCover(
-                      icon: app.iconData,
-                      mode: GalleryItemCoverMode.square,
-                      sizeMultiplier: 3,
-                      iconColor: app.seedColor,
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: GalleryItemBrief(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12),
-                              name: app.name,
-                              description: app.description,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              const Spacer(),
-                              ShadButton(
-                                size: ShadButtonSize.sm,
-                                child: const Text('LAUNCH'),
-                                onPressed: () {
-                                  context.navigateToItemRunMode(app.id);
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
+          ResponsiveView(
+            smChild: GalleryItemDetailPageMobile(app: app),
+            child: GalleryItemDetailBody(app: app),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class GalleryItemDetailPageMobile extends StatelessWidget {
+  const GalleryItemDetailPageMobile({
+    required this.app,
+    super.key,
+  });
+
+  final GalleryItemData app;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: ShadCard(
+        padding: EdgeInsets.zero,
+        child: Column(
+          children: [
+            GalleryItemCover(
+              icon: app.iconData,
+              sizeMultiplier: 1.8,
+              iconColor: app.seedColor,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 12,
+              ),
+              child: Column(
+                children: [
+                  GalleryItemBrief(
+                    padding: EdgeInsets.zero,
+                    name: app.name,
+                    description: app.description,
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      const Spacer(),
+                      ShadButton(
+                        size: ShadButtonSize.sm,
+                        child: const Text('LAUNCH'),
+                        onPressed: () {
+                          context.navigateToItemRunMode(app.id);
+                        },
                       ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class GalleryItemDetailBody extends StatelessWidget {
+  const GalleryItemDetailBody({
+    required this.app,
+    super.key,
+  });
+
+  final GalleryItemData app;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: ShadCard(
+        child: SizedBox(
+          height: 300,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GalleryItemCover(
+                icon: app.iconData,
+                mode: GalleryItemCoverMode.square,
+                sizeMultiplier: 3,
+                iconColor: app.seedColor,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: GalleryItemBrief(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        name: app.name,
+                        description: app.description,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        const Spacer(),
+                        ShadButton(
+                          size: ShadButtonSize.sm,
+                          child: const Text('LAUNCH'),
+                          onPressed: () {
+                            context.navigateToItemRunMode(app.id);
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
