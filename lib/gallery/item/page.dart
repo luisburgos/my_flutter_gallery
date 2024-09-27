@@ -92,48 +92,46 @@ class GalleryItemDetailPage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8),
-            child: Expanded(
-              child: ShadCard(
-                child: SizedBox(
-                  height: 300,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GalleryItemCover(
-                        icon: app.iconData,
-                        mode: GalleryItemCoverMode.square,
-                        sizeMultiplier: 3,
-                        iconColor: app.seedColor,
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: GalleryItemBrief(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 12),
-                                name: app.name,
-                                description: app.description,
+            child: ShadCard(
+              child: SizedBox(
+                height: 300,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GalleryItemCover(
+                      icon: app.iconData,
+                      mode: GalleryItemCoverMode.square,
+                      sizeMultiplier: 3,
+                      iconColor: app.seedColor,
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: GalleryItemBrief(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                              name: app.name,
+                              description: app.description,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              const Spacer(),
+                              ShadButton(
+                                size: ShadButtonSize.sm,
+                                child: const Text('LAUNCH'),
+                                onPressed: () {
+                                  context.navigateToItemRunMode(app.id);
+                                },
                               ),
-                            ),
-                            Row(
-                              children: [
-                                const Spacer(),
-                                ShadButton(
-                                  size: ShadButtonSize.sm,
-                                  child: const Text('LAUNCH'),
-                                  onPressed: () {
-                                    context.navigateToItemRunMode(app.id);
-                                  },
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
