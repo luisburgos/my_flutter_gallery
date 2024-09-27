@@ -395,7 +395,7 @@ class _HighlightPreview extends StatelessWidget {
     return Row(
       children: [
         Container(
-          margin: const EdgeInsets.all(10),
+          margin: const EdgeInsets.all(4),
           child: IconButton(
             onPressed: onPrevious,
             icon: const Icon(
@@ -407,7 +407,7 @@ class _HighlightPreview extends StatelessWidget {
         Expanded(
           child: Container(
             padding: const EdgeInsets.symmetric(
-              vertical: 20,
+              vertical: 60,
             ),
             child: Card(
               elevation: 6,
@@ -434,7 +434,7 @@ class _HighlightPreview extends StatelessWidget {
           ),
         ),
         Container(
-          margin: const EdgeInsets.all(10),
+          margin: const EdgeInsets.all(4),
           child: IconButton(
             onPressed: onNext,
             icon: const Icon(

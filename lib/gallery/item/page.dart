@@ -46,6 +46,7 @@ class GalleryItemRunnerPage extends StatelessWidget {
     final find = state.items.where((app) => app.id == itemId).firstOrNull;
     if (find != null) {
       return DevicePreview(
+        backgroundColor: ShadTheme.of(context).colorScheme.background,
         builder: (_) => SafeArea(
           child: find.pageBuilder(_),
         ),

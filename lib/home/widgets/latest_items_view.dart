@@ -12,6 +12,7 @@ class LatestItemsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = GalleryItemsState.of(context);
     final apps = state.items;
+    final totalApps = state.items.length;
 
     final subtitleColor = ShadTheme.of(context).colorScheme.mutedForeground;
 
@@ -44,14 +45,14 @@ class LatestItemsView extends StatelessWidget {
         const SizedBox(height: 4),
         GalleryItemCard(
           margin: EdgeInsets.zero,
-          item: apps[0],
+          item: apps[totalApps - 2],
           onItemTap: (_) => context.navigateToGalleryItem(_.id),
           mode: GalleryItemCardMode.square,
         ),
         const SizedBox(height: 14),
         GalleryItemCard(
           margin: EdgeInsets.zero,
-          item: apps[1],
+          item: apps[totalApps - 1],
           onItemTap: (_) => context.navigateToGalleryItem(_.id),
           mode: GalleryItemCardMode.square,
         ),
