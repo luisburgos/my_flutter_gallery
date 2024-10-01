@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_gallery/components/site_top_bar/state.dart';
 
+@Deprecated('Avoid usage')
 class SiteTopBar extends StatefulWidget {
+  @Deprecated('Avoid usage')
   const SiteTopBar({
     required this.child,
     super.key,

@@ -10,11 +10,17 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ConstrainedPage(
+    return ConstrainedPage(
       child: Column(
         children: [
-          DefaultSiteTopBar(),
-          Expanded(
+          DefaultSiteTopBarView(
+            selectedIndex: siteTopBarHomeIndex,
+            onItemPressed: (_) => defaultSiteTopBarItemPressedHandler(
+              _,
+              context,
+            ),
+          ),
+          const Expanded(
             child: HomePageTemplate(
               summary: SummaryView(),
               latestItems: LatestItemsView(),

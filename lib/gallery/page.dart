@@ -8,11 +8,17 @@ class GalleryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ConstrainedPage(
+    return ConstrainedPage(
       child: Column(
         children: [
-          DefaultSiteTopBar(),
-          Expanded(
+          DefaultSiteTopBarView(
+            selectedIndex: siteTopBarGalleryIndex,
+            onItemPressed: (_) => defaultSiteTopBarItemPressedHandler(
+              _,
+              context,
+            ),
+          ),
+          const Expanded(
             child: GalleryView(),
           ),
         ],

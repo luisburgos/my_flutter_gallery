@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_gallery/app/app_routes.dart';
 import 'package:my_flutter_gallery/components/my_flutter_gallery/provider.dart';
-import 'package:my_flutter_gallery/components/site_top_bar/site_top_bar.dart';
 import 'package:my_flutter_gallery/l10n/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
@@ -10,10 +9,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SiteTopBar(
-      child: MyFlutterGallery(
-        child: MyFlutterGalleryApp(),
-      ),
+    return const MyFlutterGallery(
+      child: MyFlutterGalleryApp(),
     );
   }
 }

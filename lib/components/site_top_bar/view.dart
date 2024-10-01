@@ -5,6 +5,9 @@ import 'package:my_flutter_gallery/app/app_routes.dart';
 import 'package:my_flutter_gallery/components/site_top_bar/state.dart';
 import 'package:my_flutter_gallery/components/site_top_bar/widgets.dart';
 
+const siteTopBarHomeIndex = 0;
+const siteTopBarGalleryIndex = 1;
+
 class DefaultSiteTopBar extends StatelessWidget {
   const DefaultSiteTopBar({super.key});
 
@@ -12,23 +15,64 @@ class DefaultSiteTopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final siteTopBarState = SiteTopBarState.of(context);
 
+    return DefaultSiteTopBarView(
+      selectedIndex: siteTopBarState.selectedIndex,
+      onItemPressed: (index) {
+        if (index == siteTopBarHomeIndex) {
+          siteTopBarState.setIndex(
+            siteTopBarHomeIndex,
+            context.navigateToHome,
+          );
+        }
+
+        if (index == siteTopBarGalleryIndex) {
+          selectGalleryPage(context);
+        }
+      },
+    );
+  }
+}
+
+void defaultSiteTopBarItemPressedHandler(
+  int index,
+  BuildContext context,
+) {
+  switch (index) {
+    case siteTopBarHomeIndex:
+      context.navigateToHome();
+    case siteTopBarGalleryIndex:
+      context.navigateToGallery();
+    default:
+      break;
+  }
+}
+
+class DefaultSiteTopBarView extends StatelessWidget {
+  const DefaultSiteTopBarView({
+    required this.selectedIndex,
+    required this.onItemPressed,
+    super.key,
+  });
+
+  final int selectedIndex;
+  final void Function(int) onItemPressed;
+
+  @override
+  Widget build(BuildContext context) {
     return SiteTopBarContainer(
       children: [
         SiteTopBarTabButton(
-          onPressed: () => siteTopBarState.setIndex(
-            0,
-            context.navigateToHome,
-          ),
-          isSelected: siteTopBarState.selectedIndex == 0,
+          onPressed: () => onItemPressed(siteTopBarHomeIndex),
+          isSelected: selectedIndex == siteTopBarHomeIndex,
           iconData: FontAwesomeIcons.house,
           text: 'HOME',
         ),
         const SizedBox(width: 8),
         SiteTopBarTabButton(
-          onPressed: () => selectGalleryPage(context),
-          isSelected: siteTopBarState.selectedIndex == 1,
+          onPressed: () => onItemPressed(siteTopBarGalleryIndex),
+          isSelected: selectedIndex == siteTopBarGalleryIndex,
           iconData: FontAwesomeIcons.folderOpen,
-          text: 'FLUTTER GALLERY',
+          text: 'GALLERY',
         ),
         const Spacer(),
         const SocialButtons(),
