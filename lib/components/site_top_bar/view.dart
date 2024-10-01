@@ -30,16 +30,6 @@ class DefaultSiteTopBar extends StatelessWidget {
           iconData: FontAwesomeIcons.folderOpen,
           text: 'FLUTTER GALLERY',
         ),
-        /*const SizedBox(width: 8),
-        SiteTopBarTabButton(
-          onPressed: () => siteTopBarState.setIndex(
-            2,
-            context.navigateToAbout,
-          ),
-          isSelected: siteTopBarState.selectedIndex == 2,
-          iconData: FontAwesomeIcons.user,
-          text: 'ABOUT',
-        ),*/
         const Spacer(),
         const SocialButtons(),
       ],

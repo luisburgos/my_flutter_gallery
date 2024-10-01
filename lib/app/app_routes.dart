@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:my_flutter_gallery/about/page.dart';
 import 'package:my_flutter_gallery/gallery/item/page.dart';
 import 'package:my_flutter_gallery/gallery/page.dart';
 import 'package:my_flutter_gallery/home/page.dart';
@@ -37,10 +36,6 @@ final defaultAppRouter = GoRouter(
           ),
         );
       },
-    ),
-    GoRoute(
-      path: AppRoutes.about,
-      builder: (_, __) => const AboutPage(),
     ),
     GoRoute(
       path: AppRoutes.run,
