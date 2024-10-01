@@ -10,6 +10,7 @@ import 'package:my_flutter_gallery/legacy/clones/popcorn_flavor_picker/popcorn_f
 import 'package:my_flutter_gallery/legacy/clones/supernotes/supernotes_app_page.dart';
 import 'package:my_flutter_gallery/shared/colors_extended.dart';
 import 'package:readwise_daily_review/readwise_daily_review.dart';
+import 'package:roadie/roadie.dart';
 import 'package:splitwise_split_options/splitwise_split_options.dart';
 
 const gLoremDescription = 'TODO: Add description lorem ipsum description '
@@ -148,5 +149,23 @@ class SplitwiseSplitOptions extends GalleryItemData {
           ),
           description: gLoremDescription,
           pageBuilder: (_) => const SplitOptionsPage(),
+        );
+}
+
+class RoadieAppItemData extends GalleryItemData {
+  RoadieAppItemData()
+      : super(
+          id: 'ROAD-00',
+          name: 'Roadie: Course to App',
+          seedColor: Colors.deepOrange,
+          iconData: const Icon(
+            FontAwesomeIcons.spa,
+            size: 16,
+          ),
+          description: 'Easily transform any course contents into '
+              'an interactive Mobile App',
+          pageBuilder: (_) => const RoadieApp(
+            child: RoadieMainPage(),
+          ),
         );
 }

@@ -24,6 +24,8 @@ dependencies:
   package_info_plus: ^7.0.0
   readwise_daily_review:
     path: packages/readwise_daily_review
+  roadie:
+    path: packages/roadie
   shadcn_ui: ^0.8.1
   splitwise_split_options:
     path: packages/splitwise_split_options

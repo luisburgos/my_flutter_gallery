@@ -57,6 +57,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  carousel_slider:
+    dependency: transitive
+    description:
+      name: carousel_slider
+      sha256: "7b006ec356205054af5beaef62e2221160ea36b90fb70a35e4deacd49d0349ae"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.0"
   characters:
     dependency: transitive
     description:
@@ -585,6 +593,13 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/readwise_daily_review"
+      relative: true
+    source: path
+    version: "0.1.0+1"
+  roadie:
+    dependency: "direct main"
+    description:
+      path: "packages/roadie"
       relative: true
     source: path
     version: "0.1.0+1"
