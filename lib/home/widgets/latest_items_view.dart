@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter_gallery/app/app_commands.dart';
 import 'package:my_flutter_gallery/app/app_routes.dart';
 import 'package:my_flutter_gallery/components/my_flutter_gallery/state.dart';
 import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_card.dart';
@@ -32,7 +31,7 @@ class LatestItemsView extends StatelessWidget {
             const Spacer(),
             ShadButton.link(
               padding: EdgeInsets.zero,
-              onPressed: () => selectGalleryPage(context),
+              onPressed: context.navigateToGallery,
               child: Text(
                 'VIEW ALL',
                 style: TextStyle(

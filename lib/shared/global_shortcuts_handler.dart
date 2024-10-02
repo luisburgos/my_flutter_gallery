@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_flutter_gallery/app/app_commands.dart';
+import 'package:my_flutter_gallery/app/app_routes.dart';
 
 class GlobalShortcutsState extends InheritedWidget {
   const GlobalShortcutsState({
@@ -56,7 +56,7 @@ class _GlobalShortcutsState extends State<GlobalShortcuts> {
           meta: isMac,
           control: !isMac,
         ): VoidCallbackIntent(
-          () => selectGalleryPage(context),
+          () => context.navigateToGallery(),
         ),
       },
       child: Actions(
