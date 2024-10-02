@@ -82,16 +82,22 @@ class DefaultSiteTopBarView extends StatelessWidget {
 }
 
 class SocialButtons extends StatelessWidget {
-  const SocialButtons({super.key});
+  const SocialButtons({
+    super.key,
+    this.withPersonalGithub = true,
+  });
+
+  final bool withPersonalGithub;
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
         //const XTwitterButton(),
-        GithubButton(
-          url: 'https://github.com/luisburgos',
-        ),
+        if (withPersonalGithub)
+          const GithubButton(
+            url: 'https://github.com/luisburgos',
+          ),
       ],
     );
   }

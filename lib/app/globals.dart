@@ -134,6 +134,7 @@ class ReadwiseDailyReview extends GalleryItemData {
           ),
           description: gLoremDescription,
           pageBuilder: (_) => const ReadwiseDailyReviewPage(),
+          githubRepoUrl: '$_baseMyFlutterGalleryRepoUrl/readwise_daily_review',
         );
 }
 
@@ -149,6 +150,8 @@ class SplitwiseSplitOptions extends GalleryItemData {
           ),
           description: gLoremDescription,
           pageBuilder: (_) => const SplitOptionsPage(),
+          githubRepoUrl:
+              '$_baseMyFlutterGalleryRepoUrl/splitwise_split_options',
         );
 }
 
@@ -163,9 +166,14 @@ class RoadieAppItemData extends GalleryItemData {
             size: 16,
           ),
           description: 'Easily transform any course contents into '
-              'an interactive Mobile App',
+              'a companion app. Go from zero to '
+              'hero with interactive lessons',
           pageBuilder: (_) => const RoadieApp(
             child: RoadieMainPage(),
           ),
+          githubRepoUrl: '$_baseMyFlutterGalleryRepoUrl/roadie',
         );
 }
+
+const _baseMyFlutterGalleryRepoUrl = 'https://github.com/luisburgos/'
+    'my_flutter_gallery/tree/main/packages';

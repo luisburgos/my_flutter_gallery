@@ -9,7 +9,7 @@ class GalleryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = GalleryItemsState.of(context);
-    final apps = state.items;
+    final apps = state.items.reversed.toList();
 
     return GalleryItemsGrid(
       items: apps,

@@ -14,33 +14,44 @@ class RoadieMainPage extends StatelessWidget {
     final state = RoadieAppState.of(context);
     final roadmap = state.roadmap;
 
+    Widget child;
+    if (roadmap == null) {
+      child = const Center(
+        child: CircularProgressIndicator(
+          color: Colors.black,
+        ),
+      );
+    } else {
+      child = SelectedModuleWrapper(
+        initialModule: roadmap.modules.first,
+        builder: (selectedModule, setSelectedModule) {
+          return Column(
+            children: [
+              RoadieTopBar(
+                userName: roadmap.user.name,
+              ),
+              ModulesCarouselView(
+                selectedItem: selectedModule,
+                modules: roadmap.modules,
+                onItemPressed: (module) {
+                  setSelectedModule.call(module);
+                },
+              ),
+              Expanded(
+                child: ModuleLessonsCarouselView(
+                  lessons: selectedModule.lessons,
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: SelectedModuleWrapper(
-          initialModule: roadmap.modules.first,
-          builder: (selectedModule, setSelectedModule) {
-            return Column(
-              children: [
-                RoadieTopBar(
-                  userName: roadmap.user.name,
-                ),
-                ModulesCarouselView(
-                  selectedItem: selectedModule,
-                  modules: roadmap.modules,
-                  onItemPressed: (module) {
-                    setSelectedModule.call(module);
-                  },
-                ),
-                Expanded(
-                  child: ModuleLessonsCarouselView(
-                    lessons: selectedModule.lessons,
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
+        child: child,
       ),
     );
   }
@@ -169,6 +180,7 @@ class ModulesCarouselView extends StatelessWidget {
       options: CarouselOptions(
         viewportFraction: 0.92,
         enableInfiniteScroll: false,
+        autoPlay: true,
         height: 240,
         onPageChanged: (index, reason) {
           onItemPressed(modules[index]);
@@ -280,7 +292,7 @@ class ModuleLessonsCarouselView extends StatelessWidget {
               vertical: 8,
             ),
             child: Text(
-              'MEDITATIONS',
+              'LESSONS',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),

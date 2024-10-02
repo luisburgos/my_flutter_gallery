@@ -58,18 +58,22 @@ class SocialButton extends StatelessWidget {
   const SocialButton({
     required this.iconData,
     this.onPressed,
+    this.withBorder = false,
     super.key,
   });
 
   final IconData iconData;
   final VoidCallback? onPressed;
+  final bool withBorder;
 
   @override
   Widget build(BuildContext context) {
     return ShadButton.outline(
-      decoration: const ShadDecoration(
-        border: ShadBorder.none,
-      ),
+      decoration: withBorder
+          ? null
+          : const ShadDecoration(
+              border: ShadBorder.none,
+            ),
       onPressed: onPressed,
       icon: Icon(
         iconData,
@@ -98,16 +102,19 @@ class XTwitterButton extends StatelessWidget {
 class GithubButton extends StatelessWidget {
   const GithubButton({
     required this.url,
+    this.withBorder = false,
     super.key,
   });
 
   final String url;
+  final bool withBorder;
 
   @override
   Widget build(BuildContext context) {
     return SocialButton(
       iconData: FontAwesomeIcons.github,
       onPressed: _onPressed,
+      withBorder: withBorder,
     );
   }
 

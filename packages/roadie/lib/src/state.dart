@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:roadie/roadie.dart';
 
@@ -12,7 +14,7 @@ class RoadieAppState extends InheritedWidget {
   });
 
   /// @no-doc
-  final Roadmap roadmap;
+  final Roadmap? roadmap;
 
   /// @no-doc
   final void Function(
@@ -53,6 +55,20 @@ class RoadieApp extends StatefulWidget {
 
 class _RoadieAppState extends State<RoadieApp> {
   final repository = DefaultRoadmapRepository();
+  Roadmap? roadmap;
+
+  @override
+  void initState() {
+    unawaited(_loadData());
+    super.initState();
+  }
+
+  Future<void> _loadData() async {
+    final data = await repository.load();
+    setState(() {
+      roadmap = data;
+    });
+  }
 
   void _markAsDone(
     String moduleName,
@@ -68,7 +84,7 @@ class _RoadieAppState extends State<RoadieApp> {
   @override
   Widget build(BuildContext context) {
     return RoadieAppState(
-      roadmap: repository.cache,
+      roadmap: roadmap,
       markAsDone: _markAsDone,
       child: widget.child,
     );

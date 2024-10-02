@@ -88,7 +88,7 @@ class GalleryItemDetailPage extends StatelessWidget {
                 },
               ),
               const Spacer(),
-              const SocialButtons(),
+              const SocialButtons(withPersonalGithub: false),
             ],
           ),
           ResponsiveView(
@@ -135,17 +135,9 @@ class GalleryItemDetailPageMobile extends StatelessWidget {
                     description: app.description,
                   ),
                   const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      const Spacer(),
-                      ShadButton(
-                        size: ShadButtonSize.sm,
-                        child: const Text('LAUNCH'),
-                        onPressed: () {
-                          context.navigateToItemRunMode(app.id);
-                        },
-                      ),
-                    ],
+                  ItemActionButtons(
+                    appId: app.id,
+                    githubRepoUrl: app.githubRepoUrl,
                   ),
                 ],
               ),
@@ -192,17 +184,9 @@ class GalleryItemDetailBody extends StatelessWidget {
                         description: app.description,
                       ),
                     ),
-                    Row(
-                      children: [
-                        const Spacer(),
-                        ShadButton(
-                          size: ShadButtonSize.sm,
-                          child: const Text('LAUNCH'),
-                          onPressed: () {
-                            context.navigateToItemRunMode(app.id);
-                          },
-                        ),
-                      ],
+                    ItemActionButtons(
+                      appId: app.id,
+                      githubRepoUrl: app.githubRepoUrl,
                     ),
                   ],
                 ),
@@ -224,6 +208,39 @@ class UnimplementedGalleryItemPage extends StatelessWidget {
       body: Center(
         child: Text('Unimplemented item'),
       ),
+    );
+  }
+}
+
+class ItemActionButtons extends StatelessWidget {
+  const ItemActionButtons({
+    required this.appId,
+    this.githubRepoUrl,
+    super.key,
+  });
+
+  final String appId;
+  final String? githubRepoUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Spacer(),
+        if (githubRepoUrl != null)
+          GithubButton(
+            withBorder: true,
+            url: githubRepoUrl!,
+          ),
+        const SizedBox(width: 8),
+        ShadButton(
+          size: ShadButtonSize.sm,
+          child: const Text('LAUNCH'),
+          onPressed: () {
+            context.navigateToItemRunMode(appId);
+          },
+        ),
+      ],
     );
   }
 }

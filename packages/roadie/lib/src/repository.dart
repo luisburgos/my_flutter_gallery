@@ -195,7 +195,7 @@ const globalModules = [
 /// @no-doc
 abstract class RoadmapRepository {
   /// @no-doc
-  Roadmap get cache;
+  Roadmap? get cache;
 
   /// @no-doc
   Future<Roadmap> load();
@@ -206,19 +206,22 @@ abstract class RoadmapRepository {
 
 /// @no-doc
 class DefaultRoadmapRepository implements RoadmapRepository {
-  var _data = const Roadmap(
-    user: globalUser,
-    modules: globalModules,
-  );
+  late Roadmap _data;
 
   @override
-  Roadmap get cache => _data;
+  Roadmap? get cache => _data;
 
   @override
   Future<Roadmap> load() async {
     return Future.delayed(
       const Duration(seconds: 1),
-      () => _data,
+      () {
+        _data = const Roadmap(
+          user: globalUser,
+          modules: globalModules,
+        );
+        return cache!;
+      },
     );
   }
 
