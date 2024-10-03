@@ -11,7 +11,8 @@ class GalleryView extends StatelessWidget {
     final state = GalleryItemsState.of(context);
     final apps = state.items.reversed.toList();
 
-    return GalleryItemsGrid(
+    return GalleryItemsResponsiveView(
+      padding: EdgeInsets.zero,
       items: apps,
       onItemTap: (_) {
         context.navigateToGalleryItem(_.id);

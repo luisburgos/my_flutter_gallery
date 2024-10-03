@@ -18,5 +18,6 @@ class MyAppData extends GalleryItemData {
           ),
           description: 'TODO: Add description',
           pageBuilder: (_) => const MyPage(),
+          type: GalleryItemType.feature,
         );
 }

@@ -18,5 +18,6 @@ class LLMSelectorAppData extends GalleryItemData {
           ),
           description: 'TODO: Add description',
           pageBuilder: (_) => const LLMSelectorPage(),
+          type: GalleryItemType.component,
         );
 }

@@ -1,59 +1,67 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter_gallery/utils/constrained_page.dart';
+import 'package:my_flutter_gallery/app/globals.dart';
 
 class HomePageTemplate extends StatelessWidget {
   const HomePageTemplate({
-    required this.summary,
-    required this.latestItems,
+    required this.header,
+    required this.body,
+    required this.footer,
     super.key,
   });
 
-  final Widget summary;
-  final Widget latestItems;
+  final Widget header;
+  final Widget body;
+  final Widget footer;
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveView(
-      smChild: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(
-                vertical: 12,
-                horizontal: 20,
-              ),
-              child: summary,
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxWidth: 1024,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 12,
-                horizontal: 20,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          constraints: const BoxConstraints(
+                            maxWidth: maxWidthConstraint,
+                          ),
+                          padding: const EdgeInsets.only(
+                            top: 100,
+                          ),
+                          child: header,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 32,
+                          ),
+                          child: body,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 32,
+                            bottom: 18,
+                          ),
+                          child: footer,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              child: latestItems,
             ),
-          ],
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Flexible(
-              child: Center(
-                child: summary,
-              ),
-            ),
-            const SizedBox(width: 20),
-            Flexible(
-              child: Center(
-                child: latestItems,
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_flutter_gallery/gallery/item/page.dart';
-import 'package:my_flutter_gallery/gallery/page.dart';
+import 'package:my_flutter_gallery/gallery/item/runner/page.dart';
 import 'package:my_flutter_gallery/home/page.dart';
 import 'package:my_flutter_gallery/shared/global_shortcuts_handler.dart';
 
 class AppRoutes {
   static const root = '/';
-  static const gallery = '/gallery';
+  //static const gallery = '/gallery';
   static const about = '/about';
-  static const run = '/run/:id';
+  static const run = '$galleryItem/run';
   static const galleryItem = '/gallery/:id';
 }
 
@@ -21,10 +21,10 @@ final defaultAppRouter = GoRouter(
         child: HomePage(),
       ),
     ),
-    GoRoute(
+    /*GoRoute(
       path: AppRoutes.gallery,
       builder: (_, __) => const GalleryPage(),
-    ),
+    ),*/
     GoRoute(
       path: AppRoutes.galleryItem,
       builder: (_, __) {
@@ -54,7 +54,7 @@ final defaultAppRouter = GoRouter(
 
 extension BuildContextNavigationMethods<T> on BuildContext {
   void navigateToGallery() {
-    go(AppRoutes.gallery);
+    //go(AppRoutes.gallery);
   }
 
   void navigateToHome() {

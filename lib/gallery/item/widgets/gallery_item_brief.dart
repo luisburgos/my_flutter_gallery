@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
+import 'package:my_flutter_gallery/app/globals.dart';
 
 class GalleryItemBrief extends StatelessWidget {
   const GalleryItemBrief({
@@ -15,31 +15,65 @@ class GalleryItemBrief extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final subtitleColor = ShadTheme.of(context).colorScheme.mutedForeground;
-
     return Padding(
       padding: padding ?? const EdgeInsets.all(12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            name,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          GalleryItemNameText(name),
           const SizedBox(height: 4),
-          Text(
-            description,
-            maxLines: 3,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w300,
-              color: subtitleColor,
-            ),
-          ),
+          GalleryItemDescriptionText(description),
         ],
+      ),
+    );
+  }
+}
+
+class GalleryItemDescriptionText extends StatelessWidget {
+  const GalleryItemDescriptionText(
+    this.description, {
+    super.key,
+    this.minHeight = 80.0,
+    this.padding,
+  });
+
+  final String description;
+  final double minHeight;
+  final EdgeInsetsGeometry? padding;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      //color: Colors.red.withOpacity(0.5),
+      padding: padding,
+      constraints: BoxConstraints(
+        minHeight: minHeight,
+      ),
+      child: Text(
+        description,
+        maxLines: 4,
+        style: const TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w300,
+          color: secondaryColor,
+        ),
+      ),
+    );
+  }
+}
+
+class GalleryItemNameText extends StatelessWidget {
+  const GalleryItemNameText(this.name, {super.key});
+
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      name,
+      style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
       ),
     );
   }

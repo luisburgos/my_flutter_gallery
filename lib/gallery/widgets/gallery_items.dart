@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:my_flutter_gallery/components/my_flutter_gallery/model.dart';
-import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_card.dart';
+import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_view.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-class GalleryItemsGrid extends StatelessWidget {
-  const GalleryItemsGrid({
+class GalleryItemsResponsiveView extends StatelessWidget {
+  const GalleryItemsResponsiveView({
     required this.items,
     required this.onItemTap,
+    this.padding,
     super.key,
   });
 
   final List<GalleryItemData> items;
   final void Function(GalleryItemData) onItemTap;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +29,13 @@ class GalleryItemsGrid extends StatelessWidget {
         rowGap: rowGap,
         children: [
           for (var i = 0; i < items.length; i++)
-            GalleryItemCard(
+            GalleryItemView(
+              margin: EdgeInsets.zero,
               item: items[i],
               onItemTap: onItemTap,
               mode: crossAxisCount == 1
-                  ? GalleryItemCardMode.square
-                  : GalleryItemCardMode.rectangle,
+                  ? GalleryItemViewMode.tile
+                  : GalleryItemViewMode.card,
             ),
         ],
       ),
@@ -51,9 +54,8 @@ class GalleryItemsGrid extends StatelessWidget {
   }
 
   (double, double) _getGaps(int crossAxisCount) {
-    if (crossAxisCount == 1) return (0, 0);
-    if (crossAxisCount == 2) return (5, 5);
-    return (10, 10);
+    if (crossAxisCount == 1) return (18, 0);
+    return (24, 24);
   }
 
   (List<FlexibleTrackSize>, List<IntrinsicContentTrackSize>) _getSizes(

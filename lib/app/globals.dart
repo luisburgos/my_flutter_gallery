@@ -13,6 +13,16 @@ import 'package:readwise_daily_review/readwise_daily_review.dart';
 import 'package:roadie/roadie.dart';
 import 'package:splitwise_split_options/splitwise_split_options.dart';
 
+const primaryColor = Color(0xFF1E1E1E);
+const secondaryColor = Color(0xFF757575);
+const accentColor = Color(0xFF4F9FFA);
+
+const githubUrl = 'https://github.com/luisburgos';
+const galleryRepoGithubUrl = '$githubUrl/my_flutter_gallery';
+const galleryRepoPackagesGithubUrl = '$galleryRepoGithubUrl/tree/main/packages';
+
+const maxWidthConstraint = 732.0;
+
 const gLoremDescription = 'TODO: Add description lorem ipsum description '
     'lorem ipsum description '
     'lorem ipsum description';
@@ -22,6 +32,7 @@ class InstagramAppData extends GalleryItemData {
       : super(
           id: 'INST-00',
           name: 'Instagram',
+          type: GalleryItemType.feature,
           seedColor: ColorsExtended.instaOrange,
           iconData: const Icon(
             FontAwesomeIcons.instagram,
@@ -37,6 +48,7 @@ class PerplexityAppData extends GalleryItemData {
       : super(
           id: 'PERP-00',
           name: 'Perplexity',
+          type: GalleryItemType.feature,
           seedColor: Colors.cyan,
           iconData: const Icon(
             FontAwesomeIcons.microchip,
@@ -52,6 +64,7 @@ class SupernotesAppData extends GalleryItemData {
       : super(
           id: 'SUPN-00',
           name: 'Supernotes',
+          type: GalleryItemType.feature,
           seedColor: Colors.pinkAccent,
           iconData: const Icon(
             FontAwesomeIcons.noteSticky,
@@ -67,6 +80,7 @@ class BrancherAiAppData extends GalleryItemData {
       : super(
           id: 'BRCR-00',
           name: 'brancher.ai',
+          type: GalleryItemType.feature,
           seedColor: Colors.green,
           iconData: const Icon(
             FontAwesomeIcons.wind,
@@ -82,6 +96,7 @@ class OpenGptChatUiAppData extends GalleryItemData {
       : super(
           id: 'OGTC-00',
           name: 'OpenGPTChatUI',
+          type: GalleryItemType.feature,
           seedColor: Colors.green,
           iconData: const Icon(
             FontAwesomeIcons.message,
@@ -97,6 +112,7 @@ class PopcornFlavorPickerData extends GalleryItemData {
       : super(
           id: 'POPP-00',
           name: 'PopcornFlavorPicker',
+          type: GalleryItemType.feature,
           seedColor: Colors.blueAccent,
           iconData: const Icon(
             FontAwesomeIcons.film,
@@ -112,6 +128,7 @@ class HabitsData extends GalleryItemData {
       : super(
           id: 'HABI-00',
           name: 'Habits',
+          type: GalleryItemType.feature,
           seedColor: Colors.orange,
           iconData: const Icon(
             FontAwesomeIcons.calendarWeek,
@@ -127,6 +144,7 @@ class ReadwiseDailyReview extends GalleryItemData {
       : super(
           id: 'RWDR-00',
           name: 'Readwise Daily Review',
+          type: GalleryItemType.feature,
           seedColor: Colors.blueGrey,
           iconData: const Icon(
             FontAwesomeIcons.readme,
@@ -134,7 +152,7 @@ class ReadwiseDailyReview extends GalleryItemData {
           ),
           description: gLoremDescription,
           pageBuilder: (_) => const ReadwiseDailyReviewPage(),
-          githubRepoUrl: '$_baseMyFlutterGalleryRepoUrl/readwise_daily_review',
+          githubRepoUrl: '$galleryRepoPackagesGithubUrl/readwise_daily_review',
         );
 }
 
@@ -143,6 +161,7 @@ class SplitwiseSplitOptions extends GalleryItemData {
       : super(
           id: 'SWSP-00',
           name: 'Splitwise Split Options',
+          type: GalleryItemType.feature,
           seedColor: Colors.greenAccent,
           iconData: const Icon(
             FontAwesomeIcons.arrowsSplitUpAndLeft,
@@ -151,7 +170,7 @@ class SplitwiseSplitOptions extends GalleryItemData {
           description: gLoremDescription,
           pageBuilder: (_) => const SplitOptionsPage(),
           githubRepoUrl:
-              '$_baseMyFlutterGalleryRepoUrl/splitwise_split_options',
+              '$galleryRepoPackagesGithubUrl/splitwise_split_options',
         );
 }
 
@@ -160,20 +179,18 @@ class RoadieAppItemData extends GalleryItemData {
       : super(
           id: 'ROAD-00',
           name: 'Roadie: Course to App',
+          type: GalleryItemType.feature,
           seedColor: Colors.deepOrange,
           iconData: const Icon(
             FontAwesomeIcons.spa,
             size: 16,
           ),
           description: 'Easily transform any course contents into '
-              'a companion app. Go from zero to '
+              'a companion app.\nGo from zero to '
               'hero with interactive lessons',
           pageBuilder: (_) => const RoadieApp(
             child: RoadieMainPage(),
           ),
-          githubRepoUrl: '$_baseMyFlutterGalleryRepoUrl/roadie',
+          githubRepoUrl: '$galleryRepoPackagesGithubUrl/roadie',
         );
 }
-
-const _baseMyFlutterGalleryRepoUrl = 'https://github.com/luisburgos/'
-    'my_flutter_gallery/tree/main/packages';

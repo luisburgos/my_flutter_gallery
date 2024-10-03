@@ -17,5 +17,6 @@ class OpenAiUiData extends GalleryItemData {
           ),
           description: 'TODO: Add description',
           pageBuilder: (_) => const OpenAiUiPage(),
+          type: GalleryItemType.feature,
         );
 }

@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -27,30 +26,6 @@ class GalleryItemHomePage extends StatelessWidget {
     final find = state.items.where((app) => app.id == itemId).firstOrNull;
     if (find != null) {
       return GalleryItemDetailPage(app: find);
-    }
-    return const UnimplementedGalleryItemPage();
-  }
-}
-
-class GalleryItemRunnerPage extends StatelessWidget {
-  const GalleryItemRunnerPage({
-    required this.itemId,
-    super.key,
-  });
-
-  final String? itemId;
-
-  @override
-  Widget build(BuildContext context) {
-    final state = GalleryItemsState.of(context);
-    final find = state.items.where((app) => app.id == itemId).firstOrNull;
-    if (find != null) {
-      return DevicePreview(
-        backgroundColor: ShadTheme.of(context).colorScheme.background,
-        builder: (_) => SafeArea(
-          child: find.pageBuilder(_),
-        ),
-      );
     }
     return const UnimplementedGalleryItemPage();
   }
@@ -119,8 +94,9 @@ class GalleryItemDetailPageMobile extends StatelessWidget {
           children: [
             GalleryItemCover(
               icon: app.iconData,
-              sizeMultiplier: 1.8,
               iconColor: app.seedColor,
+              width: 100,
+              height: 100,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -169,8 +145,8 @@ class GalleryItemDetailBody extends StatelessWidget {
             children: [
               GalleryItemCover(
                 icon: app.iconData,
-                mode: GalleryItemCoverMode.square,
-                sizeMultiplier: 3,
+                width: 100,
+                height: 100,
                 iconColor: app.seedColor,
               ),
               const SizedBox(width: 12),

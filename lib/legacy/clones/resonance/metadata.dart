@@ -18,5 +18,6 @@ class ResonanceAppData extends GalleryItemData {
           ),
           description: 'TODO: Add description',
           pageBuilder: (_) => const ResonancePage(),
+          type: GalleryItemType.feature,
         );
 }

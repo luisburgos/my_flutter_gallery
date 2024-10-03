@@ -4,16 +4,16 @@ import 'package:my_flutter_gallery/utils/is_mobile.dart';
 class ResponsiveView extends StatelessWidget {
   const ResponsiveView({
     required this.child,
-    required this.smChild,
+    this.smChild,
     super.key,
   });
 
   final Widget child;
-  final Widget smChild;
+  final Widget? smChild;
 
   @override
   Widget build(BuildContext context) {
-    if (isSmallWidth(context)) return smChild;
+    if (isSmallWidth(context) && smChild != null) return smChild!;
     return child;
   }
 }
@@ -32,7 +32,7 @@ class ConstrainedPage extends StatelessWidget {
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(
-            maxWidth: 800,
+            maxWidth: 1024,
           ),
           child: child,
         ),

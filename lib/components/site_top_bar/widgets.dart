@@ -58,6 +58,7 @@ class SocialButton extends StatelessWidget {
   const SocialButton({
     required this.iconData,
     this.onPressed,
+    this.child,
     this.withBorder = false,
     super.key,
   });
@@ -65,6 +66,7 @@ class SocialButton extends StatelessWidget {
   final IconData iconData;
   final VoidCallback? onPressed;
   final bool withBorder;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +81,7 @@ class SocialButton extends StatelessWidget {
         iconData,
         size: 18,
       ),
+      child: child,
     );
   }
 }
@@ -96,6 +99,31 @@ class XTwitterButton extends StatelessWidget {
 
   void _onPressed() {
     // TODO(luisburgos): open github profile.
+  }
+}
+
+class GithubButton2 extends StatelessWidget {
+  const GithubButton2({
+    required this.url,
+    this.withBorder = false,
+    super.key,
+  });
+
+  final String url;
+  final bool withBorder;
+
+  @override
+  Widget build(BuildContext context) {
+    return SocialButton(
+      iconData: FontAwesomeIcons.github,
+      onPressed: _onPressed,
+      withBorder: true,
+      child: const Text('github.com/luisburgos'),
+    );
+  }
+
+  Future<void> _onPressed() async {
+    await launchUrl(Uri.parse(url));
   }
 }
 
