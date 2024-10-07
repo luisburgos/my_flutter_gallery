@@ -18,12 +18,12 @@ const wireframeArtHeightUnit = 2.5;
 const wireframeArtPaddingUnit = 8.0;
 
 final defaultArtColors = ArtColors(
-  accentColor: Colors.black,
-  backgroundColor: Colors.grey.shade100,
-  filColor0: Colors.grey.shade200,
-  filColor1: Colors.grey.shade300,
-  filColor2: Colors.grey.shade400,
-);
+    accentColor: Colors.black,
+    backgroundColor: Colors.grey.shade100,
+    filColor0: Colors.grey.shade200,
+    filColor1: Colors.grey.shade300,
+    filColor2: Colors.grey.shade400,
+    borderColor: Colors.grey.shade300);
 
 class ExperimentalItemCover extends StatelessWidget {
   const ExperimentalItemCover({
@@ -36,6 +36,7 @@ class ExperimentalItemCover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WireframeArtWindow(
+      colors: colors,
       child: Column(
         children: [
           WireframeArtTopBar1(
@@ -68,6 +69,7 @@ class HighlightsDailyReviewArt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WireframeArtWindow(
+      colors: colors,
       isMobile: true,
       padding: const EdgeInsets.symmetric(
         horizontal: wireframeArtPaddingUnit / 2,
@@ -124,6 +126,7 @@ class CinemaSnacksPickerArt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WireframeArtWindow(
+      colors: colors,
       isMobile: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -190,6 +193,7 @@ class BillSplitCalculatorArt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WireframeArtWindow(
+      colors: colors,
       isMobile: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -247,6 +251,7 @@ class WeeklyHabitsTrackerArt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WireframeArtWindow(
+      colors: colors,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: wireframeArtPaddingUnit * 2,
@@ -292,6 +297,7 @@ class AiPoweredAppBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WireframeArtWindow(
+      colors: colors,
       padding: EdgeInsets.zero,
       child: Row(
         children: [
@@ -339,6 +345,7 @@ class AiPoweredAppBuilder extends StatelessWidget {
 
 class WireframeArtWindow extends StatelessWidget {
   const WireframeArtWindow({
+    required this.colors,
     required this.child,
     this.padding,
     this.color,
@@ -350,6 +357,7 @@ class WireframeArtWindow extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final Color? color;
   final bool isMobile;
+  final ArtColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -360,7 +368,7 @@ class WireframeArtWindow extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.grey.shade100,
         border: Border.all(
-          color: Colors.grey.shade300,
+          color: colors.borderColor,
           width: 0.5,
         ),
         borderRadius: BorderRadius.circular(

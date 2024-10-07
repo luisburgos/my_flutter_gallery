@@ -32,21 +32,22 @@ class GalleryItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.circular(24);
 
-    Widget child;
-    if (mode.isCard) {
-      child = GalleryItemCard(
-        item: item,
-        borderRadius: borderRadius,
-      );
-    } else {
-      child = GalleryItemListTile(
-        item: item,
-        borderRadius: borderRadius,
-      );
-    }
-
     return HoverAware(
       builder: (isHovered) {
+        Widget child;
+        if (mode.isCard) {
+          child = GalleryItemCard(
+            item: item,
+            borderRadius: borderRadius,
+            displayDecoration: isHovered,
+          );
+        } else {
+          child = GalleryItemListTile(
+            item: item,
+            borderRadius: borderRadius,
+          );
+        }
+
         return GestureDetector(
           onTap: () => onItemTap(item),
           child: Container(

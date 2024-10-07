@@ -8,11 +8,13 @@ class GalleryItemCard extends StatelessWidget {
   const GalleryItemCard({
     required this.item,
     this.borderRadius,
+    this.displayDecoration = false,
     super.key,
   });
 
   final GalleryItemData item;
   final BorderRadius? borderRadius;
+  final bool displayDecoration;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class GalleryItemCard extends StatelessWidget {
             width: double.infinity,
             height: galleryItemCoverHeight,
             coverBuilder: item.coverBuilder,
+            displayDecoration: displayDecoration,
           ),
           GalleryItemBrief(
             name: item.name,

@@ -12,34 +12,49 @@ class GalleryItemCover extends StatelessWidget {
     required this.height,
     required this.width,
     required this.coverBuilder,
-    this.iconColor,
+    required this.iconColor,
     this.margin,
+    this.displayDecoration = false,
     super.key,
   });
 
   final Icon icon;
   final double height;
   final double width;
-  final Color? iconColor;
+  final Color iconColor;
   final EdgeInsetsGeometry? margin;
   final CoverBuilder? coverBuilder;
+  final bool displayDecoration;
 
   @override
   Widget build(BuildContext context) {
     final secondaryColor = ShadTheme.of(context).colorScheme.secondary;
     final defaultIconColor =
-        iconColor ?? ShadTheme.of(context).colorScheme.primary;
+        ShadTheme.of(context).colorScheme.primary.withOpacity(
+              0.3,
+            );
+
+    final experimentalColor =
+        displayDecoration ? iconColor : Colors.grey.shade200;
 
     return GalleryItemCoverContainer(
       margin: margin ?? const EdgeInsets.all(24),
       height: height,
       width: width,
-      backgroundColor: experimental ? null : secondaryColor.withOpacity(0.8),
+      backgroundColor: experimental
+          ? experimentalColor.withOpacity(0.25)
+          : secondaryColor.withOpacity(0.8),
       child: Center(
         child: experimental
-            ? coverBuilder!(
-                defaultArtColors.copyWith(
-                  accentColor: defaultIconColor,
+            ? Card(
+                elevation: displayDecoration ? 12 : 0,
+                child: coverBuilder!(
+                  defaultArtColors.copyWith(
+                    accentColor:
+                        displayDecoration ? iconColor : defaultIconColor,
+                    //borderColor:
+                    //displayDecoration ? iconColor : defaultIconColor,
+                  ),
                 ),
               )
             : Icon(

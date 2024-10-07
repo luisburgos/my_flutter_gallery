@@ -40,6 +40,7 @@ class ArtColors {
     required this.filColor0,
     required this.filColor1,
     required this.filColor2,
+    required this.borderColor,
   });
 
   final Color accentColor;
@@ -47,6 +48,7 @@ class ArtColors {
   final Color filColor0;
   final Color filColor1;
   final Color filColor2;
+  final Color borderColor;
 
   ArtColors copyWith({
     Color? accentColor,
@@ -54,6 +56,7 @@ class ArtColors {
     Color? filColor0,
     Color? filColor1,
     Color? filColor2,
+    Color? borderColor,
   }) {
     return ArtColors(
       accentColor: accentColor ?? this.accentColor,
@@ -61,6 +64,7 @@ class ArtColors {
       filColor0: filColor0 ?? this.filColor0,
       filColor1: filColor1 ?? this.filColor1,
       filColor2: filColor2 ?? this.filColor2,
+      borderColor: borderColor ?? this.borderColor,
     );
   }
 }
