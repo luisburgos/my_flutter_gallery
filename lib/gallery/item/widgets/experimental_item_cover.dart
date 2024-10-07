@@ -98,7 +98,7 @@ class HighlightsDailyReviewArt extends StatelessWidget {
                       color: colors.filColor1,
                     ),
                     WireframeArtSquare.small(
-                      color: colors.filColor1,
+                      color: colors.accentColor,
                     ),
                   ],
                 ),
@@ -160,7 +160,7 @@ class CinemaSnacksPickerArt extends StatelessWidget {
           const SizedBox(height: 4),
           Row(
             children: [
-              _buildItem(),
+              _buildItem(useAccent: true),
               const SizedBox(width: 4),
               _buildItem(),
               const Spacer(),
@@ -171,10 +171,10 @@ class CinemaSnacksPickerArt extends StatelessWidget {
     );
   }
 
-  Widget _buildItem() => WireframeArtSquare(
+  Widget _buildItem({bool useAccent = false}) => WireframeArtSquare(
         height: wireframeArtHeightUnit * 9,
         width: wireframeArtHeightUnit * 11.5,
-        color: colors.filColor1,
+        color: useAccent ? colors.accentColor : colors.filColor1,
         radius: 5,
       );
 }
@@ -213,7 +213,7 @@ class BillSplitCalculatorArt extends StatelessWidget {
                 color: colors.filColor1,
               ),
               WireframeArtSquare.small(
-                color: colors.filColor1,
+                color: colors.accentColor,
               ),
               WireframeArtSquare.small(
                 color: colors.filColor1,
@@ -234,13 +234,6 @@ class BillSplitCalculatorArt extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildItem() => WireframeArtSquare(
-        height: wireframeArtHeightUnit * 9,
-        width: wireframeArtHeightUnit * 11.5,
-        color: colors.filColor1,
-        radius: 5,
-      );
 }
 
 class WeeklyHabitsTrackerArt extends StatelessWidget {
@@ -278,7 +271,7 @@ class WeeklyHabitsTrackerArt extends StatelessWidget {
             ),
             Expanded(
               child: WireframeArtCirclesGrid(
-                color: colors.filColor1,
+                colors: colors,
               ),
             ),
           ],
@@ -324,7 +317,7 @@ class AiPoweredAppBuilder extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         WireframeArtCircle(
-                          color: colors.filColor1,
+                          color: colors.accentColor,
                         ),
                       ],
                     ),
@@ -568,11 +561,11 @@ class WireframeArtGrid1By2 extends StatelessWidget {
 
 class WireframeArtCirclesGrid extends StatelessWidget {
   const WireframeArtCirclesGrid({
-    required this.color,
+    required this.colors,
     super.key,
   });
 
-  final Color color;
+  final ArtColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -580,7 +573,12 @@ class WireframeArtCirclesGrid extends StatelessWidget {
     const rowsCount = 5;
     final items = List.generate(
       columnsCount * rowsCount,
-      (_) => WireframeArtCircle(color: color),
+      (_) {
+        final useAccent = _ == 19;
+        return WireframeArtCircle(
+          color: useAccent ? colors.accentColor : colors.filColor1,
+        );
+      },
     );
 
     return GridView.builder(

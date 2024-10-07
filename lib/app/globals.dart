@@ -153,7 +153,7 @@ class ReadwiseDailyReview extends GalleryItemData {
           id: 'RWDR-00',
           name: 'Highlights Daily Review',
           type: GalleryItemType.feature,
-          seedColor: Colors.blueGrey,
+          seedColor: Colors.purple,
           iconData: const Icon(
             FontAwesomeIcons.readme,
             size: 16,
@@ -173,7 +173,7 @@ class SplitwiseSplitOptions extends GalleryItemData {
           id: 'SWSP-00',
           name: 'Bill Split Calculator',
           type: GalleryItemType.feature,
-          seedColor: Colors.greenAccent,
+          seedColor: Colors.cyan,
           iconData: const Icon(
             FontAwesomeIcons.arrowsSplitUpAndLeft,
             size: 16,
