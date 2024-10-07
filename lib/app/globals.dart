@@ -25,6 +25,7 @@ const maxWidthConstraint = 732.0;
 
 const gLoremDescription = 'TODO: Add description lorem ipsum description '
     'lorem ipsum description '
+    'lorem ipsum description '
     'lorem ipsum description';
 
 class InstagramAppData extends GalleryItemData {
@@ -79,14 +80,14 @@ class BrancherAiAppData extends GalleryItemData {
   BrancherAiAppData()
       : super(
           id: 'BRCR-00',
-          name: 'brancher.ai',
+          name: 'AI-Powered App Builder',
           type: GalleryItemType.feature,
           seedColor: Colors.green,
           iconData: const Icon(
             FontAwesomeIcons.wind,
             size: 16,
           ),
-          description: gLoremDescription,
+          description: 'TODO',
           pageBuilder: (_) => const BrancherAiAppPage(),
         );
 }
@@ -111,14 +112,14 @@ class PopcornFlavorPickerData extends GalleryItemData {
   PopcornFlavorPickerData()
       : super(
           id: 'POPP-00',
-          name: 'PopcornFlavorPicker',
+          name: 'Cinema Snacks Picker',
           type: GalleryItemType.feature,
           seedColor: Colors.blueAccent,
           iconData: const Icon(
             FontAwesomeIcons.film,
             size: 16,
           ),
-          description: gLoremDescription,
+          description: 'TODO',
           pageBuilder: (_) => const PopcornFlavorPickerPage(),
         );
 }
@@ -127,14 +128,16 @@ class HabitsData extends GalleryItemData {
   HabitsData()
       : super(
           id: 'HABI-00',
-          name: 'Habits',
+          name: 'Weekly Habits Tracker',
           type: GalleryItemType.feature,
           seedColor: Colors.orange,
           iconData: const Icon(
             FontAwesomeIcons.calendarWeek,
             size: 16,
           ),
-          description: gLoremDescription,
+          description: 'Keep track of your daily habits using a week by week'
+              'visualization where giving you the proper sense of'
+              'progress is the main goal',
           pageBuilder: (_) => const HabitsPage(),
         );
 }
@@ -143,14 +146,16 @@ class ReadwiseDailyReview extends GalleryItemData {
   ReadwiseDailyReview()
       : super(
           id: 'RWDR-00',
-          name: 'Readwise Daily Review',
+          name: 'Highlights Daily Review',
           type: GalleryItemType.feature,
           seedColor: Colors.blueGrey,
           iconData: const Icon(
             FontAwesomeIcons.readme,
             size: 16,
           ),
-          description: gLoremDescription,
+          description: 'Read through a group of highlights for the day and '
+              'decide whether to keep it, discard or modify the '
+              'display frequency',
           pageBuilder: (_) => const ReadwiseDailyReviewPage(),
           githubRepoUrl: '$galleryRepoPackagesGithubUrl/readwise_daily_review',
         );
@@ -160,14 +165,15 @@ class SplitwiseSplitOptions extends GalleryItemData {
   SplitwiseSplitOptions()
       : super(
           id: 'SWSP-00',
-          name: 'Splitwise Split Options',
+          name: 'Bill Split Calculator',
           type: GalleryItemType.feature,
           seedColor: Colors.greenAccent,
           iconData: const Icon(
             FontAwesomeIcons.arrowsSplitUpAndLeft,
             size: 16,
           ),
-          description: gLoremDescription,
+          description: 'Define the bill amount, add people, choose a split '
+              'strategy and share the allocation results with everyone',
           pageBuilder: (_) => const SplitOptionsPage(),
           githubRepoUrl:
               '$galleryRepoPackagesGithubUrl/splitwise_split_options',

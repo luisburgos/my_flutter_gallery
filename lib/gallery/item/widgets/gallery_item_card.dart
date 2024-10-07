@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:my_flutter_gallery/components/my_flutter_gallery/model.dart';
 import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_brief.dart';
 import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_cover.dart';
-import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_type.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class GalleryItemCard extends StatelessWidget {
@@ -33,14 +32,6 @@ class GalleryItemCard extends StatelessWidget {
           GalleryItemBrief(
             name: item.name,
             description: item.description,
-            padding: const EdgeInsets.only(
-              right: 24,
-              left: 24,
-              bottom: 12,
-            ),
-          ),
-          GalleryItemTypeChip(
-            type: item.type,
             padding: const EdgeInsets.only(
               right: 24,
               left: 24,

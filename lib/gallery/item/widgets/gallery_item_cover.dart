@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_flutter_gallery/gallery/item/widgets/experimental_item_cover.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 const galleryItemCoverHeight = 178.0;
+const experimental = true;
 
 class GalleryItemCover extends StatelessWidget {
   const GalleryItemCover({
@@ -22,7 +24,7 @@ class GalleryItemCover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final backgroundColor =
-        ShadTheme.of(context).colorScheme.secondary.withOpacity(0.9);
+        ShadTheme.of(context).colorScheme.secondary.withOpacity(0.3);
     final defaultIconColor = ShadTheme.of(context).colorScheme.primary;
 
     return Container(
@@ -34,11 +36,17 @@ class GalleryItemCover extends StatelessWidget {
       height: height,
       width: width,
       child: Center(
-        child: Icon(
-          icon.icon,
-          color: iconColor ?? defaultIconColor,
-          size: 24,
-        ),
+        child: experimental
+            ? ExperimentalItemCover(
+                colors: defaultArtColors.copyWith(
+                  accentColor: iconColor,
+                ),
+              )
+            : Icon(
+                icon.icon,
+                color: iconColor ?? defaultIconColor,
+                size: 24,
+              ),
       ),
     );
   }

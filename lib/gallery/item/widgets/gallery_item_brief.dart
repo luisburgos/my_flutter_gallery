@@ -22,7 +22,9 @@ class GalleryItemBrief extends StatelessWidget {
         children: [
           GalleryItemNameText(name),
           const SizedBox(height: 4),
-          GalleryItemDescriptionText(description),
+          GalleryItemDescriptionText(
+            description,
+          ),
         ],
       ),
     );
@@ -51,7 +53,8 @@ class GalleryItemDescriptionText extends StatelessWidget {
       ),
       child: Text(
         description,
-        maxLines: 4,
+        //maxLines: 4,
+        //textAlign: TextAlign.justify,
         style: const TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w300,
