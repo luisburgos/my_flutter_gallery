@@ -97,6 +97,7 @@ class GalleryItemDetailPageMobile extends StatelessWidget {
               iconColor: app.seedColor,
               width: 100,
               height: 100,
+              coverBuilder: app.coverBuilder,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -148,6 +149,7 @@ class GalleryItemDetailBody extends StatelessWidget {
                 width: 100,
                 height: 100,
                 iconColor: app.seedColor,
+                coverBuilder: app.coverBuilder,
               ),
               const SizedBox(width: 12),
               Expanded(

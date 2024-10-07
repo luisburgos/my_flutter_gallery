@@ -28,6 +28,7 @@ class GalleryItemCard extends StatelessWidget {
             iconColor: item.seedColor,
             width: double.infinity,
             height: galleryItemCoverHeight,
+            coverBuilder: item.coverBuilder,
           ),
           GalleryItemBrief(
             name: item.name,

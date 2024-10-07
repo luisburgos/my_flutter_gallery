@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_flutter_gallery/components/my_flutter_gallery/model.dart';
+import 'package:my_flutter_gallery/gallery/item/widgets/experimental_item_cover.dart';
 import 'package:my_flutter_gallery/legacy/clones/brancher/brancher_app_page.dart';
 import 'package:my_flutter_gallery/legacy/clones/habits/habits.dart';
 import 'package:my_flutter_gallery/legacy/clones/instagram/instagram_app_page.dart';
@@ -89,6 +90,7 @@ class BrancherAiAppData extends GalleryItemData {
           ),
           description: 'TODO',
           pageBuilder: (_) => const BrancherAiAppPage(),
+          coverBuilder: (_) => AiPoweredAppBuilder(colors: _),
         );
 }
 
@@ -105,6 +107,7 @@ class OpenGptChatUiAppData extends GalleryItemData {
           ),
           description: gLoremDescription,
           pageBuilder: (_) => const OpenGptChatUiPage(),
+          coverBuilder: (_) => ExperimentalItemCover(colors: _),
         );
 }
 
@@ -121,6 +124,7 @@ class PopcornFlavorPickerData extends GalleryItemData {
           ),
           description: 'TODO',
           pageBuilder: (_) => const PopcornFlavorPickerPage(),
+          coverBuilder: (_) => CinemaSnacksPickerArt(colors: _),
         );
 }
 
@@ -139,6 +143,7 @@ class HabitsData extends GalleryItemData {
               'visualization where giving you the proper sense of'
               'progress is the main goal',
           pageBuilder: (_) => const HabitsPage(),
+          coverBuilder: (_) => WeeklyHabitsTrackerArt(colors: _),
         );
 }
 
@@ -158,6 +163,7 @@ class ReadwiseDailyReview extends GalleryItemData {
               'display frequency',
           pageBuilder: (_) => const ReadwiseDailyReviewPage(),
           githubRepoUrl: '$galleryRepoPackagesGithubUrl/readwise_daily_review',
+          coverBuilder: (_) => HighlightsDailyReviewArt(colors: _),
         );
 }
 
@@ -177,6 +183,7 @@ class SplitwiseSplitOptions extends GalleryItemData {
           pageBuilder: (_) => const SplitOptionsPage(),
           githubRepoUrl:
               '$galleryRepoPackagesGithubUrl/splitwise_split_options',
+          coverBuilder: (_) => BillSplitCalculatorArt(colors: _),
         );
 }
 
@@ -198,5 +205,6 @@ class RoadieAppItemData extends GalleryItemData {
             child: RoadieMainPage(),
           ),
           githubRepoUrl: '$galleryRepoPackagesGithubUrl/roadie',
+          coverBuilder: (_) => ExperimentalItemCover(colors: _),
         );
 }

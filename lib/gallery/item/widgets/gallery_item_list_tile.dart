@@ -22,40 +22,25 @@ class GalleryItemListTile extends StatelessWidget {
       radius: borderRadius,
       padding: const EdgeInsets.all(12),
       width: double.infinity,
-      height: itemCardHeight / 1.7,
+      height: itemCardHeight,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GalleryItemCover(
-                icon: item.iconData,
-                iconColor: item.seedColor,
-                width: 100,
-                height: itemCardHeight / 2.5,
-                margin: const EdgeInsets.all(10),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GalleryItemNameText(item.name),
-                      const SizedBox(height: 4),
-                      GalleryItemTypeChip(
-                        type: item.type,
-                      ),
-                      const SizedBox(height: 10),
-                      GalleryItemDescriptionText(
-                        item.description,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+          GalleryItemCover(
+            icon: item.iconData,
+            iconColor: item.seedColor,
+            width: 200,
+            height: itemCardHeight / 2.5,
+            margin: const EdgeInsets.all(10),
+            coverBuilder: item.coverBuilder,
+          ),
+          GalleryItemNameText(item.name),
+          const SizedBox(height: 4),
+          GalleryItemTypeChip(
+            type: item.type,
+          ),
+          const SizedBox(height: 10),
+          GalleryItemDescriptionText(
+            item.description,
           ),
         ],
       ),
