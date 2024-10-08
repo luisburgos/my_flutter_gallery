@@ -1,7 +1,9 @@
-import 'package:my_flutter_gallery/legacy/clones/popcorn_flavor_picker/popcorn_flavor_model.dart';
+import 'package:cinema_store_pickers/src/popcorn_picker/models.dart';
 
-class PopcornFlavorPickerModel {
-  const PopcornFlavorPickerModel({
+/// @no-doc
+class PopcornPickerState {
+  /// @no-doc
+  const PopcornPickerState({
     this.selected = const [],
     this.options = const [],
     this.selectionLimit = -1,
@@ -10,14 +12,26 @@ class PopcornFlavorPickerModel {
     this.brandHexColor,
   });
 
+  /// @no-doc
   final List<PopcornFlavor> selected;
+
+  /// @no-doc
   final List<PopcornFlavor> options;
+
+  /// @no-doc
   final int selectionLimit;
+
+  /// @no-doc
   final String? selectedCinema;
+
+  /// @no-doc
   final List<String> cinemaOptions;
+
+  /// @no-doc
   final String? brandHexColor;
 
-  PopcornFlavorPickerModel copyWith({
+  /// @no-doc
+  PopcornPickerState copyWith({
     List<PopcornFlavor>? selected,
     List<PopcornFlavor>? options,
     int? selectionLimit,
@@ -25,7 +39,7 @@ class PopcornFlavorPickerModel {
     List<String>? cinemaOptions,
     String? brandHexColor,
   }) {
-    return PopcornFlavorPickerModel(
+    return PopcornPickerState(
       selected: selected ?? this.selected,
       options: options ?? this.options,
       selectionLimit: selectionLimit ?? this.selectionLimit,

@@ -1,5 +1,6 @@
 // ignore: one_member_abstracts
-import 'package:my_flutter_gallery/legacy/clones/popcorn_flavor_picker/popcorn_flavor_model.dart';
+
+import 'package:cinema_store_pickers/src/popcorn_picker/models.dart';
 
 class PopcornFlavorPickerConfig {
   PopcornFlavorPickerConfig({

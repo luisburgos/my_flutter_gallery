@@ -1,32 +1,28 @@
+import 'package:cinema_store_pickers/src/popcorn_picker/models.dart';
+import 'package:cinema_store_pickers/src/popcorn_picker/providers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_flutter_gallery/legacy/clones/popcorn_flavor_picker/popcorn_flavor_model.dart';
-import 'package:my_flutter_gallery/legacy/clones/popcorn_flavor_picker/popcorn_flavor_picker_cubit.dart';
-import 'package:my_flutter_gallery/shared/color_utils.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PopcornFlavorPickerView extends StatefulWidget {
-  const PopcornFlavorPickerView({super.key});
-
+class PopcornPickerWidget extends ConsumerStatefulWidget {
   @override
-  State<PopcornFlavorPickerView> createState() =>
-      _PopcornFlavorPickerViewState();
+  _PopcornPickerWidgetState createState() => _PopcornPickerWidgetState();
 }
 
-class _PopcornFlavorPickerViewState extends State<PopcornFlavorPickerView> {
+class _PopcornPickerWidgetState extends ConsumerState<PopcornPickerWidget> {
   @override
   void initState() {
-    context.read<PopcornFlavorPickerCubit>().loadOptions();
+    ref.read(popcornFlavorPickerNotifierProvider.notifier).initialize();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<PopcornFlavorPickerCubit>();
+    final popcornFlavorPicker = ref.watch(popcornFlavorPickerNotifierProvider);
     final theme = Theme.of(context);
     var brandColor = theme.colorScheme.primary;
-    if (cubit.state.brandHexColor != null) {
-      brandColor = hexToColor(cubit.state.brandHexColor!);
+    if (popcornFlavorPicker.brandHexColor != null) {
+      //brandColor = hexToColor(popcornFlavorPicker.brandHexColor!);
     }
 
     return Padding(
@@ -40,22 +36,26 @@ class _PopcornFlavorPickerViewState extends State<PopcornFlavorPickerView> {
             ),
           ),
           PickerTitle(
-            selectionLimit: cubit.state.selectionLimit,
+            selectionLimit: popcornFlavorPicker.selectionLimit,
             color: brandColor,
           ),
           SizedBox(
             height: 100,
             child: PickerPreview(
-              items: cubit.state.selected,
-              onRemoveTap: cubit.toggleSelected,
+              items: popcornFlavorPicker.selected,
+              onRemoveTap: ref
+                  .read(popcornFlavorPickerNotifierProvider.notifier)
+                  .toggleSelected,
             ),
           ),
           SizedBox(
             height: 300,
             child: PickerOptions(
-              items: cubit.state.options,
-              selectedItems: cubit.state.selected,
-              onOptionTap: cubit.toggleSelected,
+              items: popcornFlavorPicker.options,
+              selectedItems: popcornFlavorPicker.selected,
+              onOptionTap: ref
+                  .read(popcornFlavorPickerNotifierProvider.notifier)
+                  .toggleSelected,
               selectedColor: brandColor,
             ),
           ),
@@ -65,7 +65,7 @@ class _PopcornFlavorPickerViewState extends State<PopcornFlavorPickerView> {
   }
 }
 
-class PickerDataSourceSelector extends StatelessWidget {
+class PickerDataSourceSelector extends ConsumerWidget {
   const PickerDataSourceSelector({
     required this.color,
     super.key,
@@ -74,13 +74,14 @@ class PickerDataSourceSelector extends StatelessWidget {
   final Color color;
 
   @override
-  Widget build(BuildContext context) {
-    final state = context.watch<PopcornFlavorPickerCubit>().state;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final popcornFlavorPicker = ref.watch(popcornFlavorPickerNotifierProvider);
 
-    if (state.cinemaOptions.isEmpty) return const CircularProgressIndicator();
+    if (popcornFlavorPicker.cinemaOptions.isEmpty)
+      return const CircularProgressIndicator();
 
     final segmentedCinemaOptions = {
-      for (final option in state.cinemaOptions)
+      for (final option in popcornFlavorPicker.cinemaOptions)
         option: Padding(
           padding: const EdgeInsets.all(8),
           child: Text('Cinema $option'),
@@ -89,12 +90,14 @@ class PickerDataSourceSelector extends StatelessWidget {
 
     return CupertinoSegmentedControl(
       padding: const EdgeInsets.all(8),
-      groupValue: state.selectedCinema,
+      groupValue: popcornFlavorPicker.selectedCinema,
       selectedColor: color,
       borderColor: color,
       children: segmentedCinemaOptions,
       onValueChanged: (_) {
-        context.read<PopcornFlavorPickerCubit>().setSelectedCinema(_);
+        ref
+            .read(popcornFlavorPickerNotifierProvider.notifier)
+            .setSelectedCinema(_);
       },
     );
   }
