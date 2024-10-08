@@ -25,7 +25,10 @@ class GalleryItemHomePage extends StatelessWidget {
     final state = GalleryItemsState.of(context);
     final find = state.items.where((app) => app.id == itemId).firstOrNull;
     if (find != null) {
-      return GalleryItemDetailPage(app: find);
+      return GalleryItemDetailPage(
+        app: find,
+        displayDecoration: true,
+      );
     }
     return const UnimplementedGalleryItemPage();
   }
@@ -34,10 +37,12 @@ class GalleryItemHomePage extends StatelessWidget {
 class GalleryItemDetailPage extends StatelessWidget {
   const GalleryItemDetailPage({
     required this.app,
+    required this.displayDecoration,
     super.key,
   });
 
   final GalleryItemData app;
+  final bool displayDecoration;
 
   @override
   Widget build(BuildContext context) {
@@ -67,8 +72,14 @@ class GalleryItemDetailPage extends StatelessWidget {
             ],
           ),
           ResponsiveView(
-            smChild: GalleryItemDetailPageMobile(app: app),
-            child: GalleryItemDetailBody(app: app),
+            smChild: GalleryItemDetailPageMobile(
+              app: app,
+              displayDecoration: displayDecoration,
+            ),
+            child: GalleryItemDetailBody(
+              app: app,
+              displayDecoration: displayDecoration,
+            ),
           ),
         ],
       ),
@@ -79,10 +90,12 @@ class GalleryItemDetailPage extends StatelessWidget {
 class GalleryItemDetailPageMobile extends StatelessWidget {
   const GalleryItemDetailPageMobile({
     required this.app,
+    required this.displayDecoration,
     super.key,
   });
 
   final GalleryItemData app;
+  final bool displayDecoration;
 
   @override
   Widget build(BuildContext context) {
@@ -95,9 +108,10 @@ class GalleryItemDetailPageMobile extends StatelessWidget {
             GalleryItemCover(
               icon: app.iconData,
               iconColor: app.seedColor,
-              width: 100,
-              height: 100,
+              width: double.infinity,
+              height: galleryItemCoverHeight,
               coverBuilder: app.coverBuilder,
+              displayDecoration: displayDecoration,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -105,17 +119,27 @@ class GalleryItemDetailPageMobile extends StatelessWidget {
                 vertical: 12,
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GalleryItemBrief(
-                    padding: EdgeInsets.zero,
-                    name: app.name,
-                    description: app.description,
+                  GalleryItemNameText(
+                    app.name,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  GalleryItemDescriptionText(
+                    app.description,
+                    fontSize: 18,
                   ),
                   const SizedBox(height: 20),
-                  ItemActionButtons(
-                    appId: app.id,
-                    githubRepoUrl: app.githubRepoUrl,
-                  ),
+                  Row(
+                    children: [
+                      const Spacer(),
+                      ItemActionButtons(
+                        appId: app.id,
+                        githubRepoUrl: app.githubRepoUrl,
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),
@@ -129,48 +153,52 @@ class GalleryItemDetailPageMobile extends StatelessWidget {
 class GalleryItemDetailBody extends StatelessWidget {
   const GalleryItemDetailBody({
     required this.app,
+    required this.displayDecoration,
     super.key,
   });
 
   final GalleryItemData app;
+  final bool displayDecoration;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: ShadCard(
-        child: SizedBox(
-          height: 300,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GalleryItemCover(
-                icon: app.iconData,
-                width: 100,
-                height: 100,
-                iconColor: app.seedColor,
-                coverBuilder: app.coverBuilder,
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: GalleryItemBrief(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        name: app.name,
-                        description: app.description,
-                      ),
-                    ),
-                    ItemActionButtons(
-                      appId: app.id,
-                      githubRepoUrl: app.githubRepoUrl,
-                    ),
-                  ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GalleryItemCover(
+              margin: EdgeInsets.zero,
+              icon: app.iconData,
+              iconColor: app.seedColor,
+              width: double.infinity,
+              height: 200,
+              coverBuilder: app.coverBuilder,
+              displayDecoration: displayDecoration,
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: GalleryItemNameText(
+                    app.name,
+                    fontSize: 38,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-            ],
-          ),
+                ItemActionButtons(
+                  appId: app.id,
+                  githubRepoUrl: app.githubRepoUrl,
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            GalleryItemDescriptionText(
+              app.description,
+              fontSize: 18,
+            ),
+          ],
         ),
       ),
     );
@@ -204,7 +232,6 @@ class ItemActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Spacer(),
         if (githubRepoUrl != null)
           GithubButton(
             withBorder: true,

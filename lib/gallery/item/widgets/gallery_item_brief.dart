@@ -37,11 +37,13 @@ class GalleryItemDescriptionText extends StatelessWidget {
     super.key,
     this.minHeight = 80.0,
     this.padding,
+    this.fontSize = 12,
   });
 
   final String description;
   final double minHeight;
   final EdgeInsetsGeometry? padding;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +57,8 @@ class GalleryItemDescriptionText extends StatelessWidget {
         description,
         //maxLines: 4,
         //textAlign: TextAlign.justify,
-        style: const TextStyle(
-          fontSize: 12,
+        style: TextStyle(
+          fontSize: fontSize,
           fontWeight: FontWeight.w300,
           color: secondaryColor,
         ),
@@ -66,17 +68,24 @@ class GalleryItemDescriptionText extends StatelessWidget {
 }
 
 class GalleryItemNameText extends StatelessWidget {
-  const GalleryItemNameText(this.name, {super.key});
+  const GalleryItemNameText(
+    this.name, {
+    super.key,
+    this.fontSize = 20,
+    this.fontWeight = FontWeight.w500,
+  });
 
   final String name;
+  final double? fontSize;
+  final FontWeight? fontWeight;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       name,
-      style: const TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.w500,
+      style: TextStyle(
+        fontSize: fontSize,
+        fontWeight: fontWeight,
       ),
     );
   }
