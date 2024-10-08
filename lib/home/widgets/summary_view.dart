@@ -13,7 +13,7 @@ class SummaryView extends StatelessWidget {
         SelectableText.rich(
           TextSpan(
             style: TextStyle(
-              fontSize: 48,
+              fontSize: 44,
               fontWeight: FontWeight.normal,
               height: 1.21,
               color: primaryColor,
@@ -37,7 +37,7 @@ class SummaryView extends StatelessWidget {
         SelectableText.rich(
           TextSpan(
             style: TextStyle(
-              fontSize: 48,
+              fontSize: 44,
               fontWeight: FontWeight.normal,
               height: 1.21,
               color: primaryColor,

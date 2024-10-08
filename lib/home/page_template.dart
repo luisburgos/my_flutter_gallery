@@ -50,7 +50,7 @@ class HomePageTemplate extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                            top: 32,
+                            top: 64,
                             bottom: 18,
                           ),
                           child: footer,
