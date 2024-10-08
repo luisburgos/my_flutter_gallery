@@ -1,3 +1,4 @@
+import 'package:cinema_store_pickers/cinema_store_pickers.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_flutter_gallery/components/my_flutter_gallery/model.dart';
@@ -206,5 +207,24 @@ class RoadieAppItemData extends GalleryItemData {
           ),
           githubRepoUrl: '$galleryRepoPackagesGithubUrl/roadie',
           coverBuilder: (_) => ExperimentalItemCover(colors: _),
+        );
+}
+
+class CinemaStorePickersPackageMetadata extends GalleryItemData {
+  CinemaStorePickersPackageMetadata()
+      : super(
+          id: 'cinema-stores-pickers',
+          name: 'Cinema Store Pickers',
+          type: GalleryItemType.component,
+          seedColor: Colors.blueAccent,
+          iconData: const Icon(
+            FontAwesomeIcons.ticket,
+            size: 16,
+          ),
+          description: 'Pickers for customizable cinema snacks, designed to'
+              ' handle variations in size, flavor, and availability by branch',
+          pageBuilder: (_) => const CinemaStorePickersRootPage(),
+          githubRepoUrl: '$galleryRepoPackagesGithubUrl/cinema_stores_pickers',
+          coverBuilder: (_) => CinemaSnacksPickerArt(colors: _),
         );
 }

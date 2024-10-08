@@ -31,6 +31,8 @@ dependencies:
   shadcn_ui: ^0.8.1
   splitwise_split_options:
     path: packages/splitwise_split_options
+  cinema_store_pickers:
+    path: packages/cinema_store_pickers
   timelines: ^0.1.0
   url_launcher: ^6.3.0
 
