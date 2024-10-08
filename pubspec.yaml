@@ -21,6 +21,8 @@ dependencies:
   go_router: ^14.2.7
   google_fonts: ^6.2.1
   intl: ^0.19.0
+  lowframer:
+    path: shared/lowframer
   meta: ^1.11.0
   neubrutalism_ui: ^2.0.2
   package_info_plus: ^7.0.0

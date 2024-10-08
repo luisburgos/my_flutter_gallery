@@ -1,5 +1,5 @@
-name: cinema_store_pickers
-description: Customizable product pickers for cinema store apps
+name: lowframer
+description: A kit to create customizable, reusable low-fidelity wireframe visuals
 version: 0.1.0+1
 publish_to: none
 
@@ -10,8 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  lowframer:
-    path: ../../shared/lowframer
+  font_awesome_flutter: ^10.7.0
 
 dev_dependencies:
   flutter_test:

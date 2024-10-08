@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lowframer/lowframer.dart';
 
 enum GalleryItemType {
   component,
@@ -31,40 +32,4 @@ class GalleryItemData {
   final Icon iconData;
   final CoverBuilder? coverBuilder;
   final Widget Function(BuildContext context) pageBuilder;
-}
-
-class ArtColors {
-  const ArtColors({
-    required this.accentColor,
-    required this.backgroundColor,
-    required this.filColor0,
-    required this.filColor1,
-    required this.filColor2,
-    required this.borderColor,
-  });
-
-  final Color accentColor;
-  final Color backgroundColor;
-  final Color filColor0;
-  final Color filColor1;
-  final Color filColor2;
-  final Color borderColor;
-
-  ArtColors copyWith({
-    Color? accentColor,
-    Color? backgroundColor,
-    Color? filColor0,
-    Color? filColor1,
-    Color? filColor2,
-    Color? borderColor,
-  }) {
-    return ArtColors(
-      accentColor: accentColor ?? this.accentColor,
-      backgroundColor: backgroundColor ?? this.backgroundColor,
-      filColor0: filColor0 ?? this.filColor0,
-      filColor1: filColor1 ?? this.filColor1,
-      filColor2: filColor2 ?? this.filColor2,
-      borderColor: borderColor ?? this.borderColor,
-    );
-  }
 }

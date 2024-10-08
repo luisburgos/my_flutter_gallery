@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lowframer/lowframer.dart';
 import 'package:my_flutter_gallery/components/my_flutter_gallery/model.dart';
-import 'package:my_flutter_gallery/gallery/item/widgets/experimental_item_cover.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 const galleryItemCoverHeight = 178.0;

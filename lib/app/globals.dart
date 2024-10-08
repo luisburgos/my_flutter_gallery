@@ -1,14 +1,13 @@
 import 'package:cinema_store_pickers/cinema_store_pickers.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lowframer/lowframer.dart';
 import 'package:my_flutter_gallery/components/my_flutter_gallery/model.dart';
-import 'package:my_flutter_gallery/gallery/item/widgets/experimental_item_cover.dart';
 import 'package:my_flutter_gallery/legacy/clones/brancher/brancher_app_page.dart';
 import 'package:my_flutter_gallery/legacy/clones/habits/habits.dart';
 import 'package:my_flutter_gallery/legacy/clones/instagram/instagram_app_page.dart';
 import 'package:my_flutter_gallery/legacy/clones/open_gpt_chat_ui/open_gpt_chat_ui_page.dart';
 import 'package:my_flutter_gallery/legacy/clones/perplexity/perplexity_app_page.dart';
-import 'package:my_flutter_gallery/legacy/clones/popcorn_flavor_picker/popcorn_flavor_picker_page.dart';
 import 'package:my_flutter_gallery/legacy/clones/supernotes/supernotes_app_page.dart';
 import 'package:my_flutter_gallery/shared/colors_extended.dart';
 import 'package:readwise_daily_review/readwise_daily_review.dart';
@@ -112,23 +111,6 @@ class OpenGptChatUiAppData extends GalleryItemData {
         );
 }
 
-class PopcornFlavorPickerData extends GalleryItemData {
-  PopcornFlavorPickerData()
-      : super(
-          id: 'POPP-00',
-          name: 'Cinema Snacks Picker',
-          type: GalleryItemType.feature,
-          seedColor: Colors.blueAccent,
-          iconData: const Icon(
-            FontAwesomeIcons.film,
-            size: 16,
-          ),
-          description: 'TODO',
-          pageBuilder: (_) => const PopcornFlavorPickerPage(),
-          coverBuilder: (_) => CinemaSnacksPickerArt(colors: _),
-        );
-}
-
 class HabitsData extends GalleryItemData {
   HabitsData()
       : super(
@@ -225,6 +207,6 @@ class CinemaStorePickersPackageMetadata extends GalleryItemData {
               ' handle variations in size, flavor, and availability by branch',
           pageBuilder: (_) => const CinemaStorePickersRootPage(),
           githubRepoUrl: '$galleryRepoPackagesGithubUrl/cinema_stores_pickers',
-          coverBuilder: (_) => CinemaSnacksPickerArt(colors: _),
+          coverBuilder: (_) => CinemaStorePickersCoverArt(colors: _),
         );
 }
