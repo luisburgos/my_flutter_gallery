@@ -1,27 +1,32 @@
 import 'package:cinema_store_pickers/src/popcorn_picker/models.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/providers.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cinema_store_pickers/src/popcorn_picker/widgets/cinema_branch_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+/// @no-doc
 class PopcornPickerWidget extends ConsumerStatefulWidget {
+  /// @no-doc
+  const PopcornPickerWidget({super.key});
+
   @override
-  _PopcornPickerWidgetState createState() => _PopcornPickerWidgetState();
+  PopcornPickerWidgetState createState() => PopcornPickerWidgetState();
 }
 
-class _PopcornPickerWidgetState extends ConsumerState<PopcornPickerWidget> {
+/// @no-doc
+class PopcornPickerWidgetState extends ConsumerState<PopcornPickerWidget> {
   @override
   void initState() {
-    ref.read(popcornFlavorPickerNotifierProvider.notifier).initialize();
+    ref.read(popcornPickerNotifierProvider.notifier).initialize();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final popcornFlavorPicker = ref.watch(popcornFlavorPickerNotifierProvider);
+    final popcornPicker = ref.watch(popcornPickerNotifierProvider);
     final theme = Theme.of(context);
-    var brandColor = theme.colorScheme.primary;
-    if (popcornFlavorPicker.brandHexColor != null) {
+    final brandColor = theme.colorScheme.primary;
+    if (popcornPicker.brandHexColor != null) {
       //brandColor = hexToColor(popcornFlavorPicker.brandHexColor!);
     }
 
@@ -31,30 +36,37 @@ class _PopcornPickerWidgetState extends ConsumerState<PopcornPickerWidget> {
         children: [
           Align(
             alignment: Alignment.centerLeft,
-            child: PickerDataSourceSelector(
+            child: CinemaBranchSelector(
+              options: popcornPicker.cinemaOptions,
+              selectedCinema: popcornPicker.selectedCinema!,
+              onSetSelectedCinema: (_) {
+                ref
+                    .read(popcornPickerNotifierProvider.notifier)
+                    .setSelectedCinemaBranch(_.id);
+              },
               color: brandColor,
             ),
           ),
           PickerTitle(
-            selectionLimit: popcornFlavorPicker.selectionLimit,
+            selectionLimit: popcornPicker.selectionLimit,
             color: brandColor,
           ),
           SizedBox(
             height: 100,
             child: PickerPreview(
-              items: popcornFlavorPicker.selected,
+              items: popcornPicker.selected,
               onRemoveTap: ref
-                  .read(popcornFlavorPickerNotifierProvider.notifier)
+                  .read(popcornPickerNotifierProvider.notifier)
                   .toggleSelected,
             ),
           ),
           SizedBox(
             height: 300,
             child: PickerOptions(
-              items: popcornFlavorPicker.options,
-              selectedItems: popcornFlavorPicker.selected,
+              items: popcornPicker.options,
+              selectedItems: popcornPicker.selected,
               onOptionTap: ref
-                  .read(popcornFlavorPickerNotifierProvider.notifier)
+                  .read(popcornPickerNotifierProvider.notifier)
                   .toggleSelected,
               selectedColor: brandColor,
             ),
@@ -65,52 +77,19 @@ class _PopcornPickerWidgetState extends ConsumerState<PopcornPickerWidget> {
   }
 }
 
-class PickerDataSourceSelector extends ConsumerWidget {
-  const PickerDataSourceSelector({
-    required this.color,
-    super.key,
-  });
-
-  final Color color;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final popcornFlavorPicker = ref.watch(popcornFlavorPickerNotifierProvider);
-
-    if (popcornFlavorPicker.cinemaOptions.isEmpty)
-      return const CircularProgressIndicator();
-
-    final segmentedCinemaOptions = {
-      for (final option in popcornFlavorPicker.cinemaOptions)
-        option: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Text('Cinema $option'),
-        ),
-    };
-
-    return CupertinoSegmentedControl(
-      padding: const EdgeInsets.all(8),
-      groupValue: popcornFlavorPicker.selectedCinema,
-      selectedColor: color,
-      borderColor: color,
-      children: segmentedCinemaOptions,
-      onValueChanged: (_) {
-        ref
-            .read(popcornFlavorPickerNotifierProvider.notifier)
-            .setSelectedCinema(_);
-      },
-    );
-  }
-}
-
+/// @no-doc
 class PickerTitle extends StatelessWidget {
+  /// @no-doc
   const PickerTitle({
     required this.color,
     required this.selectionLimit,
     super.key,
   });
 
+  /// @no-doc
   final Color color;
+
+  /// @no-doc
   final int selectionLimit;
 
   @override
@@ -135,15 +114,17 @@ class PickerTitle extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class PickerPreview extends StatelessWidget {
+  /// @no-doc
   const PickerPreview({
     required this.items,
     required this.onRemoveTap,
     super.key,
   });
 
-  final List<PopcornFlavor> items;
-  final void Function(PopcornFlavor) onRemoveTap;
+  final List<PopcornFlavorOption> items;
+  final void Function(PopcornFlavorOption) onRemoveTap;
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +160,9 @@ class PickerPreview extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class PickerPreviewItem extends StatelessWidget {
+  /// @no-doc
   const PickerPreviewItem({
     required this.item,
     required this.onRemoveTap,
@@ -187,9 +170,9 @@ class PickerPreviewItem extends StatelessWidget {
     super.key,
   });
 
-  final PopcornFlavor item;
+  final PopcornFlavorOption item;
   final bool displayRemoveButton;
-  final void Function(PopcornFlavor) onRemoveTap;
+  final void Function(PopcornFlavorOption) onRemoveTap;
 
   @override
   Widget build(BuildContext context) {
@@ -224,7 +207,9 @@ class PickerPreviewItem extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class PickerOptions extends StatelessWidget {
+  /// @no-doc
   const PickerOptions({
     required this.items,
     required this.selectedItems,
@@ -233,9 +218,16 @@ class PickerOptions extends StatelessWidget {
     super.key,
   });
 
-  final List<PopcornFlavor> items;
-  final List<PopcornFlavor> selectedItems;
-  final void Function(PopcornFlavor) onOptionTap;
+  /// @no-doc
+  final List<PopcornFlavorOption> items;
+
+  /// @no-doc
+  final List<PopcornFlavorOption> selectedItems;
+
+  /// @no-doc
+  final void Function(PopcornFlavorOption) onOptionTap;
+
+  /// @no-doc
   final Color selectedColor;
 
   @override
@@ -262,7 +254,9 @@ class PickerOptions extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class PickerOptionItem extends StatelessWidget {
+  /// @no-doc
   const PickerOptionItem({
     required this.item,
     required this.onOptionTap,
@@ -271,9 +265,16 @@ class PickerOptionItem extends StatelessWidget {
     super.key,
   });
 
-  final PopcornFlavor item;
+  /// @no-doc
+  final PopcornFlavorOption item;
+
+  /// @no-doc
   final bool isSelected;
-  final void Function(PopcornFlavor) onOptionTap;
+
+  /// @no-doc
+  final void Function(PopcornFlavorOption) onOptionTap;
+
+  /// @no-doc
   final Color selectedColor;
 
   @override

@@ -2,86 +2,80 @@
 
 import 'package:cinema_store_pickers/src/popcorn_picker/models.dart';
 
-class PopcornFlavorPickerConfig {
-  PopcornFlavorPickerConfig({
-    required this.cinemaId,
-    required this.selectionLimit,
-    required this.brandHexColor,
-  });
+/// @no-doc
+abstract class PopcornPickerService {
+  /// @no-doc
+  Future<CinemaBranch> getDefaultCinemaBranch();
 
-  final String cinemaId;
-  final int selectionLimit;
-  final String brandHexColor;
+  /// @no-doc
+  Future<CinemaBranch> getCinemaBranchById(String cinemaId);
+
+  /// @no-doc
+  Future<List<PopcornFlavorOption>> getPopcornFlavorOptions(String cinemaId);
+
+  /// @no-doc
+  Future<List<CinemaBranch>> getDefaultCinemaBranches();
 }
 
-abstract class PopcornFlavorPickerOptionsService {
-  Future<String> getDefaultCinemaId();
+const _data = [
+  CinemaBranch(
+    id: 'A',
+    name: 'A',
+    selectionLimit: 2,
+    brandHexColor: '003366',
+  ),
+  CinemaBranch(
+    id: 'B',
+    name: 'B',
+    selectionLimit: 3,
+    brandHexColor: 'E30B17',
+  ),
+];
 
-  Future<PopcornFlavorPickerConfig> getConfigForCinemaId(String cinemaId);
-
-  Future<List<PopcornFlavor>> getPopcornFlavorOptions(String cinemaId);
-
-  Future<List<String>> getDefaultCinemas();
-}
-
-class DefaultPopcornFlavorPickerOptionsService
-    extends PopcornFlavorPickerOptionsService {
+/// @no-doc
+class DefaultPopcornPickerService extends PopcornPickerService {
   @override
-  Future<List<String>> getDefaultCinemas() {
-    return Future.value(['A', 'B']);
+  Future<List<CinemaBranch>> getDefaultCinemaBranches() {
+    return Future.value(_data);
   }
 
   @override
-  Future<String> getDefaultCinemaId() {
-    return Future.value('B');
+  Future<CinemaBranch> getDefaultCinemaBranch() {
+    return Future.value(_data[0]);
   }
 
   @override
-  Future<PopcornFlavorPickerConfig> getConfigForCinemaId(String cinemaId) {
-    if (cinemaId == 'A') {
-      return Future.value(
-        PopcornFlavorPickerConfig(
-          cinemaId: 'A',
-          selectionLimit: 2,
-          brandHexColor: '003366',
-        ),
-      );
-    }
-
-    return Future.value(
-      PopcornFlavorPickerConfig(
-        cinemaId: 'B',
-        selectionLimit: 3,
-        brandHexColor: 'E30B17',
-      ),
-    );
+  Future<CinemaBranch> getCinemaBranchById(String cinemaId) {
+    final find = _data.where((c) => c.id == cinemaId);
+    if (find.isEmpty) throw Exception('');
+    return Future.value(find.first);
   }
 
   @override
-  Future<List<PopcornFlavor>> getPopcornFlavorOptions(String cinemaId) {
+  Future<List<PopcornFlavorOption>> getPopcornFlavorOptions(String cinemaId) {
     final baseFlavors = [
-      const PopcornFlavor(
+      const PopcornFlavorOption(
         name: 'Mantequilla',
         iconName: 'butter',
       ),
-      const PopcornFlavor(
+      const PopcornFlavorOption(
         name: 'Caramelo',
         iconName: 'caramel',
       ),
     ];
 
-    var cinemaFlavors = <PopcornFlavor>[];
+    var cinemaFlavors = <PopcornFlavorOption>[];
     if (cinemaId == 'A') {
       cinemaFlavors = [
-        const PopcornFlavor(
+        const PopcornFlavorOption(
           name: 'Doritos® Nachos',
           iconName: 'nacho',
         ),
-        const PopcornFlavor(
+        const PopcornFlavorOption(
           name: 'Cheetos Torciditos®',
           iconName: 'stick',
         ),
-        const PopcornFlavor(
+        const PopcornFlavorOption(
           name: 'Takis® Blue',
           iconName: 'blue_stick',
         ),
@@ -90,11 +84,11 @@ class DefaultPopcornFlavorPickerOptionsService
 
     if (cinemaId == 'B') {
       cinemaFlavors = [
-        const PopcornFlavor(
+        const PopcornFlavorOption(
           name: 'Chips Jalapeño®',
           iconName: 'pepper',
         ),
-        const PopcornFlavor(
+        const PopcornFlavorOption(
           name: 'Ruffles Queso®',
           iconName: 'cheese',
         ),

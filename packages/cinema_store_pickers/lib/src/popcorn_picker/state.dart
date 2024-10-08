@@ -13,30 +13,30 @@ class PopcornPickerState {
   });
 
   /// @no-doc
-  final List<PopcornFlavor> selected;
+  final List<PopcornFlavorOption> selected;
 
   /// @no-doc
-  final List<PopcornFlavor> options;
+  final List<PopcornFlavorOption> options;
 
   /// @no-doc
   final int selectionLimit;
 
   /// @no-doc
-  final String? selectedCinema;
+  final CinemaBranch? selectedCinema;
 
   /// @no-doc
-  final List<String> cinemaOptions;
+  final List<CinemaBranch> cinemaOptions;
 
   /// @no-doc
   final String? brandHexColor;
 
   /// @no-doc
   PopcornPickerState copyWith({
-    List<PopcornFlavor>? selected,
-    List<PopcornFlavor>? options,
+    List<PopcornFlavorOption>? selected,
+    List<PopcornFlavorOption>? options,
     int? selectionLimit,
-    String? selectedCinema,
-    List<String>? cinemaOptions,
+    CinemaBranch? selectedCinema,
+    List<CinemaBranch>? cinemaOptions,
     String? brandHexColor,
   }) {
     return PopcornPickerState(

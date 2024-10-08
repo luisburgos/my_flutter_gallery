@@ -7,19 +7,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class PopcornPickerController extends StateNotifier<PopcornPickerState> {
   /// @no-doc
   PopcornPickerController({
-    required this.optionsService,
+    required this.service,
   }) : super(const PopcornPickerState());
 
   /// @no-doc
-  final PopcornFlavorPickerOptionsService optionsService;
+  final PopcornPickerService service;
 
   /// Call this method after the controller is created
   Future<void> initialize() async {
-    await loadOptions();
+    await _loadData();
   }
 
   /// @no-doc
-  void toggleSelected(PopcornFlavor item) {
+  void toggleSelected(PopcornFlavorOption item) {
     final selected = [...state.selected];
     final isSelected = selected.contains(item);
 
@@ -36,31 +36,33 @@ class PopcornPickerController extends StateNotifier<PopcornPickerState> {
   }
 
   /// @no-doc
-  Future<void> setSelectedCinema(String cinema) async {
-    final config = await optionsService.getConfigForCinemaId(cinema);
-    final options = await optionsService.getPopcornFlavorOptions(cinema);
+  Future<void> setSelectedCinemaBranch(String cinemaId) async {
+    final cinemaBranch = await service.getCinemaBranchById(cinemaId);
+    final options = await service.getPopcornFlavorOptions(cinemaId);
     state = state.copyWith(
       options: options,
-      selectionLimit: config.selectionLimit,
-      selectedCinema: cinema,
+      selectionLimit: cinemaBranch.selectionLimit,
+      selectedCinema: cinemaBranch,
       selected: [],
-      brandHexColor: config.brandHexColor,
+      brandHexColor: cinemaBranch.brandHexColor,
     );
   }
 
   /// @no-doc
-  Future<void> loadOptions() async {
-    final defaultCinema = await optionsService.getDefaultCinemaId();
-    final cinemaOptions = await optionsService.getDefaultCinemas();
-    final config = await optionsService.getConfigForCinemaId(defaultCinema);
-    final options = await optionsService.getPopcornFlavorOptions(defaultCinema);
+  Future<void> _loadData() async {
+    final defaultCinemaBranch = await service.getDefaultCinemaBranch();
+    final cinemaBranches = await service.getDefaultCinemaBranches();
+    final popcornFlavorOptions = await service.getPopcornFlavorOptions(
+      defaultCinemaBranch.id,
+    );
     state = state.copyWith(
-      options: options,
-      selectionLimit: config.selectionLimit,
-      cinemaOptions: cinemaOptions,
-      selectedCinema:
-          cinemaOptions.firstWhere((cinema) => cinema == defaultCinema),
-      brandHexColor: config.brandHexColor,
+      options: popcornFlavorOptions,
+      selectionLimit: defaultCinemaBranch.selectionLimit,
+      cinemaOptions: cinemaBranches,
+      selectedCinema: cinemaBranches.firstWhere(
+        (cinema) => cinema == defaultCinemaBranch,
+      ),
+      brandHexColor: defaultCinemaBranch.brandHexColor,
     );
   }
 }

@@ -4,14 +4,15 @@ import 'package:cinema_store_pickers/src/popcorn_picker/state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// @no-doc
-final popcornFlavorPickerOptionsServiceProvider =
-    Provider<PopcornFlavorPickerOptionsService>((ref) {
-  return DefaultPopcornFlavorPickerOptionsService();
+final popcornPickerServiceProvider = Provider<PopcornPickerService>((ref) {
+  return DefaultPopcornPickerService();
 });
 
 /// @no-doc
-final popcornFlavorPickerNotifierProvider =
-    StateNotifierProvider<PopcornPickerController, PopcornPickerState>((ref) {
-  final optionsService = ref.watch(popcornFlavorPickerOptionsServiceProvider);
-  return PopcornPickerController(optionsService: optionsService);
-});
+final popcornPickerNotifierProvider =
+    StateNotifierProvider<PopcornPickerController, PopcornPickerState>(
+  (ref) {
+    final service = ref.watch(popcornPickerServiceProvider);
+    return PopcornPickerController(service: service);
+  },
+);
