@@ -1,11 +1,13 @@
-import 'package:cinema_store_pickers/src/popcorn_picker/models.dart';
+import 'package:cinema_store_pickers/src/models/models.dart';
 
 /// @no-doc
 class PopcornPickerState {
   /// @no-doc
   const PopcornPickerState({
-    this.selected = const [],
-    this.options = const [],
+    this.selectedSize,
+    this.selectedFlavors = const [],
+    this.flavorOptions = const [],
+    this.sizeOptions = const [],
     this.selectionLimit = -1,
     this.selectedCinema,
     this.cinemaOptions = const [],
@@ -13,10 +15,16 @@ class PopcornPickerState {
   });
 
   /// @no-doc
-  final List<PopcornFlavorOption> selected;
+  final List<PopcornFlavor> selectedFlavors;
 
   /// @no-doc
-  final List<PopcornFlavorOption> options;
+  final List<PopcornFlavor> flavorOptions;
+
+  /// @no-doc
+  final PopcornSize? selectedSize;
+
+  /// @no-doc
+  final List<PopcornSize> sizeOptions;
 
   /// @no-doc
   final int selectionLimit;
@@ -32,16 +40,20 @@ class PopcornPickerState {
 
   /// @no-doc
   PopcornPickerState copyWith({
-    List<PopcornFlavorOption>? selected,
-    List<PopcornFlavorOption>? options,
+    List<PopcornFlavor>? selectedFlavors,
+    PopcornSize? selectedSize,
+    List<PopcornFlavor>? flavorOptions,
+    List<PopcornSize>? sizeOptions,
     int? selectionLimit,
     CinemaBranch? selectedCinema,
     List<CinemaBranch>? cinemaOptions,
     String? brandHexColor,
   }) {
     return PopcornPickerState(
-      selected: selected ?? this.selected,
-      options: options ?? this.options,
+      selectedSize: selectedSize ?? this.selectedSize,
+      selectedFlavors: selectedFlavors ?? this.selectedFlavors,
+      flavorOptions: flavorOptions ?? this.flavorOptions,
+      sizeOptions: sizeOptions ?? this.sizeOptions,
       selectionLimit: selectionLimit ?? this.selectionLimit,
       selectedCinema: selectedCinema ?? this.selectedCinema,
       cinemaOptions: cinemaOptions ?? this.cinemaOptions,

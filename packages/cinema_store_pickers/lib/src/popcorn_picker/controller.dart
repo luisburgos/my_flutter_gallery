@@ -1,5 +1,5 @@
-import 'package:cinema_store_pickers/src/popcorn_picker/models.dart';
-import 'package:cinema_store_pickers/src/popcorn_picker/services.dart';
+import 'package:cinema_store_pickers/src/data/data.dart';
+import 'package:cinema_store_pickers/src/models/models.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,11 +7,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class PopcornPickerController extends StateNotifier<PopcornPickerState> {
   /// @no-doc
   PopcornPickerController({
-    required this.service,
+    required this.popcornOptionsRepository,
+    required this.cinemaBranchesRepository,
   }) : super(const PopcornPickerState());
 
   /// @no-doc
-  final PopcornPickerService service;
+
+  final PopcornOptionsRepository popcornOptionsRepository;
+
+  /// @no-doc
+  final CinemaBranchesRepository cinemaBranchesRepository;
 
   /// Call this method after the controller is created
   Future<void> initialize() async {
@@ -19,8 +24,18 @@ class PopcornPickerController extends StateNotifier<PopcornPickerState> {
   }
 
   /// @no-doc
-  void toggleSelected(PopcornFlavorOption item) {
-    final selected = [...state.selected];
+  void toggleSelectedSize(PopcornSize item) {
+    final selected = state.selectedSize;
+    if (selected != item) {
+      state = state.copyWith(
+        selectedSize: item,
+      );
+    }
+  }
+
+  /// @no-doc
+  void toggleSelectedFlavor(PopcornFlavor item) {
+    final selected = [...state.selectedFlavors];
     final isSelected = selected.contains(item);
 
     if (isSelected) {
@@ -31,37 +46,51 @@ class PopcornPickerController extends StateNotifier<PopcornPickerState> {
     }
 
     state = state.copyWith(
-      selected: selected,
+      selectedFlavors: selected,
     );
   }
 
   /// @no-doc
   Future<void> setSelectedCinemaBranch(String cinemaId) async {
-    final cinemaBranch = await service.getCinemaBranchById(cinemaId);
-    final options = await service.getPopcornFlavorOptions(cinemaId);
+    final cinemaBranch =
+        await cinemaBranchesRepository.getCinemaBranchById(cinemaId);
+    final options = await popcornOptionsRepository.getPopcornFlavors(cinemaId);
     state = state.copyWith(
-      options: options,
+      flavorOptions: options,
       selectionLimit: cinemaBranch.selectionLimit,
       selectedCinema: cinemaBranch,
-      selected: [],
+      selectedFlavors: [],
       brandHexColor: cinemaBranch.brandHexColor,
     );
   }
 
   /// @no-doc
   Future<void> _loadData() async {
-    final defaultCinemaBranch = await service.getDefaultCinemaBranch();
-    final cinemaBranches = await service.getDefaultCinemaBranches();
-    final popcornFlavorOptions = await service.getPopcornFlavorOptions(
+    final defaultCinemaBranch =
+        await cinemaBranchesRepository.getDefaultCinemaBranch();
+    final cinemaBranches =
+        await cinemaBranchesRepository.getDefaultCinemaBranches();
+    final popcornFlavorOptions =
+        await popcornOptionsRepository.getPopcornFlavors(
       defaultCinemaBranch.id,
     );
+    final popcornSizeOptions = await popcornOptionsRepository.getPopcornSizes(
+      defaultCinemaBranch.id,
+    );
+    final defaultPopcornSize =
+        await popcornOptionsRepository.getDefaultPopcornSize(
+      defaultCinemaBranch.id,
+    );
+
     state = state.copyWith(
-      options: popcornFlavorOptions,
+      flavorOptions: popcornFlavorOptions,
       selectionLimit: defaultCinemaBranch.selectionLimit,
       cinemaOptions: cinemaBranches,
       selectedCinema: cinemaBranches.firstWhere(
         (cinema) => cinema == defaultCinemaBranch,
       ),
+      selectedSize: defaultPopcornSize,
+      sizeOptions: popcornSizeOptions,
       brandHexColor: defaultCinemaBranch.brandHexColor,
     );
   }

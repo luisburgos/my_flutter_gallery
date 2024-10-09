@@ -1,4 +1,4 @@
-import 'package:cinema_store_pickers/src/popcorn_picker/models.dart';
+import 'package:cinema_store_pickers/src/models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
