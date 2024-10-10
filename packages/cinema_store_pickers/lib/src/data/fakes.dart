@@ -18,26 +18,31 @@ const popcornSizeFamily = 'family';
 /// @no-doc
 final popcornSizes = {
   popcornSizeSmall: const PopcornSize(
+    id: popcornSizeSmall,
     name: 'Chicas',
     iconName: '',
     price: 80,
   ),
   popcornSizeMedium: const PopcornSize(
+    id: popcornSizeMedium,
     name: 'Medianas',
     iconName: '',
     price: 85,
   ),
   popcornSizeLarge: const PopcornSize(
+    id: popcornSizeLarge,
     name: 'Grandes',
     iconName: '',
     price: 90,
   ),
   popcornSizeJumbo: const PopcornSize(
+    id: popcornSizeJumbo,
     name: 'Jumbo',
     iconName: '',
     price: 95,
   ),
   popcornSizeFamily: const PopcornSize(
+    id: popcornSizeFamily,
     name: 'Para llevar',
     iconName: '',
     price: 105,

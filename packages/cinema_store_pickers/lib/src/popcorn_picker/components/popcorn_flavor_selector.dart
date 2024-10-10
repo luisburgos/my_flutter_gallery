@@ -5,6 +5,7 @@ import 'package:cinema_store_pickers/src/shared/picker_selection_preview.dart';
 import 'package:cinema_store_pickers/src/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:money2/money2.dart';
 
 /// @no-doc
 class PopcornFlavorSelector extends ConsumerWidget {
@@ -15,12 +16,17 @@ class PopcornFlavorSelector extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final popcornPicker = ref.watch(popcornPickerNotifierProvider);
 
+    final popcornSelectedSize = popcornPicker.selectedSize!;
     final pickerSelectedFlavors = {
       for (final item in popcornPicker.selectedFlavors)
         PickerSectionOptionItemData(
           name: item.name,
           iconName: item.iconName,
-          priceTag: r'$0.00',
+          priceTag: Money.fromNum(
+            item.prices[popcornSelectedSize.id] ?? 0.0,
+            isoCode: 'MXN',
+            decimalDigits: 2,
+          ).toString(),
         ): item,
     };
 
@@ -29,7 +35,11 @@ class PopcornFlavorSelector extends ConsumerWidget {
         PickerSectionOptionItemData(
           name: item.name,
           iconName: item.iconName,
-          priceTag: r'$0.00',
+          priceTag: Money.fromNum(
+            item.prices[popcornSelectedSize.id] ?? 0.0,
+            isoCode: 'MXN',
+            decimalDigits: 2,
+          ).toString(),
         ): item,
     };
 
