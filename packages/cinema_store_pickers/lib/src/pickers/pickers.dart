@@ -9,24 +9,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /// @no-doc
 final pickers = [
   PickerItem(
-    name: 'COMBOS',
-    isEnabled: false,
-    builder: () => const Padding(
-      padding: EdgeInsets.all(20),
-      child: Placeholder(
-        child: Center(child: Text('TODO: COMBOS')),
-      ),
-    ),
-  ),
-  PickerItem(
     name: 'PALOMITAS',
-    builder: () => const ProviderScope(
-      child: Scaffold(
-        body: SafeArea(
-          child: PopcornPickerWidget(),
-        ),
-      ),
-    ),
+    builder: () => const PopcornPickerWidget(),
   ),
   PickerItem(
     name: 'BEBIDAS',
@@ -77,7 +61,7 @@ class PickersWidgetState extends ConsumerState<PickersWidget> {
 
   @override
   void initState() {
-    selectedOption = pickers[1];
+    selectedOption = pickers.first;
     super.initState();
   }
 
@@ -111,6 +95,7 @@ class PickersWidgetState extends ConsumerState<PickersWidget> {
             color: popcornPicker.getBrandColor(context),
           ),
         ),
+        const Divider(),
         Expanded(
           child: selectedOption.builder(),
         ),

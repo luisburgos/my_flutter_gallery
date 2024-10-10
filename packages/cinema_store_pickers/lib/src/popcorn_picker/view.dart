@@ -33,6 +33,9 @@ class PopcornPickerWidgetState extends ConsumerState<PopcornPickerWidget> {
                   child: PopcornSizeSelector(),
                 ),
                 SliverToBoxAdapter(
+                  child: SizedBox(height: 60),
+                ),
+                SliverToBoxAdapter(
                   child: PopcornFlavorSelector(),
                 ),
               ],
@@ -42,7 +45,7 @@ class PopcornPickerWidgetState extends ConsumerState<PopcornPickerWidget> {
         Divider(),
         Padding(
           padding: EdgeInsets.all(12),
-          child: PopcornPickerCta(),
+          child: PopcornPickerSummary(),
         )
       ],
     );

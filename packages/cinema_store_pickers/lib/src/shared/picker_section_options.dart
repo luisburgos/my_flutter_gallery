@@ -118,7 +118,6 @@ class PickerSectionOptionsItem extends StatelessWidget {
   }
 
   IconData _faIconNameMapping(String iconName) {
-    print('_faIconNameMapping: $iconName');
     if (iconName == 'cheese') return FontAwesomeIcons.cheese;
     if (iconName == 'butter') return FontAwesomeIcons.squarePlus;
     if (iconName == 'caramel') return FontAwesomeIcons.candyCane;

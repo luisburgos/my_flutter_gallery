@@ -38,21 +38,19 @@ class PopcornSizeSelector extends ConsumerWidget {
           'Elige un tamaño',
           color: brandColor,
         ),
-        SizedBox(
-          //height: 120,
-          child: PickerSectionOptions(
-            items: pickerSizeOptions.keys.toList(),
-            selectedItems: pickerSelectedSize.keys.toList(),
-            onOptionTap: (option) {
-              final value = pickerSizeOptions[option];
-              if (value != null) {
-                ref
-                    .read(popcornPickerNotifierProvider.notifier)
-                    .toggleSelectedSize(value);
-              }
-            },
-            selectedColor: brandColor,
-          ),
+        const SizedBox(height: 12),
+        PickerSectionOptions(
+          items: pickerSizeOptions.keys.toList(),
+          selectedItems: pickerSelectedSize.keys.toList(),
+          onOptionTap: (option) {
+            final value = pickerSizeOptions[option];
+            if (value != null) {
+              ref
+                  .read(popcornPickerNotifierProvider.notifier)
+                  .toggleSelectedSize(value);
+            }
+          },
+          selectedColor: brandColor,
         ),
       ],
     );

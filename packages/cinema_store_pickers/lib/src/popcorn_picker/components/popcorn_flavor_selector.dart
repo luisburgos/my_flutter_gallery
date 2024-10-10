@@ -42,6 +42,7 @@ class PopcornFlavorSelector extends ConsumerWidget {
           ' sabores para tus palomitas',
           color: brandColor,
         ),
+        const SizedBox(height: 12),
         SizedBox(
           height: 100,
           child: PickerSelectionPreview(
@@ -56,21 +57,19 @@ class PopcornFlavorSelector extends ConsumerWidget {
             },
           ),
         ),
-        SizedBox(
-          //height: 300,
-          child: PickerSectionOptions(
-            items: pickerFlavorOptions.keys.toList(),
-            selectedItems: pickerSelectedFlavors.keys.toList(),
-            onOptionTap: (option) {
-              final value = pickerFlavorOptions[option];
-              if (value != null) {
-                ref
-                    .read(popcornPickerNotifierProvider.notifier)
-                    .toggleSelectedFlavor(value);
-              }
-            },
-            selectedColor: brandColor,
-          ),
+        const SizedBox(height: 12),
+        PickerSectionOptions(
+          items: pickerFlavorOptions.keys.toList(),
+          selectedItems: pickerSelectedFlavors.keys.toList(),
+          onOptionTap: (option) {
+            final value = pickerFlavorOptions[option];
+            if (value != null) {
+              ref
+                  .read(popcornPickerNotifierProvider.notifier)
+                  .toggleSelectedFlavor(value);
+            }
+          },
+          selectedColor: brandColor,
         )
       ],
     );
