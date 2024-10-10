@@ -1,5 +1,7 @@
 import 'package:cinema_store_pickers/src/shared/picker_models.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:shared_utils/shared_utils.dart';
 
 /// @no-doc
 class PickerSectionOptions extends StatelessWidget {
@@ -26,27 +28,27 @@ class PickerSectionOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-        childAspectRatio: 6,
-      ),
-      padding: const EdgeInsets.all(8),
+    final calculations = SimpleLayoutGridCalculations(
+      crossAxisCount: 2,
       itemCount: items.length,
-      itemBuilder: (context, index) {
-        final item = items[index];
-        final isSelected = selectedItems.contains(item);
-        print(
-            'selectedItems.contains(item): $selectedItems contains $item is $isSelected');
-        return PickerSectionOptionsItem(
-          item: item,
-          onOptionTap: onOptionTap,
-          isSelected: isSelected,
-          selectedColor: selectedColor,
-        );
-      },
+    );
+    final (columnSizes, rowSizes) = calculations.sizes;
+    final (rowGap, columGap) = calculations.gaps;
+
+    return LayoutGrid(
+      columnSizes: columnSizes,
+      rowSizes: rowSizes,
+      columnGap: columGap,
+      rowGap: rowGap,
+      children: [
+        for (var i = 0; i < items.length; i++)
+          PickerSectionOptionsItem(
+            item: items[i],
+            onOptionTap: onOptionTap,
+            isSelected: selectedItems.contains(items[i]),
+            selectedColor: selectedColor,
+          ),
+      ],
     );
   }
 }
@@ -85,8 +87,8 @@ class PickerSectionOptionsItem extends StatelessWidget {
             color: isSelected ? selectedColor : Colors.grey,
           ),
         ),
-        width: 20,
-        height: 20,
+        //width: 20,
+        //height: 20,
         child: Center(
           child: Text(
             item.name,

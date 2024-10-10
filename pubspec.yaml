@@ -31,6 +31,8 @@ dependencies:
   roadie:
     path: packages/roadie
   shadcn_ui: ^0.8.1
+  shared_utils:
+    path: shared/shared_utils
   splitwise_split_options:
     path: packages/splitwise_split_options
   cinema_store_pickers:

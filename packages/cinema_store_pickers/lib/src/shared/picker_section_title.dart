@@ -17,21 +17,12 @@ class PickerSectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 20,
-        horizontal: 8,
-      ),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          text,
-          style: TextStyle(
-            color: color,
-            fontSize: 20,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+    return Text(
+      text,
+      style: TextStyle(
+        color: color,
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
       ),
     );
   }

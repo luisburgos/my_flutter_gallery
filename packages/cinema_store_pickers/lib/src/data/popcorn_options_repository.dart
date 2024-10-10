@@ -17,9 +17,9 @@ abstract class PopcornOptionsRepository {
 class FakePopcornOptionsRepository extends PopcornOptionsRepository {
   @override
   Future<List<PopcornFlavor>> getPopcornFlavors(String cinemaId) async {
-    final cinemaFlavors = cinemaFlavorsByBranch[cinemaId];
+    final cinemaFlavors = cinemaBranches[cinemaId]?.availablePopcornFlavors;
     return [
-      ...baseFlavors,
+      ...popcornBaseFlavors,
       ...cinemaFlavors ?? [],
     ];
   }

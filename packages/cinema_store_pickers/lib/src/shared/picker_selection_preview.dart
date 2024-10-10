@@ -1,5 +1,7 @@
 import 'package:cinema_store_pickers/src/shared/picker_models.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:shared_utils/shared_utils.dart';
 
 /// @no-doc
 class PickerSelectionPreview extends StatelessWidget {
@@ -20,32 +22,33 @@ class PickerSelectionPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     if (items.isEmpty) {
       return Container(
-        margin: const EdgeInsets.symmetric(
-          vertical: 4,
-          horizontal: 8,
-        ),
-        color: Colors.grey.shade300,
+        margin: const EdgeInsets.symmetric(vertical: 4),
+        color: Colors.grey.shade200,
         width: double.infinity,
         height: 20,
       );
     }
 
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: items.isEmpty ? 1 : items.length,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-        childAspectRatio: 12 / items.length,
-      ),
-      padding: const EdgeInsets.all(8),
+    final calculations = SimpleLayoutGridCalculations(
+      crossAxisCount: 2,
       itemCount: items.length,
-      itemBuilder: (context, index) {
-        return PickerSelectionPreviewItem(
-          item: items[index],
-          onRemoveTap: onRemoveTap,
-          displayRemoveButton: items.length > 1,
-        );
-      },
+    );
+    final (columnSizes, rowSizes) = calculations.sizes;
+    final (rowGap, columGap) = calculations.gaps;
+
+    return LayoutGrid(
+      columnSizes: columnSizes,
+      rowSizes: rowSizes,
+      columnGap: columGap,
+      rowGap: rowGap,
+      children: [
+        for (var i = 0; i < items.length; i++)
+          PickerSelectionPreviewItem(
+            item: items[i],
+            onRemoveTap: onRemoveTap,
+            displayRemoveButton: items.length > 1,
+          ),
+      ],
     );
   }
 }

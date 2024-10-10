@@ -3,6 +3,7 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:my_flutter_gallery/components/my_flutter_gallery/model.dart';
 import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_view.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
+import 'package:shared_utils/shared_utils.dart';
 
 class GalleryItemsResponsiveView extends StatelessWidget {
   const GalleryItemsResponsiveView({
@@ -19,8 +20,13 @@ class GalleryItemsResponsiveView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final crossAxisCount = _calculateCrossAxisCount(context);
-    final (columnSizes, rowSizes) = _getSizes(crossAxisCount);
-    final (rowGap, columGap) = _getGaps(crossAxisCount);
+    final calculations = GalleryLayoutGridCalculations(
+      crossAxisCount: _calculateCrossAxisCount(context),
+      itemCount: items.length,
+    );
+
+    final (columnSizes, rowSizes) = calculations.sizes;
+    final (rowGap, columGap) = calculations.gaps;
     return SingleChildScrollView(
       child: LayoutGrid(
         columnSizes: columnSizes,
@@ -52,24 +58,17 @@ class GalleryItemsResponsiveView extends StatelessWidget {
       return 3;
     }
   }
+}
 
-  (double, double) _getGaps(int crossAxisCount) {
+class GalleryLayoutGridCalculations extends SimpleLayoutGridCalculations {
+  const GalleryLayoutGridCalculations({
+    required super.itemCount,
+    required super.crossAxisCount,
+  });
+
+  @override
+  (double, double) get gaps {
     if (crossAxisCount == 1) return (18, 0);
     return (24, 24);
-  }
-
-  (List<FlexibleTrackSize>, List<IntrinsicContentTrackSize>) _getSizes(
-    int crossAxisCount,
-  ) {
-    var columnSizes = <FlexibleTrackSize>[];
-    for (var i = 0; i < crossAxisCount; i++) {
-      columnSizes = [...columnSizes, 1.fr];
-    }
-
-    var rowSizes = <IntrinsicContentTrackSize>[];
-    for (var i = 0; i < items.length / crossAxisCount; i++) {
-      rowSizes = [...rowSizes, auto];
-    }
-    return (columnSizes, rowSizes);
   }
 }

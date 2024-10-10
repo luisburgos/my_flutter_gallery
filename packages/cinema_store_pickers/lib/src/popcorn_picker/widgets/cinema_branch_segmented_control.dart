@@ -3,13 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// @no-doc
-class CinemaBranchSelector extends StatelessWidget {
+class CinemaBranchSegmentedControl extends StatelessWidget {
   /// @no-doc
-  const CinemaBranchSelector({
+  const CinemaBranchSegmentedControl({
     required this.options,
     required this.selectedCinema,
     required this.onSetSelectedCinema,
     required this.color,
+    this.padding = EdgeInsets.zero,
     super.key,
   });
 
@@ -24,6 +25,9 @@ class CinemaBranchSelector extends StatelessWidget {
 
   /// @no-doc
   final Color color;
+
+  /// @no-doc
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,7 @@ class CinemaBranchSelector extends StatelessWidget {
     };
 
     return CupertinoSegmentedControl(
-      padding: const EdgeInsets.all(8),
+      padding: padding,
       groupValue: selectedCinema,
       selectedColor: color,
       borderColor: color,
