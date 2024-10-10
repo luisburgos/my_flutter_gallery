@@ -19,6 +19,7 @@ class PopcornFlavorSelector extends ConsumerWidget {
       for (final item in popcornPicker.selectedFlavors)
         PickerSectionOptionItemData(
           name: item.name,
+          priceTag: r'$0.00',
         ): item,
     };
 
@@ -26,6 +27,7 @@ class PopcornFlavorSelector extends ConsumerWidget {
       for (final item in popcornPicker.flavorOptions)
         PickerSectionOptionItemData(
           name: item.name,
+          priceTag: r'$0.00',
         ): item,
     };
 

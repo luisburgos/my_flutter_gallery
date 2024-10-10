@@ -17,12 +17,14 @@ class PopcornSizeSelector extends ConsumerWidget {
     final pickerSelectedSize = {
       PickerSectionOptionItemData(
         name: popcornPicker.selectedSize!.name,
+        priceTag: r'$0.00',
       ): popcornPicker.selectedSize,
     };
     final pickerSizeOptions = {
       for (final item in popcornPicker.sizeOptions)
         PickerSectionOptionItemData(
           name: item.name,
+          priceTag: r'$0.00',
         ): item,
     };
 

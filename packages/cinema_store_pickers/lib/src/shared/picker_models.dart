@@ -5,13 +5,17 @@ class PickerSectionOptionItemData extends Equatable {
   /// @no-doc
   const PickerSectionOptionItemData({
     required this.name,
+    required this.priceTag,
   });
 
   /// @no-doc
   final String name;
 
+  /// @no-doc
+  final String priceTag;
+
   @override
-  String toString() => name;
+  String toString() => '$name, $priceTag';
 
   @override
   List<Object?> get props => [name];

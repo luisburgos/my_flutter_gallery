@@ -89,13 +89,21 @@ class PickerSectionOptionsItem extends StatelessWidget {
         ),
         //width: 20,
         //height: 20,
-        child: Center(
-          child: Text(
-            item.name,
-            style: const TextStyle(
-              fontSize: 16,
+        child: Column(
+          children: [
+            Text(
+              item.name,
+              style: const TextStyle(
+                fontSize: 16,
+              ),
             ),
-          ),
+            Text(
+              item.priceTag,
+              style: const TextStyle(
+                fontSize: 12,
+              ),
+            )
+          ],
         ),
       ),
     );
