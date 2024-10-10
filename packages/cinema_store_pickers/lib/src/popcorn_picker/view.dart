@@ -24,27 +24,35 @@ class PopcornPickerWidgetState extends ConsumerState<PopcornPickerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(20),
-      child: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: CinemaBranchSelector(),
+    return const Column(
+      children: [
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: CinemaBranchSelector(),
+                ),
+                SliverToBoxAdapter(
+                  child: PopcornPickerTitle(),
+                ),
+                SliverToBoxAdapter(
+                  child: PopcornSizeSelector(),
+                ),
+                SliverToBoxAdapter(
+                  child: PopcornFlavorSelector(),
+                ),
+              ],
+            ),
           ),
-          SliverToBoxAdapter(
-            child: PopcornPickerTitle(),
-          ),
-          SliverToBoxAdapter(
-            child: PopcornSizeSelector(),
-          ),
-          SliverToBoxAdapter(
-            child: PopcornFlavorSelector(),
-          ),
-          SliverToBoxAdapter(
-            child: PopcornPickerCta(),
-          ),
-        ],
-      ),
+        ),
+        Divider(),
+        Padding(
+          padding: EdgeInsets.all(12),
+          child: PopcornPickerCta(),
+        )
+      ],
     );
   }
 }

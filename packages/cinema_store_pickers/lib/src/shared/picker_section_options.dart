@@ -1,6 +1,7 @@
 import 'package:cinema_store_pickers/src/shared/picker_models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_utils/shared_utils.dart';
 
 /// @no-doc
@@ -81,16 +82,23 @@ class PickerSectionOptionsItem extends StatelessWidget {
     return GestureDetector(
       onTap: () => onOptionTap(item),
       child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(
+          vertical: 8,
+          horizontal: 12,
+        ),
         decoration: BoxDecoration(
           border: Border.all(
             width: 2,
-            color: isSelected ? selectedColor : Colors.grey,
+            color: isSelected ? selectedColor : Colors.grey.shade400,
           ),
         ),
-        //width: 20,
-        //height: 20,
         child: Column(
           children: [
+            FaIcon(
+              _faIconNameMapping(item.iconName),
+              size: 16,
+            ),
             Text(
               item.name,
               style: const TextStyle(
@@ -107,5 +115,15 @@ class PickerSectionOptionsItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  IconData _faIconNameMapping(String iconName) {
+    print('_faIconNameMapping: $iconName');
+    if (iconName == 'cheese') return FontAwesomeIcons.cheese;
+    if (iconName == 'butter') return FontAwesomeIcons.squarePlus;
+    if (iconName == 'caramel') return FontAwesomeIcons.candyCane;
+    if (iconName == 'stick') return FontAwesomeIcons.personCane;
+    if (iconName == 'blue_stick') return FontAwesomeIcons.stickerMule;
+    return FontAwesomeIcons.ticket;
   }
 }
