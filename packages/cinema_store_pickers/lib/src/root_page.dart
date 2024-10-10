@@ -1,4 +1,4 @@
-import 'package:cinema_store_pickers/src/popcorn_picker/view.dart';
+import 'package:cinema_store_pickers/src/pickers/pickers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,10 +9,12 @@ class CinemaStorePickersRootPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProviderScope(
-      child: Scaffold(
-        body: SafeArea(
-          child: PopcornPickerWidget(),
+    return const Scaffold(
+      body: SafeArea(
+        child: SizedBox.expand(
+          child: ProviderScope(
+            child: PickersWidget(),
+          ),
         ),
       ),
     );
