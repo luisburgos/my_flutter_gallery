@@ -1,13 +1,11 @@
 import 'package:equatable/equatable.dart';
 
 /// @no-doc
-class ItemSize extends Equatable {
+class ItemIce extends Equatable {
   /// @no-doc
-  const ItemSize({
+  const ItemIce({
     required this.id,
     required this.name,
-    required this.price,
-    required this.iconName,
   });
 
   /// @no-doc
@@ -15,12 +13,6 @@ class ItemSize extends Equatable {
 
   /// @no-doc
   final String name;
-
-  /// @no-doc
-  final double price;
-
-  /// @no-doc
-  final String iconName;
 
   @override
   String toString() => name;

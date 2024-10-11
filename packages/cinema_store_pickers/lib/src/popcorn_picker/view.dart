@@ -46,7 +46,7 @@ class PopcornPickerWidgetState extends ConsumerState<PopcornPickerWidget> {
         Padding(
           padding: EdgeInsets.all(12),
           child: PopcornPickerSummary(),
-        )
+        ),
       ],
     );
   }

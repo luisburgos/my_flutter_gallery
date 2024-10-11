@@ -1,4 +1,5 @@
 import 'package:cinema_store_pickers/src/models/popcorn_flavor.dart';
+import 'package:cinema_store_pickers/src/models/popcorn_size.dart';
 
 /// @no-doc
 class CinemaBranch {
@@ -9,6 +10,7 @@ class CinemaBranch {
     required this.selectionLimit,
     required this.brandHexColor,
     required this.availablePopcornFlavors,
+    required this.availablePopcornSizes,
   });
 
   /// @no-doc
@@ -25,6 +27,9 @@ class CinemaBranch {
 
   /// @no-doc
   final List<PopcornFlavor> availablePopcornFlavors;
+
+  /// @no-doc
+  final List<ItemSize> availablePopcornSizes;
 
   /// @no-doc
   @override

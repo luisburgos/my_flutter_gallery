@@ -1,7 +1,7 @@
 /// @no-doc
-class PopcornFlavor {
+class Beverage {
   /// @no-doc
-  const PopcornFlavor({
+  const Beverage({
     required this.name,
     required this.prices,
     required this.iconName,

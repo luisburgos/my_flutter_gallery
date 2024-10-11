@@ -1,9 +1,7 @@
-import 'package:equatable/equatable.dart';
-
 /// @no-doc
-class ItemSize extends Equatable {
+class ItemFlavor {
   /// @no-doc
-  const ItemSize({
+  const ItemFlavor({
     required this.id,
     required this.name,
     required this.price,
@@ -22,9 +20,7 @@ class ItemSize extends Equatable {
   /// @no-doc
   final String iconName;
 
+  /// @no-doc
   @override
-  String toString() => name;
-
-  @override
-  List<Object?> get props => [id];
+  String toString() => id;
 }

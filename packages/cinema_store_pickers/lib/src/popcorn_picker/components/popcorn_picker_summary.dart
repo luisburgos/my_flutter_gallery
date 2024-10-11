@@ -39,7 +39,7 @@ class PopcornPickerSummary extends ConsumerWidget {
   }
 
   double _calculateCost(
-    PopcornSize? selectedSize,
+    ItemSize? selectedSize,
     List<PopcornFlavor> selectedFlavors,
   ) {
     final sizePrice = selectedSize?.price ?? 0.0;

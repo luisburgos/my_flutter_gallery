@@ -17,31 +17,31 @@ const popcornSizeFamily = 'family';
 
 /// @no-doc
 final popcornSizes = {
-  popcornSizeSmall: const PopcornSize(
+  popcornSizeSmall: const ItemSize(
     id: popcornSizeSmall,
     name: 'Chicas',
     iconName: '',
     price: 80,
   ),
-  popcornSizeMedium: const PopcornSize(
+  popcornSizeMedium: const ItemSize(
     id: popcornSizeMedium,
     name: 'Medianas',
     iconName: '',
     price: 85,
   ),
-  popcornSizeLarge: const PopcornSize(
+  popcornSizeLarge: const ItemSize(
     id: popcornSizeLarge,
     name: 'Grandes',
     iconName: '',
     price: 90,
   ),
-  popcornSizeJumbo: const PopcornSize(
+  popcornSizeJumbo: const ItemSize(
     id: popcornSizeJumbo,
     name: 'Jumbo',
     iconName: '',
     price: 95,
   ),
-  popcornSizeFamily: const PopcornSize(
+  popcornSizeFamily: const ItemSize(
     id: popcornSizeFamily,
     name: 'Para llevar',
     iconName: '',
@@ -147,6 +147,7 @@ final cinemaBranches = {
       popcornExtraFlavors['B']!,
       popcornExtraFlavors['C']!,
     ],
+    availablePopcornSizes: popcornSizes.values.toList(),
   ),
   'B': CinemaBranch(
     id: 'B',
@@ -158,6 +159,7 @@ final cinemaBranches = {
       popcornExtraFlavors['D']!,
       popcornExtraFlavors['E']!,
     ],
+    availablePopcornSizes: popcornSizes.values.toList(),
   ),
   'C': CinemaBranch(
     id: 'C',
@@ -168,5 +170,6 @@ final cinemaBranches = {
       ...popcornBaseFlavors,
       ...popcornExtraFlavors.values,
     ],
+    availablePopcornSizes: popcornSizes.values.toList(),
   ),
 };

@@ -7,10 +7,10 @@ abstract class PopcornOptionsRepository {
   Future<List<PopcornFlavor>> getPopcornFlavors(String cinemaId);
 
   /// @no-doc
-  Future<List<PopcornSize>> getPopcornSizes(String cinemaId);
+  Future<List<ItemSize>> getPopcornSizes(String cinemaId);
 
   /// @no-doc
-  Future<PopcornSize> getDefaultPopcornSize(String cinemaId);
+  Future<ItemSize> getDefaultPopcornSize(String cinemaId);
 }
 
 /// @no-doc
@@ -25,12 +25,12 @@ class FakePopcornOptionsRepository extends PopcornOptionsRepository {
   }
 
   @override
-  Future<List<PopcornSize>> getPopcornSizes(String cinemaId) async {
+  Future<List<ItemSize>> getPopcornSizes(String cinemaId) async {
     return popcornSizes.values.toList();
   }
 
   @override
-  Future<PopcornSize> getDefaultPopcornSize(String cinemaId) async {
+  Future<ItemSize> getDefaultPopcornSize(String cinemaId) async {
     return popcornSizes.values.first;
   }
 }

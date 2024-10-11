@@ -21,10 +21,10 @@ class PopcornPickerState {
   final List<PopcornFlavor> flavorOptions;
 
   /// @no-doc
-  final PopcornSize? selectedSize;
+  final ItemSize? selectedSize;
 
   /// @no-doc
-  final List<PopcornSize> sizeOptions;
+  final List<ItemSize> sizeOptions;
 
   /// @no-doc
   final int selectionLimit;
@@ -41,9 +41,9 @@ class PopcornPickerState {
   /// @no-doc
   PopcornPickerState copyWith({
     List<PopcornFlavor>? selectedFlavors,
-    PopcornSize? selectedSize,
+    ItemSize? selectedSize,
     List<PopcornFlavor>? flavorOptions,
-    List<PopcornSize>? sizeOptions,
+    List<ItemSize>? sizeOptions,
     int? selectionLimit,
     CinemaBranch? selectedCinema,
     List<CinemaBranch>? cinemaOptions,

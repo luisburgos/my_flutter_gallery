@@ -2,6 +2,7 @@ import 'package:cinema_store_pickers/src/popcorn_picker/components/cinema_brand_
 import 'package:cinema_store_pickers/src/popcorn_picker/components/components.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/providers.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/view.dart';
+import 'package:cinema_store_pickers/src/soda_picker/soda_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,12 +16,7 @@ final pickers = [
   PickerItem(
     name: 'BEBIDAS',
     isEnabled: false,
-    builder: () => const Padding(
-      padding: EdgeInsets.all(20),
-      child: Placeholder(
-        child: Center(child: Text('TODO: BEBIDAS')),
-      ),
-    ),
+    builder: () => const SodaPickerWidget(),
   ),
 ];
 

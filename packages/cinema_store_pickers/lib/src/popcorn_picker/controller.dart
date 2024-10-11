@@ -24,7 +24,7 @@ class PopcornPickerController extends StateNotifier<PopcornPickerState> {
   }
 
   /// @no-doc
-  void toggleSelectedSize(PopcornSize item) {
+  void toggleSelectedSize(ItemSize item) {
     final selected = state.selectedSize;
     if (selected != item) {
       state = state.copyWith(
