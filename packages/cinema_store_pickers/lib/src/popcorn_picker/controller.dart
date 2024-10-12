@@ -7,16 +7,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class PopcornPickerController extends StateNotifier<PopcornPickerState> {
   /// @no-doc
   PopcornPickerController({
+    required this.cinemaId,
     required this.popcornOptionsRepository,
-    required this.cinemaBranchesRepository,
   }) : super(const PopcornPickerState());
 
   /// @no-doc
-
-  final PopcornOptionsRepository popcornOptionsRepository;
+  final String? cinemaId;
 
   /// @no-doc
-  final CinemaBranchesRepository cinemaBranchesRepository;
+  final PopcornOptionsRepository popcornOptionsRepository;
 
   /// Call this method after the controller is created
   Future<void> initialize() async {
@@ -41,7 +40,7 @@ class PopcornPickerController extends StateNotifier<PopcornPickerState> {
     if (isSelected) {
       selected.remove(item);
     } else {
-      if (selected.length == state.selectionLimit) return;
+      //if (selected.length == state.selectionLimit) return;
       selected.add(item);
     }
 
@@ -52,46 +51,29 @@ class PopcornPickerController extends StateNotifier<PopcornPickerState> {
 
   /// @no-doc
   Future<void> setSelectedCinemaBranch(String cinemaId) async {
-    final cinemaBranch =
-        await cinemaBranchesRepository.getCinemaBranchById(cinemaId);
-    final options = await popcornOptionsRepository.getPopcornFlavors(cinemaId);
+    final options = await popcornOptionsRepository.getPopcornFlavors(
+      cinemaId,
+    );
     state = state.copyWith(
       flavorOptions: options,
-      selectionLimit: cinemaBranch.selectionLimit,
-      selectedCinema: cinemaBranch,
       selectedFlavors: [],
-      brandHexColor: cinemaBranch.brandHexColor,
     );
   }
 
   /// @no-doc
   Future<void> _loadData() async {
-    final defaultCinemaBranch =
-        await cinemaBranchesRepository.getDefaultCinemaBranch();
-    final cinemaBranches =
-        await cinemaBranchesRepository.getDefaultCinemaBranches();
+    if (cinemaId == null) return;
     final popcornFlavorOptions =
-        await popcornOptionsRepository.getPopcornFlavors(
-      defaultCinemaBranch.id,
-    );
-    final popcornSizeOptions = await popcornOptionsRepository.getPopcornSizes(
-      defaultCinemaBranch.id,
-    );
+        await popcornOptionsRepository.getPopcornFlavors(cinemaId!);
+    final popcornSizeOptions =
+        await popcornOptionsRepository.getPopcornSizes(cinemaId!);
     final defaultPopcornSize =
-        await popcornOptionsRepository.getDefaultPopcornSize(
-      defaultCinemaBranch.id,
-    );
+        await popcornOptionsRepository.getDefaultPopcornSize(cinemaId!);
 
     state = state.copyWith(
-      flavorOptions: popcornFlavorOptions,
-      selectionLimit: defaultCinemaBranch.selectionLimit,
-      cinemaOptions: cinemaBranches,
-      selectedCinema: cinemaBranches.firstWhere(
-        (cinema) => cinema == defaultCinemaBranch,
-      ),
       selectedSize: defaultPopcornSize,
       sizeOptions: popcornSizeOptions,
-      brandHexColor: defaultCinemaBranch.brandHexColor,
+      flavorOptions: popcornFlavorOptions,
     );
   }
 }

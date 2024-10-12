@@ -1,3 +1,4 @@
+import 'package:cinema_store_pickers/src/cinemas/providers.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/components/cinema_brand_color.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/providers.dart';
 import 'package:cinema_store_pickers/src/shared/picker_models.dart';
@@ -15,15 +16,16 @@ class PopcornFlavorSelector extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final popcornPicker = ref.watch(popcornPickerNotifierProvider);
+    final cinemaStore = ref.watch(cinemaStoreNotifierProvider);
 
-    final popcornSelectedSize = popcornPicker.selectedSize!;
+    final popcornSelectedSize = popcornPicker.selectedSize;
     final pickerSelectedFlavors = {
       for (final item in popcornPicker.selectedFlavors)
         PickerSectionOptionItemData(
           name: item.name,
           iconName: item.iconName,
           priceTag: Money.fromNum(
-            item.prices[popcornSelectedSize.id] ?? 0.0,
+            item.prices[popcornSelectedSize?.id] ?? 0.0,
             isoCode: 'MXN',
             decimalDigits: 2,
           ).toString(),
@@ -36,20 +38,24 @@ class PopcornFlavorSelector extends ConsumerWidget {
           name: item.name,
           iconName: item.iconName,
           priceTag: Money.fromNum(
-            item.prices[popcornSelectedSize.id] ?? 0.0,
+            item.prices[popcornSelectedSize?.id] ?? 0.0,
             isoCode: 'MXN',
             decimalDigits: 2,
           ).toString(),
         ): item,
     };
 
-    final brandColor = popcornPicker.getBrandColor(context);
+    final brandColor = cinemaStore.getBrandColor(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        PickerSectionTitle(
+        /*PickerSectionTitle(
           'Elige hasta ${popcornPicker.selectionLimit}'
           ' sabores para tus palomitas',
+          color: brandColor,
+        ),*/
+        PickerSectionTitle(
+          'Elige el sabor',
           color: brandColor,
         ),
         const SizedBox(height: 12),

@@ -1,5 +1,5 @@
+import 'package:cinema_store_pickers/src/cinemas/providers.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/components/cinema_brand_color.dart';
-import 'package:cinema_store_pickers/src/popcorn_picker/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,14 +10,14 @@ class PopcornPickerTitle extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final popcornPicker = ref.watch(popcornPickerNotifierProvider);
+    final cinemaStore = ref.watch(cinemaStoreNotifierProvider);
 
     return Text(
       'Palomitas'.toUpperCase(),
       style: TextStyle(
         fontWeight: FontWeight.w900,
         fontSize: 22,
-        color: popcornPicker.getBrandColor(context),
+        color: cinemaStore.getBrandColor(context),
       ),
     );
   }

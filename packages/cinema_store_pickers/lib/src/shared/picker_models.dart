@@ -19,7 +19,7 @@ class PickerSectionOptionItemData extends Equatable {
   final String priceTag;
 
   @override
-  String toString() => '$name, $priceTag';
+  String toString() => name;
 
   @override
   List<Object?> get props => [name];

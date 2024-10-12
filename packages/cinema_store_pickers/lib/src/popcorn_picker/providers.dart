@@ -1,3 +1,4 @@
+import 'package:cinema_store_pickers/src/cinemas/providers.dart';
 import 'package:cinema_store_pickers/src/data/data.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/controller.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/state.dart';
@@ -9,19 +10,14 @@ final popcornOptionsRepository = Provider<PopcornOptionsRepository>((ref) {
 });
 
 /// @no-doc
-final cinemaBranchesRepository = Provider<CinemaBranchesRepository>((ref) {
-  return FakeCinemaBranchesRepository();
-});
-
-/// @no-doc
 final popcornPickerNotifierProvider =
     StateNotifierProvider<PopcornPickerController, PopcornPickerState>(
   (ref) {
     final popcornOptions = ref.watch(popcornOptionsRepository);
-    final cinemaBranches = ref.watch(cinemaBranchesRepository);
+    final cinemaStore = ref.watch(cinemaStoreNotifierProvider);
     return PopcornPickerController(
+      cinemaId: cinemaStore.selectedCinema?.id,
       popcornOptionsRepository: popcornOptions,
-      cinemaBranchesRepository: cinemaBranches,
     );
   },
 );

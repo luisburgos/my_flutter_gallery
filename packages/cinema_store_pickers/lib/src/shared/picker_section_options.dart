@@ -94,6 +94,7 @@ class PickerSectionOptionsItem extends StatelessWidget {
           ),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FaIcon(
               _faIconNameMapping(item.iconName),
@@ -101,16 +102,18 @@ class PickerSectionOptionsItem extends StatelessWidget {
             ),
             Text(
               item.name,
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 16,
               ),
             ),
-            Text(
-              item.priceTag,
-              style: const TextStyle(
-                fontSize: 12,
+            if (item.priceTag.isNotEmpty)
+              Text(
+                item.priceTag,
+                style: const TextStyle(
+                  fontSize: 12,
+                ),
               ),
-            )
           ],
         ),
       ),

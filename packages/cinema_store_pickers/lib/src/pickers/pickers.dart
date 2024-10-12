@@ -1,6 +1,6 @@
+import 'package:cinema_store_pickers/src/cinemas/providers.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/components/cinema_brand_color.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/components/components.dart';
-import 'package:cinema_store_pickers/src/popcorn_picker/providers.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/view.dart';
 import 'package:cinema_store_pickers/src/soda_picker/soda_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -57,13 +57,13 @@ class PickersWidgetState extends ConsumerState<PickersWidget> {
 
   @override
   void initState() {
-    selectedOption = pickers.first;
+    selectedOption = pickers.last;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final popcornPicker = ref.watch(popcornPickerNotifierProvider);
+    final cinemaStore = ref.watch(cinemaStoreNotifierProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,7 +88,7 @@ class PickersWidgetState extends ConsumerState<PickersWidget> {
                 selectedOption = option;
               });
             },
-            color: popcornPicker.getBrandColor(context),
+            color: cinemaStore.getBrandColor(context),
           ),
         ),
         const Divider(),

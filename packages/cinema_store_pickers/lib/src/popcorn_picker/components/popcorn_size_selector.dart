@@ -1,3 +1,4 @@
+import 'package:cinema_store_pickers/src/cinemas/providers.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/components/cinema_brand_color.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/providers.dart';
 import 'package:cinema_store_pickers/src/shared/picker_models.dart';
@@ -13,6 +14,7 @@ class PopcornSizeSelector extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final cinemaStore = ref.watch(cinemaStoreNotifierProvider);
     final popcornPicker = ref.watch(popcornPickerNotifierProvider);
 
     final popcornSelectedSize = popcornPicker.selectedSize!;
@@ -40,7 +42,7 @@ class PopcornSizeSelector extends ConsumerWidget {
         ): item,
     };
 
-    final brandColor = popcornPicker.getBrandColor(context);
+    final brandColor = cinemaStore.getBrandColor(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

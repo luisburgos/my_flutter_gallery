@@ -1,3 +1,4 @@
+import 'package:cinema_store_pickers/src/cinemas/providers.dart';
 import 'package:cinema_store_pickers/src/models/popcorn_flavor.dart';
 import 'package:cinema_store_pickers/src/models/popcorn_size.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/components/cinema_brand_color.dart';
@@ -14,6 +15,7 @@ class PopcornPickerSummary extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final popcornPicker = ref.watch(popcornPickerNotifierProvider);
+    final cinemaStore = ref.watch(cinemaStoreNotifierProvider);
     final price = _calculateCost(
       popcornPicker.selectedSize,
       popcornPicker.selectedFlavors,
@@ -24,7 +26,7 @@ class PopcornPickerSummary extends ConsumerWidget {
       decimalDigits: 2,
     ).toString();
 
-    final brandColor = popcornPicker.getBrandColor(context);
+    final brandColor = cinemaStore.getBrandColor(context);
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Text(
