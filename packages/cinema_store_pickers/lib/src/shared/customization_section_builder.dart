@@ -69,23 +69,29 @@ class _CustomizationSectionViewState<T>
 
   @override
   Widget build(BuildContext context) {
+    final section = widget.section;
+    final selectionMode = section.selectionMode;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         PickerSectionTitle(
-          widget.section.title,
+          section.title,
           color: widget.color,
         ),
         const SizedBox(height: 12),
         PickerSectionOptions(
-          items: widget.section.options.map(optionToData).toList(),
+          items: section.options.map(optionToData).toList(),
           selectedItems: selected,
           onOptionTap: (option) {
             setState(() {
-              if (widget.section.selectionMode.isMultiple) {
+              final isMultiple =
+                  selectionMode is MultipleCustomizationSectionSelectionMode;
+              if (isMultiple) {
                 if (selected.contains(option)) {
                   selected.remove(option);
                 } else {
+                  if (selected.length == selectionMode.selectionLimit) return;
                   selected.add(option);
                 }
               } else {

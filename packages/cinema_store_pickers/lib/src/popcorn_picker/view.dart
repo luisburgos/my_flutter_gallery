@@ -16,7 +16,6 @@ class PopcornPickerWidget extends StatelessWidget {
           CustomizationSection<ItemSize>(
             id: 'popcorn-size-section-01',
             title: 'Elige un tamaño',
-            selectionMode: CustomizationSectionSelectionMode.single,
             options: state.selectedCinema?.availablePopcornSizes
                     .map(CustomizationSectionOption.new)
                     .toList() ??
@@ -25,7 +24,7 @@ class PopcornPickerWidget extends StatelessWidget {
           CustomizationSection<ItemFlavor>(
             id: 'popcorn-flavor-section-01',
             title: 'Elige un sabor',
-            selectionMode: CustomizationSectionSelectionMode.multiple,
+            selectionMode: const MultipleCustomizationSectionSelectionMode(2),
             options: state.selectedCinema?.availablePopcornFlavors
                     .map(CustomizationSectionOption.new)
                     .toList() ??

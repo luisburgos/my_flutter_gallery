@@ -8,7 +8,6 @@ import 'package:cinema_store_pickers/src/models/item_size.dart';
 const sodaSizeSection = CustomizationSection<ItemSize>(
   id: 'soda-size-section-01',
   title: 'Elige un tamaño',
-  selectionMode: CustomizationSectionSelectionMode.single,
   options: [
     CustomizationSectionOption(sodaSize1),
     CustomizationSectionOption(sodaSize2),
@@ -21,7 +20,6 @@ const sodaSizeSection = CustomizationSection<ItemSize>(
 const sodaFlavorSection = CustomizationSection<ItemFlavor>(
   id: 'soda-flavor-section-01',
   title: 'Elige un sabor',
-  selectionMode: CustomizationSectionSelectionMode.single,
   options: [
     CustomizationSectionOption(sodaFlavor1),
     CustomizationSectionOption(sodaFlavor2),
@@ -34,7 +32,6 @@ const sodaFlavorSection = CustomizationSection<ItemFlavor>(
 const sodaIceSection = CustomizationSection<ItemIce>(
   id: 'soda-ice-section-01',
   title: 'Elige la cantidad de hielo deseada',
-  selectionMode: CustomizationSectionSelectionMode.single,
   options: [
     CustomizationSectionOption(itemIce1),
     CustomizationSectionOption(itemIce2),

@@ -8,15 +8,31 @@ class CustomizationSectionOption<T> {
 }
 
 /// @no-doc
-enum CustomizationSectionSelectionMode {
+mixin CustomizationSectionSelectionMode {
   /// @no-doc
-  single,
+  int get selectionLimit;
+}
+
+/// @no-doc
+class SingleCustomizationSectionSelectionMode
+    with CustomizationSectionSelectionMode {
+  /// @no-doc
+  const SingleCustomizationSectionSelectionMode();
+  @override
+  int get selectionLimit => 1;
+}
+
+/// @no-doc
+class MultipleCustomizationSectionSelectionMode
+    with CustomizationSectionSelectionMode {
+  /// @no-doc
+  const MultipleCustomizationSectionSelectionMode(this.limit);
 
   /// @no-doc
-  multiple;
+  final int limit;
 
-  /// @no-doc
-  bool get isMultiple => this == CustomizationSectionSelectionMode.multiple;
+  @override
+  int get selectionLimit => limit;
 }
 
 /// @no-doc
@@ -25,8 +41,8 @@ class CustomizationSection<T> {
   const CustomizationSection({
     required this.id,
     required this.title,
-    required this.selectionMode,
     required this.options,
+    this.selectionMode = const SingleCustomizationSectionSelectionMode(),
     this.currentSelection,
   });
 
