@@ -4,7 +4,7 @@ import 'package:cinema_store_pickers/src/models/models.dart';
 /// @no-doc
 abstract class PopcornOptionsRepository {
   /// @no-doc
-  Future<List<PopcornFlavor>> getPopcornFlavors(String cinemaId);
+  Future<List<ItemFlavor>> getPopcornFlavors(String cinemaId);
 
   /// @no-doc
   Future<List<ItemSize>> getPopcornSizes(String cinemaId);
@@ -16,7 +16,7 @@ abstract class PopcornOptionsRepository {
 /// @no-doc
 class FakePopcornOptionsRepository extends PopcornOptionsRepository {
   @override
-  Future<List<PopcornFlavor>> getPopcornFlavors(String cinemaId) async {
+  Future<List<ItemFlavor>> getPopcornFlavors(String cinemaId) async {
     final cinemaFlavors = cinemaBranches[cinemaId]?.availablePopcornFlavors;
     return [
       ...popcornBaseFlavors,

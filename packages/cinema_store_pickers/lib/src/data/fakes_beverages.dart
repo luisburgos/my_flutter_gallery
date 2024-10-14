@@ -59,7 +59,7 @@ const sodaSize4 = ItemSize(
 const sodaFlavor1 = ItemFlavor(
   id: 'soda-flavor-01',
   name: 'Coca-Cola® Sin Azúcar',
-  price: 0,
+  price: SingleItemPrice(price: 0),
   iconName: 'bottle',
 );
 
@@ -67,7 +67,7 @@ const sodaFlavor1 = ItemFlavor(
 const sodaFlavor2 = ItemFlavor(
   id: 'soda-flavor-02',
   name: 'Coca-Cola®',
-  price: 0,
+  price: SingleItemPrice(price: 0),
   iconName: 'bottle',
 );
 
@@ -75,7 +75,7 @@ const sodaFlavor2 = ItemFlavor(
 const sodaFlavor3 = ItemFlavor(
   id: 'soda-flavor-03',
   name: 'Coca-Cola® Light',
-  price: 0,
+  price: SingleItemPrice(price: 0),
   iconName: 'bottle',
 );
 
@@ -83,7 +83,7 @@ const sodaFlavor3 = ItemFlavor(
 const sodaFlavor4 = ItemFlavor(
   id: 'soda-flavor-04',
   name: 'Del Valle Frut',
-  price: 0,
+  price: SingleItemPrice(price: 0),
   iconName: 'bottle',
 );
 

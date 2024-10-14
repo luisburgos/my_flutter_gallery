@@ -33,7 +33,7 @@ class PopcornPickerController extends StateNotifier<PopcornPickerState> {
   }
 
   /// @no-doc
-  void toggleSelectedFlavor(PopcornFlavor item) {
+  void toggleSelectedFlavor(ItemFlavor item) {
     final selected = [...state.selectedFlavors];
     final isSelected = selected.contains(item);
 

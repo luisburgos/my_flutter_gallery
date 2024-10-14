@@ -1,53 +1,38 @@
-import 'package:cinema_store_pickers/src/popcorn_picker/components/components.dart';
-import 'package:cinema_store_pickers/src/popcorn_picker/providers.dart';
+import 'package:cinema_store_pickers/src/models/customization_section.dart';
+import 'package:cinema_store_pickers/src/models/models.dart';
+import 'package:cinema_store_pickers/src/shared/base_cinema_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// @no-doc
-class PopcornPickerWidget extends ConsumerStatefulWidget {
+class PopcornPickerWidget extends StatelessWidget {
   /// @no-doc
   const PopcornPickerWidget({super.key});
 
   @override
-  PopcornPickerWidgetState createState() => PopcornPickerWidgetState();
-}
-
-/// @no-doc
-class PopcornPickerWidgetState extends ConsumerState<PopcornPickerWidget> {
-  @override
-  void initState() {
-    ref.read(popcornPickerNotifierProvider.notifier).initialize();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(20),
-            child: CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: PopcornSizeSelector(),
-                ),
-                SliverToBoxAdapter(
-                  child: SizedBox(height: 60),
-                ),
-                SliverToBoxAdapter(
-                  child: PopcornFlavorSelector(),
-                ),
-              ],
-            ),
+    return BaseCinemaPickerWidget.builder(
+      sectionsBuilder: (state) {
+        return [
+          CustomizationSection<ItemSize>(
+            id: 'popcorn-size-section-01',
+            title: 'Elige un tamaño',
+            selectionMode: CustomizationSectionSelectionMode.single,
+            options: state.selectedCinema?.availablePopcornSizes
+                    .map(CustomizationSectionOption.new)
+                    .toList() ??
+                const [],
           ),
-        ),
-        Divider(),
-        Padding(
-          padding: EdgeInsets.all(12),
-          child: PopcornPickerSummary(),
-        ),
-      ],
+          CustomizationSection<ItemFlavor>(
+            id: 'popcorn-flavor-section-01',
+            title: 'Elige un sabor',
+            selectionMode: CustomizationSectionSelectionMode.multiple,
+            options: state.selectedCinema?.availablePopcornFlavors
+                    .map(CustomizationSectionOption.new)
+                    .toList() ??
+                const [],
+          ),
+        ];
+      },
     );
   }
 }

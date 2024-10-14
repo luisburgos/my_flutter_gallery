@@ -1,4 +1,5 @@
 import 'package:cinema_store_pickers/src/cinemas/providers.dart';
+import 'package:cinema_store_pickers/src/models/item_flavor.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/components/cinema_brand_color.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/providers.dart';
 import 'package:cinema_store_pickers/src/shared/picker_models.dart';
@@ -25,7 +26,8 @@ class PopcornFlavorSelector extends ConsumerWidget {
           name: item.name,
           iconName: item.iconName,
           priceTag: Money.fromNum(
-            item.prices[popcornSelectedSize?.id] ?? 0.0,
+            (item.price as MultipleItemPrice).prices[popcornSelectedSize?.id] ??
+                0.0,
             isoCode: 'MXN',
             decimalDigits: 2,
           ).toString(),
@@ -38,7 +40,8 @@ class PopcornFlavorSelector extends ConsumerWidget {
           name: item.name,
           iconName: item.iconName,
           priceTag: Money.fromNum(
-            item.prices[popcornSelectedSize?.id] ?? 0.0,
+            (item.price as MultipleItemPrice).prices[popcornSelectedSize?.id] ??
+                0.0,
             isoCode: 'MXN',
             decimalDigits: 2,
           ).toString(),

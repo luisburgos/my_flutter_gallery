@@ -11,10 +11,10 @@ class PopcornPickerState {
   });
 
   /// @no-doc
-  final List<PopcornFlavor> selectedFlavors;
+  final List<ItemFlavor> selectedFlavors;
 
   /// @no-doc
-  final List<PopcornFlavor> flavorOptions;
+  final List<ItemFlavor> flavorOptions;
 
   /// @no-doc
   final ItemSize? selectedSize;
@@ -26,8 +26,8 @@ class PopcornPickerState {
   PopcornPickerState copyWith({
     ItemSize? selectedSize,
     List<ItemSize>? sizeOptions,
-    List<PopcornFlavor>? selectedFlavors,
-    List<PopcornFlavor>? flavorOptions,
+    List<ItemFlavor>? selectedFlavors,
+    List<ItemFlavor>? flavorOptions,
   }) {
     return PopcornPickerState(
       selectedSize: selectedSize ?? this.selectedSize,

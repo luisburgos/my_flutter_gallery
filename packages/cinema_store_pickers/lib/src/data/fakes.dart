@@ -51,86 +51,107 @@ final popcornSizes = {
 
 /// @no-doc
 const popcornExtraFlavors = {
-  'A': PopcornFlavor(
+  'A': ItemFlavor(
+    id: 'doritos-nachos',
     name: 'Doritos® Nachos',
     iconName: 'nacho',
-    prices: {
-      popcornSizeSmall: 10,
-      popcornSizeMedium: 15,
-      popcornSizeLarge: 15,
-      popcornSizeFamily: 20,
-      popcornSizeJumbo: 20,
-    },
+    price: MultipleItemPrice(
+      prices: {
+        popcornSizeSmall: 10,
+        popcornSizeMedium: 15,
+        popcornSizeLarge: 15,
+        popcornSizeFamily: 20,
+        popcornSizeJumbo: 20,
+      },
+    ),
   ),
-  'B': PopcornFlavor(
+  'B': ItemFlavor(
+    id: 'cheetos-mix',
     name: 'Cheetos MIX',
     iconName: 'stick',
-    prices: {
-      popcornSizeSmall: 15,
-      popcornSizeMedium: 20,
-      popcornSizeLarge: 20,
-      popcornSizeFamily: 25,
-      popcornSizeJumbo: 25,
-    },
+    price: MultipleItemPrice(
+      prices: {
+        popcornSizeSmall: 15,
+        popcornSizeMedium: 20,
+        popcornSizeLarge: 20,
+        popcornSizeFamily: 25,
+        popcornSizeJumbo: 25,
+      },
+    ),
   ),
-  'C': PopcornFlavor(
+  'C': ItemFlavor(
+    id: 'takis-blue',
     name: 'Takis® Blue',
     iconName: 'blue_stick',
-    prices: {
-      popcornSizeSmall: 10,
-      popcornSizeMedium: 15,
-      popcornSizeLarge: 15,
-      popcornSizeFamily: 20,
-      popcornSizeJumbo: 20,
-    },
+    price: MultipleItemPrice(
+      prices: {
+        popcornSizeSmall: 10,
+        popcornSizeMedium: 15,
+        popcornSizeLarge: 15,
+        popcornSizeFamily: 20,
+        popcornSizeJumbo: 20,
+      },
+    ),
   ),
-  'D': PopcornFlavor(
+  'D': ItemFlavor(
+    id: 'chips-jalapeno',
     name: 'Chips Jalapeño®',
     iconName: 'pepper',
-    prices: {
-      popcornSizeSmall: 10,
-      popcornSizeMedium: 15,
-      popcornSizeLarge: 15,
-      popcornSizeFamily: 20,
-      popcornSizeJumbo: 20,
-    },
+    price: MultipleItemPrice(
+      prices: {
+        popcornSizeSmall: 10,
+        popcornSizeMedium: 15,
+        popcornSizeLarge: 15,
+        popcornSizeFamily: 20,
+        popcornSizeJumbo: 20,
+      },
+    ),
   ),
-  'E': PopcornFlavor(
+  'E': ItemFlavor(
+    id: 'ruffles-queso',
     name: 'Ruffles Queso®',
     iconName: 'cheese',
-    prices: {
-      popcornSizeSmall: 10,
-      popcornSizeMedium: 15,
-      popcornSizeLarge: 15,
-      popcornSizeFamily: 20,
-      popcornSizeJumbo: 20,
-    },
+    price: MultipleItemPrice(
+      prices: {
+        popcornSizeSmall: 10,
+        popcornSizeMedium: 15,
+        popcornSizeLarge: 15,
+        popcornSizeFamily: 20,
+        popcornSizeJumbo: 20,
+      },
+    ),
   ),
 };
 
 /// @no-doc
 final popcornBaseFlavors = [
-  const PopcornFlavor(
+  const ItemFlavor(
+    id: 'butter',
     name: 'Mantequilla',
     iconName: 'butter',
-    prices: {
-      popcornSizeSmall: 0,
-      popcornSizeMedium: 0,
-      popcornSizeLarge: 0,
-      popcornSizeFamily: 0,
-      popcornSizeJumbo: 0,
-    },
+    price: MultipleItemPrice(
+      prices: {
+        popcornSizeSmall: 0,
+        popcornSizeMedium: 0,
+        popcornSizeLarge: 0,
+        popcornSizeFamily: 0,
+        popcornSizeJumbo: 0,
+      },
+    ),
   ),
-  const PopcornFlavor(
+  const ItemFlavor(
+    id: 'caramel',
     name: 'Caramelo',
     iconName: 'caramel',
-    prices: {
-      popcornSizeSmall: 10,
-      popcornSizeMedium: 15,
-      popcornSizeLarge: 15,
-      popcornSizeFamily: 20,
-      popcornSizeJumbo: 20,
-    },
+    price: MultipleItemPrice(
+      prices: {
+        popcornSizeSmall: 10,
+        popcornSizeMedium: 15,
+        popcornSizeLarge: 15,
+        popcornSizeFamily: 20,
+        popcornSizeJumbo: 20,
+      },
+    ),
   ),
 ];
 

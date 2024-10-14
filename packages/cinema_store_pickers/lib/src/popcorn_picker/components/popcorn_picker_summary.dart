@@ -1,6 +1,5 @@
 import 'package:cinema_store_pickers/src/cinemas/providers.dart';
-import 'package:cinema_store_pickers/src/models/popcorn_flavor.dart';
-import 'package:cinema_store_pickers/src/models/popcorn_size.dart';
+import 'package:cinema_store_pickers/src/models/models.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/components/cinema_brand_color.dart';
 import 'package:cinema_store_pickers/src/popcorn_picker/providers.dart';
 import 'package:flutter/material.dart';
@@ -42,12 +41,13 @@ class PopcornPickerSummary extends ConsumerWidget {
 
   double _calculateCost(
     ItemSize? selectedSize,
-    List<PopcornFlavor> selectedFlavors,
+    List<ItemFlavor> selectedFlavors,
   ) {
     final sizePrice = selectedSize?.price ?? 0.0;
     var flavorsPrice = 0.0;
     for (final flavor in selectedFlavors) {
-      final flavorPriceForSize = flavor.prices[selectedSize?.id] ?? 0.0;
+      final flavorPrices = flavor.price as MultipleItemPrice;
+      final flavorPriceForSize = flavorPrices.prices[selectedSize?.id] ?? 0.0;
       if (flavorsPrice < flavorPriceForSize) {
         flavorsPrice = flavorPriceForSize;
       }

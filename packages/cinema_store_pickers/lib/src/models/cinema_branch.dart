@@ -1,5 +1,4 @@
-import 'package:cinema_store_pickers/src/models/popcorn_flavor.dart';
-import 'package:cinema_store_pickers/src/models/popcorn_size.dart';
+import 'package:cinema_store_pickers/src/models/models.dart';
 
 /// @no-doc
 class CinemaBranch {
@@ -26,7 +25,7 @@ class CinemaBranch {
   final String brandHexColor;
 
   /// @no-doc
-  final List<PopcornFlavor> availablePopcornFlavors;
+  final List<ItemFlavor> availablePopcornFlavors;
 
   /// @no-doc
   final List<ItemSize> availablePopcornSizes;

@@ -1,5 +1,3 @@
-import 'package:cinema_store_pickers/src/data/fake_customization_sections.dart';
-
 /// @no-doc
 class CustomizationSectionOption<T> {
   /// @no-doc
@@ -29,7 +27,7 @@ class CustomizationSection<T> {
     required this.title,
     required this.selectionMode,
     required this.options,
-    required this.transformer,
+    this.currentSelection,
   });
 
   /// @no-doc
@@ -45,5 +43,14 @@ class CustomizationSection<T> {
   final List<CustomizationSectionOption<T>> options;
 
   /// @no-doc
-  final CustomizationSectionOptionTransformer<T> transformer;
+  final ItemSelection<T>? currentSelection;
+}
+
+/// @no-doc
+class ItemSelection<T> {
+  /// @no-doc
+  const ItemSelection(this.data);
+
+  /// @no-doc
+  final T data;
 }
