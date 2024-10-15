@@ -1,4 +1,4 @@
-import 'package:cinema_store_pickers/src/data/fakes.dart';
+import 'package:cinema_store_pickers/src/cinemas/fake_cinema_branch.dart';
 import 'package:cinema_store_pickers/src/models/models.dart';
 
 /// @no-doc

@@ -1,4 +1,4 @@
-import 'package:cinema_store_pickers/src/models/models.dart';
+import 'package:cinema_store_pickers/src/pickomatic/pickomatic_item.dart';
 
 /// @no-doc
 class CinemaBranch {
@@ -25,10 +25,10 @@ class CinemaBranch {
   final String brandHexColor;
 
   /// @no-doc
-  final List<ItemFlavor> availablePopcornFlavors;
+  final List<PickOMaticItem> availablePopcornFlavors;
 
   /// @no-doc
-  final List<ItemSize> availablePopcornSizes;
+  final List<PickOMaticItem> availablePopcornSizes;
 
   /// @no-doc
   @override

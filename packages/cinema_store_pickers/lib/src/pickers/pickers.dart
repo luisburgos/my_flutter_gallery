@@ -1,8 +1,10 @@
+import 'package:cinema_store_pickers/src/cinemas/beverages/store_item_data.dart';
+import 'package:cinema_store_pickers/src/cinemas/cinema_branch_selector.dart';
+import 'package:cinema_store_pickers/src/cinemas/cinema_brand_color.dart';
 import 'package:cinema_store_pickers/src/cinemas/providers.dart';
-import 'package:cinema_store_pickers/src/popcorn_picker/components/cinema_brand_color.dart';
-import 'package:cinema_store_pickers/src/popcorn_picker/components/components.dart';
-import 'package:cinema_store_pickers/src/popcorn_picker/view.dart';
-import 'package:cinema_store_pickers/src/soda_picker/soda_picker.dart';
+import 'package:cinema_store_pickers/src/clothing/store_item_data.dart';
+import 'package:cinema_store_pickers/src/pickers/popcorn_picker.dart';
+import 'package:cinema_store_pickers/src/pickomatic/store_item_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,7 +18,16 @@ final pickers = [
   PickerItem(
     name: 'BEBIDAS',
     isEnabled: false,
-    builder: () => const SodaPickerWidget(),
+    builder: () => StoreItemPickerWidget(
+      storeItem: sodaStoreItem,
+    ),
+  ),
+  PickerItem(
+    name: 'T-SHIRT',
+    isEnabled: false,
+    builder: () => StoreItemPickerWidget(
+      storeItem: tShirtStoreItem,
+    ),
   ),
 ];
 
@@ -57,7 +68,7 @@ class PickersWidgetState extends ConsumerState<PickersWidget> {
 
   @override
   void initState() {
-    selectedOption = pickers.last;
+    selectedOption = pickers.first;
     super.initState();
   }
 
