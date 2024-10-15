@@ -1,10 +1,9 @@
-import 'package:cinema_store_pickers/src/cinemas/beverages/store_item_data.dart';
 import 'package:cinema_store_pickers/src/cinemas/cinema_branch_selector.dart';
 import 'package:cinema_store_pickers/src/cinemas/cinema_brand_color.dart';
 import 'package:cinema_store_pickers/src/cinemas/providers.dart';
-import 'package:cinema_store_pickers/src/clothing/store_item_data.dart';
 import 'package:cinema_store_pickers/src/pickers/popcorn_picker.dart';
-import 'package:cinema_store_pickers/src/pickomatic/store_item_picker.dart';
+import 'package:cinema_store_pickers/src/pickers/soda_picker.dart';
+import 'package:cinema_store_pickers/src/pickers/tshirt_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,16 +17,12 @@ final pickers = [
   PickerItem(
     name: 'BEBIDAS',
     isEnabled: false,
-    builder: () => StoreItemPickerWidget(
-      storeItem: sodaStoreItem,
-    ),
+    builder: () => const SodaPickerWidget(),
   ),
   PickerItem(
     name: 'T-SHIRT',
     isEnabled: false,
-    builder: () => StoreItemPickerWidget(
-      storeItem: tShirtStoreItem,
-    ),
+    builder: () => const TShirtPickerWidget(),
   ),
 ];
 

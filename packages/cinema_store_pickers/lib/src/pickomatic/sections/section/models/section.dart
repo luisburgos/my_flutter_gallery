@@ -11,6 +11,7 @@ class PickOMaticSectionWrapper {
     required List<PickOMaticItem> items,
     void Function(PickOMaticSectionOption option)? onSelected,
     int selectionLimit = 1,
+    PickOMaticSectionOption? initialSelection,
     bool withPreview = false,
   }) {
     return PickOMaticSection<PickOMaticItem>(
@@ -18,11 +19,12 @@ class PickOMaticSectionWrapper {
       title: title,
       withPreview: withPreview,
       onSelected: onSelected,
-      initialSelection: PickOMaticSectionOption(
-        name: items.first.name,
-        iconName: items.first.iconName ?? '',
-        priceTag: '',
-      ),
+      initialSelection: initialSelection ??
+          PickOMaticSectionOption(
+            name: items.first.name,
+            iconName: items.first.iconName ?? '',
+            priceTag: '',
+          ),
       selectionConfig: PickOMaticSelectionConfig(selectionLimit),
       options: items.map((item) {
         return PickOMaticSectionOption(
