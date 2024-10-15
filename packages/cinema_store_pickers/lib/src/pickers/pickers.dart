@@ -1,4 +1,5 @@
 import 'package:cinema_store_pickers/src/cinemas/fake_cinema_branch.dart';
+import 'package:cinema_store_pickers/src/pickers/jeans_picker.dart';
 import 'package:cinema_store_pickers/src/pickers/popcorn_picker.dart';
 import 'package:cinema_store_pickers/src/pickers/soda_picker.dart';
 import 'package:cinema_store_pickers/src/pickers/tshirt_picker.dart';
@@ -15,13 +16,15 @@ final pickers = [
   ),
   PickerItem(
     name: 'BEBIDAS',
-    isEnabled: false,
     builder: () => const SodaPickerWidget(),
   ),
   PickerItem(
     name: 'T-SHIRT',
-    isEnabled: false,
     builder: () => const TShirtPickerWidget(),
+  ),
+  PickerItem(
+    name: 'JEANS',
+    builder: () => const JeansPickerWidget(),
   ),
 ];
 
@@ -135,7 +138,12 @@ class PickerSegmentedControl extends StatelessWidget {
       for (final option in options)
         option: Padding(
           padding: const EdgeInsets.all(8),
-          child: Text(option.name.toUpperCase()),
+          child: Text(
+            option.name.toUpperCase(),
+            style: const TextStyle(
+              fontSize: 12,
+            ),
+          ),
         ),
     };
 
