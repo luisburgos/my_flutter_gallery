@@ -1,12 +1,11 @@
-import 'package:cinema_store_pickers/src/cinemas/cinema_branch_selector.dart';
-import 'package:cinema_store_pickers/src/cinemas/cinema_brand_color.dart';
-import 'package:cinema_store_pickers/src/cinemas/providers.dart';
+import 'package:cinema_store_pickers/src/cinemas/fake_cinema_branch.dart';
 import 'package:cinema_store_pickers/src/pickers/popcorn_picker.dart';
 import 'package:cinema_store_pickers/src/pickers/soda_picker.dart';
 import 'package:cinema_store_pickers/src/pickers/tshirt_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 /// @no-doc
 final pickers = [
@@ -69,22 +68,15 @@ class PickersWidgetState extends ConsumerState<PickersWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final cinemaStore = ref.watch(cinemaStoreNotifierProvider);
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 8,
-          ),
-          child: CinemaBranchSelector(),
-        ),
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 8,
+          padding: const EdgeInsets.only(
+            top: 16,
+            left: 20,
+            right: 20,
+            bottom: 8,
           ),
           child: PickerSegmentedControl(
             options: pickers,
@@ -94,7 +86,7 @@ class PickersWidgetState extends ConsumerState<PickersWidget> {
                 selectedOption = option;
               });
             },
-            color: cinemaStore.getBrandColor(context),
+            color: HexColor(cinemaBranches['A']!.brandHexColor),
           ),
         ),
         const Divider(),

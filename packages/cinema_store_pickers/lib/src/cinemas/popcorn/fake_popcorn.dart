@@ -126,9 +126,13 @@ const popcornFlavorRufflesQueso = PickOMaticItem(
 );
 
 /// @no-doc
-final globalPopcornExtraFlavors = {
+final globalPopcornExtraFlavors1 = {
   popcornFlavorDoritosNachosId: popcornFlavorDoritosNachos,
   popcornFlavorCheetosMixId: popcornFlavorCheetosMix,
+};
+
+/// @no-doc
+final globalPopcornExtraFlavors2 = {
   popcornFlavorTakisBlueId: popcornFlavorTakisBlue,
   popcornFlavorRufflesQuesoId: popcornFlavorRufflesQueso,
   popcornFlavorChipsJalapenoId: popcornFlavorChipsJalapeno,
@@ -137,7 +141,7 @@ final globalPopcornExtraFlavors = {
 /// @no-doc
 final globalPopcornFlavors = [
   ...globalPopcornBaseFlavors.values,
-  ...globalPopcornExtraFlavors.values,
+  ...globalPopcornExtraFlavors1.values,
 ];
 
 /// @no-doc
