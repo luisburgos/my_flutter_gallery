@@ -5,14 +5,26 @@ import 'package:flutter/material.dart';
 /// @no-doc
 class PopcornPickerWidget extends StatefulWidget {
   /// @no-doc
-  const PopcornPickerWidget({super.key});
+  const PopcornPickerWidget({
+    super.key,
+    this.initialSelectionLimit = 2,
+  });
+
+  /// @no-doc
+  final int initialSelectionLimit;
 
   @override
   State<PopcornPickerWidget> createState() => _PopcornPickerWidgetState();
 }
 
 class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
-  int selectionLimit = 1;
+  late int selectionLimit;
+
+  @override
+  void initState() {
+    selectionLimit = widget.initialSelectionLimit;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +43,14 @@ class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
                 case 'Para llevar':
                   selectionLimit = 4;
                 default:
-                  selectionLimit = 1;
+                  selectionLimit = widget.initialSelectionLimit;
               }
             });
           },
         ),
         PickOMaticSectionWrapper.build(
           id: '$id-flavor',
-          title: 'Elige un sabor',
+          title: 'Elige hasta $selectionLimit sabores',
           items: globalPopcornFlavors,
           withPreview: selectionLimit > 1,
           selectionLimit: selectionLimit,

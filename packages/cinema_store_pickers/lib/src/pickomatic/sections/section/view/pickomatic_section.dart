@@ -29,6 +29,15 @@ class _PickOMaticSectionViewState<T> extends State<PickOMaticSectionView<T>> {
   List<PickOMaticSectionOption> selected = [];
 
   @override
+  void initState() {
+    final initialSelection = widget.section.currentSelection;
+    if (initialSelection != null) {
+      selected = [initialSelection];
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

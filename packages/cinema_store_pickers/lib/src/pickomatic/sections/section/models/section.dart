@@ -18,13 +18,10 @@ class PickOMaticSectionWrapper {
       title: title,
       withPreview: withPreview,
       onSelected: onSelected,
-      currentSelection: PickOMaticItemSelection(
-        PickOMaticItem(
-          id: PickOMaticItemId(
-            items.first.id.value,
-          ),
-          name: items.first.name,
-        ),
+      currentSelection: PickOMaticSectionOption(
+        name: items.first.name,
+        iconName: items.first.iconName ?? '',
+        priceTag: '',
       ),
       selectionConfig: PickOMaticSelectionConfig(selectionLimit),
       options: items.map((item) {
@@ -64,7 +61,7 @@ class PickOMaticSection<T> {
   final List<PickOMaticSectionOption> options;
 
   /// @no-doc
-  final PickOMaticItemSelection<T>? currentSelection;
+  final PickOMaticSectionOption? currentSelection;
 
   /// @no-doc
   final bool withPreview;
@@ -79,13 +76,4 @@ class PickOMaticSection<T> {
   bool get isMultipleSelectionMode {
     return selectionConfig.limit > 1;
   }
-}
-
-/// @no-doc
-class PickOMaticItemSelection<T> {
-  /// @no-doc
-  const PickOMaticItemSelection(this.data);
-
-  /// @no-doc
-  final T data;
 }
