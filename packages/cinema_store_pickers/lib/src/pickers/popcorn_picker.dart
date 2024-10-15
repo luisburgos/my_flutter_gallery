@@ -39,8 +39,13 @@ class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
           items: popcornSizes.values.toList(),
           onSelectedChanged: (selected) {
             setState(() {
-              final isFamily =
-                  selected.contains(popcornSizes[popcornSizeFamilyId]);
+              final isFamily = selected.contains(
+                const PickOMaticSectionOption(
+                  name: 'Para llevar',
+                  iconName: '',
+                  priceTag: '',
+                ),
+              );
               selectionLimit = isFamily ? 4 : widget.initialSelectionLimit;
             });
           },

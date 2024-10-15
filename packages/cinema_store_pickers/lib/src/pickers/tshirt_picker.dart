@@ -63,7 +63,13 @@ class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
   Widget build(BuildContext context) {
     const id = 'tshirt-01';
 
-    final isWhite = _selected.contains(_white);
+    final isWhite = _selected.contains(
+      const PickOMaticSectionOption(
+        name: 'WHITE',
+        iconName: '',
+        priceTag: '',
+      ),
+    );
     var items = [_sizeS, _sizeG];
     if (isWhite) {
       items = [

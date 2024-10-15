@@ -26,20 +26,18 @@ class _JeansPickerWidgetState extends State<JeansPickerWidget> {
     const id = 'jeans-01';
 
     final is28 = _selected.contains(
-      const PickOMaticItem(
-        id: PickOMaticItemId('28'),
+      const PickOMaticSectionOption(
         name: '28',
-        price: 0,
         iconName: '',
+        priceTag: '',
       ),
     );
 
     final is31 = _selected.contains(
-      const PickOMaticItem(
-        id: PickOMaticItemId('31'),
+      const PickOMaticSectionOption(
         name: '31',
-        price: 0,
         iconName: '',
+        priceTag: '',
       ),
     );
 
