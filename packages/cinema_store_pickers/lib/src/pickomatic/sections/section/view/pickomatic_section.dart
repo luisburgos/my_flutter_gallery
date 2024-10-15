@@ -77,18 +77,19 @@ class _PickOMaticSectionViewState<T> extends State<PickOMaticSectionView<T>> {
     setState(() {
       if (!isMultiple) {
         selected = [option];
-        widget.section.onSelected?.call(option);
+        widget.section.onSelectedChanged?.call(selected);
         return;
       }
 
       if (selected.contains(option)) {
         selected.remove(option);
+        widget.section.onSelectedChanged?.call(selected);
         return;
       }
 
       if (selected.length == widget.section.selectionModeLimit) return;
       selected.add(option);
-      widget.section.onSelected?.call(option);
+      widget.section.onSelectedChanged?.call(selected);
     });
   }
 }

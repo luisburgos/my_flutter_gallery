@@ -13,15 +13,35 @@ class JeansPickerWidget extends StatefulWidget {
 }
 
 class _JeansPickerWidgetState extends State<JeansPickerWidget> {
-  PickOMaticSectionOption? initialSelection = const PickOMaticSectionOption(
-    name: 'BLUE',
-    iconName: '',
-    priceTag: '',
-  );
+  var _selected = [
+    const PickOMaticSectionOption(
+      name: 'BLUE',
+      iconName: '',
+      priceTag: '',
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     const id = 'jeans-01';
+
+    final is28 = _selected.contains(
+      const PickOMaticItem(
+        id: PickOMaticItemId('28'),
+        name: '28',
+        price: 0,
+        iconName: '',
+      ),
+    );
+
+    final is31 = _selected.contains(
+      const PickOMaticItem(
+        id: PickOMaticItemId('31'),
+        name: '31',
+        price: 0,
+        iconName: '',
+      ),
+    );
 
     var items = [
       const PickOMaticItem(
@@ -37,7 +57,7 @@ class _JeansPickerWidgetState extends State<JeansPickerWidget> {
         iconName: '',
       ),
     ];
-    if (initialSelection?.name == '28') {
+    if (is28) {
       items = [
         const PickOMaticItem(
           id: PickOMaticItemId('34'),
@@ -48,7 +68,7 @@ class _JeansPickerWidgetState extends State<JeansPickerWidget> {
       ];
     }
 
-    if (initialSelection?.name == '31') {
+    if (is31) {
       items = [
         const PickOMaticItem(
           id: PickOMaticItemId('34'),
@@ -71,7 +91,7 @@ class _JeansPickerWidgetState extends State<JeansPickerWidget> {
         PickOMaticSectionWrapper.build(
           id: '$id-waist',
           title: 'Elige un WAIST',
-          initialSelection: initialSelection,
+          initialSelection: _selected,
           items: const [
             PickOMaticItem(
               id: PickOMaticItemId('28'),
@@ -92,9 +112,9 @@ class _JeansPickerWidgetState extends State<JeansPickerWidget> {
               iconName: '',
             ),
           ],
-          onSelected: (color) {
+          onSelectedChanged: (selected) {
             setState(() {
-              initialSelection = color;
+              _selected = selected;
             });
           },
         ),

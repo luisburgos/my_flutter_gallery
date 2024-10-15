@@ -12,16 +12,66 @@ class TShirtPickerWidget extends StatefulWidget {
   State<TShirtPickerWidget> createState() => _TShirtPickerWidgetState();
 }
 
+/// @no-doc
+const _white = PickOMaticItem(
+  id: PickOMaticItemId('white'),
+  name: 'WHITE',
+  price: 0,
+  iconName: '',
+);
+
+/// @no-doc
+const _blue = PickOMaticItem(
+  id: PickOMaticItemId('blue'),
+  name: 'BLUE',
+  price: 0,
+  iconName: '',
+);
+
+/// @no-doc
+const _blueOption = PickOMaticSectionOption(
+  name: 'BLUE',
+  iconName: '',
+  priceTag: '',
+);
+
+/// @no-doc
+const _sizeS = PickOMaticItem(
+  id: PickOMaticItemId('s'),
+  name: 'S',
+  iconName: '',
+);
+
+/// @no-doc
+const _sizeM = PickOMaticItem(
+  id: PickOMaticItemId('m'),
+  name: 'M',
+  iconName: '',
+);
+
+/// @no-doc
+const _sizeG = PickOMaticItem(
+  id: PickOMaticItemId('g'),
+  name: 'G',
+  iconName: '',
+);
+
 class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
-  PickOMaticSectionOption? selectedColor = const PickOMaticSectionOption(
-    name: 'BLUE',
-    iconName: '',
-    priceTag: '',
-  );
+  var _selected = [_blueOption];
 
   @override
   Widget build(BuildContext context) {
     const id = 'tshirt-01';
+
+    final isWhite = _selected.contains(_white);
+    var items = [_sizeS, _sizeG];
+    if (isWhite) {
+      items = [
+        _sizeS,
+        _sizeM,
+        _sizeG,
+      ];
+    }
 
     return PickOMaticWidget(
       key: const Key(id),
@@ -29,49 +79,21 @@ class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
         PickOMaticSectionWrapper.build(
           id: '$id-size',
           title: 'Elige un color',
-          initialSelection: selectedColor,
+          initialSelection: _selected,
           items: const [
-            PickOMaticItem(
-              id: PickOMaticItemId('blue'),
-              name: 'BLUE',
-              price: 0,
-              iconName: '',
-            ),
-            PickOMaticItem(
-              id: PickOMaticItemId('white'),
-              name: 'WHITE',
-              price: 0,
-              iconName: '',
-            ),
+            _blue,
+            _white,
           ],
-          onSelected: (color) {
-            print('selectedColor: $selectedColor');
+          onSelectedChanged: (selected) {
             setState(() {
-              selectedColor = color;
+              _selected = selected;
             });
           },
         ),
         PickOMaticSectionWrapper.build(
           id: '$id-flavor',
           title: 'Elige un tamaño',
-          items: [
-            const PickOMaticItem(
-              id: PickOMaticItemId('s'),
-              name: 'S',
-              iconName: '',
-            ),
-            if (selectedColor?.name == 'WHITE')
-              const PickOMaticItem(
-                id: PickOMaticItemId('m'),
-                name: 'M',
-                iconName: '',
-              ),
-            const PickOMaticItem(
-              id: PickOMaticItemId('g'),
-              name: 'G',
-              iconName: '',
-            ),
-          ],
+          items: items,
         ),
       ],
     );

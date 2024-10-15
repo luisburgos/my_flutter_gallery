@@ -9,17 +9,17 @@ class PickOMaticSectionWrapper {
     required String id,
     required String title,
     required List<PickOMaticItem> items,
-    void Function(PickOMaticSectionOption option)? onSelected,
+    OnSelectedChanged? onSelectedChanged,
     int selectionLimit = 1,
-    PickOMaticSectionOption? initialSelection,
+    List<PickOMaticSectionOption>? initialSelection,
     bool withPreview = false,
   }) {
     return PickOMaticSection<PickOMaticItem>(
       id: '$id-section-$selectionLimit',
       title: title,
       withPreview: withPreview,
-      onSelected: onSelected,
-      initialSelection: initialSelection ??
+      onSelectedChanged: onSelectedChanged,
+      initialSelection: initialSelection?.first ??
           PickOMaticSectionOption(
             name: items.first.name,
             iconName: items.first.iconName ?? '',
@@ -38,13 +38,16 @@ class PickOMaticSectionWrapper {
 }
 
 /// @no-doc
+typedef OnSelectedChanged = void Function(List<PickOMaticSectionOption>);
+
+/// @no-doc
 class PickOMaticSection<T> {
   /// @no-doc
   const PickOMaticSection({
     required this.id,
     required this.title,
     required this.options,
-    this.onSelected,
+    this.onSelectedChanged,
     this.selectionConfig = const PickOMaticSelectionConfig(1),
     this.initialSelection,
     this.withPreview = false,
@@ -69,7 +72,7 @@ class PickOMaticSection<T> {
   final bool withPreview;
 
   /// @no-doc
-  final void Function(PickOMaticSectionOption)? onSelected;
+  final OnSelectedChanged? onSelectedChanged;
 
   /// @no-doc
   int get selectionModeLimit => selectionConfig.limit;

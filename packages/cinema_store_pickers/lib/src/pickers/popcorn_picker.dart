@@ -37,14 +37,11 @@ class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
           id: '$id-size',
           title: 'Elige un tamaño',
           items: popcornSizes.values.toList(),
-          onSelected: (option) {
+          onSelectedChanged: (selected) {
             setState(() {
-              switch (option.name) {
-                case 'Para llevar':
-                  selectionLimit = 4;
-                default:
-                  selectionLimit = widget.initialSelectionLimit;
-              }
+              final isFamily =
+                  selected.contains(popcornSizes[popcornSizeFamilyId]);
+              selectionLimit = isFamily ? 4 : widget.initialSelectionLimit;
             });
           },
         ),
