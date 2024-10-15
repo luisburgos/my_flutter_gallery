@@ -30,7 +30,7 @@ class _PickOMaticSectionViewState<T> extends State<PickOMaticSectionView<T>> {
 
   @override
   void initState() {
-    final initialSelection = widget.section.currentSelection;
+    final initialSelection = widget.section.initialSelection;
     if (initialSelection != null) {
       selected = [initialSelection];
     }

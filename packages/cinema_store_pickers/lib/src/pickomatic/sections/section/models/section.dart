@@ -18,7 +18,7 @@ class PickOMaticSectionWrapper {
       title: title,
       withPreview: withPreview,
       onSelected: onSelected,
-      currentSelection: PickOMaticSectionOption(
+      initialSelection: PickOMaticSectionOption(
         name: items.first.name,
         iconName: items.first.iconName ?? '',
         priceTag: '',
@@ -44,7 +44,7 @@ class PickOMaticSection<T> {
     required this.options,
     this.onSelected,
     this.selectionConfig = const PickOMaticSelectionConfig(1),
-    this.currentSelection,
+    this.initialSelection,
     this.withPreview = false,
   });
 
@@ -61,7 +61,7 @@ class PickOMaticSection<T> {
   final List<PickOMaticSectionOption> options;
 
   /// @no-doc
-  final PickOMaticSectionOption? currentSelection;
+  final PickOMaticSectionOption? initialSelection;
 
   /// @no-doc
   final bool withPreview;
