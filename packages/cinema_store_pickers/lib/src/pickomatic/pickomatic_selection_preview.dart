@@ -17,10 +17,10 @@ class PickOMaticSelectionPreview extends StatelessWidget {
   });
 
   /// @no-doc
-  final List<PickOMaticSectionOption> items;
+  final List<PickOMaticItem> items;
 
   /// @no-doc
-  final void Function(PickOMaticSectionOption) onRemoveTap;
+  final void Function(PickOMaticItem) onRemoveTap;
 
   @override
   Widget build(BuildContext context) {
@@ -68,13 +68,13 @@ class PickerSelectionPreviewItem extends StatelessWidget {
   });
 
   /// @no-doc
-  final PickOMaticSectionOption item;
+  final PickOMaticItem item;
 
   /// @no-doc
   final bool displayRemoveButton;
 
   /// @no-doc
-  final void Function(PickOMaticSectionOption) onRemoveTap;
+  final void Function(PickOMaticItem) onRemoveTap;
 
   @override
   Widget build(BuildContext context) {
@@ -85,15 +85,16 @@ class PickerSelectionPreviewItem extends StatelessWidget {
       height: _minHeight,
       child: Stack(
         children: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: FaIcon(
-                faIconNameMapping(item.iconName),
-                size: 16,
+          if (item.iconName != null)
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: FaIcon(
+                  faIconNameMapping(item.iconName!),
+                  size: 16,
+                ),
               ),
             ),
-          ),
           if (displayRemoveButton)
             Positioned(
               top: 0,

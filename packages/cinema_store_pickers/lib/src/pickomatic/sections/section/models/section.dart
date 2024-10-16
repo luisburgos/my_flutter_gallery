@@ -1,5 +1,4 @@
 import 'package:cinema_store_pickers/src/pickomatic/pickomatic_item.dart';
-import 'package:cinema_store_pickers/src/pickomatic/sections/section/models/section_option.dart';
 import 'package:cinema_store_pickers/src/pickomatic/sections/section/models/selectiong_config.dart';
 
 /// @no-doc
@@ -11,7 +10,7 @@ class PickOMaticSectionWrapper {
     required List<PickOMaticItem> items,
     OnSelectedChanged? onSelectedChanged,
     int selectionLimit = 1,
-    List<PickOMaticSectionOption>? initialSelection,
+    List<PickOMaticItem>? initialSelection,
     bool withPreview = false,
   }) {
     return PickOMaticSection<PickOMaticItem>(
@@ -19,26 +18,15 @@ class PickOMaticSectionWrapper {
       title: title,
       withPreview: withPreview,
       onSelectedChanged: onSelectedChanged,
-      initialSelection: initialSelection?.first ??
-          PickOMaticSectionOption(
-            name: items.first.name,
-            iconName: items.first.iconName ?? '',
-            priceTag: '',
-          ),
+      initialSelection: initialSelection?.first ?? items.first,
       selectionConfig: PickOMaticSelectionConfig(selectionLimit),
-      options: items.map((item) {
-        return PickOMaticSectionOption(
-          name: item.name,
-          iconName: item.iconName ?? '',
-          priceTag: '',
-        );
-      }).toList(),
+      options: items,
     );
   }
 }
 
 /// @no-doc
-typedef OnSelectedChanged = void Function(List<PickOMaticSectionOption>);
+typedef OnSelectedChanged = void Function(List<PickOMaticItem>);
 
 /// @no-doc
 class PickOMaticSection<T> {
@@ -63,10 +51,10 @@ class PickOMaticSection<T> {
   final PickOMaticSelectionConfig selectionConfig;
 
   /// @no-doc
-  final List<PickOMaticSectionOption> options;
+  final List<PickOMaticItem> options;
 
   /// @no-doc
-  final PickOMaticSectionOption? initialSelection;
+  final PickOMaticItem? initialSelection;
 
   /// @no-doc
   final bool withPreview;

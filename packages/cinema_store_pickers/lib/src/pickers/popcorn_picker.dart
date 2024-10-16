@@ -40,10 +40,11 @@ class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
           onSelectedChanged: (selected) {
             setState(() {
               final isFamily = selected.contains(
-                const PickOMaticSectionOption(
+                const PickOMaticItem(
+                  id: PickOMaticItemId('family'),
                   name: 'Para llevar',
                   iconName: '',
-                  priceTag: '',
+                  price: 0,
                 ),
               );
               selectionLimit = isFamily ? 4 : widget.initialSelectionLimit;

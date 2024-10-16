@@ -1,5 +1,5 @@
 import 'package:cinema_store_pickers/src/pickomatic/helpers.dart';
-import 'package:cinema_store_pickers/src/pickomatic/sections/section/models/section_option.dart';
+import 'package:cinema_store_pickers/src/pickomatic/pickomatic_item.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -15,13 +15,13 @@ class PickerSectionOptionView extends StatelessWidget {
   });
 
   /// @no-doc
-  final PickOMaticSectionOption item;
+  final PickOMaticItem item;
 
   /// @no-doc
   final bool isSelected;
 
   /// @no-doc
-  final void Function(PickOMaticSectionOption) onOptionTap;
+  final void Function(PickOMaticItem) onOptionTap;
 
   /// @no-doc
   final Color selectedColor;
@@ -45,10 +45,11 @@ class PickerSectionOptionView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FaIcon(
-              faIconNameMapping(item.iconName),
-              size: 16,
-            ),
+            if (item.iconName != null)
+              FaIcon(
+                faIconNameMapping(item.iconName!),
+                size: 16,
+              ),
             Text(
               item.name,
               textAlign: TextAlign.center,
@@ -56,9 +57,9 @@ class PickerSectionOptionView extends StatelessWidget {
                 fontSize: 16,
               ),
             ),
-            if (item.priceTag.isNotEmpty)
+            if ((item.price ?? 0) > 0)
               Text(
-                item.priceTag,
+                '\$${item.price}',
                 style: const TextStyle(
                   fontSize: 12,
                 ),

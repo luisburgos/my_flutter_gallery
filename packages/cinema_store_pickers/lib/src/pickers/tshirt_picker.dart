@@ -29,10 +29,11 @@ const _blue = PickOMaticItem(
 );
 
 /// @no-doc
-const _blueOption = PickOMaticSectionOption(
+const _blueOption = PickOMaticItem(
+  id: PickOMaticItemId('blue'),
   name: 'BLUE',
   iconName: '',
-  priceTag: '',
+  price: 0,
 );
 
 /// @no-doc
@@ -64,10 +65,11 @@ class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
     const id = 'tshirt-01';
 
     final isWhite = _selected.contains(
-      const PickOMaticSectionOption(
+      const PickOMaticItem(
+        id: PickOMaticItemId('white'),
         name: 'WHITE',
         iconName: '',
-        priceTag: '',
+        price: 0,
       ),
     );
     var items = [_sizeS, _sizeG];

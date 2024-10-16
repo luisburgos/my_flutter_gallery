@@ -14,10 +14,11 @@ class JeansPickerWidget extends StatefulWidget {
 
 class _JeansPickerWidgetState extends State<JeansPickerWidget> {
   var _selected = [
-    const PickOMaticSectionOption(
+    const PickOMaticItem(
+      id: PickOMaticItemId('BLUE'),
       name: 'BLUE',
       iconName: '',
-      priceTag: '',
+      price: 0,
     ),
   ];
 
@@ -26,18 +27,20 @@ class _JeansPickerWidgetState extends State<JeansPickerWidget> {
     const id = 'jeans-01';
 
     final is28 = _selected.contains(
-      const PickOMaticSectionOption(
+      const PickOMaticItem(
+        id: PickOMaticItemId('28'),
         name: '28',
         iconName: '',
-        priceTag: '',
+        price: 0,
       ),
     );
 
     final is31 = _selected.contains(
-      const PickOMaticSectionOption(
+      const PickOMaticItem(
+        id: PickOMaticItemId('31'),
         name: '31',
         iconName: '',
-        priceTag: '',
+        price: 0,
       ),
     );
 

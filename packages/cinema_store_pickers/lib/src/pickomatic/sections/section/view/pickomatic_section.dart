@@ -1,6 +1,6 @@
+import 'package:cinema_store_pickers/src/pickomatic/pickomatic_item.dart';
 import 'package:cinema_store_pickers/src/pickomatic/pickomatic_selection_preview.dart';
 import 'package:cinema_store_pickers/src/pickomatic/sections/section/models/section.dart';
-import 'package:cinema_store_pickers/src/pickomatic/sections/section/models/section_option.dart';
 import 'package:cinema_store_pickers/src/pickomatic/sections/section/view/pickomatic_section_options.dart';
 import 'package:cinema_store_pickers/src/pickomatic/sections/section/view/pickomatic_section_title.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class PickOMaticSectionView<T> extends StatefulWidget {
 }
 
 class _PickOMaticSectionViewState<T> extends State<PickOMaticSectionView<T>> {
-  List<PickOMaticSectionOption> selected = [];
+  List<PickOMaticItem> selected = [];
 
   @override
   void initState() {
@@ -54,7 +54,7 @@ class _PickOMaticSectionViewState<T> extends State<PickOMaticSectionView<T>> {
           ),
           const SizedBox(height: 12),
         ],
-        PickOMaticSectionOptions(
+        PickOMaticItems(
           items: widget.section.options,
           selectedItems: selected,
           onOptionTap: _onToggleSelection,
@@ -64,14 +64,14 @@ class _PickOMaticSectionViewState<T> extends State<PickOMaticSectionView<T>> {
     );
   }
 
-  void _onRemove(PickOMaticSectionOption option) {
+  void _onRemove(PickOMaticItem option) {
     setState(() {
       if (!selected.contains(option)) return;
       selected.remove(option);
     });
   }
 
-  void _onToggleSelection(PickOMaticSectionOption option) {
+  void _onToggleSelection(PickOMaticItem option) {
     final isMultiple = widget.section.isMultipleSelectionMode;
 
     setState(() {
