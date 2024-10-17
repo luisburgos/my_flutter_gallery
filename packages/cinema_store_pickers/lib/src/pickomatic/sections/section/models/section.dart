@@ -1,5 +1,5 @@
 import 'package:cinema_store_pickers/src/pickomatic/pickomatic_item.dart';
-import 'package:cinema_store_pickers/src/pickomatic/sections/section/models/selectiong_config.dart';
+import 'package:cinema_store_pickers/src/pickomatic/sections/section/models/selection_config.dart';
 
 /// @no-doc
 class PickOMaticSectionWrapper {

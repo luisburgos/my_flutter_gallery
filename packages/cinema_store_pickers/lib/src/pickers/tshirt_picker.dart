@@ -6,7 +6,11 @@ class TShirtPickerWidget extends StatefulWidget {
   /// @no-doc
   const TShirtPickerWidget({
     super.key,
+    this.id = 'tshirt-01',
   });
+
+  /// @no-doc
+  final String id;
 
   @override
   State<TShirtPickerWidget> createState() => _TShirtPickerWidgetState();
@@ -16,7 +20,7 @@ class TShirtPickerWidget extends StatefulWidget {
 const _white = PickOMaticItem(
   id: PickOMaticItemId('white'),
   name: 'WHITE',
-  price: 0,
+  price: 270,
   iconName: '',
 );
 
@@ -24,7 +28,7 @@ const _white = PickOMaticItem(
 const _blue = PickOMaticItem(
   id: PickOMaticItemId('blue'),
   name: 'BLUE',
-  price: 0,
+  price: 270,
   iconName: '',
 );
 
@@ -41,6 +45,7 @@ const _sizeS = PickOMaticItem(
   id: PickOMaticItemId('s'),
   name: 'S',
   iconName: '',
+  price: 10,
 );
 
 /// @no-doc
@@ -48,6 +53,7 @@ const _sizeM = PickOMaticItem(
   id: PickOMaticItemId('m'),
   name: 'M',
   iconName: '',
+  price: 15,
 );
 
 /// @no-doc
@@ -55,23 +61,35 @@ const _sizeG = PickOMaticItem(
   id: PickOMaticItemId('g'),
   name: 'G',
   iconName: '',
+  price: 20,
 );
 
 class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
-  var _selected = [_blueOption];
+  late Map<String, List<PickOMaticItem>> _selected;
+
+  String get colorSectionId => '${widget.id}-color';
+  String get sizeSectionId => '${widget.id}-size';
+
+  @override
+  void initState() {
+    _selected = {
+      colorSectionId: [_blueOption],
+      sizeSectionId: [],
+    };
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    const id = 'tshirt-01';
-
-    final isWhite = _selected.contains(
-      const PickOMaticItem(
-        id: PickOMaticItemId('white'),
-        name: 'WHITE',
-        iconName: '',
-        price: 0,
-      ),
-    );
+    final isWhite = _selected[colorSectionId]?.contains(
+          const PickOMaticItem(
+            id: PickOMaticItemId('white'),
+            name: 'WHITE',
+            iconName: '',
+            price: 0,
+          ),
+        ) ??
+        false;
     var items = [_sizeS, _sizeG];
     if (isWhite) {
       items = [
@@ -81,27 +99,37 @@ class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
       ];
     }
 
+    final selections = _selected.values.reduce(
+      (value, element) => [...value, ...element],
+    );
+
     return PickOMaticWidget(
-      key: const Key(id),
+      key: Key(widget.id),
+      selections: selections,
       sections: [
         PickOMaticSectionWrapper.build(
-          id: '$id-size',
+          id: colorSectionId,
           title: 'Elige un color',
-          initialSelection: _selected,
+          initialSelection: _selected[colorSectionId],
           items: const [
             _blue,
             _white,
           ],
           onSelectedChanged: (selected) {
             setState(() {
-              _selected = selected;
+              _selected[colorSectionId] = selected;
             });
           },
         ),
         PickOMaticSectionWrapper.build(
-          id: '$id-flavor',
+          id: sizeSectionId,
           title: 'Elige un tamaño',
           items: items,
+          onSelectedChanged: (selected) {
+            setState(() {
+              _selected[sizeSectionId] = selected;
+            });
+          },
         ),
       ],
     );

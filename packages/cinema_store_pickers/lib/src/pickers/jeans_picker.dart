@@ -88,6 +88,7 @@ class _JeansPickerWidgetState extends State<JeansPickerWidget> {
 
     return PickOMaticWidget(
       key: const Key(id),
+      selections: _selected,
       sections: [
         PickOMaticSectionWrapper.build(
           id: '$id-waist',

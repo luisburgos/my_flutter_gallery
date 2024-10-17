@@ -1,7 +1,7 @@
 import 'package:cinema_store_pickers/src/cinemas/cinema_brand_color.dart';
 import 'package:cinema_store_pickers/src/cinemas/providers.dart';
-import 'package:cinema_store_pickers/src/cinemas/state.dart';
 import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
+import 'package:cinema_store_pickers/src/pickomatic/sections/pickomatic_selection_summary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,22 +10,15 @@ class PickOMaticWidget extends ConsumerStatefulWidget {
   /// @no-doc
   const PickOMaticWidget({
     required this.sections,
+    this.selections,
     super.key,
-  }) : sectionsBuilder = null;
-
-  /// @no-doc
-  const PickOMaticWidget.builder({
-    required this.sectionsBuilder,
-    super.key,
-  }) : sections = const [];
+  });
 
   /// @no-doc
   final List<PickOMaticSection<dynamic>> sections;
 
   /// @no-doc
-  final List<PickOMaticSection<dynamic>> Function(
-    CinemaStoreState,
-  )? sectionsBuilder;
+  final List<PickOMaticItem>? selections;
 
   @override
   PickOMaticWidgetState createState() => PickOMaticWidgetState();
@@ -42,8 +35,7 @@ class PickOMaticWidgetState extends ConsumerState<PickOMaticWidget> {
   @override
   Widget build(BuildContext context) {
     final cinemaStore = ref.watch(cinemaStoreNotifierProvider);
-    final sections =
-        widget.sectionsBuilder?.call(cinemaStore) ?? widget.sections;
+    final sections = widget.sections;
 
     final brandColor = cinemaStore.getBrandColor(context);
     return Column(
@@ -58,14 +50,16 @@ class PickOMaticWidgetState extends ConsumerState<PickOMaticWidget> {
           ),
         ),
         const Divider(),
-        /*Padding(
-          padding: const EdgeInsets.all(12),
-          child: CustomizationSectionSummary(
-            brandColor: brandColor,
-            sections:
-                widget.sectionsBuilder?.call(cinemaStore) ?? widget.sections,
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 12,
           ),
-        ),*/
+          child: PickOMaticSelectionSummary(
+            brandColor: brandColor,
+            selections: widget.selections ?? [],
+          ),
+        ),
       ],
     );
   }
