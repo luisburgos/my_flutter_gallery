@@ -129,7 +129,7 @@ class GameScoreHeader extends ConsumerWidget {
         'TEAM $name'.toUpperCase(),
         style: const TextStyle(
           fontWeight: FontWeight.w800,
-          fontSize: 14,
+          fontSize: 18,
         ),
       );
 
@@ -191,7 +191,7 @@ class TeamScoreView extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: onIncreaseTap,
+                    onPressed: onReduceTap,
                     icon: const Icon(
                       FontAwesomeIcons.chevronDown,
                       size: 20,
