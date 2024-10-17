@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// @no-doc
-class PickOMaticWidget extends ConsumerStatefulWidget {
+class PickOMaticWidget extends ConsumerWidget {
   /// @no-doc
   const PickOMaticWidget({
     required this.sections,
@@ -21,21 +21,8 @@ class PickOMaticWidget extends ConsumerStatefulWidget {
   final List<PickOMaticItem>? selections;
 
   @override
-  PickOMaticWidgetState createState() => PickOMaticWidgetState();
-}
-
-/// @no-doc
-class PickOMaticWidgetState extends ConsumerState<PickOMaticWidget> {
-  @override
-  void initState() {
-    ref.read(cinemaStoreNotifierProvider.notifier).initialize();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final cinemaStore = ref.watch(cinemaStoreNotifierProvider);
-    final sections = widget.sections;
 
     final brandColor = cinemaStore.getBrandColor(context);
     return Column(
@@ -57,7 +44,7 @@ class PickOMaticWidgetState extends ConsumerState<PickOMaticWidget> {
           ),
           child: PickOMaticSelectionSummary(
             brandColor: brandColor,
-            selections: widget.selections ?? [],
+            selections: selections ?? [],
           ),
         ),
       ],

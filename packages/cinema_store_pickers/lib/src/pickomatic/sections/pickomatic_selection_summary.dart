@@ -20,7 +20,6 @@ class PickOMaticSelectionSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     var total = 0.0;
     for (final selection in selections) {
-      print('Add price from: ${selection.name}: \$${selection.price}');
       total += selection.price ?? 0.0;
     }
 

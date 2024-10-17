@@ -67,6 +67,7 @@ class CinemaStoreController extends StateNotifier<CinemaStoreState> {
     final cinemaBranches =
         await cinemaStoreRepository.getDefaultCinemaBranches();
 
+    if (!mounted) return;
     state = state.copyWith(
       cinemaOptions: cinemaBranches,
       selectedCinema: cinemaBranches.firstWhere(

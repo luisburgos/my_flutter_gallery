@@ -14,6 +14,6 @@ final cinemaStoreNotifierProvider =
     final cinemaBranches = ref.watch(cinemaBranchesRepository);
     return CinemaStoreController(
       cinemaStoreRepository: cinemaBranches,
-    );
+    )..initialize();
   },
 );
