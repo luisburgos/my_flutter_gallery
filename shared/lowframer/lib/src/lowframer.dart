@@ -1,22 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+/// @no-doc
 const wireframeArtWindowHeight = 120.0;
+
+/// @no-doc
 const wireframeArtWindowWidth = 160.0;
 
+/// @no-doc
 const wireframeArtRadius1 = 10.0;
+
+/// @no-doc
 const wireframeArtRadius2 = wireframeArtRadius1 / 1.5;
 
+/// @no-doc
 final wireframeArtFillColor1 = Colors.grey.shade200;
+
+/// @no-doc
 final wireframeArtFillColor2 = Colors.grey.shade300;
+
+/// @no-doc
 final wireframeArtFillColor3 = Colors.grey.shade400;
+
+/// @no-doc
 final wireframeArtFillColor4 = Colors.grey.shade900;
+
+/// @no-doc
 const wireframeArtWidthUnit = 14.0;
+
+/// @no-doc
 const wireframeArtHeightUnit = 2.5;
 
+/// @no-doc
 const wireframeArtPaddingUnit = 8.0;
 
+/// @no-doc
 class ArtColors {
+  /// @no-doc
   const ArtColors({
     required this.accentColor,
     required this.backgroundColor,
@@ -26,13 +46,25 @@ class ArtColors {
     required this.borderColor,
   });
 
+  /// @no-doc
   final Color accentColor;
+
+  /// @no-doc
   final Color backgroundColor;
+
+  /// @no-doc
   final Color filColor0;
+
+  /// @no-doc
   final Color filColor1;
+
+  /// @no-doc
   final Color filColor2;
+
+  /// @no-doc
   final Color borderColor;
 
+  /// @no-doc
   ArtColors copyWith({
     Color? accentColor,
     Color? backgroundColor,
@@ -52,6 +84,7 @@ class ArtColors {
   }
 }
 
+/// @no-doc
 final defaultArtColors = ArtColors(
   accentColor: Colors.black,
   backgroundColor: Colors.grey.shade100,
@@ -61,28 +94,45 @@ final defaultArtColors = ArtColors(
   borderColor: Colors.grey.shade300,
 );
 
+/// @no-doc
 class WireframeArtWindow extends StatelessWidget {
+  /// @no-doc
   const WireframeArtWindow({
     required this.colors,
     required this.child,
     this.padding,
     this.color,
     this.isMobile = false,
+    this.isLandscape = false,
     super.key,
   });
 
+  /// @no-doc
   final Widget child;
+
+  /// @no-doc
   final EdgeInsetsGeometry? padding;
+
+  /// @no-doc
   final Color? color;
+
+  /// @no-doc
   final bool isMobile;
+
+  /// @no-doc
+  final bool isLandscape;
+
+  /// @no-doc
   final ArtColors colors;
 
   @override
   Widget build(BuildContext context) {
+    final width = wireframeArtWindowWidth / (isMobile ? 2 : 1);
+
     return Container(
       padding: padding ?? const EdgeInsets.all(wireframeArtPaddingUnit),
-      width: wireframeArtWindowWidth / (isMobile ? 2 : 1),
-      height: wireframeArtWindowHeight,
+      width: isLandscape ? wireframeArtWindowHeight : width,
+      height: isLandscape ? width : wireframeArtWindowHeight,
       decoration: BoxDecoration(
         color: Colors.grey.shade100,
         border: Border.all(
@@ -98,12 +148,15 @@ class WireframeArtWindow extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class WireframeArtHomeIcon extends StatelessWidget {
+  /// @no-doc
   const WireframeArtHomeIcon({
     required this.color,
     super.key,
   });
 
+  /// @no-doc
   final Color color;
 
   @override
@@ -126,7 +179,9 @@ class WireframeArtHomeIcon extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class WireframeArtSquare extends StatelessWidget {
+  /// @no-doc
   const WireframeArtSquare({
     required this.color,
     this.height = double.infinity,
@@ -136,6 +191,7 @@ class WireframeArtSquare extends StatelessWidget {
     super.key,
   });
 
+  /// @no-doc
   const WireframeArtSquare.small({
     required this.color,
     this.padding,
@@ -144,10 +200,19 @@ class WireframeArtSquare extends StatelessWidget {
         width = wireframeArtHeightUnit * 5,
         radius = wireframeArtRadius1 / 2.5;
 
+  /// @no-doc
   final double height;
+
+  /// @no-doc
   final double width;
+
+  /// @no-doc
   final EdgeInsetsGeometry? padding;
+
+  /// @no-doc
   final Color color;
+
+  /// @no-doc
   final double radius;
 
   @override
@@ -164,7 +229,9 @@ class WireframeArtSquare extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class WireframeArtCircle extends StatelessWidget {
+  /// @no-doc
   const WireframeArtCircle({
     required this.color,
     this.height = wireframeArtWidthUnit,
@@ -173,9 +240,17 @@ class WireframeArtCircle extends StatelessWidget {
     super.key,
   });
 
+  /// @no-doc
   final double height;
+
+  /// @no-doc
   final double width;
+
+  /// @no-doc
   final EdgeInsetsGeometry? padding;
+
+  /// @no-doc
+
   final Color color;
 
   @override
@@ -192,7 +267,9 @@ class WireframeArtCircle extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class WireframeArtLine extends StatelessWidget {
+  /// @no-doc
   const WireframeArtLine({
     required this.color,
     this.height = wireframeArtHeightUnit,
@@ -200,8 +277,13 @@ class WireframeArtLine extends StatelessWidget {
     super.key,
   });
 
+  /// @no-doc
   final Color color;
+
+  /// @no-doc
   final double height;
+
+  /// @no-doc
   final double width;
 
   @override
@@ -214,14 +296,19 @@ class WireframeArtLine extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class WireframeArtTopBar1 extends StatelessWidget {
+  /// @no-doc
   const WireframeArtTopBar1({
     required this.leading,
     required this.trailing,
     super.key,
   });
 
+  /// @no-doc
   final Widget leading;
+
+  /// @no-doc
   final Widget trailing;
 
   @override
@@ -234,7 +321,9 @@ class WireframeArtTopBar1 extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class WireframeArtTopBarBase extends StatelessWidget {
+  /// @no-doc
   const WireframeArtTopBarBase({
     required this.leading,
     required this.body,
@@ -242,8 +331,13 @@ class WireframeArtTopBarBase extends StatelessWidget {
     super.key,
   });
 
+  /// @no-doc
   final Widget leading;
+
+  /// @no-doc
   final Widget body;
+
+  /// @no-doc
   final Widget trailing;
 
   @override
@@ -261,12 +355,15 @@ class WireframeArtTopBarBase extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class WireframeArtGrid1By2 extends StatelessWidget {
+  /// @no-doc
   const WireframeArtGrid1By2({
     required this.color,
     super.key,
   });
 
+  /// @no-doc
   final Color color;
 
   @override
@@ -285,12 +382,15 @@ class WireframeArtGrid1By2 extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class WireframeArtCirclesGrid extends StatelessWidget {
+  /// @no-doc
   const WireframeArtCirclesGrid({
     required this.colors,
     super.key,
   });
 
+  /// @no-doc
   final ArtColors colors;
 
   @override
@@ -299,8 +399,8 @@ class WireframeArtCirclesGrid extends StatelessWidget {
     const rowsCount = 5;
     final items = List.generate(
       columnsCount * rowsCount,
-      (_) {
-        final useAccent = _ == 19;
+      (item) {
+        final useAccent = item == 19;
         return WireframeArtCircle(
           color: useAccent ? colors.accentColor : colors.filColor1,
         );
@@ -321,12 +421,15 @@ class WireframeArtCirclesGrid extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class WireframeArtIconLeft extends StatelessWidget {
+  /// @no-doc
   const WireframeArtIconLeft({
     required this.colors,
     super.key,
   });
 
+  /// @no-doc
   final ArtColors colors;
 
   @override
@@ -339,12 +442,15 @@ class WireframeArtIconLeft extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class WireframeArtIconRight extends StatelessWidget {
+  /// @no-doc
   const WireframeArtIconRight({
     required this.colors,
     super.key,
   });
 
+  /// @no-doc
   final ArtColors colors;
 
   @override
