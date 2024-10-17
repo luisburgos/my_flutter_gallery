@@ -37,6 +37,8 @@ dependencies:
     path: packages/splitwise_split_options
   cinema_store_pickers:
     path: packages/cinema_store_pickers
+  game_score_counter:
+    path: packages/game_score_counter
   timelines: ^0.1.0
   url_launcher: ^6.3.0
 

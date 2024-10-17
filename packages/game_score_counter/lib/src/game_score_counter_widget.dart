@@ -22,39 +22,74 @@ class GameScoreCounterWidget extends ConsumerWidget {
     return Column(
       children: [
         Expanded(
-          child: TeamScoreView(
-            backgroundColor: Colors.redAccent.withOpacity(0.5),
-            score: gameScore.teamScoreRed,
-            onIncreaseTap: () {
-              ref
-                  .read(gameScoreCounterNotifierProvider.notifier)
-                  .increaseTeamScoreRed();
-            },
-            onReduceTap: () {
-              ref
-                  .read(gameScoreCounterNotifierProvider.notifier)
-                  .reduceTeamScoreRed();
-            },
+          child: Row(
+            children: [
+              Expanded(
+                child: TeamScoreView(
+                  backgroundColor: Colors.redAccent,
+                  score: gameScore.teamScoreRed,
+                  onIncreaseTap: () {
+                    ref
+                        .read(gameScoreCounterNotifierProvider.notifier)
+                        .increaseTeamScoreRed();
+                  },
+                  onReduceTap: () {
+                    ref
+                        .read(gameScoreCounterNotifierProvider.notifier)
+                        .reduceTeamScoreRed();
+                  },
+                ),
+              ),
+              const VerticalDivider(
+                width: 4,
+                color: Colors.white,
+              ),
+              Expanded(
+                child: TeamScoreView(
+                  backgroundColor: Colors.blueAccent,
+                  score: gameScore.teamScoreBlue,
+                  onIncreaseTap: () {
+                    ref
+                        .read(gameScoreCounterNotifierProvider.notifier)
+                        .increaseTeamScoreBlue();
+                  },
+                  onReduceTap: () {
+                    ref
+                        .read(gameScoreCounterNotifierProvider.notifier)
+                        .reduceTeamScoreBlue();
+                  },
+                ),
+              ),
+            ],
           ),
         ),
         const Divider(
-          height: 10,
           color: Colors.white,
+          height: 5,
         ),
-        Expanded(
-          child: TeamScoreView(
-            backgroundColor: Colors.blueAccent.withOpacity(0.5),
-            score: gameScore.teamScoreBlue,
-            onIncreaseTap: () {
-              ref
-                  .read(gameScoreCounterNotifierProvider.notifier)
-                  .increaseTeamScoreBlue();
-            },
-            onReduceTap: () {
-              ref
-                  .read(gameScoreCounterNotifierProvider.notifier)
-                  .reduceTeamScoreBlue();
-            },
+        SizedBox(
+          height: 40,
+          child: ColoredBox(
+            color: Colors.grey.shade300,
+            child: SizedBox.expand(
+              child: Row(
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      ref
+                          .read(gameScoreCounterNotifierProvider.notifier)
+                          .resetGame();
+                    },
+                    child: const Text(
+                      'RESET',
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ],
@@ -89,40 +124,49 @@ class TeamScoreView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox.expand(
       child: ColoredBox(
-        color: backgroundColor,
+        color: backgroundColor.withOpacity(0.9),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: Center(
-                child: Text(
-                  '$score',
-                  style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.all(12),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton.outlined(
+                  OutlinedButton(
                     onPressed: onReduceTap,
-                    icon: const Icon(
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(
+                        color: Colors.white,
+                      ),
+                    ),
+                    child: const Icon(
                       FontAwesomeIcons.minus,
-                      size: 18,
+                      size: 14,
+                      color: Colors.white,
                     ),
                   ),
-                  const SizedBox(width: 8),
-                  IconButton.outlined(
+                  const SizedBox(width: 12),
+                  Text(
+                    '$score',
+                    style: const TextStyle(
+                      fontSize: 100,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  OutlinedButton(
                     onPressed: onIncreaseTap,
-                    icon: const Icon(
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(
+                        color: Colors.white,
+                      ),
+                    ),
+                    child: const Icon(
                       FontAwesomeIcons.plus,
-                      size: 18,
+                      size: 14,
+                      color: Colors.white,
                     ),
                   ),
                 ],
@@ -193,6 +237,14 @@ class GameScoreCounterController extends StateNotifier<GameScoreCounterState> {
     if (state.teamScoreBlue <= 0) return;
     state = state.copyWith(
       teamScoreBlue: state.teamScoreBlue - 1,
+    );
+  }
+
+  /// @no-doc
+  void resetGame() {
+    state = state.copyWith(
+      teamScoreBlue: 0,
+      teamScoreRed: 0,
     );
   }
 }

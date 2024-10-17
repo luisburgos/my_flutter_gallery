@@ -27,6 +27,7 @@ class _MyFlutterGalleryState extends State<MyFlutterGallery> {
     //SplitwiseSplitOptions(),
     //ReadwiseDailyReview(),
     CinemaStorePickersPackageMetadata(),
+    GameScoreCounterPackageMetadata(),
     //RoadieAppItemData(),
     //ResonanceAppData(),
     //LLMSelectorAppData(),

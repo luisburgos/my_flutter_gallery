@@ -1,6 +1,7 @@
 import 'package:cinema_store_pickers/cinema_store_pickers.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:game_score_counter/game_score_counter.dart';
 import 'package:lowframer/lowframer.dart';
 import 'package:my_flutter_gallery/components/my_flutter_gallery/model.dart';
 import 'package:my_flutter_gallery/legacy/clones/brancher/brancher_app_page.dart';
@@ -208,5 +209,23 @@ class CinemaStorePickersPackageMetadata extends GalleryItemData {
           pageBuilder: (_) => const CinemaStorePickersRootPage(),
           githubRepoUrl: '$galleryRepoPackagesGithubUrl/cinema_stores_pickers',
           coverBuilder: (_) => CinemaStorePickersCoverArt(colors: _),
+        );
+}
+
+class GameScoreCounterPackageMetadata extends GalleryItemData {
+  GameScoreCounterPackageMetadata()
+      : super(
+          id: 'game-score-counter',
+          name: 'Game Score Counter',
+          type: GalleryItemType.component,
+          seedColor: Colors.redAccent,
+          iconData: const Icon(
+            FontAwesomeIcons.volleyball,
+            size: 16,
+          ),
+          description: 'Counter for games. Initially volleyball',
+          pageBuilder: (_) => const GameScoreCounterRootPage(),
+          githubRepoUrl: '$galleryRepoPackagesGithubUrl/cinema_stores_pickers',
+          coverBuilder: (_) => GameScoreCounterCoverArt(colors: _),
         );
 }

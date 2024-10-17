@@ -308,6 +308,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
+  game_score_counter:
+    dependency: "direct main"
+    description:
+      path: "packages/game_score_counter"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   glob:
     dependency: transitive
     description:
