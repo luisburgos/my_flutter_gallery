@@ -130,23 +130,17 @@ class TeamScoreView extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(12),
-              child: Row(
+              child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  OutlinedButton(
-                    onPressed: onReduceTap,
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
-                    child: const Icon(
-                      FontAwesomeIcons.minus,
-                      size: 14,
+                  IconButton(
+                    onPressed: onIncreaseTap,
+                    icon: const Icon(
+                      FontAwesomeIcons.chevronUp,
+                      size: 20,
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(width: 12),
                   Text(
                     '$score',
                     style: const TextStyle(
@@ -155,17 +149,11 @@ class TeamScoreView extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(width: 12),
-                  OutlinedButton(
+                  IconButton(
                     onPressed: onIncreaseTap,
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
-                    child: const Icon(
-                      FontAwesomeIcons.plus,
-                      size: 14,
+                    icon: const Icon(
+                      FontAwesomeIcons.chevronDown,
+                      size: 20,
                       color: Colors.white,
                     ),
                   ),
