@@ -1,15 +1,11 @@
-import 'package:cinema_store_pickers/src/pickomatic/pickomatic_item.dart';
-
 /// @no-doc
-class CinemaBranch {
+class StoreInfo {
   /// @no-doc
-  const CinemaBranch({
+  const StoreInfo({
     required this.id,
     required this.name,
     required this.selectionLimit,
     required this.brandHexColor,
-    required this.availablePopcornFlavors,
-    required this.availablePopcornSizes,
   });
 
   /// @no-doc
@@ -23,12 +19,6 @@ class CinemaBranch {
 
   /// @no-doc
   final String brandHexColor;
-
-  /// @no-doc
-  final List<PickOMaticItem> availablePopcornFlavors;
-
-  /// @no-doc
-  final List<PickOMaticItem> availablePopcornSizes;
 
   /// @no-doc
   @override

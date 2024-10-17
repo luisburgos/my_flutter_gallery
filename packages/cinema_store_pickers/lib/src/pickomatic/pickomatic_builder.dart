@@ -1,7 +1,6 @@
-import 'package:cinema_store_pickers/src/cinemas/cinema_brand_color.dart';
-import 'package:cinema_store_pickers/src/cinemas/providers.dart';
 import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
 import 'package:cinema_store_pickers/src/pickomatic/sections/pickomatic_selection_summary.dart';
+import 'package:cinema_store_pickers/src/stores/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,9 +21,9 @@ class PickOMaticWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final cinemaStore = ref.watch(cinemaStoreNotifierProvider);
+    final stores = ref.watch(storesControllerNotifierProvider);
 
-    final brandColor = cinemaStore.getBrandColor(context);
+    final brandColor = stores.getBrandColor(context);
     return Column(
       children: [
         Expanded(

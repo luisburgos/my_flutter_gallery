@@ -1,4 +1,4 @@
-import 'package:cinema_store_pickers/src/cinemas/beverages/fakes_beverages.dart';
+import 'package:cinema_store_pickers/src/cinema/soda/fake_soda.dart';
 import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
 import 'package:flutter/material.dart';
 

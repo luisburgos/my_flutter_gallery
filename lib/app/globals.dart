@@ -205,7 +205,7 @@ class CinemaStorePickersPackageMetadata extends GalleryItemData {
           ),
           description: 'Pickers for customizable cinema snacks, designed to'
               ' handle variations in size, flavor, and availability by branch',
-          pageBuilder: (_) => const CinemaStorePickersRootPage(),
+          pageBuilder: (_) => const StoresPickersRootPage(),
           githubRepoUrl: '$galleryRepoPackagesGithubUrl/cinema_stores_pickers',
           coverBuilder: (_) => CinemaStorePickersCoverArt(colors: _),
         );
