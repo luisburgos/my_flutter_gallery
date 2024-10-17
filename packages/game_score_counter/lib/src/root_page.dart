@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:game_score_counter/src/game_score_counter_widget.dart';
 
 /// @no-doc
 class GameScoreCounterRootPage extends StatelessWidget {
@@ -12,9 +13,7 @@ class GameScoreCounterRootPage extends StatelessWidget {
       body: SafeArea(
         child: SizedBox.expand(
           child: ProviderScope(
-            child: Placeholder(
-              child: Text('Game Score Counter'),
-            ),
+            child: GameScoreCounterWidget(),
           ),
         ),
       ),
