@@ -17,46 +17,53 @@ class GameScoreCounterCoverArt extends StatelessWidget {
     return WireframeArtWindow(
       colors: colors,
       isMobile: true,
+      isLandscape: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          WireframeArtLine(
-            color: colors.filColor1,
-            height: wireframeArtHeightUnit * 2,
-            width: 30,
-          ),
-          const SizedBox(height: 4),
           Row(
             children: [
-              _buildItem(),
-              const SizedBox(width: 4),
-              _buildItem(),
-              const Spacer(),
+              Flexible(
+                flex: 4,
+                child: WireframeArtLine(
+                  color: colors.filColor1,
+                  height: wireframeArtHeightUnit * 2,
+                  width: double.infinity,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Flexible(
+                flex: 2,
+                child: WireframeArtLine(
+                  color: colors.filColor1,
+                  height: wireframeArtHeightUnit * 2,
+                  width: double.infinity,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Flexible(
+                flex: 4,
+                child: WireframeArtLine(
+                  color: colors.filColor1,
+                  height: wireframeArtHeightUnit * 2,
+                  width: double.infinity,
+                ),
+              ),
             ],
-          ),
-          const SizedBox(height: 8),
-          WireframeArtLine(
-            color: colors.filColor1,
-            height: wireframeArtHeightUnit * 2,
-            width: 30,
           ),
           const SizedBox(height: 4),
-          Row(
-            children: [
-              _buildItem(),
-              const SizedBox(width: 4),
-              _buildItem(),
-              const Spacer(),
-            ],
-          ),
-          const SizedBox(height: 4),
-          Row(
-            children: [
-              _buildItem(useAccent: true),
-              const SizedBox(width: 4),
-              _buildItem(),
-              const Spacer(),
-            ],
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: _buildItem(),
+                ),
+                const SizedBox(width: 4),
+                Expanded(
+                  child: _buildItem(useAccent: true),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -64,7 +71,7 @@ class GameScoreCounterCoverArt extends StatelessWidget {
   }
 
   Widget _buildItem({bool useAccent = false}) => WireframeArtSquare(
-        height: wireframeArtHeightUnit * 9,
+        height: wireframeArtHeightUnit * 20,
         width: wireframeArtHeightUnit * 11.5,
         color: useAccent ? colors.accentColor : colors.filColor1,
         radius: 5,

@@ -19,81 +19,122 @@ class GameScoreCounterWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final gameScore = ref.watch(gameScoreCounterNotifierProvider);
 
-    return Column(
+    return Scaffold(
+      backgroundColor: Colors.deepOrange.shade100,
+      body: const Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: 20,
+          horizontal: 40,
+        ),
+        child: Column(
+          children: [
+            GameScoreHeader(),
+            SizedBox(height: 10),
+            Expanded(
+              child: GameScoreBody(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// @no-doc
+class GameScoreBody extends ConsumerWidget {
+  /// @no-doc
+  const GameScoreBody({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final gameScore = ref.watch(gameScoreCounterNotifierProvider);
+
+    return Row(
       children: [
         Expanded(
-          child: Row(
-            children: [
-              Expanded(
-                child: TeamScoreView(
-                  backgroundColor: Colors.redAccent,
-                  score: gameScore.teamScoreRed,
-                  onIncreaseTap: () {
-                    ref
-                        .read(gameScoreCounterNotifierProvider.notifier)
-                        .increaseTeamScoreRed();
-                  },
-                  onReduceTap: () {
-                    ref
-                        .read(gameScoreCounterNotifierProvider.notifier)
-                        .reduceTeamScoreRed();
-                  },
-                ),
-              ),
-              const VerticalDivider(
-                width: 4,
-                color: Colors.white,
-              ),
-              Expanded(
-                child: TeamScoreView(
-                  backgroundColor: Colors.blueAccent,
-                  score: gameScore.teamScoreBlue,
-                  onIncreaseTap: () {
-                    ref
-                        .read(gameScoreCounterNotifierProvider.notifier)
-                        .increaseTeamScoreBlue();
-                  },
-                  onReduceTap: () {
-                    ref
-                        .read(gameScoreCounterNotifierProvider.notifier)
-                        .reduceTeamScoreBlue();
-                  },
-                ),
-              ),
-            ],
+          child: TeamScoreView(
+            backgroundColor: Colors.redAccent,
+            score: gameScore.teamScoreRed,
+            onIncreaseTap: () {
+              ref
+                  .read(gameScoreCounterNotifierProvider.notifier)
+                  .increaseTeamScoreRed();
+            },
+            onReduceTap: () {
+              ref
+                  .read(gameScoreCounterNotifierProvider.notifier)
+                  .reduceTeamScoreRed();
+            },
           ),
         ),
-        const Divider(
+        const VerticalDivider(
+          width: 4,
           color: Colors.white,
-          height: 5,
         ),
-        SizedBox(
-          height: 40,
-          child: ColoredBox(
-            color: Colors.grey.shade300,
-            child: SizedBox.expand(
-              child: Row(
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      ref
-                          .read(gameScoreCounterNotifierProvider.notifier)
-                          .resetGame();
-                    },
-                    child: const Text(
-                      'RESET',
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+        Expanded(
+          child: TeamScoreView(
+            backgroundColor: Colors.blueAccent,
+            score: gameScore.teamScoreBlue,
+            onIncreaseTap: () {
+              ref
+                  .read(gameScoreCounterNotifierProvider.notifier)
+                  .increaseTeamScoreBlue();
+            },
+            onReduceTap: () {
+              ref
+                  .read(gameScoreCounterNotifierProvider.notifier)
+                  .reduceTeamScoreBlue();
+            },
           ),
         ),
       ],
     );
+  }
+}
+
+/// @no-doc
+class GameScoreHeader extends ConsumerWidget {
+  /// @no-doc
+  const GameScoreHeader({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final gameScore = ref.watch(gameScoreCounterNotifierProvider);
+
+    return Row(
+      children: [
+        _teamNameLabel(gameScore.teamNameRed),
+        const Spacer(),
+        OutlinedButton(
+          style: OutlinedButton.styleFrom(
+            backgroundColor: Colors.white,
+            side: BorderSide(
+              color: Colors.grey.shade300,
+            ),
+          ),
+          onPressed: () => _onResetTap(ref),
+          child: Icon(
+            FontAwesomeIcons.arrowRotateRight,
+            size: 20,
+            color: Colors.grey.shade900,
+          ),
+        ),
+        const Spacer(),
+        _teamNameLabel(gameScore.teamNameBlue),
+      ],
+    );
+  }
+
+  Widget _teamNameLabel(String name) => Text(
+        'TEAM $name'.toUpperCase(),
+        style: const TextStyle(
+          fontWeight: FontWeight.w800,
+          fontSize: 14,
+        ),
+      );
+
+  void _onResetTap(WidgetRef ref) {
+    ref.read(gameScoreCounterNotifierProvider.notifier).resetGame();
   }
 }
 
@@ -144,7 +185,7 @@ class TeamScoreView extends StatelessWidget {
                   Text(
                     '$score',
                     style: const TextStyle(
-                      fontSize: 100,
+                      fontSize: 80,
                       fontWeight: FontWeight.w700,
                       color: Colors.white,
                     ),
@@ -159,7 +200,7 @@ class TeamScoreView extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -171,9 +212,17 @@ class TeamScoreView extends StatelessWidget {
 class GameScoreCounterState {
   /// @no-doc
   const GameScoreCounterState({
+    this.teamNameRed = 'Red',
+    this.teamNameBlue = 'Blue',
     this.teamScoreRed = 0,
     this.teamScoreBlue = 0,
   });
+
+  /// @no-doc
+  final String teamNameRed;
+
+  /// @no-doc
+  final String teamNameBlue;
 
   /// @no-doc
   final int teamScoreRed;
