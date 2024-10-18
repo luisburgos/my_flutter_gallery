@@ -13,12 +13,21 @@ class PickOMaticSectionWrapper {
     List<PickOMaticItem>? initialSelection,
     bool withPreview = false,
   }) {
+    PickOMaticItem? selection = items.first;
+    if (initialSelection != null) {
+      if (initialSelection.isEmpty) {
+        selection = null;
+      } else {
+        selection = initialSelection.first;
+      }
+    }
+
     return PickOMaticSection<PickOMaticItem>(
       id: '$id-section-$selectionLimit',
       title: title,
       withPreview: withPreview,
       onSelectedChanged: onSelectedChanged,
-      initialSelection: initialSelection?.first ?? items.first,
+      initialSelection: selection,
       selectionConfig: PickOMaticSelectionConfig(selectionLimit),
       options: items,
     );

@@ -1,5 +1,7 @@
-import 'package:cinema_store_pickers/src/cinema/popcorn/fake_popcorn.dart';
+import 'package:cinema_store_pickers/src/cinema/popcorn/popcorn_picker_data.dart';
 import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
+import 'package:cinema_store_pickers/src/stores/providers.dart';
+import 'package:cinema_store_pickers/src/stores/views/stores_state_consumer_widget.dart';
 import 'package:flutter/material.dart';
 
 /// @no-doc
@@ -8,7 +10,11 @@ class PopcornPickerWidget extends StatefulWidget {
   const PopcornPickerWidget({
     super.key,
     this.initialSelectionLimit = 2,
+    this.id = 'popcorn-01',
   });
+
+  /// @no-doc
+  final String id;
 
   /// @no-doc
   final int initialSelectionLimit;
@@ -19,9 +25,19 @@ class PopcornPickerWidget extends StatefulWidget {
 
 class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
   late int selectionLimit;
+  late Map<String, List<PickOMaticItem>> _selected;
+
+  String get sizeSectionId => '${widget.id}-size';
+  String get flavorSectionId => '${widget.id}-flavor';
 
   @override
   void initState() {
+    _selected = {
+      flavorSectionId: [],
+      sizeSectionId: [
+        popcornSizes[popcornSizeSmallId]!,
+      ],
+    };
     selectionLimit = widget.initialSelectionLimit;
     super.initState();
   }
@@ -30,35 +46,73 @@ class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
   Widget build(BuildContext context) {
     const id = 'popcorn-01';
 
-    return PickOMaticWidget(
-      key: const Key(id),
-      sections: [
-        PickOMaticSectionWrapper.build(
-          id: '$id-size',
-          title: 'Elige un tamaño',
-          items: popcornSizes.values.toList(),
-          onSelectedChanged: (selected) {
-            setState(() {
-              final isFamily = selected.contains(
-                const PickOMaticItem(
-                  id: PickOMaticItemId('family'),
-                  name: 'Para llevar',
-                  iconName: '',
-                  price: 0,
-                ),
-              );
-              selectionLimit = isFamily ? 4 : widget.initialSelectionLimit;
-            });
-          },
-        ),
-        PickOMaticSectionWrapper.build(
-          id: '$id-flavor',
-          title: 'Elige hasta $selectionLimit sabores',
-          items: globalPopcornFlavors,
-          withPreview: selectionLimit > 1,
-          selectionLimit: selectionLimit,
-        ),
-      ],
+    final selections = _selected.values.reduce(
+      (value, element) => [...value, ...element],
     );
+
+    final selectedSize = _selected[sizeSectionId]?.first.id.value ?? '';
+
+    return StoresStateConsumerWidget(
+      builder: (storesState, __) => PickOMaticWidget(
+        key: const Key(id),
+        color: storesState.getBrandColor(context),
+        selections: selections,
+        sections: [
+          PickOMaticSectionWrapper.build(
+            id: sizeSectionId,
+            title: 'Elige un tamaño',
+            items: popcornSizes.values.toList(),
+            initialSelection: [],
+            onSelectedChanged: (selected) {
+              setState(() {
+                _selected[sizeSectionId] = selected;
+
+                final isFamily = selected.contains(
+                  popcornSizes[popcornSizeFamilyId],
+                );
+                selectionLimit = isFamily ? 4 : widget.initialSelectionLimit;
+              });
+            },
+          ),
+          if (_selected[sizeSectionId]?.isNotEmpty ?? false)
+            PickOMaticSectionWrapper.build(
+              id: '$flavorSectionId-$selectedSize',
+              title: 'Elige hasta $selectionLimit sabores',
+              items: _getPopcornFlavorsWithPrices(
+                _selected[sizeSectionId]?.first,
+              ),
+              withPreview: selectionLimit > 1,
+              selectionLimit: selectionLimit,
+              onSelectedChanged: (selected) {
+                print('selected: $selected');
+
+                setState(() {
+                  /// Filter just the most expensive item during selection
+                  final mostExpensiveItem = selected.reduce(
+                    (a, b) => (a.price ?? 0.0) > (b.price ?? 0.0) ? a : b,
+                  );
+                  _selected[flavorSectionId] = [mostExpensiveItem];
+                });
+              },
+            ),
+        ],
+      ),
+    );
+  }
+
+  List<PickOMaticItem> _getPopcornFlavorsWithPrices(
+    PickOMaticItem? sizeSelected,
+  ) {
+    if (sizeSelected == null) return [];
+
+    final prices = flavorPricesForSize[sizeSelected.id];
+
+    return globalPopcornFlavors
+        .map(
+          (flavor) => flavor.copyWith(
+            price: prices?[flavor.id] ?? 0.0,
+          ),
+        )
+        .toList();
   }
 }

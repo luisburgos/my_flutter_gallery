@@ -1,14 +1,13 @@
 import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
 import 'package:cinema_store_pickers/src/pickomatic/sections/pickomatic_selection_summary.dart';
-import 'package:cinema_store_pickers/src/stores/providers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// @no-doc
-class PickOMaticWidget extends ConsumerWidget {
+class PickOMaticWidget extends StatelessWidget {
   /// @no-doc
   const PickOMaticWidget({
     required this.sections,
+    required this.color,
     this.selections,
     super.key,
   });
@@ -19,18 +18,18 @@ class PickOMaticWidget extends ConsumerWidget {
   /// @no-doc
   final List<PickOMaticItem>? selections;
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final stores = ref.watch(storesControllerNotifierProvider);
+  /// @no-doc
+  final Color color;
 
-    final brandColor = stores.getBrandColor(context);
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: PickOMaticSectionsViews(
-              color: brandColor,
+              color: color,
               sections: sections,
             ),
           ),
@@ -42,7 +41,7 @@ class PickOMaticWidget extends ConsumerWidget {
             vertical: 12,
           ),
           child: PickOMaticSelectionSummary(
-            brandColor: brandColor,
+            brandColor: color,
             selections: selections ?? [],
           ),
         ),

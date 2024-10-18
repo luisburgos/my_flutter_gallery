@@ -39,5 +39,20 @@ class PickOMaticItem extends Equatable {
 
   /// @no-doc
   @override
-  String toString() => '${id.value}, $name';
+  String toString() => '${id.value}-$name';
+
+  /// @no-doc
+  PickOMaticItem copyWith({
+    PickOMaticItemId? id,
+    String? name,
+    String? iconName,
+    double? price,
+  }) {
+    return PickOMaticItem(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      iconName: iconName ?? this.iconName,
+      price: price ?? this.price,
+    );
+  }
 }

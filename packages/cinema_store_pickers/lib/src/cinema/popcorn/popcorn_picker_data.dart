@@ -21,31 +21,31 @@ final popcornSizes = {
     id: popcornSizeSmallId,
     name: 'Chicas',
     iconName: '',
-    price: 80,
+    price: 75,
   ),
   popcornSizeMediumId: const PickOMaticItem(
     id: popcornSizeMediumId,
     name: 'Medianas',
     iconName: '',
-    price: 85,
+    price: 80,
   ),
   popcornSizeLargeId: const PickOMaticItem(
     id: popcornSizeLargeId,
     name: 'Grandes',
     iconName: '',
-    price: 90,
+    price: 85,
   ),
   popcornSizeJumboId: const PickOMaticItem(
     id: popcornSizeJumboId,
     name: 'Jumbo',
     iconName: '',
-    price: 95,
+    price: 90,
   ),
   popcornSizeFamilyId: const PickOMaticItem(
     id: popcornSizeFamilyId,
     name: 'Para llevar',
     iconName: '',
-    price: 105,
+    price: 100,
   ),
 };
 
@@ -143,6 +143,50 @@ final globalPopcornFlavors = [
   ...globalPopcornBaseFlavors.values,
   ...globalPopcornExtraFlavors1.values,
 ];
+
+/// @no-doc
+final flavorPricesForSize = <PickOMaticItemId, Map<PickOMaticItemId, double>>{
+  popcornSizeSmallId: {
+    popcornFlavorCaramelId: 10.0,
+    popcornFlavorDoritosNachosId: 10.0,
+    popcornFlavorChipsJalapenoId: 10.0,
+    popcornFlavorTakisBlueId: 10.0,
+    popcornFlavorRufflesQuesoId: 10.0,
+    popcornFlavorCheetosMixId: 15.0,
+  },
+  popcornSizeMediumId: {
+    popcornFlavorCaramelId: 15.0,
+    popcornFlavorDoritosNachosId: 15.0,
+    popcornFlavorChipsJalapenoId: 15.0,
+    popcornFlavorTakisBlueId: 15.0,
+    popcornFlavorRufflesQuesoId: 15.0,
+    popcornFlavorCheetosMixId: 20.0,
+  },
+  popcornSizeLargeId: {
+    popcornFlavorCaramelId: 15.0,
+    popcornFlavorDoritosNachosId: 15.0,
+    popcornFlavorChipsJalapenoId: 15.0,
+    popcornFlavorTakisBlueId: 15.0,
+    popcornFlavorRufflesQuesoId: 15.0,
+    popcornFlavorCheetosMixId: 20.0,
+  },
+  popcornSizeJumboId: {
+    popcornFlavorCaramelId: 20.0,
+    popcornFlavorDoritosNachosId: 20.0,
+    popcornFlavorChipsJalapenoId: 20.0,
+    popcornFlavorTakisBlueId: 20.0,
+    popcornFlavorRufflesQuesoId: 20.0,
+    popcornFlavorCheetosMixId: 25.0,
+  },
+  popcornSizeFamilyId: {
+    popcornFlavorCaramelId: 20.0,
+    popcornFlavorDoritosNachosId: 20.0,
+    popcornFlavorChipsJalapenoId: 20.0,
+    popcornFlavorTakisBlueId: 20.0,
+    popcornFlavorRufflesQuesoId: 20.0,
+    popcornFlavorCheetosMixId: 25.0,
+  },
+};
 
 /// @no-doc
 final globalPopcornFlavorsIds =

@@ -1,131 +1,90 @@
+import 'package:cinema_store_pickers/src/clothing/jeans/jeans_picker_data.dart';
 import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
+import 'package:cinema_store_pickers/src/stores/providers.dart';
+import 'package:cinema_store_pickers/src/stores/views/stores_state_consumer_widget.dart';
 import 'package:flutter/material.dart';
 
 /// @no-doc
 class JeansPickerWidget extends StatefulWidget {
   /// @no-doc
   const JeansPickerWidget({
+    this.id = 'jeans-01',
     super.key,
   });
+
+  /// @no-doc
+  final String id;
 
   @override
   State<JeansPickerWidget> createState() => _JeansPickerWidgetState();
 }
 
 class _JeansPickerWidgetState extends State<JeansPickerWidget> {
-  var _selected = [
-    const PickOMaticItem(
-      id: PickOMaticItemId('BLUE'),
-      name: 'BLUE',
-      iconName: '',
-      price: 0,
-    ),
-  ];
+  late Map<String, List<PickOMaticItem>> _selected;
+
+  String get waistSectionId => '${widget.id}-waist';
+  String get legSectionId => '${widget.id}-leg';
+
+  @override
+  void initState() {
+    _selected = {
+      waistSectionId: [],
+      legSectionId: [],
+    };
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    const id = 'jeans-01';
+    final is28 = _selected[waistSectionId]?.contains(jeanWaistSize28) ?? false;
+    final is31 = _selected[waistSectionId]?.contains(jeanWaistSize31) ?? false;
 
-    final is28 = _selected.contains(
-      const PickOMaticItem(
-        id: PickOMaticItemId('28'),
-        name: '28',
-        iconName: '',
-        price: 0,
-      ),
-    );
-
-    final is31 = _selected.contains(
-      const PickOMaticItem(
-        id: PickOMaticItemId('31'),
-        name: '31',
-        iconName: '',
-        price: 0,
-      ),
-    );
-
-    var items = [
-      const PickOMaticItem(
-        id: PickOMaticItemId('30'),
-        name: '30',
-        price: 0,
-        iconName: '',
-      ),
-      const PickOMaticItem(
-        id: PickOMaticItemId('32'),
-        name: '32',
-        price: 0,
-        iconName: '',
-      ),
+    var legItems = [
+      jeanLegSize30,
+      jeanLegSize32,
     ];
+
     if (is28) {
-      items = [
-        const PickOMaticItem(
-          id: PickOMaticItemId('34'),
-          name: '34',
-          price: 0,
-          iconName: '',
-        ),
+      legItems = [
+        jeanLegSize34,
       ];
     }
 
     if (is31) {
-      items = [
-        const PickOMaticItem(
-          id: PickOMaticItemId('34'),
-          name: '34',
-          price: 0,
-          iconName: '',
-        ),
-        const PickOMaticItem(
-          id: PickOMaticItemId('32'),
-          name: '32',
-          price: 0,
-          iconName: '',
-        ),
+      legItems = [
+        jeanLegSize34,
+        jeanLegSize32,
       ];
     }
 
-    return PickOMaticWidget(
-      key: const Key(id),
-      selections: _selected,
-      sections: [
-        PickOMaticSectionWrapper.build(
-          id: '$id-waist',
-          title: 'Elige un WAIST',
-          initialSelection: _selected,
-          items: const [
-            PickOMaticItem(
-              id: PickOMaticItemId('28'),
-              name: '28',
-              price: 0,
-              iconName: '',
-            ),
-            PickOMaticItem(
-              id: PickOMaticItemId('31'),
-              name: '31',
-              price: 0,
-              iconName: '',
-            ),
-            PickOMaticItem(
-              id: PickOMaticItemId('32'),
-              name: '32',
-              price: 0,
-              iconName: '',
-            ),
-          ],
-          onSelectedChanged: (selected) {
-            setState(() {
-              _selected = selected;
-            });
-          },
-        ),
-        PickOMaticSectionWrapper.build(
-          id: '$id-leg',
-          title: 'Elige un LEG LENGHT',
-          items: items,
-        ),
-      ],
+    return StoresStateConsumerWidget(
+      builder: (storesState, __) => PickOMaticWidget(
+        key: Key(widget.id),
+        color: storesState.getBrandColor(context),
+        selections: _selected[waistSectionId],
+        sections: [
+          PickOMaticSectionWrapper.build(
+            id: waistSectionId,
+            title: 'Elige un WAIST',
+            initialSelection: _selected[waistSectionId],
+            items: const [
+              jeanWaistSize28,
+              jeanWaistSize31,
+              jeanWaistSize32,
+            ],
+            onSelectedChanged: (selected) {
+              setState(() {
+                _selected[waistSectionId] = selected;
+              });
+            },
+          ),
+          PickOMaticSectionWrapper.build(
+            id: legSectionId,
+            title: 'Elige un LEG LENGTH',
+            items: legItems,
+          ),
+        ],
+      ),
     );
   }
 }

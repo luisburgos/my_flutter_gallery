@@ -1,4 +1,7 @@
+import 'package:cinema_store_pickers/src/clothing/tshirts/tshirt_picker_data.dart';
 import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
+import 'package:cinema_store_pickers/src/stores/providers.dart';
+import 'package:cinema_store_pickers/src/stores/views/stores_state_consumer_widget.dart';
 import 'package:flutter/material.dart';
 
 /// @no-doc
@@ -16,54 +19,6 @@ class TShirtPickerWidget extends StatefulWidget {
   State<TShirtPickerWidget> createState() => _TShirtPickerWidgetState();
 }
 
-/// @no-doc
-const _white = PickOMaticItem(
-  id: PickOMaticItemId('white'),
-  name: 'WHITE',
-  price: 270,
-  iconName: '',
-);
-
-/// @no-doc
-const _blue = PickOMaticItem(
-  id: PickOMaticItemId('blue'),
-  name: 'BLUE',
-  price: 270,
-  iconName: '',
-);
-
-/// @no-doc
-const _blueOption = PickOMaticItem(
-  id: PickOMaticItemId('blue'),
-  name: 'BLUE',
-  iconName: '',
-  price: 0,
-);
-
-/// @no-doc
-const _sizeS = PickOMaticItem(
-  id: PickOMaticItemId('s'),
-  name: 'S',
-  iconName: '',
-  price: 10,
-);
-
-/// @no-doc
-const _sizeM = PickOMaticItem(
-  id: PickOMaticItemId('m'),
-  name: 'M',
-  iconName: '',
-  price: 15,
-);
-
-/// @no-doc
-const _sizeG = PickOMaticItem(
-  id: PickOMaticItemId('g'),
-  name: 'G',
-  iconName: '',
-  price: 20,
-);
-
 class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
   late Map<String, List<PickOMaticItem>> _selected;
 
@@ -73,7 +28,7 @@ class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
   @override
   void initState() {
     _selected = {
-      colorSectionId: [_blueOption],
+      colorSectionId: [tShirtBlueColor],
       sizeSectionId: [],
     };
     super.initState();
@@ -81,21 +36,14 @@ class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final isWhite = _selected[colorSectionId]?.contains(
-          const PickOMaticItem(
-            id: PickOMaticItemId('white'),
-            name: 'WHITE',
-            iconName: '',
-            price: 0,
-          ),
-        ) ??
-        false;
-    var items = [_sizeS, _sizeG];
+    final isWhite =
+        _selected[colorSectionId]?.contains(tShirtWhiteColor) ?? false;
+    var sizeItems = [tShirtSizeS, tShirtSizeG];
     if (isWhite) {
-      items = [
-        _sizeS,
-        _sizeM,
-        _sizeG,
+      sizeItems = [
+        tShirtSizeS,
+        tShirtSizeM,
+        tShirtSizeG,
       ];
     }
 
@@ -103,35 +51,38 @@ class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
       (value, element) => [...value, ...element],
     );
 
-    return PickOMaticWidget(
-      key: Key(widget.id),
-      selections: selections,
-      sections: [
-        PickOMaticSectionWrapper.build(
-          id: colorSectionId,
-          title: 'Elige un color',
-          initialSelection: _selected[colorSectionId],
-          items: const [
-            _blue,
-            _white,
-          ],
-          onSelectedChanged: (selected) {
-            setState(() {
-              _selected[colorSectionId] = selected;
-            });
-          },
-        ),
-        PickOMaticSectionWrapper.build(
-          id: sizeSectionId,
-          title: 'Elige un tamaño',
-          items: items,
-          onSelectedChanged: (selected) {
-            setState(() {
-              _selected[sizeSectionId] = selected;
-            });
-          },
-        ),
-      ],
+    return StoresStateConsumerWidget(
+      builder: (storesState, __) => PickOMaticWidget(
+        key: Key(widget.id),
+        color: storesState.getBrandColor(context),
+        selections: selections,
+        sections: [
+          PickOMaticSectionWrapper.build(
+            id: colorSectionId,
+            title: 'Elige un color',
+            initialSelection: _selected[colorSectionId],
+            items: const [
+              tShirtBlueColor,
+              tShirtWhiteColor,
+            ],
+            onSelectedChanged: (selected) {
+              setState(() {
+                _selected[colorSectionId] = selected;
+              });
+            },
+          ),
+          PickOMaticSectionWrapper.build(
+            id: sizeSectionId,
+            title: 'Elige un tamaño',
+            items: sizeItems,
+            onSelectedChanged: (selected) {
+              setState(() {
+                _selected[sizeSectionId] = selected;
+              });
+            },
+          ),
+        ],
+      ),
     );
   }
 }
