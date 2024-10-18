@@ -1,12 +1,10 @@
-import 'package:cinema_store_pickers/src/engine/sections/picker_engine_sections_view.dart';
-import 'package:cinema_store_pickers/src/engine/sections/picker_engine_selection_summary.dart';
-import 'package:cinema_store_pickers/src/engine/sections/section/models/models.dart';
+import 'package:cinema_store_pickers/src/engine/models/models.dart';
+import 'package:cinema_store_pickers/src/engine/view/picker_engine_sections_summary.dart';
+import 'package:cinema_store_pickers/src/engine/view/picker_engine_sections_view.dart';
 import 'package:flutter/material.dart';
 
-import 'sections/section/models/picker_engine_icon_data_locator.dart';
-
 /// @no-doc
-class PickerEngineWidget extends StatelessWidget {
+class PickerEngineWidget extends StatefulWidget {
   /// @no-doc
   const PickerEngineWidget({
     required this.sections,
@@ -29,16 +27,21 @@ class PickerEngineWidget extends StatelessWidget {
   final IconDataLocator iconDataLocator;
 
   @override
+  State<PickerEngineWidget> createState() => _PickerEngineWidgetState();
+}
+
+class _PickerEngineWidgetState extends State<PickerEngineWidget> {
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(20),
-            child: PickerEngineSectionsViews(
-              color: color,
-              sections: sections,
-              iconDataLocator: iconDataLocator,
+            child: PickerEngineSectionsBuilder(
+              color: widget.color,
+              sections: widget.sections,
+              iconDataLocator: widget.iconDataLocator,
             ),
           ),
         ),
@@ -48,9 +51,9 @@ class PickerEngineWidget extends StatelessWidget {
             horizontal: 20,
             vertical: 12,
           ),
-          child: PickerEngineSelectionSummary(
-            brandColor: color,
-            selections: selections ?? [],
+          child: PickerEngineSectionsSummary(
+            brandColor: widget.color,
+            selections: widget.selections ?? [],
           ),
         ),
       ],

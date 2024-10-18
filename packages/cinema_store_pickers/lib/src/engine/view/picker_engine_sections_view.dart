@@ -1,12 +1,11 @@
-import 'package:cinema_store_pickers/src/engine/sections/section/models/models.dart';
-import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_icon_data_locator.dart';
-import 'package:cinema_store_pickers/src/engine/sections/section/view/picker_engine_section.dart';
+import 'package:cinema_store_pickers/src/engine/models/models.dart';
+import 'package:cinema_store_pickers/src/engine/view/picker_engine_sections_builder.dart';
 import 'package:flutter/material.dart';
 
 /// @no-doc
-class PickerEngineSectionsViews extends StatelessWidget {
+class PickerEngineSectionsBuilder extends StatelessWidget {
   /// @no-doc
-  const PickerEngineSectionsViews({
+  const PickerEngineSectionsBuilder({
     required this.sections,
     required this.color,
     required this.iconDataLocator,

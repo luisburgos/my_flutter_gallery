@@ -1,14 +1,13 @@
-import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_icon_data_locator.dart';
-import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_item.dart';
-import 'package:cinema_store_pickers/src/engine/sections/section/view/picker_engine_section_option.dart';
+import 'package:cinema_store_pickers/src/engine/models/models.dart';
+import 'package:cinema_store_pickers/src/engine/view/picker_engine_item_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:shared_utils/shared_utils.dart';
 
 /// @no-doc
-class PickerEngineItems extends StatelessWidget {
+class PickerEngineSectionItems extends StatelessWidget {
   /// @no-doc
-  const PickerEngineItems({
+  const PickerEngineSectionItems({
     required this.items,
     required this.selectedItems,
     required this.onOptionTap,
@@ -48,7 +47,7 @@ class PickerEngineItems extends StatelessWidget {
       rowGap: rowGap,
       children: [
         for (var i = 0; i < items.length; i++)
-          PickerSectionOptionView(
+          PickerEngineItemView(
             key: Key('option-view-${items[i].name}'),
             item: items[i],
             onOptionTap: onOptionTap,

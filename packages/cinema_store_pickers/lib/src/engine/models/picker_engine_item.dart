@@ -1,16 +1,5 @@
+import 'package:cinema_store_pickers/src/engine/models/picker_engine_item_id.dart';
 import 'package:equatable/equatable.dart';
-
-/// @no-doc
-class PickerEngineItemId extends Equatable {
-  /// @no-doc
-  const PickerEngineItemId(this.value);
-
-  /// @no-doc
-  final String value;
-
-  @override
-  List<Object?> get props => [value];
-}
 
 /// @no-doc
 class PickerEngineItem extends Equatable {

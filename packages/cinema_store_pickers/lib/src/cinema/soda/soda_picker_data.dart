@@ -1,4 +1,4 @@
-import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_item.dart';
+import 'package:cinema_store_pickers/src/engine/models/models.dart';
 
 /// @no-doc
 const waterBottleSize01 = PickerEngineItemId('water-size-01');

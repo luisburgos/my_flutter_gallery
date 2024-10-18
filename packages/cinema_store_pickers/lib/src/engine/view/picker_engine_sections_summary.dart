@@ -1,10 +1,10 @@
-import 'package:cinema_store_pickers/src/engine/sections/section/models/models.dart';
+import 'package:cinema_store_pickers/src/engine/models/models.dart';
 import 'package:flutter/material.dart';
 
 /// @no-doc
-class PickerEngineSelectionSummary extends StatelessWidget {
+class PickerEngineSectionsSummary extends StatelessWidget {
   /// @no-doc
-  const PickerEngineSelectionSummary({
+  const PickerEngineSectionsSummary({
     required this.brandColor,
     required this.selections,
     super.key,

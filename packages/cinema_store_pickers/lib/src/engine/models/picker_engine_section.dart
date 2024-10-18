@@ -1,4 +1,4 @@
-import 'package:cinema_store_pickers/src/engine/sections/section/models/models.dart';
+import 'package:cinema_store_pickers/src/engine/models/models.dart';
 
 /// @no-doc
 class PickerEngineSectionWrapper {

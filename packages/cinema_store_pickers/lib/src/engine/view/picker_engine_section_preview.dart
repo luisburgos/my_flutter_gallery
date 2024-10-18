@@ -1,5 +1,4 @@
-import 'package:cinema_store_pickers/src/engine/sections/section/models/models.dart';
-import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_icon_data_locator.dart';
+import 'package:cinema_store_pickers/src/engine/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:shared_utils/shared_utils.dart';
@@ -7,9 +6,9 @@ import 'package:shared_utils/shared_utils.dart';
 const _minHeight = 40.0;
 
 /// @no-doc
-class PickerEngineSelectionPreview extends StatelessWidget {
+class PickerEngineSectionPreview extends StatelessWidget {
   /// @no-doc
-  const PickerEngineSelectionPreview({
+  const PickerEngineSectionPreview({
     required this.items,
     required this.onRemoveTap,
     required this.iconDataLocator,

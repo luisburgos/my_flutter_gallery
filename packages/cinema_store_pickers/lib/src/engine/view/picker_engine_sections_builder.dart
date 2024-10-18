@@ -1,8 +1,7 @@
-import 'package:cinema_store_pickers/src/engine/picker_engine_selection_preview.dart';
-import 'package:cinema_store_pickers/src/engine/sections/section/models/models.dart';
-import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_icon_data_locator.dart';
-import 'package:cinema_store_pickers/src/engine/sections/section/view/picker_engine_section_options.dart';
-import 'package:cinema_store_pickers/src/engine/sections/section/view/picker_engine_section_title.dart';
+import 'package:cinema_store_pickers/src/engine/models/models.dart';
+import 'package:cinema_store_pickers/src/engine/view/picker_engine_section_items.dart';
+import 'package:cinema_store_pickers/src/engine/view/picker_engine_section_preview.dart';
+import 'package:cinema_store_pickers/src/engine/view/picker_engine_section_title.dart';
 import 'package:flutter/material.dart';
 
 /// @no-doc
@@ -53,14 +52,14 @@ class _PickerEngineSectionViewState<T>
         ),
         const SizedBox(height: 12),
         if (widget.section.withPreview) ...[
-          PickerEngineSelectionPreview(
+          PickerEngineSectionPreview(
             items: selected,
             onRemoveTap: _onRemove,
             iconDataLocator: widget.iconDataLocator,
           ),
           const SizedBox(height: 12),
         ],
-        PickerEngineItems(
+        PickerEngineSectionItems(
           items: widget.section.options,
           selectedItems: selected,
           onOptionTap: _onToggleSelection,

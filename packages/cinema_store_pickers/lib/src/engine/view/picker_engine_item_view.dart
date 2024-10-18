@@ -1,11 +1,10 @@
-import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_icon_data_locator.dart';
-import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_item.dart';
+import 'package:cinema_store_pickers/src/engine/models/models.dart';
 import 'package:flutter/material.dart';
 
 /// @no-doc
-class PickerSectionOptionView extends StatelessWidget {
+class PickerEngineItemView extends StatelessWidget {
   /// @no-doc
-  const PickerSectionOptionView({
+  const PickerEngineItemView({
     required this.item,
     required this.onOptionTap,
     required this.isSelected,
