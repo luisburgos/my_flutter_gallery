@@ -1,21 +1,34 @@
 import 'package:cinema_store_pickers/src/engine/models/models.dart';
-import 'package:cinema_store_pickers/src/engine/view/picker_engine_section_items.dart';
-import 'package:cinema_store_pickers/src/engine/view/picker_engine_section_preview.dart';
-import 'package:cinema_store_pickers/src/engine/view/picker_engine_section_title.dart';
+import 'package:cinema_store_pickers/src/engine/view/picker_engine_sections_view.dart';
 import 'package:flutter/material.dart';
 
 /// @no-doc
-class PickerEngineSectionView<T> extends StatefulWidget {
+class PickerEngineSectionsBuilder extends StatelessWidget {
   /// @no-doc
-  const PickerEngineSectionView({
-    required this.section,
+  const PickerEngineSectionsBuilder({
+    required this.sections,
     required this.color,
     required this.iconDataLocator,
+    required this.selected,
+    required this.onRemove,
+    required this.onToggleSelection,
     super.key,
   });
 
   /// @no-doc
-  final PickerEngineSection<T> section;
+  final List<PickerEngineSection<dynamic>> sections;
+
+  /// @no-doc
+  final Map<String, List<PickerEngineItem>> selected;
+
+  /// @no-doc
+  final void Function(String sectionId, PickerEngineItem option) onRemove;
+
+  /// @no-doc
+  final void Function(
+    String sectionId,
+    PickerEngineItem option,
+  ) onToggleSelection;
 
   /// @no-doc
   final Color color;
@@ -24,78 +37,31 @@ class PickerEngineSectionView<T> extends StatefulWidget {
   final IconDataLocator iconDataLocator;
 
   @override
-  State<PickerEngineSectionView<T>> createState() =>
-      _PickerEngineSectionViewState<T>();
-}
-
-class _PickerEngineSectionViewState<T>
-    extends State<PickerEngineSectionView<T>> {
-  List<PickerEngineItem> selected = [];
-
-  @override
-  void initState() {
-    final initialSelection = widget.section.initialSelection;
-    if (initialSelection != null) {
-      selected = [initialSelection];
-    }
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        PickerEngineSectionTitle(
-          widget.section.title,
-          color: widget.color,
-        ),
-        const SizedBox(height: 12),
-        if (widget.section.withPreview) ...[
-          PickerEngineSectionPreview(
-            items: selected,
-            onRemoveTap: _onRemove,
-            iconDataLocator: widget.iconDataLocator,
+    final slivers = <Widget>[];
+    for (final section in sections) {
+      slivers.addAll(
+        [
+          SliverToBoxAdapter(
+            child: DefaultPickerEngineSectionView(
+              key: Key('section-view-${section.id}'),
+              title: section.title,
+              withPreview: section.withPreview,
+              color: color,
+              iconDataLocator: iconDataLocator,
+              options: section.options,
+              selected: selected[section.id] ?? [],
+              onRemove: (item) => onRemove(section.id, item),
+              onToggleSelection: (item) => onToggleSelection(section.id, item),
+            ),
           ),
-          const SizedBox(height: 12),
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 20),
+          ),
         ],
-        PickerEngineSectionItems(
-          items: widget.section.options,
-          selectedItems: selected,
-          onOptionTap: _onToggleSelection,
-          selectedColor: widget.color,
-          iconDataLocator: widget.iconDataLocator,
-        ),
-      ],
-    );
-  }
+      );
+    }
 
-  void _onRemove(PickerEngineItem option) {
-    setState(() {
-      if (!selected.contains(option)) return;
-      selected.remove(option);
-    });
-  }
-
-  void _onToggleSelection(PickerEngineItem option) {
-    final isMultiple = widget.section.isMultipleSelectionMode;
-
-    setState(() {
-      if (!isMultiple) {
-        selected = [option];
-        widget.section.onSelectedChanged?.call(selected);
-        return;
-      }
-
-      if (selected.contains(option)) {
-        selected.remove(option);
-        widget.section.onSelectedChanged?.call(selected);
-        return;
-      }
-
-      if (selected.length == widget.section.selectionModeLimit) return;
-      selected.add(option);
-      widget.section.onSelectedChanged?.call(selected);
-    });
+    return CustomScrollView(slivers: slivers);
   }
 }

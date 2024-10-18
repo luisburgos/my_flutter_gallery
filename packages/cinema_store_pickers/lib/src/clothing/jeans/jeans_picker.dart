@@ -63,7 +63,7 @@ class _JeansPickerWidgetState extends State<JeansPickerWidget> {
         key: Key(widget.id),
         color: storesState.getBrandColor(context),
         iconDataLocator: faIconNameMapping,
-        selections: _selected[waistSectionId],
+        //selections: _selected[waistSectionId],
         sections: [
           PickerEngineSectionWrapper.build(
             id: waistSectionId,

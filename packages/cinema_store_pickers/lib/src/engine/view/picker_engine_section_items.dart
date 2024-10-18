@@ -48,7 +48,7 @@ class PickerEngineSectionItems extends StatelessWidget {
       children: [
         for (var i = 0; i < items.length; i++)
           PickerEngineItemView(
-            key: Key('option-view-${items[i].name}'),
+            key: Key('item-view-${items[i].name}'),
             item: items[i],
             onOptionTap: onOptionTap,
             isSelected: selectedItems.contains(items[i]),

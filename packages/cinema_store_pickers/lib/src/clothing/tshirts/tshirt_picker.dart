@@ -57,7 +57,7 @@ class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
         key: Key(widget.id),
         color: storesState.getBrandColor(context),
         iconDataLocator: faIconNameMapping,
-        selections: selections,
+        //selections: selections,
         sections: [
           PickerEngineSectionWrapper.build(
             id: colorSectionId,

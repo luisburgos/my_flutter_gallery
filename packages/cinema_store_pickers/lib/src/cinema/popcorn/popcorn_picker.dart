@@ -58,7 +58,7 @@ class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
         key: const Key(id),
         color: storesState.getBrandColor(context),
         iconDataLocator: faIconNameMapping,
-        selections: selections,
+        //selections: selections,
         sections: [
           PickerEngineSectionWrapper.build(
             id: sizeSectionId,

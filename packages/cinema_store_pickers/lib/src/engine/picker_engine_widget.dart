@@ -1,6 +1,6 @@
 import 'package:cinema_store_pickers/src/engine/models/models.dart';
+import 'package:cinema_store_pickers/src/engine/view/picker_engine_sections_builder.dart';
 import 'package:cinema_store_pickers/src/engine/view/picker_engine_sections_summary.dart';
-import 'package:cinema_store_pickers/src/engine/view/picker_engine_sections_view.dart';
 import 'package:flutter/material.dart';
 
 /// @no-doc
@@ -10,15 +10,11 @@ class PickerEngineWidget extends StatefulWidget {
     required this.sections,
     required this.color,
     required this.iconDataLocator,
-    this.selections,
     super.key,
   });
 
   /// @no-doc
   final List<PickerEngineSection<dynamic>> sections;
-
-  /// @no-doc
-  final List<PickerEngineItem>? selections;
 
   /// @no-doc
   final Color color;
@@ -31,6 +27,23 @@ class PickerEngineWidget extends StatefulWidget {
 }
 
 class _PickerEngineWidgetState extends State<PickerEngineWidget> {
+  late Map<String, List<PickerEngineItem>> _selected;
+
+  @override
+  void initState() {
+    _selected = {};
+    for (final section in widget.sections) {
+      _selected = {
+        section.id: [],
+      };
+    }
+    super.initState();
+  }
+
+  List<PickerEngineItem> get allSelections => _selected.values.reduce(
+        (value, element) => [...value, ...element],
+      );
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -42,6 +55,9 @@ class _PickerEngineWidgetState extends State<PickerEngineWidget> {
               color: widget.color,
               sections: widget.sections,
               iconDataLocator: widget.iconDataLocator,
+              selected: _selected,
+              onToggleSelection: _onToggleSelection,
+              onRemove: _onRemove,
             ),
           ),
         ),
@@ -53,10 +69,47 @@ class _PickerEngineWidgetState extends State<PickerEngineWidget> {
           ),
           child: PickerEngineSectionsSummary(
             brandColor: widget.color,
-            selections: widget.selections ?? [],
+            selections: allSelections,
           ),
         ),
       ],
     );
+  }
+
+  void _onRemove(String sectionId, PickerEngineItem option) {
+    setState(() {
+      if (_selected[sectionId] == null) return;
+
+      final currentSectionSelection = List<PickerEngineItem>.from(
+        _selected[sectionId]!,
+      );
+      if (!currentSectionSelection.contains(option)) return;
+      currentSectionSelection.remove(option);
+      _selected[sectionId] = currentSectionSelection;
+    });
+  }
+
+  void _onToggleSelection(String sectionId, PickerEngineItem option) {
+    final section = widget.sections.firstWhere(
+      (section) => section.id == sectionId,
+    );
+    final isMultiple = section.isMultipleSelectionMode;
+
+    setState(() {
+      if (!isMultiple) {
+        _selected[sectionId] = [option];
+        return;
+      }
+
+      if (_selected[sectionId] == null) return;
+      if (_selected[sectionId]!.contains(option)) {
+        _selected[sectionId]!.remove(option);
+        return;
+      }
+
+      print('section: $section');
+      if (_selected[sectionId]!.length == section.selectionModeLimit) return;
+      _selected[sectionId]!.add(option);
+    });
   }
 }
