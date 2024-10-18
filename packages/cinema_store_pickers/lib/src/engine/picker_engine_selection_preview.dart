@@ -1,5 +1,5 @@
-import 'package:cinema_store_pickers/src/pickomatic/helpers.dart';
-import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
+import 'package:cinema_store_pickers/src/engine/helpers.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,19 +8,19 @@ import 'package:shared_utils/shared_utils.dart';
 const _minHeight = 40.0;
 
 /// @no-doc
-class PickOMaticSelectionPreview extends StatelessWidget {
+class PickerEngineSelectionPreview extends StatelessWidget {
   /// @no-doc
-  const PickOMaticSelectionPreview({
+  const PickerEngineSelectionPreview({
     required this.items,
     required this.onRemoveTap,
     super.key,
   });
 
   /// @no-doc
-  final List<PickOMaticItem> items;
+  final List<PickerEngineItem> items;
 
   /// @no-doc
-  final void Function(PickOMaticItem) onRemoveTap;
+  final void Function(PickerEngineItem) onRemoveTap;
 
   @override
   Widget build(BuildContext context) {
@@ -68,13 +68,13 @@ class PickerSelectionPreviewItem extends StatelessWidget {
   });
 
   /// @no-doc
-  final PickOMaticItem item;
+  final PickerEngineItem item;
 
   /// @no-doc
   final bool displayRemoveButton;
 
   /// @no-doc
-  final void Function(PickOMaticItem) onRemoveTap;
+  final void Function(PickerEngineItem) onRemoveTap;
 
   @override
   Widget build(BuildContext context) {

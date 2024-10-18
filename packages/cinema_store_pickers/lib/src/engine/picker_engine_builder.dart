@@ -1,11 +1,12 @@
-import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
-import 'package:cinema_store_pickers/src/pickomatic/sections/pickomatic_selection_summary.dart';
+import 'package:cinema_store_pickers/src/engine/sections/picker_engine_sections_view.dart';
+import 'package:cinema_store_pickers/src/engine/sections/picker_engine_selection_summary.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/models/models.dart';
 import 'package:flutter/material.dart';
 
 /// @no-doc
-class PickOMaticWidget extends StatelessWidget {
+class PickerEngineWidget extends StatelessWidget {
   /// @no-doc
-  const PickOMaticWidget({
+  const PickerEngineWidget({
     required this.sections,
     required this.color,
     this.selections,
@@ -13,10 +14,10 @@ class PickOMaticWidget extends StatelessWidget {
   });
 
   /// @no-doc
-  final List<PickOMaticSection<dynamic>> sections;
+  final List<PickerEngineSection<dynamic>> sections;
 
   /// @no-doc
-  final List<PickOMaticItem>? selections;
+  final List<PickerEngineItem>? selections;
 
   /// @no-doc
   final Color color;
@@ -28,7 +29,7 @@ class PickOMaticWidget extends StatelessWidget {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(20),
-            child: PickOMaticSectionsViews(
+            child: PickerEngineSectionsViews(
               color: color,
               sections: sections,
             ),
@@ -40,7 +41,7 @@ class PickOMaticWidget extends StatelessWidget {
             horizontal: 20,
             vertical: 12,
           ),
-          child: PickOMaticSelectionSummary(
+          child: PickerEngineSelectionSummary(
             brandColor: color,
             selections: selections ?? [],
           ),

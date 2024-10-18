@@ -1,47 +1,47 @@
-import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
+import 'package:cinema_store_pickers/src/engine/picker_engine.dart';
 
 /// @no-doc
-const popcornSizeSmallId = PickOMaticItemId('small');
+const popcornSizeSmallId = PickerEngineItemId('small');
 
 /// @no-doc
-const popcornSizeMediumId = PickOMaticItemId('medium');
+const popcornSizeMediumId = PickerEngineItemId('medium');
 
 /// @no-doc
-const popcornSizeLargeId = PickOMaticItemId('large');
+const popcornSizeLargeId = PickerEngineItemId('large');
 
 /// @no-doc
-const popcornSizeJumboId = PickOMaticItemId('jumbo');
+const popcornSizeJumboId = PickerEngineItemId('jumbo');
 
 /// @no-doc
-const popcornSizeFamilyId = PickOMaticItemId('family');
+const popcornSizeFamilyId = PickerEngineItemId('family');
 
 /// @no-doc
 final popcornSizes = {
-  popcornSizeSmallId: const PickOMaticItem(
+  popcornSizeSmallId: const PickerEngineItem(
     id: popcornSizeSmallId,
     name: 'Chicas',
     iconName: '',
     price: 75,
   ),
-  popcornSizeMediumId: const PickOMaticItem(
+  popcornSizeMediumId: const PickerEngineItem(
     id: popcornSizeMediumId,
     name: 'Medianas',
     iconName: '',
     price: 80,
   ),
-  popcornSizeLargeId: const PickOMaticItem(
+  popcornSizeLargeId: const PickerEngineItem(
     id: popcornSizeLargeId,
     name: 'Grandes',
     iconName: '',
     price: 85,
   ),
-  popcornSizeJumboId: const PickOMaticItem(
+  popcornSizeJumboId: const PickerEngineItem(
     id: popcornSizeJumboId,
     name: 'Jumbo',
     iconName: '',
     price: 90,
   ),
-  popcornSizeFamilyId: const PickOMaticItem(
+  popcornSizeFamilyId: const PickerEngineItem(
     id: popcornSizeFamilyId,
     name: 'Para llevar',
     iconName: '',
@@ -50,20 +50,20 @@ final popcornSizes = {
 };
 
 /// @no-doc
-const popcornFlavorButterId = PickOMaticItemId('butter');
+const popcornFlavorButterId = PickerEngineItemId('butter');
 
 /// @no-doc
-const popcornFlavorCaramelId = PickOMaticItemId('caramel');
+const popcornFlavorCaramelId = PickerEngineItemId('caramel');
 
 /// @no-doc
-const popcornFlavorButter = PickOMaticItem(
+const popcornFlavorButter = PickerEngineItem(
   id: popcornFlavorButterId,
   name: 'Mantequilla',
   iconName: 'butter',
 );
 
 /// @no-doc
-const popcornFlavorCaramel = PickOMaticItem(
+const popcornFlavorCaramel = PickerEngineItem(
   id: popcornFlavorCaramelId,
   name: 'Caramelo',
   iconName: 'caramel',
@@ -76,50 +76,50 @@ final globalPopcornBaseFlavors = {
 };
 
 /// @no-doc
-const popcornFlavorDoritosNachosId = PickOMaticItemId('doritos-nachos');
+const popcornFlavorDoritosNachosId = PickerEngineItemId('doritos-nachos');
 
 /// @no-doc
-const popcornFlavorCheetosMixId = PickOMaticItemId('cheetos-mix');
+const popcornFlavorCheetosMixId = PickerEngineItemId('cheetos-mix');
 
 /// @no-doc
-const popcornFlavorTakisBlueId = PickOMaticItemId('takis-blue');
+const popcornFlavorTakisBlueId = PickerEngineItemId('takis-blue');
 
 /// @no-doc
-const popcornFlavorChipsJalapenoId = PickOMaticItemId('chips-jalapeno');
+const popcornFlavorChipsJalapenoId = PickerEngineItemId('chips-jalapeno');
 
 /// @no-doc
-const popcornFlavorRufflesQuesoId = PickOMaticItemId('ruffles-queso');
+const popcornFlavorRufflesQuesoId = PickerEngineItemId('ruffles-queso');
 
 /// @no-doc
-const popcornFlavorDoritosNachos = PickOMaticItem(
+const popcornFlavorDoritosNachos = PickerEngineItem(
   id: popcornFlavorDoritosNachosId,
   name: 'Doritos® Nachos',
   iconName: 'nacho',
 );
 
 /// @no-doc
-const popcornFlavorCheetosMix = PickOMaticItem(
+const popcornFlavorCheetosMix = PickerEngineItem(
   id: popcornFlavorCheetosMixId,
   name: 'Cheetos MIX',
   iconName: 'stick',
 );
 
 /// @no-doc
-const popcornFlavorTakisBlue = PickOMaticItem(
+const popcornFlavorTakisBlue = PickerEngineItem(
   id: popcornFlavorTakisBlueId,
   name: 'Takis® Blue',
   iconName: 'blue_stick',
 );
 
 /// @no-doc
-const popcornFlavorChipsJalapeno = PickOMaticItem(
+const popcornFlavorChipsJalapeno = PickerEngineItem(
   id: popcornFlavorChipsJalapenoId,
   name: 'Chips Jalapeño®',
   iconName: 'pepper',
 );
 
 /// @no-doc
-const popcornFlavorRufflesQueso = PickOMaticItem(
+const popcornFlavorRufflesQueso = PickerEngineItem(
   id: popcornFlavorRufflesQuesoId,
   name: 'Ruffles Queso®',
   iconName: 'cheese',
@@ -145,7 +145,8 @@ final globalPopcornFlavors = [
 ];
 
 /// @no-doc
-final flavorPricesForSize = <PickOMaticItemId, Map<PickOMaticItemId, double>>{
+final flavorPricesForSize =
+    <PickerEngineItemId, Map<PickerEngineItemId, double>>{
   popcornSizeSmallId: {
     popcornFlavorCaramelId: 10.0,
     popcornFlavorDoritosNachosId: 10.0,

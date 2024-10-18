@@ -1,5 +1,5 @@
 import 'package:cinema_store_pickers/src/clothing/jeans/jeans_picker_data.dart';
-import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
+import 'package:cinema_store_pickers/src/engine/picker_engine.dart';
 import 'package:cinema_store_pickers/src/stores/providers.dart';
 import 'package:cinema_store_pickers/src/stores/views/stores_state_consumer_widget.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class JeansPickerWidget extends StatefulWidget {
 }
 
 class _JeansPickerWidgetState extends State<JeansPickerWidget> {
-  late Map<String, List<PickOMaticItem>> _selected;
+  late Map<String, List<PickerEngineItem>> _selected;
 
   String get waistSectionId => '${widget.id}-waist';
   String get legSectionId => '${widget.id}-leg';
@@ -58,12 +58,12 @@ class _JeansPickerWidgetState extends State<JeansPickerWidget> {
     }
 
     return StoresStateConsumerWidget(
-      builder: (storesState, __) => PickOMaticWidget(
+      builder: (storesState, __) => PickerEngineWidget(
         key: Key(widget.id),
         color: storesState.getBrandColor(context),
         selections: _selected[waistSectionId],
         sections: [
-          PickOMaticSectionWrapper.build(
+          PickerEngineSectionWrapper.build(
             id: waistSectionId,
             title: 'Elige un WAIST',
             initialSelection: _selected[waistSectionId],
@@ -78,7 +78,7 @@ class _JeansPickerWidgetState extends State<JeansPickerWidget> {
               });
             },
           ),
-          PickOMaticSectionWrapper.build(
+          PickerEngineSectionWrapper.build(
             id: legSectionId,
             title: 'Elige un LEG LENGTH',
             items: legItems,

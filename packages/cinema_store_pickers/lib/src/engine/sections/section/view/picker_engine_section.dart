@@ -1,32 +1,32 @@
-import 'package:cinema_store_pickers/src/pickomatic/pickomatic_item.dart';
-import 'package:cinema_store_pickers/src/pickomatic/pickomatic_selection_preview.dart';
-import 'package:cinema_store_pickers/src/pickomatic/sections/section/models/section.dart';
-import 'package:cinema_store_pickers/src/pickomatic/sections/section/view/pickomatic_section_options.dart';
-import 'package:cinema_store_pickers/src/pickomatic/sections/section/view/pickomatic_section_title.dart';
+import 'package:cinema_store_pickers/src/engine/picker_engine_selection_preview.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/models/models.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/view/picker_engine_section_options.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/view/picker_engine_section_title.dart';
 import 'package:flutter/material.dart';
 
 /// @no-doc
-class PickOMaticSectionView<T> extends StatefulWidget {
+class PickerEngineSectionView<T> extends StatefulWidget {
   /// @no-doc
-  const PickOMaticSectionView({
+  const PickerEngineSectionView({
     required this.section,
     required this.color,
     super.key,
   });
 
   /// @no-doc
-  final PickOMaticSection<T> section;
+  final PickerEngineSection<T> section;
 
   /// @no-doc
   final Color color;
 
   @override
-  State<PickOMaticSectionView<T>> createState() =>
-      _PickOMaticSectionViewState<T>();
+  State<PickerEngineSectionView<T>> createState() =>
+      _PickerEngineSectionViewState<T>();
 }
 
-class _PickOMaticSectionViewState<T> extends State<PickOMaticSectionView<T>> {
-  List<PickOMaticItem> selected = [];
+class _PickerEngineSectionViewState<T>
+    extends State<PickerEngineSectionView<T>> {
+  List<PickerEngineItem> selected = [];
 
   @override
   void initState() {
@@ -42,19 +42,19 @@ class _PickOMaticSectionViewState<T> extends State<PickOMaticSectionView<T>> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        PickOMaticSectionTitle(
+        PickerEngineSectionTitle(
           widget.section.title,
           color: widget.color,
         ),
         const SizedBox(height: 12),
         if (widget.section.withPreview) ...[
-          PickOMaticSelectionPreview(
+          PickerEngineSelectionPreview(
             items: selected,
             onRemoveTap: _onRemove,
           ),
           const SizedBox(height: 12),
         ],
-        PickOMaticItems(
+        PickerEngineItems(
           items: widget.section.options,
           selectedItems: selected,
           onOptionTap: _onToggleSelection,
@@ -64,14 +64,14 @@ class _PickOMaticSectionViewState<T> extends State<PickOMaticSectionView<T>> {
     );
   }
 
-  void _onRemove(PickOMaticItem option) {
+  void _onRemove(PickerEngineItem option) {
     setState(() {
       if (!selected.contains(option)) return;
       selected.remove(option);
     });
   }
 
-  void _onToggleSelection(PickOMaticItem option) {
+  void _onToggleSelection(PickerEngineItem option) {
     final isMultiple = widget.section.isMultipleSelectionMode;
 
     setState(() {

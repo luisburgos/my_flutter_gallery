@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 
 /// @no-doc
-class PickOMaticItemId extends Equatable {
+class PickerEngineItemId extends Equatable {
   /// @no-doc
-  const PickOMaticItemId(this.value);
+  const PickerEngineItemId(this.value);
 
   /// @no-doc
   final String value;
@@ -13,9 +13,9 @@ class PickOMaticItemId extends Equatable {
 }
 
 /// @no-doc
-class PickOMaticItem extends Equatable {
+class PickerEngineItem extends Equatable {
   /// @no-doc
-  const PickOMaticItem({
+  const PickerEngineItem({
     required this.id,
     required this.name,
     this.iconName,
@@ -23,7 +23,7 @@ class PickOMaticItem extends Equatable {
   });
 
   /// @no-doc
-  final PickOMaticItemId id;
+  final PickerEngineItemId id;
 
   /// @no-doc
   final String name;
@@ -42,13 +42,13 @@ class PickOMaticItem extends Equatable {
   String toString() => '${id.value}-$name';
 
   /// @no-doc
-  PickOMaticItem copyWith({
-    PickOMaticItemId? id,
+  PickerEngineItem copyWith({
+    PickerEngineItemId? id,
     String? name,
     String? iconName,
     double? price,
   }) {
-    return PickOMaticItem(
+    return PickerEngineItem(
       id: id ?? this.id,
       name: name ?? this.name,
       iconName: iconName ?? this.iconName,

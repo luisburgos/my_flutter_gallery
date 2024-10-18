@@ -1,5 +1,5 @@
 import 'package:cinema_store_pickers/src/cinema/popcorn/popcorn_picker_data.dart';
-import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
+import 'package:cinema_store_pickers/src/engine/picker_engine.dart';
 import 'package:cinema_store_pickers/src/stores/providers.dart';
 import 'package:cinema_store_pickers/src/stores/views/stores_state_consumer_widget.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,7 @@ class PopcornPickerWidget extends StatefulWidget {
 
 class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
   late int selectionLimit;
-  late Map<String, List<PickOMaticItem>> _selected;
+  late Map<String, List<PickerEngineItem>> _selected;
 
   String get sizeSectionId => '${widget.id}-size';
   String get flavorSectionId => '${widget.id}-flavor';
@@ -53,12 +53,12 @@ class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
     final selectedSize = _selected[sizeSectionId]?.first.id.value ?? '';
 
     return StoresStateConsumerWidget(
-      builder: (storesState, __) => PickOMaticWidget(
+      builder: (storesState, __) => PickerEngineWidget(
         key: const Key(id),
         color: storesState.getBrandColor(context),
         selections: selections,
         sections: [
-          PickOMaticSectionWrapper.build(
+          PickerEngineSectionWrapper.build(
             id: sizeSectionId,
             title: 'Elige un tamaño',
             items: popcornSizes.values.toList(),
@@ -75,7 +75,7 @@ class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
             },
           ),
           if (_selected[sizeSectionId]?.isNotEmpty ?? false)
-            PickOMaticSectionWrapper.build(
+            PickerEngineSectionWrapper.build(
               id: '$flavorSectionId-$selectedSize',
               title: 'Elige hasta $selectionLimit sabores',
               items: _getPopcornFlavorsWithPrices(
@@ -100,8 +100,8 @@ class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
     );
   }
 
-  List<PickOMaticItem> _getPopcornFlavorsWithPrices(
-    PickOMaticItem? sizeSelected,
+  List<PickerEngineItem> _getPopcornFlavorsWithPrices(
+    PickerEngineItem? sizeSelected,
   ) {
     if (sizeSelected == null) return [];
 

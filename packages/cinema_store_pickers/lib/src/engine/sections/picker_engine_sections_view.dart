@@ -1,17 +1,18 @@
-import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/models/models.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/view/picker_engine_section.dart';
 import 'package:flutter/material.dart';
 
 /// @no-doc
-class PickOMaticSectionsViews extends StatelessWidget {
+class PickerEngineSectionsViews extends StatelessWidget {
   /// @no-doc
-  const PickOMaticSectionsViews({
+  const PickerEngineSectionsViews({
     required this.sections,
     required this.color,
     super.key,
   });
 
   /// @no-doc
-  final List<PickOMaticSection<dynamic>> sections;
+  final List<PickerEngineSection<dynamic>> sections;
 
   /// @no-doc
   final Color color;
@@ -23,7 +24,7 @@ class PickOMaticSectionsViews extends StatelessWidget {
       slivers.addAll(
         [
           SliverToBoxAdapter(
-            child: PickOMaticSectionView(
+            child: PickerEngineSectionView(
               key: Key('${section.id}-section-view'),
               section: section,
               color: color,

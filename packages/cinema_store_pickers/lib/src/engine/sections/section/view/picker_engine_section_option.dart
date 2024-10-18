@@ -1,5 +1,5 @@
-import 'package:cinema_store_pickers/src/pickomatic/helpers.dart';
-import 'package:cinema_store_pickers/src/pickomatic/pickomatic_item.dart';
+import 'package:cinema_store_pickers/src/engine/helpers.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_item.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -15,13 +15,13 @@ class PickerSectionOptionView extends StatelessWidget {
   });
 
   /// @no-doc
-  final PickOMaticItem item;
+  final PickerEngineItem item;
 
   /// @no-doc
   final bool isSelected;
 
   /// @no-doc
-  final void Function(PickOMaticItem) onOptionTap;
+  final void Function(PickerEngineItem) onOptionTap;
 
   /// @no-doc
   final Color selectedColor;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 /// @no-doc
-class PickOMaticSectionTitle extends StatelessWidget {
+class PickerEngineSectionTitle extends StatelessWidget {
   /// @no-doc
-  const PickOMaticSectionTitle(
+  const PickerEngineSectionTitle(
     this.text, {
     required this.color,
     super.key,

@@ -1,5 +1,5 @@
 import 'package:cinema_store_pickers/src/clothing/tshirts/tshirt_picker_data.dart';
-import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
+import 'package:cinema_store_pickers/src/engine/picker_engine.dart';
 import 'package:cinema_store_pickers/src/stores/providers.dart';
 import 'package:cinema_store_pickers/src/stores/views/stores_state_consumer_widget.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class TShirtPickerWidget extends StatefulWidget {
 }
 
 class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
-  late Map<String, List<PickOMaticItem>> _selected;
+  late Map<String, List<PickerEngineItem>> _selected;
 
   String get colorSectionId => '${widget.id}-color';
   String get sizeSectionId => '${widget.id}-size';
@@ -52,12 +52,12 @@ class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
     );
 
     return StoresStateConsumerWidget(
-      builder: (storesState, __) => PickOMaticWidget(
+      builder: (storesState, __) => PickerEngineWidget(
         key: Key(widget.id),
         color: storesState.getBrandColor(context),
         selections: selections,
         sections: [
-          PickOMaticSectionWrapper.build(
+          PickerEngineSectionWrapper.build(
             id: colorSectionId,
             title: 'Elige un color',
             initialSelection: _selected[colorSectionId],
@@ -71,7 +71,7 @@ class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
               });
             },
           ),
-          PickOMaticSectionWrapper.build(
+          PickerEngineSectionWrapper.build(
             id: sizeSectionId,
             title: 'Elige un tamaño',
             items: sizeItems,

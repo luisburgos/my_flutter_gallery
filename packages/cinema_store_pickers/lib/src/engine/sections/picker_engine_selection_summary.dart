@@ -1,10 +1,10 @@
-import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/models/models.dart';
 import 'package:flutter/material.dart';
 
 /// @no-doc
-class PickOMaticSelectionSummary extends StatelessWidget {
+class PickerEngineSelectionSummary extends StatelessWidget {
   /// @no-doc
-  const PickOMaticSelectionSummary({
+  const PickerEngineSelectionSummary({
     required this.brandColor,
     required this.selections,
     super.key,
@@ -14,7 +14,7 @@ class PickOMaticSelectionSummary extends StatelessWidget {
   final Color brandColor;
 
   /// @no-doc
-  final List<PickOMaticItem> selections;
+  final List<PickerEngineItem> selections;
 
   @override
   Widget build(BuildContext context) {

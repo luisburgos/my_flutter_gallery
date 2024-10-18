@@ -1,19 +1,18 @@
-import 'package:cinema_store_pickers/src/pickomatic/pickomatic_item.dart';
-import 'package:cinema_store_pickers/src/pickomatic/sections/section/models/selection_config.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/models/models.dart';
 
 /// @no-doc
-class PickOMaticSectionWrapper {
+class PickerEngineSectionWrapper {
   /// @no-doc
-  static PickOMaticSection<PickOMaticItem> build({
+  static PickerEngineSection<PickerEngineItem> build({
     required String id,
     required String title,
-    required List<PickOMaticItem> items,
+    required List<PickerEngineItem> items,
     OnSelectedChanged? onSelectedChanged,
     int selectionLimit = 1,
-    List<PickOMaticItem>? initialSelection,
+    List<PickerEngineItem>? initialSelection,
     bool withPreview = false,
   }) {
-    PickOMaticItem? selection = items.first;
+    PickerEngineItem? selection = items.first;
     if (initialSelection != null) {
       if (initialSelection.isEmpty) {
         selection = null;
@@ -22,30 +21,30 @@ class PickOMaticSectionWrapper {
       }
     }
 
-    return PickOMaticSection<PickOMaticItem>(
+    return PickerEngineSection<PickerEngineItem>(
       id: '$id-section-$selectionLimit',
       title: title,
       withPreview: withPreview,
       onSelectedChanged: onSelectedChanged,
       initialSelection: selection,
-      selectionConfig: PickOMaticSelectionConfig(selectionLimit),
+      selectionConfig: PickerEngineSelectionConfig(selectionLimit),
       options: items,
     );
   }
 }
 
 /// @no-doc
-typedef OnSelectedChanged = void Function(List<PickOMaticItem>);
+typedef OnSelectedChanged = void Function(List<PickerEngineItem>);
 
 /// @no-doc
-class PickOMaticSection<T> {
+class PickerEngineSection<T> {
   /// @no-doc
-  const PickOMaticSection({
+  const PickerEngineSection({
     required this.id,
     required this.title,
     required this.options,
     this.onSelectedChanged,
-    this.selectionConfig = const PickOMaticSelectionConfig(1),
+    this.selectionConfig = const PickerEngineSelectionConfig(1),
     this.initialSelection,
     this.withPreview = false,
   });
@@ -57,13 +56,13 @@ class PickOMaticSection<T> {
   final String title;
 
   /// @no-doc
-  final PickOMaticSelectionConfig selectionConfig;
+  final PickerEngineSelectionConfig selectionConfig;
 
   /// @no-doc
-  final List<PickOMaticItem> options;
+  final List<PickerEngineItem> options;
 
   /// @no-doc
-  final PickOMaticItem? initialSelection;
+  final PickerEngineItem? initialSelection;
 
   /// @no-doc
   final bool withPreview;

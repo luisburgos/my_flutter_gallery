@@ -1,12 +1,13 @@
-import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_item.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/view/picker_engine_section_option.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:shared_utils/shared_utils.dart';
 
 /// @no-doc
-class PickOMaticItems extends StatelessWidget {
+class PickerEngineItems extends StatelessWidget {
   /// @no-doc
-  const PickOMaticItems({
+  const PickerEngineItems({
     required this.items,
     required this.selectedItems,
     required this.onOptionTap,
@@ -15,13 +16,13 @@ class PickOMaticItems extends StatelessWidget {
   });
 
   /// @no-doc
-  final List<PickOMaticItem> items;
+  final List<PickerEngineItem> items;
 
   /// @no-doc
-  final List<PickOMaticItem> selectedItems;
+  final List<PickerEngineItem> selectedItems;
 
   /// @no-doc
-  final void Function(PickOMaticItem) onOptionTap;
+  final void Function(PickerEngineItem) onOptionTap;
 
   /// @no-doc
   final Color selectedColor;

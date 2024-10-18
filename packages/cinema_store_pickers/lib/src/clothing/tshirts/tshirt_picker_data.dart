@@ -1,37 +1,37 @@
-import 'package:cinema_store_pickers/src/pickomatic/pickomatic.dart';
+import 'package:cinema_store_pickers/src/engine/picker_engine.dart';
 
 /// @no-doc
-const tShirtWhiteColor = PickOMaticItem(
-  id: PickOMaticItemId('white'),
+const tShirtWhiteColor = PickerEngineItem(
+  id: PickerEngineItemId('white'),
   name: 'WHITE',
   price: 270,
   iconName: '',
 );
 
 /// @no-doc
-const tShirtBlueColor = PickOMaticItem(
-  id: PickOMaticItemId('blue'),
+const tShirtBlueColor = PickerEngineItem(
+  id: PickerEngineItemId('blue'),
   name: 'BLUE',
   price: 270,
 );
 
 /// @no-doc
-const tShirtSizeS = PickOMaticItem(
-  id: PickOMaticItemId('s'),
+const tShirtSizeS = PickerEngineItem(
+  id: PickerEngineItemId('s'),
   name: 'S',
   price: 10,
 );
 
 /// @no-doc
-const tShirtSizeM = PickOMaticItem(
-  id: PickOMaticItemId('m'),
+const tShirtSizeM = PickerEngineItem(
+  id: PickerEngineItemId('m'),
   name: 'M',
   price: 15,
 );
 
 /// @no-doc
-const tShirtSizeG = PickOMaticItem(
-  id: PickOMaticItemId('g'),
+const tShirtSizeG = PickerEngineItem(
+  id: PickerEngineItemId('g'),
   name: 'G',
   price: 20,
 );

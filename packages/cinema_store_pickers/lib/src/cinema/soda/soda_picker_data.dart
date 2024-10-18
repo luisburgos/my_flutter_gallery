@@ -1,25 +1,25 @@
-import 'package:cinema_store_pickers/src/pickomatic/pickomatic_item.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_item.dart';
 
 /// @no-doc
-const waterBottleSize01 = PickOMaticItemId('water-size-01');
+const waterBottleSize01 = PickerEngineItemId('water-size-01');
 
 /// @no-doc
-const waterBottleSize02 = PickOMaticItemId('water-size-02');
+const waterBottleSize02 = PickerEngineItemId('water-size-02');
 
 /// @no-doc
-const sodaSizeSmallId = PickOMaticItemId('small');
+const sodaSizeSmallId = PickerEngineItemId('small');
 
 /// @no-doc
-const sodaSizeMediumId = PickOMaticItemId('medium');
+const sodaSizeMediumId = PickerEngineItemId('medium');
 
 /// @no-doc
-const sodaSizeLargeId = PickOMaticItemId('large');
+const sodaSizeLargeId = PickerEngineItemId('large');
 
 /// @no-doc
-const sodaSizeJumboId = PickOMaticItemId('jumbo');
+const sodaSizeJumboId = PickerEngineItemId('jumbo');
 
 /// @no-doc
-const waterSize1 = PickOMaticItem(
+const waterSize1 = PickerEngineItem(
   id: waterBottleSize01,
   name: '600 ML',
   price: 36,
@@ -27,7 +27,7 @@ const waterSize1 = PickOMaticItem(
 );
 
 /// @no-doc
-const waterSize2 = PickOMaticItem(
+const waterSize2 = PickerEngineItem(
   id: waterBottleSize01,
   name: '1 L',
   price: 48,
@@ -41,7 +41,7 @@ final waterBottleSizes = {
 };
 
 /// @no-doc
-const sodaSize1 = PickOMaticItem(
+const sodaSize1 = PickerEngineItem(
   id: sodaSizeSmallId,
   name: 'Chico 473ml',
   price: 76,
@@ -49,7 +49,7 @@ const sodaSize1 = PickOMaticItem(
 );
 
 /// @no-doc
-const sodaSize2 = PickOMaticItem(
+const sodaSize2 = PickerEngineItem(
   id: sodaSizeMediumId,
   name: 'Mediano 591ml',
   price: 81,
@@ -57,7 +57,7 @@ const sodaSize2 = PickOMaticItem(
 );
 
 /// @no-doc
-const sodaSize3 = PickOMaticItem(
+const sodaSize3 = PickerEngineItem(
   id: sodaSizeLargeId,
   name: 'Grande 946ml',
   price: 84,
@@ -65,7 +65,7 @@ const sodaSize3 = PickOMaticItem(
 );
 
 /// @no-doc
-const sodaSize4 = PickOMaticItem(
+const sodaSize4 = PickerEngineItem(
   id: sodaSizeJumboId,
   name: 'Jumbo 1.2L',
   price: 88,
@@ -89,50 +89,50 @@ final sodaFlavors = {
 };
 
 /// @no-doc
-const sodaFlavor1 = PickOMaticItem(
-  id: PickOMaticItemId('soda-flavor-01'),
+const sodaFlavor1 = PickerEngineItem(
+  id: PickerEngineItemId('soda-flavor-01'),
   name: 'Coca-Cola® Sin Azúcar',
   iconName: 'bottle',
 );
 
 /// @no-doc
-const sodaFlavor2 = PickOMaticItem(
-  id: PickOMaticItemId('soda-flavor-02'),
+const sodaFlavor2 = PickerEngineItem(
+  id: PickerEngineItemId('soda-flavor-02'),
   name: 'Coca-Cola®',
   iconName: 'bottle',
 );
 
 /// @no-doc
-const sodaFlavor3 = PickOMaticItem(
-  id: PickOMaticItemId('soda-flavor-03'),
+const sodaFlavor3 = PickerEngineItem(
+  id: PickerEngineItemId('soda-flavor-03'),
   name: 'Coca-Cola® Light',
   iconName: 'bottle',
 );
 
 /// @no-doc
-const sodaFlavor4 = PickOMaticItem(
-  id: PickOMaticItemId('soda-flavor-04'),
+const sodaFlavor4 = PickerEngineItem(
+  id: PickerEngineItemId('soda-flavor-04'),
   name: 'Del Valle Frut',
   iconName: 'bottle',
 );
 
 /// @no-doc
-const itemIce1 = PickOMaticItem(
-  id: PickOMaticItemId('ice-option-01'),
+const itemIce1 = PickerEngineItem(
+  id: PickerEngineItemId('ice-option-01'),
   name: 'Hielo Regular',
   iconName: '',
 );
 
 /// @no-doc
-const itemIce2 = PickOMaticItem(
-  id: PickOMaticItemId('ice-option-02'),
+const itemIce2 = PickerEngineItem(
+  id: PickerEngineItemId('ice-option-02'),
   name: 'Poco Hielo',
   iconName: '',
 );
 
 /// @no-doc
-const itemIce3 = PickOMaticItem(
-  id: PickOMaticItemId('ice-option-03'),
+const itemIce3 = PickerEngineItem(
+  id: PickerEngineItemId('ice-option-03'),
   name: 'Sin Hielo',
   iconName: '',
 );
