@@ -14,7 +14,7 @@ class PickerEngineWidget extends StatefulWidget {
   });
 
   /// @no-doc
-  final List<PickerEngineSection<dynamic>> sections;
+  final List<PickerEngineSection> sections;
 
   /// @no-doc
   final Color color;
@@ -27,7 +27,7 @@ class PickerEngineWidget extends StatefulWidget {
 }
 
 class _PickerEngineWidgetState extends State<PickerEngineWidget> {
-  late Map<String, List<PickerEngineItem>> _selected;
+  Map<String, List<PickerEngineItem>> _selected = {};
 
   @override
   void initState() {

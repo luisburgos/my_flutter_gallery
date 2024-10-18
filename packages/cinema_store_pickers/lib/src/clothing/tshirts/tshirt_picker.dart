@@ -48,22 +48,17 @@ class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
       ];
     }
 
-    final selections = _selected.values.reduce(
-      (value, element) => [...value, ...element],
-    );
-
     return StoresStateConsumerWidget(
       builder: (storesState, __) => PickerEngineWidget(
         key: Key(widget.id),
         color: storesState.getBrandColor(context),
         iconDataLocator: faIconNameMapping,
-        //selections: selections,
         sections: [
-          PickerEngineSectionWrapper.build(
+          PickerEngineSection(
             id: colorSectionId,
             title: 'Elige un color',
-            initialSelection: _selected[colorSectionId],
-            items: const [
+            //initialSelection: _selected[colorSectionId],
+            options: const [
               tShirtBlueColor,
               tShirtWhiteColor,
             ],
@@ -73,10 +68,10 @@ class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
               });
             },
           ),
-          PickerEngineSectionWrapper.build(
+          PickerEngineSection(
             id: sizeSectionId,
             title: 'Elige un tamaño',
-            items: sizeItems,
+            options: sizeItems,
             onSelectedChanged: (selected) {
               setState(() {
                 _selected[sizeSectionId] = selected;

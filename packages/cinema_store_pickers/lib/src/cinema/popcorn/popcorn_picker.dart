@@ -45,26 +45,20 @@ class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    const id = 'popcorn-01';
-
-    final selections = _selected.values.reduce(
-      (value, element) => [...value, ...element],
-    );
-
     final selectedSize = _selected[sizeSectionId]?.first.id.value ?? '';
 
     return StoresStateConsumerWidget(
       builder: (storesState, __) => PickerEngineWidget(
-        key: const Key(id),
+        key: Key(widget.id),
         color: storesState.getBrandColor(context),
         iconDataLocator: faIconNameMapping,
         //selections: selections,
         sections: [
-          PickerEngineSectionWrapper.build(
+          PickerEngineSection(
             id: sizeSectionId,
             title: 'Elige un tamaño',
-            items: popcornSizes.values.toList(),
-            initialSelection: [],
+            options: popcornSizes.values.toList(),
+            //initialSelection: [],
             onSelectedChanged: (selected) {
               setState(() {
                 _selected[sizeSectionId] = selected;
@@ -77,14 +71,14 @@ class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
             },
           ),
           if (_selected[sizeSectionId]?.isNotEmpty ?? false)
-            PickerEngineSectionWrapper.build(
+            PickerEngineSection(
               id: '$flavorSectionId-$selectedSize',
               title: 'Elige hasta $selectionLimit sabores',
-              items: _getPopcornFlavorsWithPrices(
+              options: _getPopcornFlavorsWithPrices(
                 _selected[sizeSectionId]?.first,
               ),
               withPreview: selectionLimit > 1,
-              selectionLimit: selectionLimit,
+              selectionConfig: PickerEngineSelectionConfig(selectionLimit),
               onSelectedChanged: (selected) {
                 print('selected: $selected');
 

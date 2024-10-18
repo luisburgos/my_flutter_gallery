@@ -16,7 +16,7 @@ class PickerEngineSectionsBuilder extends StatelessWidget {
   });
 
   /// @no-doc
-  final List<PickerEngineSection<dynamic>> sections;
+  final List<PickerEngineSection> sections;
 
   /// @no-doc
   final Map<String, List<PickerEngineItem>> selected;

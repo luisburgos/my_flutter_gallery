@@ -46,32 +46,31 @@ class _SodaPickerWidgetState extends State<SodaPickerWidget> {
         key: Key(widget.id),
         color: storesState.getBrandColor(context),
         iconDataLocator: faIconNameMapping,
-        //selections: selections,
         sections: [
-          PickerEngineSectionWrapper.build(
+          PickerEngineSection(
             id: sizeSectionId,
             title: 'Elige un tamaño',
-            items: sodaSizes.values.toList(),
+            options: sodaSizes.values.toList(),
             onSelectedChanged: (selected) {
               setState(() {
                 _selected[sizeSectionId] = selected;
               });
             },
           ),
-          PickerEngineSectionWrapper.build(
+          PickerEngineSection(
             id: flavorSectionId,
             title: 'Elige un sabor',
-            items: [
+            options: [
               sodaFlavor1,
               sodaFlavor2,
               sodaFlavor3,
               sodaFlavor4,
             ],
           ),
-          PickerEngineSectionWrapper.build(
+          PickerEngineSection(
             id: iceSectionId,
             title: 'Elige cantidad de hielo',
-            items: [
+            options: [
               itemIce1,
               itemIce2,
               itemIce3,

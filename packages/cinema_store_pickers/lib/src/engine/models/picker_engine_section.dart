@@ -1,43 +1,10 @@
 import 'package:cinema_store_pickers/src/engine/models/models.dart';
 
 /// @no-doc
-class PickerEngineSectionWrapper {
-  /// @no-doc
-  static PickerEngineSection<PickerEngineItem> build({
-    required String id,
-    required String title,
-    required List<PickerEngineItem> items,
-    OnSelectedChanged? onSelectedChanged,
-    int selectionLimit = 1,
-    List<PickerEngineItem>? initialSelection,
-    bool withPreview = false,
-  }) {
-    PickerEngineItem? selection = items.first;
-    if (initialSelection != null) {
-      if (initialSelection.isEmpty) {
-        selection = null;
-      } else {
-        selection = initialSelection.first;
-      }
-    }
-
-    return PickerEngineSection<PickerEngineItem>(
-      id: '$id-section-$selectionLimit',
-      title: title,
-      withPreview: withPreview,
-      onSelectedChanged: onSelectedChanged,
-      initialSelection: selection,
-      selectionConfig: PickerEngineSelectionConfig(selectionLimit),
-      options: items,
-    );
-  }
-}
-
-/// @no-doc
 typedef OnSelectedChanged = void Function(List<PickerEngineItem>);
 
 /// @no-doc
-class PickerEngineSection<T> {
+class PickerEngineSection {
   /// @no-doc
   const PickerEngineSection({
     required this.id,

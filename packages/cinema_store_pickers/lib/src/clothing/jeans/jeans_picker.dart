@@ -63,13 +63,12 @@ class _JeansPickerWidgetState extends State<JeansPickerWidget> {
         key: Key(widget.id),
         color: storesState.getBrandColor(context),
         iconDataLocator: faIconNameMapping,
-        //selections: _selected[waistSectionId],
         sections: [
-          PickerEngineSectionWrapper.build(
+          PickerEngineSection(
             id: waistSectionId,
             title: 'Elige un WAIST',
-            initialSelection: _selected[waistSectionId],
-            items: const [
+            //initialSelection: _selected[waistSectionId],
+            options: const [
               jeanWaistSize28,
               jeanWaistSize31,
               jeanWaistSize32,
@@ -80,10 +79,10 @@ class _JeansPickerWidgetState extends State<JeansPickerWidget> {
               });
             },
           ),
-          PickerEngineSectionWrapper.build(
+          PickerEngineSection(
             id: legSectionId,
             title: 'Elige un LEG LENGTH',
-            items: legItems,
+            options: legItems,
           ),
         ],
       ),
