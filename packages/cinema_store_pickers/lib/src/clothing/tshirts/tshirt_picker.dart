@@ -21,63 +21,54 @@ class TShirtPickerWidget extends StatefulWidget {
 }
 
 class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
-  late Map<String, List<PickerEngineItem>> _selected;
-
+  /// @no-doc
   String get colorSectionId => '${widget.id}-color';
+
+  /// @no-doc
   String get sizeSectionId => '${widget.id}-size';
 
-  @override
-  void initState() {
-    _selected = {
-      colorSectionId: [tShirtBlueColor],
-      sizeSectionId: [],
-    };
-    super.initState();
-  }
+  List<PickerEngineItem> sizeItems = [];
 
   @override
   Widget build(BuildContext context) {
-    final isWhite =
-        _selected[colorSectionId]?.contains(tShirtWhiteColor) ?? false;
-    var sizeItems = [tShirtSizeS, tShirtSizeG];
-    if (isWhite) {
-      sizeItems = [
-        tShirtSizeS,
-        tShirtSizeM,
-        tShirtSizeG,
-      ];
-    }
-
     return StoresStateConsumerWidget(
       builder: (storesState, __) => PickerEngineWidget(
         key: Key(widget.id),
         color: storesState.getBrandColor(context),
         iconDataLocator: faIconNameMapping,
+        onStateChanged: (state) {
+          print('state: $state');
+          if (state.selections.isEmpty) return;
+
+          final isWhite =
+              state.selections[colorSectionId]?.contains(tShirtWhiteColor) ??
+                  false;
+          setState(() {
+            sizeItems = [tShirtSizeS, tShirtSizeG];
+            if (isWhite) {
+              sizeItems = [
+                tShirtSizeS,
+                tShirtSizeM,
+                tShirtSizeG,
+              ];
+            }
+          });
+        },
         sections: [
           PickerEngineSection(
             id: colorSectionId,
             title: 'Elige un color',
-            //initialSelection: _selected[colorSectionId],
             options: const [
               tShirtBlueColor,
               tShirtWhiteColor,
             ],
-            onSelectedChanged: (selected) {
-              setState(() {
-                _selected[colorSectionId] = selected;
-              });
-            },
           ),
-          PickerEngineSection(
-            id: sizeSectionId,
-            title: 'Elige un tamaño',
-            options: sizeItems,
-            onSelectedChanged: (selected) {
-              setState(() {
-                _selected[sizeSectionId] = selected;
-              });
-            },
-          ),
+          if (sizeItems.isNotEmpty)
+            PickerEngineSection(
+              id: sizeSectionId,
+              title: 'Elige un tamaño',
+              options: sizeItems,
+            ),
         ],
       ),
     );

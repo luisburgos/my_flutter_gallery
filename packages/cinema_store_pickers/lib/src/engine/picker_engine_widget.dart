@@ -4,17 +4,41 @@ import 'package:cinema_store_pickers/src/engine/view/picker_engine_sections_summ
 import 'package:flutter/material.dart';
 
 /// @no-doc
+class PickerEngineWidgetState {
+  /// @no-doc
+  const PickerEngineWidgetState({
+    this.selections = const {},
+  });
+
+  /// @no-doc
+  final Map<String, List<PickerEngineItem>> selections;
+
+  /// @no-doc
+  PickerEngineWidgetState copyWith({
+    Map<String, List<PickerEngineItem>>? selections,
+  }) {
+    return PickerEngineWidgetState(
+      selections: selections ?? this.selections,
+    );
+  }
+}
+
+/// @no-doc
 class PickerEngineWidget extends StatefulWidget {
   /// @no-doc
   const PickerEngineWidget({
     required this.sections,
     required this.color,
     required this.iconDataLocator,
+    required this.onStateChanged,
     super.key,
   });
 
   /// @no-doc
   final List<PickerEngineSection> sections;
+
+  /// @no-doc
+  final void Function(PickerEngineWidgetState) onStateChanged;
 
   /// @no-doc
   final Color color;
@@ -27,22 +51,21 @@ class PickerEngineWidget extends StatefulWidget {
 }
 
 class _PickerEngineWidgetState extends State<PickerEngineWidget> {
-  Map<String, List<PickerEngineItem>> _selected = {};
+  late PickerEngineWidgetState _state;
+
+  List<PickerEngineItem> get allSelections => _state.selections.values.reduce(
+        (value, element) => [...value, ...element],
+      );
 
   @override
   void initState() {
-    _selected = {};
+    final initialSelections = <String, List<PickerEngineItem>>{};
     for (final section in widget.sections) {
-      _selected = {
-        section.id: [],
-      };
+      initialSelections[section.id] = [];
     }
+    _state = PickerEngineWidgetState(selections: initialSelections);
     super.initState();
   }
-
-  List<PickerEngineItem> get allSelections => _selected.values.reduce(
-        (value, element) => [...value, ...element],
-      );
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +78,7 @@ class _PickerEngineWidgetState extends State<PickerEngineWidget> {
               color: widget.color,
               sections: widget.sections,
               iconDataLocator: widget.iconDataLocator,
-              selected: _selected,
+              selected: _state.selections,
               onToggleSelection: _onToggleSelection,
               onRemove: _onRemove,
             ),
@@ -78,14 +101,14 @@ class _PickerEngineWidgetState extends State<PickerEngineWidget> {
 
   void _onRemove(String sectionId, PickerEngineItem option) {
     setState(() {
-      if (_selected[sectionId] == null) return;
+      if (_state.selections[sectionId] == null) return;
 
       final currentSectionSelection = List<PickerEngineItem>.from(
-        _selected[sectionId]!,
+        _state.selections[sectionId]!,
       );
       if (!currentSectionSelection.contains(option)) return;
       currentSectionSelection.remove(option);
-      _selected[sectionId] = currentSectionSelection;
+      _state.selections[sectionId] = currentSectionSelection;
     });
   }
 
@@ -97,19 +120,23 @@ class _PickerEngineWidgetState extends State<PickerEngineWidget> {
 
     setState(() {
       if (!isMultiple) {
-        _selected[sectionId] = [option];
+        _state.selections[sectionId] = [option];
+        widget.onStateChanged(_state);
         return;
       }
 
-      if (_selected[sectionId] == null) return;
-      if (_selected[sectionId]!.contains(option)) {
-        _selected[sectionId]!.remove(option);
+      if (_state.selections[sectionId] == null) return;
+      if (_state.selections[sectionId]!.contains(option)) {
+        _state.selections[sectionId]!.remove(option);
+        widget.onStateChanged(_state);
         return;
       }
 
-      print('section: $section');
-      if (_selected[sectionId]!.length == section.selectionModeLimit) return;
-      _selected[sectionId]!.add(option);
+      if (_state.selections[sectionId]!.length == section.selectionModeLimit) {
+        return;
+      }
+      _state.selections[sectionId]!.add(option);
+      widget.onStateChanged(_state);
     });
   }
 }

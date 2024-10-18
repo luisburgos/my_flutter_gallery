@@ -46,6 +46,7 @@ class _SodaPickerWidgetState extends State<SodaPickerWidget> {
         key: Key(widget.id),
         color: storesState.getBrandColor(context),
         iconDataLocator: faIconNameMapping,
+        onStateChanged: (state) {},
         sections: [
           PickerEngineSection(
             id: sizeSectionId,

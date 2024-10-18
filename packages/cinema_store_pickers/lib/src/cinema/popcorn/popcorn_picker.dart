@@ -52,13 +52,12 @@ class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
         key: Key(widget.id),
         color: storesState.getBrandColor(context),
         iconDataLocator: faIconNameMapping,
-        //selections: selections,
+        onStateChanged: (state) {},
         sections: [
           PickerEngineSection(
             id: sizeSectionId,
             title: 'Elige un tamaño',
             options: popcornSizes.values.toList(),
-            //initialSelection: [],
             onSelectedChanged: (selected) {
               setState(() {
                 _selected[sizeSectionId] = selected;
