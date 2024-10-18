@@ -1,5 +1,6 @@
 import 'package:cinema_store_pickers/src/cinema/popcorn/popcorn_picker_data.dart';
 import 'package:cinema_store_pickers/src/engine/picker_engine.dart';
+import 'package:cinema_store_pickers/src/shared/picker_engine_helpers.dart';
 import 'package:cinema_store_pickers/src/stores/providers.dart';
 import 'package:cinema_store_pickers/src/stores/views/stores_state_consumer_widget.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +57,7 @@ class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
       builder: (storesState, __) => PickerEngineWidget(
         key: const Key(id),
         color: storesState.getBrandColor(context),
+        iconDataLocator: faIconNameMapping,
         selections: selections,
         sections: [
           PickerEngineSectionWrapper.build(

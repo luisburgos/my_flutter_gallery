@@ -3,12 +3,15 @@ import 'package:cinema_store_pickers/src/engine/sections/picker_engine_selection
 import 'package:cinema_store_pickers/src/engine/sections/section/models/models.dart';
 import 'package:flutter/material.dart';
 
+import 'sections/section/models/picker_engine_icon_data_locator.dart';
+
 /// @no-doc
 class PickerEngineWidget extends StatelessWidget {
   /// @no-doc
   const PickerEngineWidget({
     required this.sections,
     required this.color,
+    required this.iconDataLocator,
     this.selections,
     super.key,
   });
@@ -22,6 +25,9 @@ class PickerEngineWidget extends StatelessWidget {
   /// @no-doc
   final Color color;
 
+  /// @no-doc
+  final IconDataLocator iconDataLocator;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -32,6 +38,7 @@ class PickerEngineWidget extends StatelessWidget {
             child: PickerEngineSectionsViews(
               color: color,
               sections: sections,
+              iconDataLocator: iconDataLocator,
             ),
           ),
         ),

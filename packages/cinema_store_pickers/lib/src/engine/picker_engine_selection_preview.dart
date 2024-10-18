@@ -1,8 +1,7 @@
-import 'package:cinema_store_pickers/src/engine/helpers.dart';
 import 'package:cinema_store_pickers/src/engine/sections/section/models/models.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_icon_data_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_utils/shared_utils.dart';
 
 const _minHeight = 40.0;
@@ -13,11 +12,15 @@ class PickerEngineSelectionPreview extends StatelessWidget {
   const PickerEngineSelectionPreview({
     required this.items,
     required this.onRemoveTap,
+    required this.iconDataLocator,
     super.key,
   });
 
   /// @no-doc
   final List<PickerEngineItem> items;
+
+  /// @no-doc
+  final IconDataLocator iconDataLocator;
 
   /// @no-doc
   final void Function(PickerEngineItem) onRemoveTap;
@@ -51,6 +54,7 @@ class PickerEngineSelectionPreview extends StatelessWidget {
             item: items[i],
             onRemoveTap: onRemoveTap,
             displayRemoveButton: items.length > 1,
+            iconDataLocator: iconDataLocator,
           ),
       ],
     );
@@ -63,6 +67,7 @@ class PickerSelectionPreviewItem extends StatelessWidget {
   const PickerSelectionPreviewItem({
     required this.item,
     required this.onRemoveTap,
+    required this.iconDataLocator,
     this.displayRemoveButton = true,
     super.key,
   });
@@ -72,6 +77,9 @@ class PickerSelectionPreviewItem extends StatelessWidget {
 
   /// @no-doc
   final bool displayRemoveButton;
+
+  /// @no-doc
+  final IconDataLocator iconDataLocator;
 
   /// @no-doc
   final void Function(PickerEngineItem) onRemoveTap;
@@ -89,8 +97,8 @@ class PickerSelectionPreviewItem extends StatelessWidget {
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(8),
-                child: FaIcon(
-                  faIconNameMapping(item.iconName!),
+                child: Icon(
+                  iconDataLocator(item.iconName!),
                   size: 16,
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:cinema_store_pickers/src/engine/picker_engine_selection_preview.dart';
 import 'package:cinema_store_pickers/src/engine/sections/section/models/models.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_icon_data_locator.dart';
 import 'package:cinema_store_pickers/src/engine/sections/section/view/picker_engine_section_options.dart';
 import 'package:cinema_store_pickers/src/engine/sections/section/view/picker_engine_section_title.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class PickerEngineSectionView<T> extends StatefulWidget {
   const PickerEngineSectionView({
     required this.section,
     required this.color,
+    required this.iconDataLocator,
     super.key,
   });
 
@@ -18,6 +20,9 @@ class PickerEngineSectionView<T> extends StatefulWidget {
 
   /// @no-doc
   final Color color;
+
+  /// @no-doc
+  final IconDataLocator iconDataLocator;
 
   @override
   State<PickerEngineSectionView<T>> createState() =>
@@ -51,6 +56,7 @@ class _PickerEngineSectionViewState<T>
           PickerEngineSelectionPreview(
             items: selected,
             onRemoveTap: _onRemove,
+            iconDataLocator: widget.iconDataLocator,
           ),
           const SizedBox(height: 12),
         ],
@@ -59,6 +65,7 @@ class _PickerEngineSectionViewState<T>
           selectedItems: selected,
           onOptionTap: _onToggleSelection,
           selectedColor: widget.color,
+          iconDataLocator: widget.iconDataLocator,
         ),
       ],
     );

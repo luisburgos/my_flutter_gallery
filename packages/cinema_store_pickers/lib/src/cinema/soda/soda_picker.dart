@@ -1,5 +1,6 @@
 import 'package:cinema_store_pickers/src/cinema/soda/soda_picker_data.dart';
 import 'package:cinema_store_pickers/src/engine/picker_engine.dart';
+import 'package:cinema_store_pickers/src/shared/picker_engine_helpers.dart';
 import 'package:cinema_store_pickers/src/stores/providers.dart';
 import 'package:cinema_store_pickers/src/stores/views/stores_state_consumer_widget.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,7 @@ class _SodaPickerWidgetState extends State<SodaPickerWidget> {
       builder: (storesState, __) => PickerEngineWidget(
         key: Key(widget.id),
         color: storesState.getBrandColor(context),
+        iconDataLocator: faIconNameMapping,
         selections: selections,
         sections: [
           PickerEngineSectionWrapper.build(

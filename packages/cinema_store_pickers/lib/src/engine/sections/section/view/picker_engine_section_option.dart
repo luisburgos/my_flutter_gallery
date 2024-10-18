@@ -1,7 +1,6 @@
-import 'package:cinema_store_pickers/src/engine/helpers.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_icon_data_locator.dart';
 import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_item.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 /// @no-doc
 class PickerSectionOptionView extends StatelessWidget {
@@ -11,6 +10,7 @@ class PickerSectionOptionView extends StatelessWidget {
     required this.onOptionTap,
     required this.isSelected,
     required this.selectedColor,
+    required this.iconDataLocator,
     super.key,
   });
 
@@ -25,6 +25,9 @@ class PickerSectionOptionView extends StatelessWidget {
 
   /// @no-doc
   final Color selectedColor;
+
+  /// @no-doc
+  final IconDataLocator iconDataLocator;
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +49,8 @@ class PickerSectionOptionView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (item.iconName != null)
-              FaIcon(
-                faIconNameMapping(item.iconName!),
+              Icon(
+                iconDataLocator(item.iconName!),
                 size: 16,
               ),
             Text(

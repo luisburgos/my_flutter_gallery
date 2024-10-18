@@ -1,3 +1,4 @@
+import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_icon_data_locator.dart';
 import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_item.dart';
 import 'package:cinema_store_pickers/src/engine/sections/section/view/picker_engine_section_option.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class PickerEngineItems extends StatelessWidget {
     required this.selectedItems,
     required this.onOptionTap,
     required this.selectedColor,
+    required this.iconDataLocator,
     super.key,
   });
 
@@ -26,6 +28,9 @@ class PickerEngineItems extends StatelessWidget {
 
   /// @no-doc
   final Color selectedColor;
+
+  /// @no-doc
+  final IconDataLocator iconDataLocator;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +54,7 @@ class PickerEngineItems extends StatelessWidget {
             onOptionTap: onOptionTap,
             isSelected: selectedItems.contains(items[i]),
             selectedColor: selectedColor,
+            iconDataLocator: iconDataLocator,
           ),
       ],
     );

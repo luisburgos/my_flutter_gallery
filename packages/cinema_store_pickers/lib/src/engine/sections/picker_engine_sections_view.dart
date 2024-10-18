@@ -1,4 +1,5 @@
 import 'package:cinema_store_pickers/src/engine/sections/section/models/models.dart';
+import 'package:cinema_store_pickers/src/engine/sections/section/models/picker_engine_icon_data_locator.dart';
 import 'package:cinema_store_pickers/src/engine/sections/section/view/picker_engine_section.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ class PickerEngineSectionsViews extends StatelessWidget {
   const PickerEngineSectionsViews({
     required this.sections,
     required this.color,
+    required this.iconDataLocator,
     super.key,
   });
 
@@ -16,6 +18,9 @@ class PickerEngineSectionsViews extends StatelessWidget {
 
   /// @no-doc
   final Color color;
+
+  /// @no-doc
+  final IconDataLocator iconDataLocator;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +33,7 @@ class PickerEngineSectionsViews extends StatelessWidget {
               key: Key('${section.id}-section-view'),
               section: section,
               color: color,
+              iconDataLocator: iconDataLocator,
             ),
           ),
           const SliverToBoxAdapter(

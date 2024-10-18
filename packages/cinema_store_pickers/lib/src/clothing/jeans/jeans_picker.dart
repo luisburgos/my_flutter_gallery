@@ -1,5 +1,6 @@
 import 'package:cinema_store_pickers/src/clothing/jeans/jeans_picker_data.dart';
 import 'package:cinema_store_pickers/src/engine/picker_engine.dart';
+import 'package:cinema_store_pickers/src/shared/picker_engine_helpers.dart';
 import 'package:cinema_store_pickers/src/stores/providers.dart';
 import 'package:cinema_store_pickers/src/stores/views/stores_state_consumer_widget.dart';
 import 'package:flutter/material.dart';
@@ -61,6 +62,7 @@ class _JeansPickerWidgetState extends State<JeansPickerWidget> {
       builder: (storesState, __) => PickerEngineWidget(
         key: Key(widget.id),
         color: storesState.getBrandColor(context),
+        iconDataLocator: faIconNameMapping,
         selections: _selected[waistSectionId],
         sections: [
           PickerEngineSectionWrapper.build(
