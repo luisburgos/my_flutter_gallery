@@ -4,14 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:my_flutter_gallery/app/app_routes.dart';
 import 'package:my_flutter_gallery/components/my_flutter_gallery/model.dart';
 import 'package:my_flutter_gallery/components/my_flutter_gallery/state.dart';
-import 'package:my_flutter_gallery/components/site_top_bar/site_top_bar.dart';
+import 'package:my_flutter_gallery/components/social_buttons.dart';
 import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_brief.dart';
 import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_cover.dart';
 import 'package:my_flutter_gallery/utils/constrained_page.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-class GalleryItemHomePage extends StatelessWidget {
-  const GalleryItemHomePage({
+class GalleryItemDetailsPage extends StatelessWidget {
+  const GalleryItemDetailsPage({
     required this.itemId,
     this.runMode = false,
     super.key,
@@ -242,10 +242,33 @@ class ItemActionButtons extends StatelessWidget {
           size: ShadButtonSize.sm,
           child: const Text('LAUNCH'),
           onPressed: () {
-            context.navigateToItemRunMode(appId);
+            context.navigateToGalleryItemRunner(appId);
           },
         ),
       ],
+    );
+  }
+}
+
+class SiteTopBarContainer extends StatelessWidget {
+  const SiteTopBarContainer({
+    required this.children,
+    super.key,
+  });
+
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(
+        vertical: 12,
+        horizontal: 4,
+      ),
+      child: Row(
+        children: children,
+      ),
     );
   }
 }

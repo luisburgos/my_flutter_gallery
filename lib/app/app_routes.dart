@@ -1,48 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:my_flutter_gallery/app/app_shortcuts.dart';
 import 'package:my_flutter_gallery/gallery/item/page.dart';
 import 'package:my_flutter_gallery/gallery/item/runner/page.dart';
 import 'package:my_flutter_gallery/home/page.dart';
-import 'package:my_flutter_gallery/shared/global_shortcuts_handler.dart';
 
 class AppRoutes {
   static const root = '/';
-  //static const gallery = '/gallery';
-  static const about = '/about';
-  static const run = '$galleryItem/run';
   static const galleryItem = '/gallery/:id';
+  static const galleryItemRun = '$galleryItem/run';
 }
 
 final defaultAppRouter = GoRouter(
   routes: [
     GoRoute(
       path: AppRoutes.root,
-      builder: (_, __) => const GlobalShortcuts(
+      builder: (_, __) => const DefaultGlobalAppShortcuts(
         child: HomePage(),
       ),
     ),
-    /*GoRoute(
-      path: AppRoutes.gallery,
-      builder: (_, __) => const GalleryPage(),
-    ),*/
     GoRoute(
       path: AppRoutes.galleryItem,
       builder: (_, __) {
         final itemId = __.pathParameters['id'];
 
-        return GlobalShortcuts(
-          child: GalleryItemHomePage(
+        return DefaultGlobalAppShortcuts(
+          child: GalleryItemDetailsPage(
             itemId: itemId,
           ),
         );
       },
     ),
     GoRoute(
-      path: AppRoutes.run,
+      path: AppRoutes.galleryItemRun,
       builder: (_, __) {
         final itemId = __.pathParameters['id'];
 
-        return GlobalShortcuts(
+        return DefaultGlobalAppShortcuts(
           child: GalleryItemRunnerPage(
             itemId: itemId,
           ),
@@ -53,16 +47,8 @@ final defaultAppRouter = GoRouter(
 );
 
 extension BuildContextNavigationMethods<T> on BuildContext {
-  void navigateToGallery() {
-    //go(AppRoutes.gallery);
-  }
-
   void navigateToHome() {
     go(AppRoutes.root);
-  }
-
-  void navigateToAbout() {
-    go(AppRoutes.about);
   }
 
   void navigateToGalleryItem(String itemId) {
@@ -71,9 +57,9 @@ extension BuildContextNavigationMethods<T> on BuildContext {
     );
   }
 
-  void navigateToItemRunMode(String itemId) {
+  void navigateToGalleryItemRunner(String itemId) {
     go(
-      AppRoutes.run.replaceAll(':id', itemId),
+      AppRoutes.galleryItemRun.replaceAll(':id', itemId),
     );
   }
 }

@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:my_flutter_gallery/app/app_routes.dart';
 
 class GlobalShortcutsState extends InheritedWidget {
   const GlobalShortcutsState({
@@ -27,9 +25,16 @@ class GlobalShortcutsState extends InheritedWidget {
   }
 }
 
+class GlobalShortcutsBuilderState {
+  const GlobalShortcutsBuilderState({required this.isMac});
+
+  final bool isMac;
+}
+
 class GlobalShortcuts extends StatefulWidget {
   const GlobalShortcuts({
     required this.child,
+    required this.shortcutsBuilder,
     super.key,
   });
 
@@ -37,6 +42,10 @@ class GlobalShortcuts extends StatefulWidget {
 
   @override
   State<GlobalShortcuts> createState() => _GlobalShortcutsState();
+
+  final Map<ShortcutActivator, Intent> Function(
+    GlobalShortcutsBuilderState,
+  ) shortcutsBuilder;
 }
 
 class _GlobalShortcutsState extends State<GlobalShortcuts> {
@@ -50,15 +59,11 @@ class _GlobalShortcutsState extends State<GlobalShortcuts> {
         defaultTargetPlatform == TargetPlatform.windows;
 
     return Shortcuts(
-      shortcuts: {
-        SingleActivator(
-          LogicalKeyboardKey.keyK,
-          meta: isMac,
-          control: !isMac,
-        ): VoidCallbackIntent(
-          () => context.navigateToGallery(),
+      shortcuts: widget.shortcutsBuilder(
+        GlobalShortcutsBuilderState(
+          isMac: isMac,
         ),
-      },
+      ),
       child: Actions(
         actions: {
           VoidCallbackIntent: CallbackAction<VoidCallbackIntent>(
