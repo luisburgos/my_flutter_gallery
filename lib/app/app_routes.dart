@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_flutter_gallery/app/app_shortcuts.dart';
-import 'package:my_flutter_gallery/gallery/item/page.dart';
+import 'package:my_flutter_gallery/gallery/item/details/page.dart';
 import 'package:my_flutter_gallery/gallery/item/runner/page.dart';
 import 'package:my_flutter_gallery/home/page.dart';
 

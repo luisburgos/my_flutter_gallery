@@ -13,8 +13,8 @@ const galleryRepoPackagesGithubUrl = '$galleryRepoGithubUrl/tree/main/packages';
 
 const maxWidthConstraint = 732.0;
 
-class CinemaStorePickersPackageMetadata extends GalleryItemData {
-  CinemaStorePickersPackageMetadata()
+class StorePickersEngineData extends GalleryItemData {
+  StorePickersEngineData()
       : super(
           id: 'store-pickers',
           name: 'Store Pickers Engine',

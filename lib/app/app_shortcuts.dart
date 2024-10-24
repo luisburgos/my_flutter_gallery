@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_flutter_gallery/shared/global_shortcuts_handler.dart';
+import 'package:my_flutter_gallery/shared/easy_shortcuts/widget.dart';
 
 class DefaultGlobalAppShortcuts extends StatelessWidget {
   const DefaultGlobalAppShortcuts({
@@ -12,7 +12,7 @@ class DefaultGlobalAppShortcuts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GlobalShortcuts(
+    return EasyShortcuts(
       shortcutsBuilder: (state) => {
         SingleActivator(
           LogicalKeyboardKey.keyK,

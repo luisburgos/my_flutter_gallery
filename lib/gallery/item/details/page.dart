@@ -8,6 +8,7 @@ import 'package:my_flutter_gallery/components/social_buttons.dart';
 import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_brief.dart';
 import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_cover.dart';
 import 'package:my_flutter_gallery/utils/constrained_page.dart';
+import 'package:my_flutter_gallery/utils/responsive_view.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class GalleryItemDetailsPage extends StatelessWidget {

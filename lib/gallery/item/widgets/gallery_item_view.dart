@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_flutter_gallery/components/my_flutter_gallery/model.dart';
 import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_card.dart';
 import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_list_tile.dart';
-import 'package:my_flutter_gallery/utils/ui_wrappers.dart';
+import 'package:my_flutter_gallery/utils/hover_aware.dart';
 
 const itemCardWidth = 327.0;
 const itemCardHeight = 387.0;

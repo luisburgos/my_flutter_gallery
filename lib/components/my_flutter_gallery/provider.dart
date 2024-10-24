@@ -17,20 +17,7 @@ class MyFlutterGallery extends StatefulWidget {
 
 class _MyFlutterGalleryState extends State<MyFlutterGallery> {
   final _items = <GalleryItemData>[
-    //InstagramAppData(),
-    //PerplexityAppData(),
-    //SupernotesAppData(),
-    //BrancherAiAppData(),
-    //OpenGptChatUiAppData(),
-    //PopcornFlavorPickerData(),
-    //HabitsData(),
-    //SplitwiseSplitOptions(),
-    //ReadwiseDailyReview(),
-    CinemaStorePickersPackageMetadata(),
-    //RoadieAppItemData(),
-    //ResonanceAppData(),
-    //LLMSelectorAppData(),
-    //OpenAiUiData(),
+    StorePickersEngineData(),
   ];
 
   @override
