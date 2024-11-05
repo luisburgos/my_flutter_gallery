@@ -645,7 +645,7 @@ packages:
     source: hosted
     version: "2.5.1"
   shadcn_ui:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: shadcn_ui
       sha256: "86d71a919e2d3e9377fe2feb7e8c525b7e74ca19a68ff42680426b6450eb279a"

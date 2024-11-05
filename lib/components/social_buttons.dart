@@ -70,11 +70,13 @@ class GithubButton extends StatelessWidget {
   const GithubButton({
     required this.url,
     this.withBorder = false,
+    this.child,
     super.key,
   });
 
   final String url;
   final bool withBorder;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +84,7 @@ class GithubButton extends StatelessWidget {
       iconData: FontAwesomeIcons.github,
       onPressed: _onPressed,
       withBorder: withBorder,
+      child: child,
     );
   }
 

@@ -6,7 +6,6 @@ import 'package:my_flutter_gallery/components/my_flutter_gallery/model.dart';
 import 'package:my_flutter_gallery/components/my_flutter_gallery/state.dart';
 import 'package:my_flutter_gallery/components/social_buttons.dart';
 import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_brief.dart';
-import 'package:my_flutter_gallery/gallery/item/widgets/gallery_item_cover.dart';
 import 'package:my_flutter_gallery/utils/constrained_page.dart';
 import 'package:my_flutter_gallery/utils/responsive_view.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -69,15 +68,10 @@ class GalleryItemDetailPage extends StatelessWidget {
                 },
               ),
               const Spacer(),
-              const SocialButtons(withPersonalGithub: false),
             ],
           ),
           ResponsiveView(
-            smChild: GalleryItemDetailPageMobile(
-              app: app,
-              displayDecoration: displayDecoration,
-            ),
-            child: GalleryItemDetailBody(
+            child: GalleryItemDetailPageMobile(
               app: app,
               displayDecoration: displayDecoration,
             ),
@@ -103,49 +97,86 @@ class GalleryItemDetailPageMobile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: ShadCard(
-        padding: EdgeInsets.zero,
+        padding: const EdgeInsets.all(20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GalleryItemCover(
-              icon: app.iconData,
-              iconColor: app.seedColor,
-              width: double.infinity,
-              height: galleryItemCoverHeight,
-              coverBuilder: app.coverBuilder,
-              displayDecoration: displayDecoration,
-            ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 12,
-              ),
+              padding: const EdgeInsets.all(6),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GalleryItemNameText(
                     app.name,
-                    fontSize: 24,
+                    fontSize: 28,
                     fontWeight: FontWeight.w600,
                   ),
+                  const SizedBox(height: 4),
                   GalleryItemDescriptionText(
                     app.description,
                     fontSize: 18,
+                    minHeight: 0,
                   ),
-                  const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      const Spacer(),
-                      ItemActionButtons(
-                        appId: app.id,
-                        githubRepoUrl: app.githubRepoUrl,
-                      ),
-                    ],
-                  )
                 ],
               ),
             ),
+            const SizedBox(height: 8),
+            ItemActionButtons(
+              appId: app.id,
+              githubRepoUrl: app.githubRepoUrl,
+            ),
+            const SizedBox(height: 8),
+            const _PlaceholderImages(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _PlaceholderImages extends StatelessWidget {
+  const _PlaceholderImages({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            height: 390,
+            width: 220,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          Container(
+            height: 390,
+            width: 220,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          Container(
+            height: 390,
+            width: 220,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          Container(
+            height: 390,
+            width: 220,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -164,20 +195,11 @@ class GalleryItemDetailBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: ShadCard(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GalleryItemCover(
-              margin: EdgeInsets.zero,
-              icon: app.iconData,
-              iconColor: app.seedColor,
-              width: double.infinity,
-              height: 200,
-              coverBuilder: app.coverBuilder,
-              displayDecoration: displayDecoration,
-            ),
             const SizedBox(height: 12),
             Row(
               children: [
@@ -237,11 +259,16 @@ class ItemActionButtons extends StatelessWidget {
           GithubButton(
             withBorder: true,
             url: githubRepoUrl!,
+            child: const Text('SOURCE CODE '),
           ),
         const SizedBox(width: 8),
         ShadButton(
-          size: ShadButtonSize.sm,
-          child: const Text('LAUNCH'),
+          //size: ShadButtonSize.sm,
+          icon: const Icon(
+            FontAwesomeIcons.play,
+            size: 14,
+          ),
+          child: const Text('LAUNCH PREVIEW'),
           onPressed: () {
             context.navigateToGalleryItemRunner(appId);
           },
