@@ -1,7 +1,7 @@
 name: Publish to GitHub Pages
 
 env:
-  flutter_version: '3.22.2'
+  flutter_version: '3.24.4'
 
 on:
   push:
