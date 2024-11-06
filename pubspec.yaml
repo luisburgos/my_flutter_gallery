@@ -26,7 +26,7 @@ dependencies:
   meta: ^1.11.0
   neubrutalism_ui: ^2.0.2
   package_info_plus: ^8.1.0
-  shadcn_ui: ^0.8.1
+  shadcn_ui: ^0.15.1
   shared_utils:
     path: shared/shared_utils
   store_picker:
