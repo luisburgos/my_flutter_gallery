@@ -37,7 +37,7 @@ class _TShirtPickerWidgetState extends State<TShirtPickerWidget> {
         color: storesState.getBrandColor(context),
         iconDataLocator: faIconNameMapping,
         onStateChanged: (state) {
-          print('state: $state');
+          //print('state: $state');
           if (state.selections.isEmpty) return;
 
           final isWhite =

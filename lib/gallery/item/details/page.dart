@@ -135,7 +135,7 @@ class GalleryItemDetailPageMobile extends StatelessWidget {
 }
 
 class _PlaceholderImages extends StatelessWidget {
-  const _PlaceholderImages({super.key});
+  const _PlaceholderImages();
 
   @override
   Widget build(BuildContext context) {

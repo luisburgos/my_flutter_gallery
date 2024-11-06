@@ -37,9 +37,9 @@ class _SodaPickerWidgetState extends State<SodaPickerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final selections = _selected.values.reduce(
+    /*final selections = _selected.values.reduce(
       (value, element) => [...value, ...element],
-    );
+    );*/
 
     return StoresStateConsumerWidget(
       builder: (storesState, __) => PickerEngineWidget(

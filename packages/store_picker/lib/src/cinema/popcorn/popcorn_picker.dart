@@ -79,7 +79,7 @@ class _PopcornPickerWidgetState extends State<PopcornPickerWidget> {
               withPreview: selectionLimit > 1,
               selectionConfig: PickerEngineSelectionConfig(selectionLimit),
               onSelectedChanged: (selected) {
-                print('selected: $selected');
+                //print('selected: $selected');
 
                 setState(() {
                   /// Filter just the most expensive item during selection

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:lowframer/src/lowframer.dart';
 
+/// @no-doc
 class ExperimentalItemCover extends StatelessWidget {
+  /// @no-doc
   const ExperimentalItemCover({
     required this.colors,
     super.key,
   });
 
+  /// @no-doc
   final ArtColors colors;
 
   @override
@@ -34,12 +37,15 @@ class ExperimentalItemCover extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class HighlightsDailyReviewArt extends StatelessWidget {
+  /// @no-doc
   const HighlightsDailyReviewArt({
     required this.colors,
     super.key,
   });
 
+  /// @no-doc
   final ArtColors colors;
 
   @override
@@ -91,12 +97,15 @@ class HighlightsDailyReviewArt extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class BillSplitCalculatorArt extends StatelessWidget {
+  /// @no-doc
   const BillSplitCalculatorArt({
     required this.colors,
     super.key,
   });
 
+  /// @no-doc
   final ArtColors colors;
 
   @override
@@ -149,12 +158,15 @@ class BillSplitCalculatorArt extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class WeeklyHabitsTrackerArt extends StatelessWidget {
+  /// @no-doc
   const WeeklyHabitsTrackerArt({
     required this.colors,
     super.key,
   });
 
+  /// @no-doc
   final ArtColors colors;
 
   @override
@@ -195,12 +207,15 @@ class WeeklyHabitsTrackerArt extends StatelessWidget {
   }
 }
 
+/// @no-doc
 class AiPoweredAppBuilder extends StatelessWidget {
+  /// @no-doc
   const AiPoweredAppBuilder({
     required this.colors,
     super.key,
   });
 
+  /// @no-doc
   final ArtColors colors;
 
   @override
